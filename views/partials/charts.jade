@@ -1,0 +1,31 @@
+charts.screen(ng-controller="chartsCtrl")
+  graph(graph)
+    #chart.screen
+  .clocks
+    .clockContainer(clock language="en" timezone="America/New_York")
+      .circle.clock
+        .face()
+            #hour
+            #minute
+            #second
+      .timeText
+        .date {{date}}
+        .month {{month}}
+        .day {{day}}
+        .year {{year}}
+        .time {{time}} 
+    .clockContainer(clock language="ru" timezone="Europe/Moscow")
+      .circle.clock.clock2
+        .face()
+            #hour
+            #minute
+            #second
+      .timeText.ru
+        .date {{date}}
+        .month {{month}}
+        .day {{day}}
+        .year {{year}}
+        .time {{time}}
+  .ticker  
+    | {{btcData.ticker.last.value | ticker}}
+

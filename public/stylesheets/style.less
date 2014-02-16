@@ -1,0 +1,90 @@
+
+@import url(http://fonts.googleapis.com/css?family=Exo+2:400,300,500);
+@import url(http://fonts.googleapis.com/css?family=Raleway);
+
+.perspective (@perspective) {
+  perspective: @perspective;
+  -webkit-perspective: @perspective;
+  -ms-perspective: @perspective;
+  -moz-perspective: @perspective;
+  -o-perspective: @perspective;
+}
+
+
+@fontColor: rgb(150,150,150);
+
+*{
+  padding:0px;
+  margin:0px;
+
+}
+
+html{
+  height:100%;
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
+  font: 14px;
+  height:100%;
+  background-image:url(http://www.okiraa.com/wallpaperstock/crystal-blue-waves-beach-beautiful-blue-crystal-nature-ocean-pretty-sea-sky-stunning-summer-sun-water-waves.jpg);
+  background-size:cover;
+}
+
+a {
+  color: #00B7FF;
+}
+
+h1{
+  font-family: sans-serif;  
+  color:white;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.15);
+  font-size: 80px;
+  text-align: center;
+}
+h2{ 
+  text-align:center;
+  color: @fontColor;
+  font-size: 14px;
+}
+
+canvas {
+  position:absolute;
+  top:0px;
+  left:0px;
+
+}
+
+.topSection{
+  width:100%;
+  padding:50px 0 0 0;
+
+}
+
+.outerFolder{
+  position:absolute;
+  bottom:0px;
+  height:60%;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  // background-image:url(/images/paper.jpg);
+  background-size: 100% auto;
+  // background-color:rgb(150,100,40);
+  width:100%;
+
+  -webkit-perspective: 600px;
+  -moz-perspective: 600px;
+  perspective: 600px;
+  
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  
+  position:absolute;
+
+}
+
+.hidden{
+  display:none;
+}
+

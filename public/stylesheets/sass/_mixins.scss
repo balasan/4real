@@ -1,0 +1,12 @@
+@mixin browser($attr, $val) {
+  -webkit-#{$attr}: $val;
+  // -khtml-#{$attr}: $val;
+     -moz-#{$attr}: $val;
+      -ms-#{$attr}: $val;
+       -o-#{$attr}: $val;
+          #{$attr}: $val;
+}
+
+*, *:before, *:after { 
+  @include browser(box-sizing, border-box); 
+}

@@ -1,0 +1,127 @@
+.animate-projects {
+  @include transition(all 0.3s cubic-bezier(0.455, 0.030, 0.515, 0.955));
+  opacity:1;
+  // @include transform(scale(1,1));
+  @include transform3d(translateX(0px)  scale3d(1,1,1));
+}
+ 
+.animate-projects.ng-hide-add,
+.animate-projects.ng-hide-remove {
+  display:block!important;
+}
+
+.animate-projects.ng-hide.ng-hide-add {
+  @include transform3d(translateX(1000px)  scale3d(0,0,0));
+  opacity:0;
+}
+ 
+.animate-projects.ng-hide.ng-hide-remove,
+ {
+  @include transform3d(translateX(-1000px) scale3d(0,0,0));
+    // @include transform(scale(0,0));
+  opacity:0;
+}
+
+
+.animate-list.ng-enter {
+  @include animation(list-animation cubic-bezier(0.175, 0.885, 0.32, 1.275) .7s );
+  // @include transition(all .7s);
+  opacity:0;
+}
+.animate-list.ng-enter-stagger {
+  /* this will have a 100ms delay between each successive leave animation */
+  -webkit-transition-delay: 0.2s;
+  transition-delay: 0.2s;
+  @include animation-delay(.2s);
+  opacity:0;
+  /* in case the stagger doesn't work then these two values
+   must be set to 0 to avoid an accidental CSS inheritance */
+  -webkit-transition-duration: 0s;
+  transition-duration: 0s;
+
+  -webkit-animation-duration: 0s;
+  animation-duration: 0s;
+}
+.animate-list.ng-enter.ng-enter-active {
+  /* standard transition styles */
+  opacity:1;
+}
+
+
+.projectList{
+  position:absolute;
+  top:50%;
+  left:5%;
+  width:25%;
+  vertical-align:middle;
+  font-size:20px;
+  line-height: 24px;
+  a{
+    text-decoration:none;
+    color:inherit;
+  }
+  p{
+    padding-bottom:10px;
+    // font-size:30px;
+    @include animation(opacity-animation cubic-bezier(0.175, 0.885, 0.32, 1.275) .7s .3s);
+  }
+  .project{
+    cursor:pointer;
+    font-style:italic;
+    @include transition(font-size cubic-bezier(0.175, 0.885, 0.32, 1.275) .3s);
+  }
+  .project:hover{
+    font-size:30px;
+  }
+}
+
+.projects{
+  height:100%;
+  // position:relative;
+  img{
+    max-width:100%;
+    max-height:80%;
+    float:right;
+  }
+
+}
+.singleproject{
+  position:absolute;
+  right:0px;
+  width:70%;
+  padding:20px;  
+}
+
+
+img.phone{
+  position:absolute;
+  bottom:-40px;
+  right:80px;
+  width:200px;
+  @include transition(all .3s .5s cubic-bezier(0.175, 0.885, 0.32, 1.275));
+
+  &.ng-hide{
+    @include transform3d(scale3d(0,0,0));
+  }
+  &.ng-hide-add,
+  &.ng-hide-remove {
+    display:block!important;
+  }
+  img.phone{
+    @include transform3d(scale3d(1,1,1));
+  }
+}
+
+@include keyframes(opacity-animation) {
+  0%    { opacity:0}
+  // 50%   { opacity: 1; }
+  // 75%   { opacity: 0; }
+  100%  {opacity:1}
+}
+
+@include keyframes(list-animation) {
+  0%    { @include transform3d(scale3d(1,1,1) translateX(1000px) translateZ(1000px) translateY(-500px)); opacity:0}
+  // 25%   { opacity: 1; }
+  // 75%   { opacity: 1; }
+  100%  {@include transform3d(scale3d(1,1,1) translateX(0)); opacity:1}
+}

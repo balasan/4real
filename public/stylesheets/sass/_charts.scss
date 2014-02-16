@@ -1,0 +1,225 @@
+path {
+  stroke: white;
+  stroke-width: .7;
+  fill:none;
+}
+
+.axis text{
+  // color:steelblue;
+  stroke: white;
+  stroke-width: 0;
+  font-size:12px;
+  font-weight:light;
+  fill: white;
+  width:.5;
+  font-weight:100;
+
+  // stroke-opacity: .5;
+  // fill:none;
+}
+
+.axis {
+  shape-rendering: crispEdges;
+}
+
+.x.axis line {
+  stroke: white;
+}
+
+.x.axis .minor {
+  stroke-opacity: .2;
+}
+
+.x.axis path, .y.axis path {
+  display: none;
+}
+
+.y.axis line, .y.axis path, .x.axis line, .x.axis path {
+  // stroke: none;
+  fill: none;
+  stroke: white;
+}
+
+charts{
+
+ }
+
+graph{
+  width:100%;
+  height:90%;
+  display:table;
+  position:absolute;
+  text-align:center;
+
+  top:0;
+  left:0;
+    // opacity:inherit;
+
+}
+#chart{
+  // padding-left:50px;
+  // opacity:inherit;
+  display:table-cell;
+  vertical-align:middle;
+  margin-top:-40px;
+
+
+}
+
+.tooltip{
+  // width:100px;
+  // height:40px;
+  position:absolute;
+  z-index:10;
+  opacity:0;
+}
+
+.timeText{
+  width:60px;
+  font-size:10px;
+  float:left;
+  text-transform:uppercase;
+  
+  .date, .month{
+    float:left;
+    font-size:23px;
+    padding: 0 2px 0 0px;
+    line-height:20px;
+    letter-spacing:1px;
+  }
+  .time{
+    font-size:14px;
+    line-height:17px;
+    letter-spacing:1px;
+  }
+  .day{
+    // float:left;
+  }
+  *{
+    // float:left;
+    vertical-align:bottom;
+    display:inline-block;
+    padding: 0 2px 0 0px;
+
+  }
+  .date:after{
+    content:" ";
+    // width:6px;
+    // height:6px;
+    // vertical-align:middle;
+    // display:inline-block;
+    // border-radius:4px;
+    // background:white;
+  }
+
+}
+
+circle{
+  fill:white;
+
+  // stroke:none;
+  pointer-events: all;
+  padding:10px;
+  z-index:10;
+  fill-opacity:0;
+  stroke-opacity: 0;
+  // stroke: white;
+  stroke-width:7px;
+  &:hover{
+    stroke-opacity: .5;
+  }
+}
+
+$clockColor: white;
+
+.clocks{
+  // top:20px;
+  // right:0px;
+  float: left;
+  position:relative;
+  margin:40px 0 0 40px;
+
+}
+.clockContainer{
+  // float:left;
+  overflow:auto;
+  position:relative;
+  margin:30px 10px 40px 10px;
+}
+.clock {
+  width: 70px;
+  height: 60px;
+  // margin:auto;
+  float:left;
+  // right: 20px;
+  // top: 20px;
+  // float:right;
+  position: relative;
+}
+
+.clock2{
+  // top:120px;
+}
+/* line 27, ../../source/css/_header.scss */
+.clock .face {
+  width: 55px;
+  height: 55px;
+  margin:auto;
+  border: 2px solid white;
+  border-radius: 50%;
+  position: relative;
+}
+
+.clock #hour {
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -1px 0 -1px -25%;
+  padding: 1px 0 1px 25%;
+  background: $clockColor;
+  -webkit-transform-origin: 100% 50%;
+  -moz-transform-origin: 100% 50%;
+  -ms-transform-origin: 100% 50%;
+  transform-origin: 100% 50%;
+  border-radius: 5px 0 0 5px;
+}
+/* line 75, ../../source/css/_header.scss */
+.clock #minute {
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -40% -1px 0;
+  padding: 40% 1px 0;
+  background: $clockColor;
+  -webkit-transform-origin: 50% 100%;
+  -moz-transform-origin: 50% 100%;
+  -ms-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+  border-radius: 5px 5px 0 0;
+}
+/* line 88, ../../source/css/_header.scss */
+.clock #second {
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -40% -1px 0 0;
+  padding: 40% 1px 0 0;
+  background: $clockColor;
+  -webkit-transform-origin: 50% 100%;
+  -moz-transform-origin: 50% 100%;
+  -ms-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+}
+
+.ru{
+  font-family: Exo2;
+  text-transform: uppercase;
+  // font-weight:100;
+}
+

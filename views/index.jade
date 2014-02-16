@@ -1,0 +1,91 @@
+extends layout
+block content
+  script(type='text/javascript', src="/javascripts/lib/pointer.js")
+
+  .container
+    
+    .cube(cube ng-controller="mainCtrl")
+    
+      .glass.back(glass ng-class="{'active': page=='about'}")
+        ipad.ipad2
+        ipad
+          camera
+          specular
+          .screen
+            .aboutOuter 
+              .about(ng-controller="aboutCtrl" about)
+                //- .div(text ng-repeat="info in text")
+                //- |{{info}}
+            div(ng-include="'/partials/nav'")
+        floor
+          shadow 
+      
+      .glass.front(glass ng-class="{'active' : !page}")
+        ipad.ipad2
+        ipad
+          specular
+          .main.screen
+            .vcenter
+              h1 
+                span 4real
+                //- |{{page}}
+              .mainNav
+                a(href="/charts")
+                  i.fa.fa-signal.fa-5x 
+                a(href="/about")
+                  i.fa.fa-comment-o.fa-5x 
+                a(href="/projects")
+                  i.fa.fa-laptop.fa-5x 
+        floor
+          shadow
+      
+      .glass.left(glass ng-class="{'active': page=='projects'}")
+        ipad.ipad2        
+        ipad
+          specular
+          .projects.screen(projects ng-controller="projectsCtrl")
+            .projectList
+              p Some projects we worked on...
+              div.animate-list(ng-repeat="project in projects")
+                .project(ng-mouseover="$parent.viewproject=$index") 
+                  a(ng-href="{{project.url}}" target="blank")
+                    |{{project.title}}
+            .singleproject.animate-projects(ng-repeat="project in projects" ng-show="$index==viewproject" )
+              img(src="{{project.img[0].url}}" ng-show="project.img[0].url")
+              img.phone(src="{{project.iphone[0].url}}" ng-show="project.iphone[0].url && $index==viewproject")
+              //- | {{project.title}}
+              | {{viewproject.description}}
+            div(ng-include="'/partials/nav'")
+        floor
+          shadow 
+
+      .glass.right(glass ng-class="{'active': page=='charts'}")
+        ipad.ipad2
+
+        ipad
+          specular
+          div(ng-include="'/partials/charts'")
+
+          div.screen(ng-include="'/partials/nav'")
+        floor
+          shadow
+
+  //- div.outerFolder( bgcolor )
+  //-   div.rolo( rolo ng-controller="projectsCtrl")
+  //-     div(ng-repeat="project in projects")
+  //-       //- img(crossorigin="anonymous" src="{{project.img[0].url}}")
+
+  canvas#waterCanvas(water)
+
+  div.hidden
+    video#video(loop)
+      Your browser doesn't appear to support the HTML5 <code>&lt;video&gt;</code> element.
+    video#zpos(src="video/nyctimelapse")
+    img#tiles(src="images/tiles.jpg")
+    //- img#tiles(crossorigin="anonymous" src='https://s3-us-west-2.amazonaws.com/4real/projects/disimages.png')
+    img#xneg(src='images/xneg.jpg')
+    img#xpos(src='images/xpos.jpg')
+    img#ypos(src='images/ypos.jpg')
+    img#zneg(src='images/zneg.jpg')
+    img#zpos(src='images/zpos.jpg')
+    div#loading | Loading...

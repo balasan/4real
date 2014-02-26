@@ -73,15 +73,31 @@ body {
   font: 14px;
   height:100%;
   overflow:hidden;
-  background-image:url(http://www.okiraa.com/wallpaperstock/crystal-blue-waves-beach-beautiful-blue-crystal-nature-ocean-pretty-sea-sky-stunning-summer-sun-water-waves.jpg);
+  // background-image:url(http://www.okiraa.com/wallpaperstock/crystal-blue-waves-beach-beautiful-blue-crystal-nature-ocean-pretty-sea-sky-stunning-summer-sun-water-waves.jpg);
   background-size:cover;
   font-weight:200;
   color:white;
-  @include background-image(linear-gradient(#FFFFFF 0%, #66B6FF 21%, #000000 68%, #0B538B 100%));
+  @include background-image(
+      url(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg));
+      // linear-gradient(to top, rgba(0, 255, 255, 0.41) 0%, rgba(255, 255, 255, 0.55) 21%, rgba(255, 255, 255, 0.48) 68%, rgba(255, 255, 255, 0.45) 100%));
+  // @include background-image( linear-gradient(#ffffff 0%, #5D7892 21%, #000000 68%, #436786 100%));
+
+  // @include background-image(linear-gradient(#FFFFFF 0%, #66B6FF 21%, #000000 68%, #0B538B 100%));
   @include browser(text-size-adjust, none);
   @include browser(transform,translateZ(0));
-  -webkit-font-smoothing: antialiased;
+  // -webkit-font-smoothing: antialiased;
 
+}
+.tint{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  opacity:.8;
+  @include background-image( linear-gradient(#ffffff 0%, #5D7892 21%, #000000 68%, #436786 100%));
+
+  // @include background-image(linear-gradient(rgba(255, 255, 255, 0.41) 0%, rgba(255, 255, 255, 0.55) 21%, rgba(255, 255, 255, 0.48) 68%, rgba(255, 255, 255, 0.45) 100%));
 }
 
 a, a:hover, a:visited {

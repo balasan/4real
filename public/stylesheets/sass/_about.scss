@@ -64,6 +64,52 @@
   @include animation(flash .7s infinite);
 }
 
+.social{
+  position:relative;
+  text-align:center;
+  i{
+
+    @include transition(all cubic-bezier(0.175, 0.885, 0.32, 1.275) .3s);
+
+    font-size:24px;
+    padding:5px;
+    &:hover{
+      @include transform(scale(1.5,1.5));
+    }
+  }
+  .icon {
+    -webkit-backface-visibility: hidden;
+    line-height:35px;
+    display: inline-block;
+    vertical-align: top;
+    width: 30px;
+    height: 30px;
+    margin:5px;
+    pointer-events: all; 
+    cursor: pointer;
+    color:rgb(120,120,120);
+    // use { width: 24px; height: 24px; }
+    svg { 
+      fill: #fff; 
+      stroke-opacity: 0;
+    }
+    &:hover {
+      .front { opacity: 0; }
+      .back  { opacity: 1; }
+    }
+    .front  { opacity: 1; }
+    .back   {
+      position: absolute;
+      // margin:5px;
+      top: 5px;
+      width: 30px;
+      height: 30px;
+      opacity: 0;
+    }
+  }
+}
+
+
 @include keyframes(glowBar) {
   0%    { opacity: 0; }
   10%   { opacity: 1; }

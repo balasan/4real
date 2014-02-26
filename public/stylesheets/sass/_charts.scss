@@ -1,19 +1,49 @@
 
 
+// .topRight{
+//   .tickOuter{
+//     display:inline-block;
+//     position:relative;
+//     width:40%;
+//     .tickers{
+     
+//       padding-bottom:50px;
+//       // position:relative;
+//     }
+//   }
+//   .clocks{
+//     display:inline-block;
+//     vertical-align:top;
+//     margin-top:80px;
+//     width:60%;
+//     float:right;
+//   } 
+// }
+
 .leftSide{
   display:inline-block;
   // position:relative;
-  width:70%;
-  padding:4% 80px 0 40px;
+  width:65%;
+  padding:7% 5% 0 0px;
+
 }
 
 .rightSide{
+  .chartsTitle{
+    font-size:30px;
+    line-height:1em;
+    text-transform: uppercase;
+    text-align:left;
+    margin-bottom:10px;
+    // padding-top:20px;
+    color:rgb(0,255,0);
+  }
   display:inline-block;
   position:relative;
   // overflow-y:hidden;
   // position:relative;
-  width:30%;
-  padding:5% 0px 0 80px;
+  width:35%;
+  padding:5% 40px 0 5%;
   vertical-align:top;
 }
 
@@ -160,6 +190,7 @@ $clockColor: white;
 }
 
 .tickers{
+
   position:relative;
   h2{
     i{
@@ -171,8 +202,11 @@ $clockColor: white;
     padding-bottom:20px;
     line-height: 1em;
     letter-spacing:0;
+    i{
+      color:white !important;
+    }
   }
-  width: 280px;
+  max-width: 280px;
   padding:0 40px 100px 40px;
   overflow:hidden;
 
@@ -184,8 +218,8 @@ $clockColor: white;
   // font-weight:200;
   // right:180px;
   margin: 40px auto 0 auto;
-  font-size:26px;
-  line-height:36px;
+  font-size:22px;
+  line-height:1.4em;
   .cur{
     .right{
       float:right;
@@ -268,6 +302,7 @@ $clockColor: white;
 }
 
 .runner{
+
   text-transform: uppercase;
   font-family: Ozone;
   // width:1600px;
@@ -279,8 +314,7 @@ $clockColor: white;
   @include browser(transform, translateX(130%));
   @include animation(runner linear 1s);
   @include animation(runner linear 20s 1s infinite );
-
-
+  line-height: 1.5em;
 }
 
 @include keyframes(runner){

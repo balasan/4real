@@ -1,16 +1,63 @@
 charts(ng-controller="chartsCtrl")
 
+  .topRight
+    .tickOuter
+      .tickers.screen
+        .globe.screen
+          img(src="http://upload.wikimedia.org/wikipedia/commons/6/6b/Rotating_globe.gif")
+        .timeText.screen(date)
+          div.time
+            span.date {{date}}
+            span.month {{month}}
+            span.year {{year}}
+            span.time {{time}} 
+          div.day
+            ul 
+              li(ng-class="{'select': day=='Sun'}") sun
+              li(ng-class="{'select': day=='Mon'}") mon
+              li(ng-class="{'select': day=='Tue'}") tue 
+              li(ng-class="{'select': day=='Wed'}") wed 
+              li(ng-class="{'select': day=='Thu'}") thu 
+              li(ng-class="{'select': day=='Fri'}") fri 
+              li(ng-class="{'select': day=='Sat'}") sat 
+        .runner
+          span
+            |Realtime is money. The chart that you are viewing is the realtime Bitcoin-USD transaction data on the BITSTAMP Bitcoin exchange. 
+
+
+    .clocks.screen
+      .clockContainer(clock language="en" timezone="America/New_York" location="NEW YORK")
+      .clockContainer(clock language="ru" timezone="Europe/London" location="LONDON")
+      .clockContainer(clock language="ru" timezone="Europe/Moscow" location="MOSCOW")
+      .clockContainer(clock language="ru" timezone="Asia/Tokyo" location="TOKYO")
+      .clockContainer(clock language="ru" timezone="America/Los_Angeles" location="LOS ANGELES")
+
+  .leftSide
+
+
+    graph(graph)
+
+      #chart.screen
+        .btclogo
+          i.fa.fa-btc
+          i.fa.fa-btc
+          i.fa.fa-btc
+          i.fa.fa-btc
+          
+
+          i.fa.fa-btc
+          i.fa.fa-btc
+          i.fa.fa-btc
+          i.fa.fa-btc
+
   .rightSide
-
+  
     .tickers.screen
-      .chartsTitle
-        |4real Global Analytics
-
       h2
-        //- i.fa.fa-btc ITCOIN 
+        i.fa.fa-btc ITCOIN 
       .small
-        i.fa.fa-btc ITCOIN trading on 
-          a(href="https://www.bitstamp.net/" target="blank") BITSTAMP
+        |trading on 
+        a(href="https://www.bitstamp.net/" target="blank") BITSTAMP
 
       .cur()
         span.curText USD
@@ -67,51 +114,8 @@ charts(ng-controller="chartsCtrl")
           i.fa.fa-cny
           span {{CNY | ticker}}
 
-      .globe.screen
-        img(src="http://upload.wikimedia.org/wikipedia/commons/6/6b/Rotating_globe.gif")
-      .timeText.screen(date)
-        div.time
-          span.date {{date}}
-          span.month {{month}}
-          span.year {{year}}
-          span.time {{time}} 
-        div.day
-          ul 
-            li(ng-class="{'select': day=='Sun'}") sun
-            li(ng-class="{'select': day=='Mon'}") mon
-            li(ng-class="{'select': day=='Tue'}") tue 
-            li(ng-class="{'select': day=='Wed'}") wed 
-            li(ng-class="{'select': day=='Thu'}") thu 
-            li(ng-class="{'select': day=='Fri'}") fri 
-            li(ng-class="{'select': day=='Sat'}") sat 
-
-      .runner
-        span
-          |Realtime is money. The chart that you are viewing is the realtime Bitcoin-USD transaction data on the BITSTAMP Bitcoin exchange. 
 
 
-  .leftSide
-
-    .clocks.screen
-      .clockContainer(clock language="en" timezone="America/New_York" location="NEW YORK")
-      .clockContainer(clock language="ru" timezone="Europe/London" location="LONDON")
-      .clockContainer(clock language="ru" timezone="Europe/Moscow" location="MOSCOW")
-      .clockContainer(clock language="ru" timezone="Asia/Tokyo" location="TOKYO")
-      .clockContainer(clock language="ru" timezone="America/Los_Angeles" location="LOS ANGELES")
 
 
-    graph(graph)
-
-      #chart.screen
-        .btclogo
-          i.fa.fa-btc
-          i.fa.fa-btc
-          i.fa.fa-btc
-          i.fa.fa-btc
-          
-
-          i.fa.fa-btc
-          i.fa.fa-btc
-          i.fa.fa-btc
-          i.fa.fa-btc
 

@@ -30,8 +30,8 @@
 
 @font-face {
   font-family: 'Exo2';
-  src: url('../fonts/Exo2-ExtraLight.ttf');
-  font-weight:200 
+  src: url('../fonts/Exo2-Light.ttf');
+  font-weight:400 
 }
 
 @font-face {
@@ -78,14 +78,19 @@ body {
   font-weight:200;
   color:white;
   @include background-image(
-      url(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg));
+
+      url(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg)
+      ,url(https://s3-us-west-2.amazonaws.com/4real/various/wave11.jpg)
+      // ,url(https://s3-us-west-2.amazonaws.com/4real/various/wave1small.jpg)
+      
+      );
       // linear-gradient(to top, rgba(0, 255, 255, 0.41) 0%, rgba(255, 255, 255, 0.55) 21%, rgba(255, 255, 255, 0.48) 68%, rgba(255, 255, 255, 0.45) 100%));
   // @include background-image( linear-gradient(#ffffff 0%, #5D7892 21%, #000000 68%, #436786 100%));
 
   // @include background-image(linear-gradient(#FFFFFF 0%, #66B6FF 21%, #000000 68%, #0B538B 100%));
   @include browser(text-size-adjust, none);
   @include browser(transform,translateZ(0));
-  // -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
 
 }
 .tint{
@@ -96,12 +101,11 @@ body {
   height:100%;
   opacity:.8;
   @include background-image( linear-gradient(#ffffff 0%, #5D7892 21%, #000000 68%, #436786 100%));
-
   // @include background-image(linear-gradient(rgba(255, 255, 255, 0.41) 0%, rgba(255, 255, 255, 0.55) 21%, rgba(255, 255, 255, 0.48) 68%, rgba(255, 255, 255, 0.45) 100%));
 }
 
 a, a:hover, a:visited {
-  color: white;
+  color: inherit;
   text-decoration:none;
 }
 

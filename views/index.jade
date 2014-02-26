@@ -15,8 +15,8 @@ block content
           specular
           div(ng-include="'/partials/about'")            
           div.screen(ng-include="'/partials/nav'")
-        floor
-          shadow 
+        //- floor
+          //- shadow 
       
       .glass.front(glass ng-class="{'active' : !page}")
         ipad.ipad2
@@ -34,16 +34,16 @@ block content
                   i.fa.fa-comment-o.fa-5x 
                 a(href="/projects")
                   i.fa.fa-laptop.fa-5x 
-        floor
-          shadow
+        //- floor
+          //- shadow
       
       .glass.left(glass ng-class="{'active': page=='projects'}")
         //- ipad.ipad2        
         ipad
           specular
           div(ng-include="'/partials/projects'")  
-        floor
-          shadow 
+        //- floor
+          //- shadow 
 
       .glass.right(glass ng-class="{'active': page=='charts'}")
         //- ipad.ipad2
@@ -51,8 +51,8 @@ block content
           specular
           div(ng-include="'/partials/charts'")
           div.screen(ng-include="'/partials/nav'")
-        floor
-          shadow
+        //- floor
+          //- shadow
 
   //- div.outerFolder( bgcolor )
   //-   div.rolo( rolo ng-controller="projectsCtrl")

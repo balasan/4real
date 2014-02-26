@@ -12,6 +12,7 @@
 		"coffee-script": "latest",
 		"goxstream": "latest",
 		"socket.io": "latest",
-		"mongoose": "latest"
+		"mongoose": "latest",
+		"newrelic": "latest"
 	}
 }

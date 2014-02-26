@@ -2,10 +2,12 @@
 ###
 Module dependencies.
 ###
+require('newrelic');
 express = require("express")
 routes = require("./routes")
 http = require("http")
 https = require("https")
+
 
 path = require("path")
 socket = require('./routes/socket');

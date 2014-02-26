@@ -4,11 +4,7 @@
 
   app = angular.module("4real.controllers", []);
 
-  app.controller('aboutCtrl', [
-    '$scope', function($scope) {
-      return $scope.text = ["4Real is a global creative agency based in New York City.", "We provide high quality multi-platform creative web services, ", "full range of strategic consulting services, ", "and deliver an array of innovative and flexible services to businesses of all sizes.", "We design & build efficient and scalable technology-driven websites & systems including:", "social integration and engagement,", "3D visualization,", "interactive media,", "realtime technologies,", "custom CMS", "...", "But most importantly,", "we come up with culturally relevant methods to present information in a wide veriety of media"];
-    }
-  ]);
+  app.controller('aboutCtrl', ['$scope', function($scope) {}]);
 
   app.controller('mainCtrl', [
     '$scope', '$route', function($scope, $route) {
@@ -58,26 +54,67 @@
   ]);
 
   app.controller("chartsCtrl", [
-    '$scope', 'socket', '$timeout', 'btcHistory', '$filter', function($scope, socket, $timeout, btcHistory, $filter) {
-      var getData;
+    '$scope', 'socket', '$timeout', 'btcHistory', '$filter', 'exchange', function($scope, socket, $timeout, btcHistory, $filter, exchange) {
+      var convert, getData, getRates;
       socket.on('init', function(data) {
         return getData();
       });
       $scope.btcData = {};
       $scope.history = [];
       $scope.filtered = {};
-      $scope.trim = 100;
+      $scope.trim = 60;
+      $scope.up = true;
+      $scope.USD = '0.00';
+      $scope.CNY = '0.00';
+      $scope.RUB = '0.00';
+      $scope.EUR = '0.00';
+      $scope.GBP = '0.00';
+      $scope.JPY = '0.00';
+      $scope.rates = {};
+      convert = function() {
+        if ($scope.USD === '0.00' || !$scope.rates[0]) {
+          return;
+        }
+        return $scope.rates.forEach(function(rate) {
+          return $scope[rate.id.slice(0, 3)] = $scope.USD / parseFloat(rate.Rate);
+        });
+      };
+      getRates = function() {
+        return exchange.getRates(function(rates) {
+          if (!rates.results) {
+            $timeout(getRates, 5000);
+            return;
+          }
+          $scope.rates = rates.results.rate;
+          return convert();
+        });
+      };
+      getRates();
       getData = function() {
         return socket.emit('getData', $scope.trim, function(data) {
           console.log(data);
-          return $scope.history = $filter('btcData')(data);
+          $scope.history = $filter('btcData')(data);
+          console.log($scope.history);
+          $scope.USD = $scope.history[$scope.history.length - 1].price;
+          return convert();
         });
       };
       return socket.on('btc-data', function(data) {
-        $scope.btcData = $filter('btcData')(JSON.parse(data.data));
-        if ($scope.history[0]) {
-          return $scope.history.push($scope.btcData);
+        $scope.btcData = $filter('btcData')(data.data);
+        console.log($scope.btcData);
+        $scope.USD = parseFloat($scope.btcData.last);
+        if ($scope.btcData.date <= $scope.history[$scope.history.length - 1].date) {
+          return;
         }
+        if ($scope.history[0] && $scope.USD > $scope.history[$scope.history.length - 1].price) {
+          $scope.up = true;
+        } else if ($scope.history[0] && $scope.USD < $scope.history[$scope.history.length - 1].price) {
+          $scope.up = false;
+        }
+        if ($scope.history[0]) {
+          $scope.history.push($scope.btcData);
+        }
+        return convert();
       });
     }
   ]);

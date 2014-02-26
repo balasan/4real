@@ -4,7 +4,15 @@
 
   app = angular.module("4real.filters", []);
 
-  app.filter("ticker", [function() {}]);
+  app.filter("ticker", [
+    "$sce", function($sce) {
+      return function(data, cur) {
+        if (data) {
+          return parseFloat(data).toFixed(2);
+        }
+      };
+    }
+  ]);
 
   app.filter("btcData", [
     function() {
@@ -12,12 +20,12 @@
         if (data[0]) {
           data.reverse();
           data.forEach(function(d) {
-            d.price = parseFloat(d.data.ticker.last.value);
-            return d.date = new Date(parseInt(d.data.ticker.now) / 1000);
+            d.price = parseFloat(d.last);
+            return d.date = new Date(d.timestamp);
           });
         } else {
-          data.price = parseFloat(data.ticker.last.value);
-          data.date = new Date(parseInt(data.ticker.now) / 1000);
+          data.price = parseFloat(data.last);
+          data.date = new Date(parseInt(data.timestamp) * 1000);
         }
         return data;
       };

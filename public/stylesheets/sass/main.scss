@@ -3,13 +3,14 @@
 @import "projects";
 @import "charts";
 @import "about";
+@import "clock";
 
 /* MAIN
 ------------------------------------------------------------*/
 
 
-@import url(http://fonts.googleapis.com/css?family=Exo+2:400,300,500);
-@import url(http://fonts.googleapis.com/css?family=Raleway:400,500,600);
+// @import url(http://fonts.googleapis.com/css?family=Exo+2:400,300,500);
+// @import url(http://fonts.googleapis.com/css?family=Raleway:400,500,600);
 
 @font-face {
   font-family: 'Raleway';
@@ -33,6 +34,23 @@
   font-weight:200 
 }
 
+@font-face {
+  font-family: 'Ozone';
+  src: url('../fonts/Ozone.ttf');
+  font-weight:200 
+}
+
+
+@font-face {
+  font-family: 'Digital';
+  src: url('../fonts/digital-7.ttf');
+  font-weight:200 
+}
+
+.notransition{
+  @inlcude transition(none);
+}
+
 #waterCanvas{
   display:none;
 }
@@ -51,7 +69,7 @@ html{
 }
 
 body {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Exo2', sans-serif;
   font: 14px;
   height:100%;
   overflow:hidden;
@@ -62,6 +80,7 @@ body {
   @include background-image(linear-gradient(#FFFFFF 0%, #66B6FF 21%, #000000 68%, #0B538B 100%));
   @include browser(text-size-adjust, none);
   @include browser(transform,translateZ(0));
+  -webkit-font-smoothing: antialiased;
 
 }
 
@@ -71,7 +90,7 @@ a, a:hover, a:visited {
 }
 
 h1{
-  // font-family: sans-serif;  
+  font-family: Raleway, sans-serif;  
   color:white;
   text-shadow: 1px 1px 1px rgba(0,0,0,.15);
   font-size: 80px;
@@ -98,6 +117,7 @@ h1{
 }
 
 .mainNav{
+  font-family: Raleway, sans-serif;  
   text-align:center;
   i {
     line-height:160px;
@@ -119,13 +139,14 @@ h1{
 
 
 h2{ 
-  text-align:center;
-  color: $fontColor;
-  font-size: 14px;
+  // text-align:center;
+  // color: $fontColor;
+  // font-size: 14px;
 
 }
 
 .smallNav{
+  font-family: Raleway, sans-serif;  
   position:absolute;
   bottom:30px;
   margin:auto;
@@ -168,6 +189,7 @@ canvas {
   height:100%;
   @include browser(transform-style, preserve-3d);
   position:absolute;
+  // @include transition(all 1s linear)
   // @include browser(transform-origin-z, -650px);
 }
 
@@ -235,4 +257,14 @@ canvas {
   25%   { opacity: 1; }
   75%   { opacity: 1; }
   100%  { opacity: 0; }
+}
+@include keyframes(flash-in) {
+  0%   { opacity: 0; }
+  1%   { opacity: 0; }
+  2%   { opacity: 1; }
+  3%   { opacity: 1; }
+  4%   { opacity: 0; }
+  6%  { opacity: 0; }
+  7%  { opacity: 1; }
+  100%  { opacity: 1; }
 }

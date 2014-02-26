@@ -1,31 +1,114 @@
-charts.screen(ng-controller="chartsCtrl")
-  graph(graph)
-    #chart.screen
-  .clocks
-    .clockContainer(clock language="en" timezone="America/New_York")
-      .circle.clock
-        .face()
-            #hour
-            #minute
-            #second
-      .timeText
-        .date {{date}}
-        .month {{month}}
-        .day {{day}}
-        .year {{year}}
-        .time {{time}} 
-    .clockContainer(clock language="ru" timezone="Europe/Moscow")
-      .circle.clock.clock2
-        .face()
-            #hour
-            #minute
-            #second
-      .timeText.ru
-        .date {{date}}
-        .month {{month}}
-        .day {{day}}
-        .year {{year}}
-        .time {{time}}
-  .ticker  
-    | {{btcData.ticker.last.value | ticker}}
+charts(ng-controller="chartsCtrl")
+
+  .rightSide
+
+    .tickers.screen
+      h2
+        i.fa.fa-btc ITCOIN 
+      .small
+        |trading on 
+        a(href="https://www.bitstamp.net/" target="blank") BITSTAMP
+
+      .cur()
+        span.curText USD
+          .arrows
+            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+        .right
+          i.fa.fa-usd
+          span {{USD | ticker}}
+      .cur()
+        span.curText RUB
+          .arrows
+            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]") 
+        .right
+          i.fa.fa-rub
+          span {{RUB | ticker}}
+      .cur()
+        span.curText GBP
+          .arrows
+            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+        .right
+          i.fa.fa-gbp
+          span {{GBP | ticker}}
+      .cur()
+        span.curText EUR
+          .arrows
+            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+        .right 
+          i.fa.fa-eur
+          span {{EUR | ticker}}
+      .cur()
+        span.curText JPY
+          .arrows
+            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+        .right
+          i.fa.fa-gbp
+          span {{JPY | ticker}}
+      .cur()
+        span.curText CNY
+           .arrows
+            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+        .right 
+          i.fa.fa-cny
+          span {{CNY | ticker}}
+
+      .globe.screen
+        img(src="http://upload.wikimedia.org/wikipedia/commons/6/6b/Rotating_globe.gif")
+      .timeText.screen(date)
+        div.time
+          span.date {{date}}
+          span.month {{month}}
+          span.year {{year}}
+          span.time {{time}} 
+        div.day
+          ul 
+            li(ng-class="{'select': day=='Sun'}") sun
+            li(ng-class="{'select': day=='Mon'}") mon
+            li(ng-class="{'select': day=='Tue'}") tue 
+            li(ng-class="{'select': day=='Wed'}") wed 
+            li(ng-class="{'select': day=='Thu'}") thu 
+            li(ng-class="{'select': day=='Fri'}") fri 
+            li(ng-class="{'select': day=='Sat'}") sat 
+
+      .runner
+        span
+          |Realtime is money. The chart that you are viewing is the realtime Bitcoin-USD transaction data on the BITSTAMP Bitcoin exchange. 
+
+
+  .leftSide
+
+    .clocks.screen
+      .clockContainer(clock language="en" timezone="America/New_York" location="NEW YORK")
+      .clockContainer(clock language="ru" timezone="Europe/London" location="LONDON")
+      .clockContainer(clock language="ru" timezone="Europe/Moscow" location="MOSCOW")
+      .clockContainer(clock language="ru" timezone="Asia/Tokyo" location="TOKYO")
+      .clockContainer(clock language="ru" timezone="America/Los_Angeles" location="LOS ANGELES")
+
+
+    graph(graph)
+
+      #chart.screen
+        .btclogo
+          i.fa.fa-btc
+          i.fa.fa-btc
+          i.fa.fa-btc
+          i.fa.fa-btc
+          
+
+          i.fa.fa-btc
+          i.fa.fa-btc
+          i.fa.fa-btc
+          i.fa.fa-btc
 

@@ -6,7 +6,8 @@ app = angular.module("4real", [
   "4real.directives", 
   "4real.controllers", 
   "ngRoute", 
-  "ngAnimate", 
+  "ngAnimate",
+  # "ngSanitize"
   # "angularMoment",
 ])
 app.config ["$routeProvider","$locationProvider", ($routeProvider, $locationProvider) ->

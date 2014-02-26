@@ -1,5 +1,5 @@
 .animate-projects {
-  @include transition(all 0.3s cubic-bezier(0.455, 0.030, 0.515, 0.955));
+  @include transition(all cubic-bezier(0.455, 0.030, 0.515, 0.955) 0.4s );
   opacity:1;
   // @include transform(scale(1,1));
   @include transform3d(translateX(0px)  scale3d(1,1,1));
@@ -50,11 +50,11 @@
 
 .projectList{
   position:absolute;
-  top:50%;
+  top:10%;
   left:5%;
-  width:25%;
+  width:100%;
   vertical-align:middle;
-  font-size:20px;
+  font-size:16px;
   line-height: 24px;
   a{
     text-decoration:none;
@@ -62,12 +62,15 @@
   }
   p{
     padding-bottom:10px;
+    @include animation(colorRainbow .7s infinite);
+    // color:rgb(255,0,0);
+    font-size:22px;
     // font-size:30px;
     @include animation(opacity-animation cubic-bezier(0.175, 0.885, 0.32, 1.275) .7s .3s);
   }
   .project{
     cursor:pointer;
-    font-style:italic;
+    // font-style:italic;
     @include transition(font-size cubic-bezier(0.175, 0.885, 0.32, 1.275) .3s);
   }
   .project:hover{
@@ -97,7 +100,8 @@ img.phone{
   position:absolute;
   bottom:-40px;
   right:80px;
-  width:200px;
+  max-width:200px;
+  // @include box-shadow(1px 1px 4px 1px rgba(0,0,0,.1));
   @include transition(all .3s .5s cubic-bezier(0.175, 0.885, 0.32, 1.275));
 
   &.ng-hide{

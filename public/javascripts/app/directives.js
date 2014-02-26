@@ -4,16 +4,44 @@
 
   app = angular.module("4real.directives", []);
 
-  app.directive("clock", [
-    "$filter", function($filter) {
+  app.directive("date", [
+    "$filter", '$timeout', function($filter, $timeout) {
       return {
         scope: true,
         link: function(scope, el, attr) {
           var timedUpdate, update;
           update = function() {
+            var now;
+            now = moment();
+            moment.lang('en');
+            scope.year = now.format('YYYY');
+            scope.date = now.format('D');
+            scope.day = now.format('ddd');
+            scope.time = now.format('h:mm:ss');
+            return scope.month = now.format('MMM');
+          };
+          timedUpdate = function() {
+            update();
+            $timeout(timedUpdate, 1000);
+          };
+          return timedUpdate();
+        }
+      };
+    }
+  ]);
+
+  app.directive("clock", [
+    "$filter", '$timeout', function($filter, $timeout) {
+      return {
+        scope: {
+          location: "@"
+        },
+        templateUrl: "/partials/clock",
+        link: function(scope, el, attr) {
+          var timedUpdate, update;
+          update = function() {
             var hour, minute, moment, now, obj, prefix, second;
             moment = window.moment;
-            moment.lang(attr.language);
             prefix = $filter('prefix');
             now = moment().tz(attr.timezone);
             second = now.seconds() * 6;
@@ -26,17 +54,38 @@
             angular.element(el[0].querySelector('#minute')).css(obj);
             obj[prefix.css + "transform"] = "rotate(" + second + "deg)";
             angular.element(el[0].querySelector('#second')).css(obj);
-            scope.year = now.format('YYYY');
-            scope.date = now.format('D');
-            scope.day = now.format('ddd');
-            scope.time = now.format('h:mm:ss');
-            scope.month = now.format('MMM');
+            scope.ampm = now.format('a');
           };
           timedUpdate = function() {
             update();
-            setTimeout(timedUpdate, 1000);
+            $timeout(timedUpdate, 1000);
           };
           return timedUpdate();
+        }
+      };
+    }
+  ]);
+
+  app.directive("abouts", [
+    '$timeout', '$window', function($timeout, $window) {
+      return {
+        link: function(scope, el, attr) {
+          var resize;
+          resize = function() {
+            var height, wh;
+            wh = $window.innerHeight;
+            el.css({
+              height: 'auto'
+            });
+            height = el[0].offsetHeight;
+            return el.css({
+              height: height,
+              'margin-top': -height / 2,
+              top: wh * .9 / 2
+            });
+          };
+          resize();
+          return angular.element($window).bind('resize', resize);
         }
       };
     }
@@ -227,13 +276,13 @@
     '$window', '$filter', function($window, $filter) {
       return {
         link: function(scope, el, att) {
-          var data, gx, gy, height, line, margin, maximum, minimum, movingWindowAvg, parseDate, path, roll, svg, tooltip, updateChart, width, x, xAxis, y, yAxis;
+          var area, data, gradient, gx, gy, height, line, margin, maximum, minimum, movingWindowAvg, parseDate, path, path2, resize, roll, svg, tooltip, updateChart, width, x, xAxis, y, yAxis;
           data = $filter('btcTrim')(scope.history, scope.trim);
           parseDate = d3.time.format("%b %Y").parse;
           margin = [30, 30, 50, 50];
           width = Math.max($window.innerWidth * .5, 300) - margin[1] - margin[3];
           height = Math.max($window.innerHeight * .5, 300) - margin[0] - margin[2];
-          svg = d3.select("#chart").append("svg").attr("width", width + margin[3] + margin[1]).attr("height", height + margin[0] + margin[2]).append("svg:g").attr("transform", "translate(" + margin[3] + "," + margin[0] + ")");
+          svg = d3.select("#chart").append("svg").attr("viewBox", "0 0 width height").attr("preserveAspectRatio", "xMidYMid").attr("width", width + margin[3] + margin[1]).attr("height", height + margin[0] + margin[2]).append("svg:g").attr("transform", "translate(" + margin[3] + "," + margin[0] + ")");
           x = d3.time.scale().range([0, width]);
           y = d3.scale.linear().range([height, 0]);
           xAxis = d3.svg.axis().scale(x).orient("bottom").tickSize(3).tickPadding(3).ticks(5);
@@ -258,9 +307,23 @@
                 return [i, d];
               }
             });
-            return d3.svg.line().x(function(d) {
+            return d3.svg.line().interpolate("cardinal").x(function(d) {
               return x(d[1].date);
             }).y(function(d) {
+              return y(d[1].price);
+            })(data);
+          };
+          area = function(data, k) {
+            data = data.map(function(d, i) {
+              if (i > k) {
+                return [k, data[k]];
+              } else {
+                return [i, d];
+              }
+            });
+            return d3.svg.area().interpolate("cardinal").x(function(d) {
+              return x(d[1].date);
+            }).y0(height).y1(function(d) {
               return y(d[1].price);
             })(data);
           };
@@ -274,19 +337,36 @@
             return d.price;
           }));
           y.domain([parseInt(minimum) - 5, parseInt(maximum) + 5]);
-          roll = function(path, k) {
-            if (k < data.length) {
-              return path.transition().duration(1).ease("linear").attr("d", line(data, k)).each("end", function() {
-                return roll(path, k + 1);
-              });
+          gradient = svg.append("svg:defs").append("svg:linearGradient").attr("id", "gradient").attr("x2", "0%").attr("y2", "100%");
+          gradient.append("svg:stop").attr("offset", "0%").attr("stop-color", "#fff").attr("stop-opacity", .2);
+          gradient.append("svg:stop").attr("offset", "100%").attr("stop-color", "#fff").attr("stop-opacity", 0.0);
+          roll = function(path, k, lineRoll) {
+            if (lineRoll) {
+              if (k < data.length) {
+                return path.transition().duration(1).ease("linear").attr("d", line(data, k)).each("end", function() {
+                  return roll(path, k + 1, true);
+                });
+              }
+            } else {
+              if (k < data.length) {
+                return path.transition().duration(1).ease("linear").attr("d", area(data, k)).each("end", function() {
+                  return roll(path, k + 1);
+                });
+              }
             }
           };
-          path = svg.append("path").attr("d", line(data, 0));
-          roll(line, 0);
+          path = svg.append("path").attr("d", area(data, 0)).attr("class", "area").attr("clip-path", "url(#clip)").style("fill", "url(#gradient)").style("stroke", 'none');
+          roll(area, 0);
+          path2 = svg.append("path").attr("d", line(data, 0)).style("fill", "none");
+          roll(line, 0, true);
           gx = svg.append("svg:g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
           gy = svg.append("svg:g").attr("class", "y axis").attr("transform", "translate(0,0)").call(yAxis);
+          resize = function() {
+            width = Math.max($window.innerWidth * .5, 300) - margin[1] - margin[3];
+            height = Math.max($window.innerHeight * .5, 300) - margin[0] - margin[2];
+            return svg.attr("width", width + margin[3] + margin[1]).attr("height", height + margin[0] + margin[2]).attr("transform", "translate(" + margin[3] + "," + margin[0] + ")");
+          };
           updateChart = function(redraw) {
-            var circle;
             data = $filter('btcTrim')(scope.history, scope.trim);
             x.domain(d3.extent(data.map(function(d) {
               return d.date;
@@ -301,29 +381,14 @@
             gx.call(xAxis);
             gy.call(yAxis);
             if (redraw) {
-              path.attr("d", line(data, 0)).transition();
-              roll(path, 0);
+              path.attr("d", area(data, 0)).transition().attr("clip-path", "url(#clip)");
+              path2.attr("d", line(data, 0)).transition();
+              roll(path2, 0, true);
+              return roll(path, 0);
             } else {
-              path.datum(data).transition().attr("d", line(data, data.lenght));
+              path.datum(data).transition().attr("clip-path", "url(#clip)").attr("d", area(data, data.lenght));
+              return path2.datum(data).transition().attr("d", line(data, data.lenght));
             }
-            circle = svg.selectAll("circle").data(data);
-            circle.transition().attr("cx", function(d) {
-              return x(d.date);
-            }).attr("cy", function(d) {
-              return y(d.price);
-            });
-            circle.enter().append("circle").attr("r", 3).attr("cx", function(d) {
-              var cx;
-              return cx = x(d.date);
-            }).attr("cy", function(d) {
-              return y(d.price);
-            }).on("mouseover", function(d) {
-              tooltip.transition().duration(200).style("opacity", 0.9);
-              return tooltip.html('$' + d.price.toFixed(2)).style("left", (d3.event.pageX - 20) + "px").style("top", (d3.event.pageY - 28) + "px");
-            }).on("mouseout", function(d) {
-              return tooltip.transition().duration(500).style("opacity", 0);
-            });
-            return circle.exit().remove();
           };
           scope.$watch('history.length', function(newV, oldV) {
             var redraw;
@@ -335,11 +400,12 @@
               return updateChart(redraw);
             }
           });
-          return scope.$watch('trim', function(newV, oldV) {
+          scope.$watch('trim', function(newV, oldV) {
             if (newV !== oldV) {
               return updateChart();
             }
           });
+          return angular.element($window).bind('resize', resize);
         }
       };
     }

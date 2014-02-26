@@ -13,6 +13,7 @@ body {
   height: 100%;
   background-image: url(http://www.okiraa.com/wallpaperstock/crystal-blue-waves-beach-beautiful-blue-crystal-nature-ocean-pretty-sea-sky-stunning-summer-sun-water-waves.jpg);
   background-size: cover;
+  -webkit-font-smoothing: antialiased;
 }
 a {
   color: #00B7FF;

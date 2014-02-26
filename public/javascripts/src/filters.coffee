@@ -1,6 +1,11 @@
 app =  angular.module("4real.filters", [])
 
-app.filter "ticker", [()->
+app.filter "ticker", ["$sce", ($sce)->
+  (data, cur) ->
+    if(data)
+        # $sce.trustAsHtml('<i class="fa fa-'+cur+'"></i> '+parseFloat(data).toFixed(2))
+       parseFloat(data).toFixed(2)
+
 ]
 
 app.filter "btcData", [ ()->
@@ -8,11 +13,11 @@ app.filter "btcData", [ ()->
     if(data[0])
       data.reverse()
       data.forEach (d) ->
-        d.price = parseFloat(d.data.ticker.last.value)
-        d.date = new Date(parseInt(d.data.ticker.now)/1000)
+        d.price = parseFloat(d.last)
+        d.date = new Date(d.timestamp)
     else
-      data.price = parseFloat(data.ticker.last.value)
-      data.date = new Date(parseInt(data.ticker.now)/1000)
+        data.price = parseFloat(data.last)
+        data.date = new Date(parseInt(data.timestamp)*1000)
     data
 ]
 

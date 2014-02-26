@@ -12,13 +12,34 @@ app =  angular.module("4real.directives", [])
 #       "background-color" : color
 # ]
 
-app.directive "clock", ["$filter", ($filter)->
+app.directive "date", ["$filter",'$timeout', ($filter,$timeout)->
   scope: true
+  link: (scope, el, attr)->
+    
+    update = ()->
+      now = moment()
+      moment.lang 'en'
+      scope.year = now.format('YYYY')
+      scope.date = now.format('D')
+      scope.day = now.format('ddd')
+      scope.time = now.format('h:mm:ss')
+      scope.month = now.format('MMM')
+
+    timedUpdate = ->
+      update()
+      $timeout timedUpdate, 1000
+      return
+    timedUpdate()
+]
+app.directive "clock", ["$filter",'$timeout', ($filter,$timeout)->
+  scope: 
+    location: "@"
+  templateUrl: "/partials/clock"
   link: (scope, el, attr)->
 
     update = ->
       moment = window.moment
-      moment.lang attr.language
+      # moment.lang attr.language
       
       # $("#js-format").html formatHtml()
       # $("#js-from-now").html fromHtml()
@@ -37,18 +58,36 @@ app.directive "clock", ["$filter", ($filter)->
       angular.element(el[0].querySelector('#minute')).css obj
       obj[prefix.css+ "transform"] = "rotate(" + second + "deg)"
       angular.element(el[0].querySelector('#second')).css obj
-      scope.year = now.format('YYYY')
-      scope.date = now.format('D')
-      scope.day = now.format('ddd')
-      scope.time = now.format('h:mm:ss')
-      scope.month = now.format('MMM')
+      # scope.year = now.format('YYYY')
+      # scope.date = now.format('D')
+      # scope.day = now.format('ddd')
+      # scope.time = now.format('h:mm:ss')
+      # scope.month = now.format('MMM')
+      scope.ampm = now.format('a')
 
       return
     timedUpdate = ->
       update()
-      setTimeout timedUpdate, 1000
+      $timeout timedUpdate, 1000
       return
     timedUpdate()
+
+]
+
+app.directive "abouts", ['$timeout','$window', ($timeout, $window)->
+  link : (scope, el, attr) ->
+    
+    resize = ()->
+      wh = $window.innerHeight
+      el.css
+        height:'auto'
+      height = el[0].offsetHeight
+      el.css
+        height:height
+        'margin-top': -height/2
+        top:wh*.9/2
+    resize()
+    angular.element($window).bind 'resize', resize
 
 ]
 
@@ -210,6 +249,8 @@ app.directive "graph", [ '$window', '$filter', ($window, $filter)->
     height = Math.max($window.innerHeight*.5, 300)- margin[0] - margin[2]
 
     svg = d3.select("#chart").append("svg")
+      .attr("viewBox","0 0 width height")
+      .attr("preserveAspectRatio","xMidYMid")
       .attr("width", width + margin[3] + margin[1])
       .attr("height", height + margin[0] + margin[2])
       .append("svg:g")
@@ -255,11 +296,29 @@ app.directive "graph", [ '$window', '$filter', ($window, $filter)->
         else
           [i, d]
       )
-      d3.svg.line().x((d) ->
+      d3.svg.line().interpolate("cardinal")
+      .x((d) ->
         x d[1].date
       ).y((d) ->
         y d[1].price
       ) data
+
+    area = (data, k) ->
+      data = data.map((d, i) ->
+        if i > k
+          [k, data[k]]
+        else
+          [i, d]
+      )
+      d3.svg.area().interpolate("cardinal")
+        .x((d) ->
+          x d[1].date
+        )
+        .y0(height)
+        .y1((d) ->
+          y d[1].price
+        ) data
+
 
     x.domain d3.extent data.map (d) ->
       d.date
@@ -269,21 +328,67 @@ app.directive "graph", [ '$window', '$filter', ($window, $filter)->
       d.price
     y.domain [parseInt(minimum) - 5, parseInt(maximum) + 5]
 
+    gradient = svg.append("svg:defs")
+      .append("svg:linearGradient")
+      .attr("id", "gradient")
+      .attr("x2", "0%")
+      .attr("y2", "100%")
+    gradient.append("svg:stop")
+      .attr("offset", "0%")
+      .attr("stop-color", "#fff")
+      .attr "stop-opacity", .2
+    gradient.append("svg:stop")
+      .attr("offset", "100%")
+        .attr("stop-color", "#fff")
+        .attr "stop-opacity", 0.0
+
+
     # path = svg.append("g")
     #   .attr("clip-path", "url(#clip)")
     #   .append("path")
 
-    roll = (path, k) ->
-      if k < data.length
-        path.transition().duration(1).ease("linear").attr("d", line(data, k)).each "end", ->
-          roll path, k + 1
+    roll = (path, k, lineRoll) ->
+      if lineRoll
+        if k < data.length
+          path.transition().duration(1).ease("linear").attr("d", line(data, k)).each "end", ->
+            roll path, k + 1, true  
+      else  
+        if k < data.length
+          path.transition().duration(1).ease("linear").attr("d", area(data, k)).each "end", ->
+            roll path, k + 1
 
-    path=svg.append("path").attr("d",line(data,0))
-    roll(line,0);  
+    path=svg.append("path")
+      .attr("d",area(data,0))
+      .attr("class", "area")
+      .attr("clip-path", "url(#clip)")
+      .style("fill", "url(#gradient)")
+      .style("stroke",'none')
+    roll(area,0);  
+
+    path2=svg.append("path")
+      .attr("d",line(data,0))
+      .style("fill", "none")
+    roll(line,0,true);  
+
 
     gx = svg.append("svg:g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call xAxis
     gy = svg.append("svg:g").attr("class", "y axis").attr("transform", "translate(0,0)").call yAxis
-    
+
+    # svg.append("defs").append("clipPath")
+    #   .attr("id", "clip")
+    #   .append("rect")
+    #   .attr("width", width)
+    #   .attr("height", height);
+
+    resize =()->
+      width = Math.max($window.innerWidth*.5, 300) - margin[1] - margin[3]
+      height = Math.max($window.innerHeight*.5, 300)- margin[0] - margin[2]
+
+      svg
+        .attr("width", width + margin[3] + margin[1])
+        .attr("height", height + margin[0] + margin[2])
+        .attr("transform", "translate(" + margin[3] + "," + margin[0] + ")");
+
 
     updateChart = (redraw)->
       data = $filter('btcTrim')(scope.history,scope.trim)
@@ -304,38 +409,44 @@ app.directive "graph", [ '$window', '$filter', ($window, $filter)->
       # only first time
       
       if redraw
-        path.attr("d", line(data,0)).transition();
+        path.attr("d", area(data,0)).transition()
+          .attr("clip-path", "url(#clip)")
+        path2.attr("d", line(data,0)).transition()
+        roll(path2,0,true)
         roll(path,0)
       else
         path.datum(data).transition()
-          .attr("d", line(data,data.lenght)); 
+          .attr("clip-path", "url(#clip)")
+          .attr("d", area(data,data.lenght))
+        path2.datum(data).transition()
+          .attr("d", line(data,data.lenght)) 
         # roll(path,data.length)
 
 
       
-      circle = svg.selectAll("circle").data(data)
+      # circle = svg.selectAll("circle").data(data)
 
-      # Add new circle
-      circle.transition()
-      .attr("cx", (d) -> 
-        x(d.date)
-      ).attr("cy", (d) ->
-        y(d.price)
-      )
+      # # Add new circle
+      # circle.transition()
+      # .attr("cx", (d) -> 
+      #   x(d.date)
+      # ).attr("cy", (d) ->
+      #   y(d.price)
+      # )
 
-      circle.enter().append("circle")
-      .attr("r", 3)
-      .attr("cx", (d) ->
-        cx = x(d.date)
-      ).attr("cy", (d) ->
-        y(d.price)
-      ).on("mouseover", (d) ->
-        tooltip.transition().duration(200).style "opacity", 0.9
-        tooltip.html('$'+(d.price).toFixed(2)).style("left", (d3.event.pageX - 20) + "px").style "top", (d3.event.pageY - 28) + "px"
-      ).on("mouseout", (d) ->
-        tooltip.transition().duration(500).style "opacity", 0
-      )
-      circle.exit().remove();
+      # circle.enter().append("circle")
+      # .attr("r", 3)
+      # .attr("cx", (d) ->
+      #   cx = x(d.date)
+      # ).attr("cy", (d) ->
+      #   y(d.price)
+      # ).on("mouseover", (d) ->
+      #   tooltip.transition().duration(200).style "opacity", 0.9
+      #   tooltip.html('$'+(d.price).toFixed(2)).style("left", (d3.event.pageX - 20) + "px").style "top", (d3.event.pageY - 28) + "px"
+      # ).on("mouseout", (d) ->
+      #   tooltip.transition().duration(500).style "opacity", 0
+      # )
+      # circle.exit().remove();
 
 
     scope.$watch 'history.length', (newV, oldV) ->
@@ -348,6 +459,9 @@ app.directive "graph", [ '$window', '$filter', ($window, $filter)->
     scope.$watch 'trim', (newV, oldV) ->
       if newV != oldV
         updateChart()
+
+    angular.element($window).bind 'resize', resize
+
 ]
 
 app.directive "water", [ ()->

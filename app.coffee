@@ -5,10 +5,12 @@ Module dependencies.
 express = require("express")
 routes = require("./routes")
 http = require("http")
+https = require("https")
+
 path = require("path")
 socket = require('./routes/socket');
-gox = require('goxstream')
-mongoose = require('mongoose')
+# gox = require('goxstream')
+db = require('./db')()
 
 app = express()
 server = require('http').createServer(app)
@@ -47,10 +49,50 @@ app.get "/projects", routes.index
 app.get "/about", routes.index
 
 
-btc = gox.createStream({trade:false,ticker:true}) 
+# btc = gox.createStream({trade:false,ticker:true}) 
 
-btc.on 'data' , (data)->
-  io.sockets.emit('btc-data', data:data)
+# btc.on 'data' , (data)->
+  # io.sockets.emit('btc-data', data:data)
+
+
+setInterval
+
+lastTime = new Date(0)
+seconds = 5
+the_interval = seconds * 1000
+
+getData = ()->
+  url = "https://www.bitstamp.net:443/api/ticker/"
+  https.get(url, (res) ->
+    body = ""
+    res.on "data", (chunk) ->
+      body += chunk
+      return
+
+    res.on "end", ->
+      try
+        data = JSON.parse(body)
+      catch error
+        console.log(body)
+        return
+      # console.log(data)
+      newTime = new Date(parseInt(data.timestamp)*100)
+      if  newTime > lastTime
+        lastTime = newTime
+        io.sockets.emit('btc-data', data:data)
+
+    return
+  ).on "error", (e) ->
+    console.log "Got error: ", e
+    return
+
+
+getData()
+
+setInterval getData, the_interval
+
+
+
 
 io.sockets.on('connection', (socket)->
   socket.emit('init')
@@ -58,28 +100,21 @@ io.sockets.on('connection', (socket)->
 
     if !limit
       limit = 1000
-    bitcoinModel.find().limit(limit).sort("data.ticker.now": -1).exec (err, tickers) ->
+
+    db.secondModel.find().limit(limit).sort(timestamp: -1).limit(limit).exec (err, data) ->
       if err
         console.log err
       else
-        # console.log tickers
-        callback(tickers)
+        callback(data)
+
+    # bitcoinModel.find().limit(limit).sort("data.ticker.now": -1).exec (err, tickers) ->
+    #   if err
+    #     console.log err
+    #   else
+    #     # console.log tickers
+    #     callback(tickers)
   )
 )
-
-mongoose.connect "mongodb://" + process.env.MONGODB_USERNAME + ":" + process.env.MONGODB_PASSWORD + "@ds027729.mongolab.com:27729/bitcoin"
-Schema = mongoose.Schema
-bitcoinSchema = new Schema(
-  data: Schema.Types.Mixed
-,
-  capped:
-    size: 268435456
-
-  strict: false
-  toJSON: true
-)
-bitcoinModel = mongoose.model("bitcoinModel", bitcoinSchema)
-
 
 
 

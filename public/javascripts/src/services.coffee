@@ -18,6 +18,17 @@ app.factory "socket", ($rootScope) ->
         # callback args  if callback
         callback.apply socket, args  if callback
 
+app.factory "exchange", ['$rootScope', '$http', ($rootScope, $http) ->
+  getRates: (callback)->
+    $http(
+      method: "GET"
+      url: "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%3D%22%20EURUSD%2CRUBUSD%2CGBPUSD%2CJPYUSD%2CCNYUSD%22&format=json&diagnostics=false&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback="
+    ).success( (data)->
+      callback(data.query)
+    ).error(()->
+      console.log("error getting exchange rates")
+    )
+] 
 
 app.factory "btcHistory", [ '$rootScope', '$http', ($rootScope, $http) ->
   getHistory: (callback)->
@@ -46,6 +57,47 @@ app.factory 'projectsService', [ ()->
     ]
     iphone:[]
   ,
+    title: 'Gifpumper'
+    description: 'realtime 3d collage platform'
+    url: 'http://gifpumper.com'
+    img: [
+      url: amazonUrl + 'gifpumper.png'
+    ]
+    iphone:[]
+  ,
+    title: 'Kehinde Wiley Studio'
+    description: 'website for artist Kehinde Wiley'
+    url: 'http://kehindewiley.com'
+    img: [
+      url: amazonUrl + 'kehindewiley.png'
+    ]
+    iphone:[
+      url: amazonUrl+ 'kwphone.png'
+    ]
+  ,
+    title: 'TWAAS'
+    description: 'Website for Thea Westreich art advisory services'
+    url: ''
+    img: [
+      url: amazonUrl + 'twaas.png'
+    ]
+    tablet: [
+      
+    ]
+    iphone:[
+      url: amazonUrl + 'twaasphone.png'
+    ]
+  ,
+
+    title: 'Walmart at 50'
+    description: 'platform for users to upload their walmart stories'
+    url: 'http://walmartat50.org'
+    img: [
+      url: amazonUrl + 'walmart.png'
+    ]
+    iphone:[]
+  ,
+
     title: 'David Lewis Gallery'
     description: ''
     url: 'http://davidlewisgallery.com'
@@ -55,42 +107,17 @@ app.factory 'projectsService', [ ()->
     iphone:[
       url: amazonUrl+ 'dlphone.png'
     ]
+
   ,
-    title: 'Gifpumper'
-    description: 'realtime 3d collage platform'
-    url: 'http://gifpumper.com'
-    img: [
-      url: amazonUrl + 'gifpumper.png'
-    ]
-    iphone:[]
-  ,
-    title: 'Walmart at 50'
-    description: 'platform for users to upload their walmart stories'
-    url: 'http://walmartat50.org'
-    img: [
-      url: amazonUrl + 'walmart.png'
-    ]
-    iphone:[]
-  ,
-    title: 'Timelines'
-    description: 'an iPad app that generates a 3d timeline of your life'
-    url: ''
-    img: [
-      url: amazonUrl + 'timelinksipad.png'
-    ]
-    tablet: [
-      url: amazonUrl + 'timelinksipad.png'
-    ]
-    iphone:[]
-  ,
-    title: 'Casey Kaplan Gallery'
-    description: ''
-    url: 'http://caseykaplangallery.com'
-    img: [
-      url: amazonUrl + 'caseykaplan.png'
-    ]
-    iphone:[]
-  ,
+
+  #   title: 'Casey Kaplan Gallery'
+  #   description: ''
+  #   url: 'http://caseykaplangallery.com'
+  #   img: [
+  #     url: amazonUrl + 'caseykaplan.png'
+  #   ]
+  #   iphone:[]
+  # ,
     title: 'The Digit'
     description: 'Augmented Reality App'
     url: 'http://balasan.net/thedigit/'

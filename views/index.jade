@@ -11,12 +11,8 @@ block content
         ipad
           camera
           specular
-          .screen
-            .aboutOuter 
-              .about(ng-controller="aboutCtrl" about)
-                //- .div(text ng-repeat="info in text")
-                //- |{{info}}
-            div(ng-include="'/partials/nav'")
+          div(ng-include="'/partials/about'")            
+          div.screen(ng-include="'/partials/nav'")
         floor
           shadow 
       
@@ -40,32 +36,18 @@ block content
           shadow
       
       .glass.left(glass ng-class="{'active': page=='projects'}")
-        ipad.ipad2        
+        //- ipad.ipad2        
         ipad
           specular
-          .projects.screen(projects ng-controller="projectsCtrl")
-            .projectList
-              p Some projects we worked on...
-              div.animate-list(ng-repeat="project in projects")
-                .project(ng-mouseover="$parent.viewproject=$index") 
-                  a(ng-href="{{project.url}}" target="blank")
-                    |{{project.title}}
-            .singleproject.animate-projects(ng-repeat="project in projects" ng-show="$index==viewproject" )
-              img(src="{{project.img[0].url}}" ng-show="project.img[0].url")
-              img.phone(src="{{project.iphone[0].url}}" ng-show="project.iphone[0].url && $index==viewproject")
-              //- | {{project.title}}
-              | {{viewproject.description}}
-            div(ng-include="'/partials/nav'")
+          div(ng-include="'/partials/projects'")  
         floor
           shadow 
 
       .glass.right(glass ng-class="{'active': page=='charts'}")
-        ipad.ipad2
-
+        //- ipad.ipad2
         ipad
           specular
           div(ng-include="'/partials/charts'")
-
           div.screen(ng-include="'/partials/nav'")
         floor
           shadow

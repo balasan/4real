@@ -208,14 +208,7 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$location', ($docum
     scale = 180
     w = angular.element($window)
 
-    el.bind 'pointerdown', (e)->
-      startX = e.x 
-      startY = e.y
-      w.bind 'pointermove', (e)->
-        e.maskedEvent.preventDefault()
-        scope.dragX = ((e.x - startX)/scope.windowWidth)*scale
-        e.maskedEvent.stopPropagation();
-    w.bind 'pointerup', (e) ->
+    cleanup = ()->
       w.unbind 'pointermove'
       scope.rotate.y += Math.round(scope.dragX / 90) * 90;
       scope.dragX = 0
@@ -229,10 +222,29 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$location', ($docum
         when -270 then scope.page = 'charts'
         when -180 then scope.page = 'about'
 
+    el.bind 'pointerdown', (e)->
+      startX = e.x 
+      startY = e.y
+      w.bind 'pointermove', (e)->
+        e.maskedEvent.preventDefault()
+        scope.dragX = ((e.x - startX)/scope.windowWidth)*scale
+        e.maskedEvent.stopPropagation();
+    w.bind 'pointerup', (e) ->
+      cleanup()
+
+
       $location.path('/'+scope.page)
 
     w.bind 'resize', ->
       resize()
+
+    document.addEventListener 'mouseout',(e) ->
+      e = (if e then e else window.event)
+      from = e.relatedTarget or e.toElement
+      if not from or from.nodeName is "HTML"
+        e.preventDefault()
+        cleanup() 
+      return
 
     updateRotation()
 ]

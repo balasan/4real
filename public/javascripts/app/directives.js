@@ -167,7 +167,7 @@
     '$document', '$window', '$timeout', '$location', function($document, $window, $timeout, $location) {
       return {
         link: function(scope, el, att) {
-          var resize, rotateScene, scale, updateRotation, w;
+          var cleanup, resize, rotateScene, scale, updateRotation, w;
           scope.oldH = 0;
           scope.oldV = 0;
           scope.newH = 0;
@@ -223,6 +223,29 @@
           $document.on('mousemove', rotateScene);
           scale = 180;
           w = angular.element($window);
+          cleanup = function() {
+            var angle;
+            w.unbind('pointermove');
+            scope.rotate.y += Math.round(scope.dragX / 90) * 90;
+            scope.dragX = 0;
+            angle = scope.rotate.y % 360;
+            switch (angle) {
+              case 0:
+                return scope.page = '';
+              case 90:
+                return scope.page = 'charts';
+              case -90:
+                return scope.page = 'projects';
+              case 180:
+                return scope.page = 'about';
+              case 270:
+                return scope.page = 'projects';
+              case -270:
+                return scope.page = 'charts';
+              case -180:
+                return scope.page = 'about';
+            }
+          };
           el.bind('pointerdown', function(e) {
             var startX, startY;
             startX = e.x;
@@ -234,37 +257,20 @@
             });
           });
           w.bind('pointerup', function(e) {
-            var angle;
-            w.unbind('pointermove');
-            scope.rotate.y += Math.round(scope.dragX / 90) * 90;
-            scope.dragX = 0;
-            angle = scope.rotate.y % 360;
-            switch (angle) {
-              case 0:
-                scope.page = '';
-                break;
-              case 90:
-                scope.page = 'charts';
-                break;
-              case -90:
-                scope.page = 'projects';
-                break;
-              case 180:
-                scope.page = 'about';
-                break;
-              case 270:
-                scope.page = 'projects';
-                break;
-              case -270:
-                scope.page = 'charts';
-                break;
-              case -180:
-                scope.page = 'about';
-            }
+            cleanup();
             return $location.path('/' + scope.page);
           });
           w.bind('resize', function() {
             return resize();
+          });
+          document.addEventListener('mouseout', function(e) {
+            var from;
+            e = (e ? e : window.event);
+            from = e.relatedTarget || e.toElement;
+            if (!from || from.nodeName === "HTML") {
+              e.preventDefault();
+              cleanup();
+            }
           });
           return updateRotation();
         }

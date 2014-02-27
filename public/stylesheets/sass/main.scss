@@ -251,7 +251,7 @@ canvas {
   0% {color:magenta}
   25% {color:cyan}
   50% {color:yellow}
-  75% {color:green}
+  75% {color:rgb(0,255,0)}
 }
 
 @include keyframes(rotateAlot) {

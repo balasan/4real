@@ -92,16 +92,13 @@
       getRates();
       getData = function() {
         return socket.emit('getData', $scope.trim, function(data) {
-          console.log(data);
           $scope.history = $filter('btcData')(data);
-          console.log($scope.history);
           $scope.USD = $scope.history[$scope.history.length - 1].price;
           return convert();
         });
       };
       return socket.on('btc-data', function(data) {
         $scope.btcData = $filter('btcData')(data.data);
-        console.log($scope.btcData);
         $scope.USD = parseFloat($scope.btcData.last);
         if ($scope.btcData.date <= $scope.history[$scope.history.length - 1].date) {
           return;

@@ -56,6 +56,8 @@
   vertical-align:middle;
   font-size:16px;
   line-height: 24px;
+  z-index:1;
+  max-width:30%;
   a{
     text-decoration:none;
     color:inherit;
@@ -78,6 +80,11 @@
   }
 }
 
+// .projectImage{
+//   position:absolute;
+//   width:100%;
+// }
+
 .projects{
   height:100%;
   // position:relative;
@@ -90,6 +97,7 @@
 }
 .singleproject{
   position:absolute;
+  height:100%;
   right:0px;
   width:70%;
   padding-top:20px;  
@@ -98,9 +106,10 @@
 
 img.phone{
   position:absolute;
-  bottom:-40px;
+  bottom:20px;
   right:80px;
   max-width:200px;
+  max-height:80%;
   // @include box-shadow(1px 1px 4px 1px rgba(0,0,0,.1));
   @include transition(all .3s .5s cubic-bezier(0.175, 0.885, 0.32, 1.275));
 
@@ -128,4 +137,34 @@ img.phone{
   // 25%   { opacity: 1; }
   // 75%   { opacity: 1; }
   100%  {@include transform3d(scale3d(1,1,1) translateX(0)); opacity:1}
+}
+
+@media screen and (max-width: 1000px){
+  .projectList{
+    max-width:none;
+    p{
+      font-size:18px;
+    }
+    position:relative;
+    padding:20px;
+    top:0;
+    left:0;
+    .project{
+      line-height:20px;
+    }
+    .project:hover{
+      font-size:24px;
+    }
+  }
+  img.phone{
+    bottom: -20px;
+    right:40px;
+  }
+  .singleproject{
+    width:100%;
+    height:auto;
+    max-height:70%;
+    text-align:center;
+    padding-top:0px;
+  }
 }

@@ -5,7 +5,7 @@
   app = angular.module("4real.directives", []);
 
   app.directive("date", [
-    "$filter", '$timeout', function($filter, $timeout) {
+    "$filter", '$timeout', 'isMobile', function($filter, $timeout, isMobile) {
       return {
         scope: true,
         link: function(scope, el, attr) {
@@ -31,7 +31,7 @@
   ]);
 
   app.directive("clock", [
-    "$filter", '$timeout', function($filter, $timeout) {
+    "$filter", '$timeout', 'isMobile', function($filter, $timeout, isMobile) {
       return {
         scope: {
           location: "@"
@@ -39,6 +39,9 @@
         templateUrl: "/partials/clock",
         link: function(scope, el, attr) {
           var timedUpdate, update;
+          if (isMobile()) {
+            return;
+          }
           update = function() {
             var hour, minute, moment, now, obj, prefix, second;
             moment = window.moment;
@@ -78,11 +81,13 @@
               height: 'auto'
             });
             height = el[0].offsetHeight;
-            return el.css({
-              height: height,
-              'margin-top': -height / 2,
-              top: wh * .9 / 2
-            });
+            if (height < wh) {
+              return el.css({
+                height: height,
+                'margin-top': -height / 2,
+                top: wh * .9 / 2
+              });
+            }
           };
           resize();
           return angular.element($window).bind('resize', resize);
@@ -231,34 +236,38 @@
             angle = scope.rotate.y % 360;
             switch (angle) {
               case 0:
-                return scope.page = '';
+                scope.page = '';
+                break;
               case 90:
-                return scope.page = 'charts';
+                scope.page = 'charts';
+                break;
               case -90:
-                return scope.page = 'projects';
+                scope.page = 'projects';
+                break;
               case 180:
-                return scope.page = 'about';
+                scope.page = 'about';
+                break;
               case 270:
-                return scope.page = 'projects';
+                scope.page = 'projects';
+                break;
               case -270:
-                return scope.page = 'charts';
+                scope.page = 'charts';
+                break;
               case -180:
-                return scope.page = 'about';
+                scope.page = 'about';
             }
+            return $location.path('/' + scope.page);
           };
           el.bind('pointerdown', function(e) {
             var startX, startY;
             startX = e.x;
             startY = e.y;
             return w.bind('pointermove', function(e) {
-              e.maskedEvent.preventDefault();
-              scope.dragX = ((e.x - startX) / scope.windowWidth) * scale;
-              return e.maskedEvent.stopPropagation();
+              return scope.dragX = ((e.x - startX) / scope.windowWidth) * scale;
             });
           });
           w.bind('pointerup', function(e) {
-            cleanup();
-            return $location.path('/' + scope.page);
+            return cleanup();
           });
           w.bind('resize', function() {
             return resize();
@@ -279,20 +288,31 @@
   ]);
 
   app.directive("graph", [
-    '$window', '$filter', function($window, $filter) {
+    '$window', '$filter', 'isMobile', function($window, $filter, isMobile) {
       return {
         link: function(scope, el, att) {
-          var area, data, gradient, gx, gy, height, line, margin, maximum, minimum, movingWindowAvg, parseDate, path, path2, resize, roll, svg, tooltip, updateChart, width, x, xAxis, y, yAxis;
+          var animate, area, data, gradient, gx, gy, height, line, margin, maximum, minimum, movingWindowAvg, parseDate, path, path2, resize, roll, svg, ticks, tooltip, updateChart, width, x, xAxis, y, yAxis;
+          animate = true;
+          if (isMobile()) {
+            animate = false;
+          }
           data = $filter('btcTrim')(scope.history, scope.trim);
           parseDate = d3.time.format("%b %Y").parse;
           margin = [30, 30, 50, 50];
           width = Math.max($window.innerWidth * .5, 300) - margin[1] - margin[3];
           height = Math.max($window.innerHeight * .5, 300) - margin[0] - margin[2];
+          if (isMobile()) {
+            height = width * 1.7 / 3;
+          }
           svg = d3.select("#chart").append("svg").attr("viewBox", "0 0 width height").attr("preserveAspectRatio", "xMidYMid").attr("width", width + margin[3] + margin[1]).attr("height", height + margin[0] + margin[2]).append("svg:g").attr("transform", "translate(" + margin[3] + "," + margin[0] + ")");
+          ticks = 5;
+          if (isMobile()) {
+            ticks = 3;
+          }
           x = d3.time.scale().range([0, width]);
           y = d3.scale.linear().range([height, 0]);
-          xAxis = d3.svg.axis().scale(x).orient("bottom").tickSize(3).tickPadding(3).ticks(5);
-          yAxis = d3.svg.axis().scale(y).orient("left").tickSize(3).tickPadding(3).ticks(5).tickFormat(d3.format("$,f"));
+          xAxis = d3.svg.axis().scale(x).orient("bottom").tickSize(3).tickPadding(3).ticks(ticks);
+          yAxis = d3.svg.axis().scale(y).orient("left").tickSize(3).tickPadding(3).ticks(ticks).tickFormat(d3.format("$,f"));
           tooltip = d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0);
           movingWindowAvg = function(arr, step) {
             return arr.map(function(_, idx) {
@@ -383,17 +403,22 @@
             minimum = d3.min(data.map(function(d) {
               return d.price;
             }));
-            y.domain([minimum - 5, maximum + 5]);
+            y.domain([minimum - 4, maximum + 4]);
             gx.call(xAxis);
             gy.call(yAxis);
-            if (redraw) {
-              path.attr("d", area(data, 0)).transition().attr("clip-path", "url(#clip)");
-              path2.attr("d", line(data, 0)).transition();
-              roll(path2, 0, true);
-              return roll(path, 0);
+            if (animate) {
+              if (redraw) {
+                path.attr("d", area(data, 0)).transition().attr("clip-path", "url(#clip)");
+                path2.attr("d", line(data, 0)).transition();
+                roll(path2, 0, true);
+                return roll(path, 0);
+              } else {
+                path.datum(data).transition().attr("clip-path", "url(#clip)").attr("d", area(data, data.lenght - 1));
+                return path2.datum(data).transition().attr("d", line(data, data.lenght - 1));
+              }
             } else {
-              path.datum(data).transition().attr("clip-path", "url(#clip)").attr("d", area(data, data.lenght));
-              return path2.datum(data).transition().attr("d", line(data, data.lenght));
+              path.datum(data).attr("clip-path", "url(#clip)").attr("d", area(data, data.lenght));
+              return path2.datum(data).attr("d", line(data, data.lenght));
             }
           };
           scope.$watch('history.length', function(newV, oldV) {

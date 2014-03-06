@@ -4,6 +4,15 @@
 
   app = angular.module("4real.services", []);
 
+  app.factory('isMobile', function($window) {
+    return function() {
+      if ($window.innerWidth < 700) {
+        return true;
+      }
+      return false;
+    };
+  });
+
   app.factory("socket", function($rootScope) {
     var socket;
     socket = io.connect();

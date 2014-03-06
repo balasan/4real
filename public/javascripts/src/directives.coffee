@@ -12,7 +12,7 @@ app =  angular.module("4real.directives", [])
 #       "background-color" : color
 # ]
 
-app.directive "date", ["$filter",'$timeout', ($filter,$timeout)->
+app.directive "date", ["$filter",'$timeout','isMobile', ($filter,$timeout,isMobile)->
   scope: true
   link: (scope, el, attr)->
     
@@ -29,13 +29,17 @@ app.directive "date", ["$filter",'$timeout', ($filter,$timeout)->
       update()
       $timeout timedUpdate, 1000
       return
+    # if (!isMobile)
     timedUpdate()
 ]
-app.directive "clock", ["$filter",'$timeout', ($filter,$timeout)->
+app.directive "clock", ["$filter",'$timeout','isMobile', ($filter,$timeout, isMobile)->
   scope: 
     location: "@"
   templateUrl: "/partials/clock"
   link: (scope, el, attr)->
+
+    if(isMobile())
+      return
 
     update = ->
       moment = window.moment
@@ -78,14 +82,16 @@ app.directive "abouts", ['$timeout','$window', ($timeout, $window)->
   link : (scope, el, attr) ->
     
     resize = ()->
-      wh = $window.innerHeight
+      wh = 
+        $window.innerHeight
       el.css
         height:'auto'
       height = el[0].offsetHeight
-      el.css
-        height:height
-        'margin-top': -height/2
-        top:wh*.9/2
+      if height < wh
+        el.css
+          height:height
+          'margin-top': -height/2
+          top:wh*.9/2
     resize()
     angular.element($window).bind 'resize', resize
 
@@ -221,19 +227,17 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$location', ($docum
         when 270 then scope.page = 'projects'
         when -270 then scope.page = 'charts'
         when -180 then scope.page = 'about'
+      $location.path('/'+scope.page)
 
     el.bind 'pointerdown', (e)->
       startX = e.x 
       startY = e.y
       w.bind 'pointermove', (e)->
-        e.maskedEvent.preventDefault()
+        # e.maskedEvent.preventDefault()
         scope.dragX = ((e.x - startX)/scope.windowWidth)*scale
-        e.maskedEvent.stopPropagation();
+        # e.maskedEvent.stopPropagation();
     w.bind 'pointerup', (e) ->
       cleanup()
-
-
-      $location.path('/'+scope.page)
 
     w.bind 'resize', ->
       resize()
@@ -249,8 +253,12 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$location', ($docum
     updateRotation()
 ]
 
-app.directive "graph", [ '$window', '$filter', ($window, $filter)->
+app.directive "graph", [ '$window', '$filter','isMobile', ($window, $filter, isMobile)->
   link: (scope, el, att) ->
+
+    animate = true
+    if isMobile() 
+      animate = false
 
     data = $filter('btcTrim')(scope.history,scope.trim)
 
@@ -260,6 +268,11 @@ app.directive "graph", [ '$window', '$filter', ($window, $filter)->
     width = Math.max($window.innerWidth*.5, 300) - margin[1] - margin[3]
     height = Math.max($window.innerHeight*.5, 300)- margin[0] - margin[2]
 
+    if(isMobile())
+      height = width * 1.7/3
+
+
+
     svg = d3.select("#chart").append("svg")
       .attr("viewBox","0 0 width height")
       .attr("preserveAspectRatio","xMidYMid")
@@ -268,17 +281,21 @@ app.directive "graph", [ '$window', '$filter', ($window, $filter)->
       .append("svg:g")
       .attr("transform", "translate(" + margin[3] + "," + margin[0] + ")");
 
+    ticks = 5
+    if isMobile()
+      ticks = 3
+
     x = d3.time.scale().range([0, width])
     y = d3.scale.linear().range([height, 0])
     xAxis = d3.svg.axis().scale(x).orient("bottom")
       .tickSize(3)
       .tickPadding(3)
-      .ticks(5)
+      .ticks(ticks)
       # .scale.ticks(5)
     yAxis = d3.svg.axis().scale(y).orient("left")
       .tickSize(3)
       .tickPadding(3)
-      .ticks(5)
+      .ticks(ticks)
       .tickFormat(d3.format("$,f"))
 
 
@@ -360,6 +377,8 @@ app.directive "graph", [ '$window', '$filter', ($window, $filter)->
     #   .append("path")
 
     roll = (path, k, lineRoll) ->
+      # if !animate
+        # k = data.length - 1
       if lineRoll
         if k < data.length
           path.transition().duration(1).ease("linear").attr("d", line(data, k)).each "end", ->
@@ -412,27 +431,37 @@ app.directive "graph", [ '$window', '$filter', ($window, $filter)->
         d.price
       minimum = d3.min data.map (d) ->
         d.price
-      y.domain [minimum - 5, maximum + 5]
+
+
+
+      y.domain [minimum - 4, maximum + 4]
 
       gx.call(xAxis);
       gy.call(yAxis);
 
       
       # only first time
-      
-      if redraw
-        path.attr("d", area(data,0)).transition()
-          .attr("clip-path", "url(#clip)")
-        path2.attr("d", line(data,0)).transition()
-        roll(path2,0,true)
-        roll(path,0)
+      if animate
+        if redraw
+          path.attr("d", area(data,0)).transition()
+            .attr("clip-path", "url(#clip)")
+          path2.attr("d", line(data,0)).transition()
+          roll(path2,0,true)
+          roll(path,0)
+        else 
+          path.datum(data).transition()
+            .attr("clip-path", "url(#clip)")
+            .attr("d", area(data,data.lenght-1))
+          path2.datum(data).transition()
+            .attr("d", line(data,data.lenght-1)) 
+          # roll(path,data.length)
       else
-        path.datum(data).transition()
-          .attr("clip-path", "url(#clip)")
-          .attr("d", area(data,data.lenght))
-        path2.datum(data).transition()
-          .attr("d", line(data,data.lenght)) 
-        # roll(path,data.length)
+          path.datum(data)
+            .attr("clip-path", "url(#clip)")
+            .attr("d", area(data,data.lenght))
+          path2.datum(data)
+            .attr("d", line(data,data.lenght)) 
+
 
 
       

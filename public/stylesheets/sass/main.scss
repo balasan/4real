@@ -66,31 +66,34 @@ $fontColor: rgb(150,150,150);
 
 html{
   height:100%;
+  overflow:hidden;
 }
 
 body {
   font-family: 'Exo2', sans-serif;
   font: 14px;
   height:100%;
+  width:100%;
   overflow:hidden;
   // background-image:url(http://www.okiraa.com/wallpaperstock/crystal-blue-waves-beach-beautiful-blue-crystal-nature-ocean-pretty-sea-sky-stunning-summer-sun-water-waves.jpg);
   background-size:cover;
   font-weight:200;
   color:white;
-  @include background-image(
+  // @include background-image(
 
-      url(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg)
-      ,url(https://s3-us-west-2.amazonaws.com/4real/various/wave11.jpg)
+      // url(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg)
+      // ,url(https://s3-us-west-2.amazonaws.com/4real/various/wave11.jpg)
       // ,url(https://s3-us-west-2.amazonaws.com/4real/various/wave1small.jpg)
       
-      );
+      // );
       // linear-gradient(to top, rgba(0, 255, 255, 0.41) 0%, rgba(255, 255, 255, 0.55) 21%, rgba(255, 255, 255, 0.48) 68%, rgba(255, 255, 255, 0.45) 100%));
   // @include background-image( linear-gradient(#ffffff 0%, #5D7892 21%, #000000 68%, #436786 100%));
 
   // @include background-image(linear-gradient(#FFFFFF 0%, #66B6FF 21%, #000000 68%, #0B538B 100%));
   @include browser(text-size-adjust, none);
   @include browser(transform,translateZ(0));
-  -webkit-font-smoothing: antialiased;
+  @include browser(font-smoothing, antialiased);
+  @include browser(text-size-adjust, none);
 
 }
 .tint{
@@ -99,8 +102,15 @@ body {
   left:0;
   width:100%;
   height:100%;
-  opacity:.8;
-  @include background-image( linear-gradient(#ffffff 0%, #5D7892 21%, #000000 68%, #436786 100%));
+  // opacity:.8;
+  background-size:cover;
+  background-position:center;
+  @include background-image( 
+    linear-gradient(rgba(180, 180, 180, 0.8) 0%, rgba(93, 120, 146, 0.8) 21%, rgba(0, 0, 0, 0.8) 68%, rgba(67, 103, 134, 0.8) 100%)
+
+    ,url(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg)
+    ,url(https://s3-us-west-2.amazonaws.com/4real/various/wave11.jpg)
+    );
   // @include background-image(linear-gradient(rgba(255, 255, 255, 0.41) 0%, rgba(255, 255, 255, 0.55) 21%, rgba(255, 255, 255, 0.48) 68%, rgba(255, 255, 255, 0.45) 100%));
 }
 
@@ -143,7 +153,7 @@ h1{
     line-height:160px;
     padding:0 20px;
     @include transition(all cubic-bezier(0.175, 0.885, 0.32, 1.275) .3s);
-    font-width:200;
+    font-weight:200;
     cursor:pointer;
     @include transform(scale3d(1,1,1))
 
@@ -211,6 +221,12 @@ canvas {
   position:absolute;
   // @include transition(all 1s linear)
   // @include browser(transform-origin-z, -650px);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 
@@ -287,4 +303,43 @@ canvas {
   6%  { opacity: 0; }
   7%  { opacity: 1; }
   100%  { opacity: 1; }
+}
+
+@media screen and (max-width: 700px){
+
+  html{
+    height:100%;
+    min-height:550px;
+  }
+
+  body{
+    // min-height:600px;
+    // overflow-y:visible;
+    height:100%;
+    width:100%;
+    overflow:hidden;
+  }
+  glass{
+    overflow:hidden;
+    // overflow-x:hidden;
+    // overflow-y: scroll; /* has to be scroll, not auto */
+    // -webkit-overflow-scrolling: touch;
+
+  }
+  .smallNav{
+    bottom:10px;
+  }
+  h1{
+    font-size:80px;
+    line-height:1em;
+  }
+  .mainNav{
+    i{
+      font-size: 65px;
+      line-height: 1.1em;
+      padding:20px 10px;
+      // display:block;
+    }
+  }
+
 }

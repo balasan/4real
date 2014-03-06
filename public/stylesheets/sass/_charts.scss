@@ -48,7 +48,7 @@
 }
 
 area{
-  // fill: url(#gradient);      
+  fill: url(#gradient);      
 }
 
 path {
@@ -206,7 +206,7 @@ $clockColor: white;
       color:white !important;
     }
   }
-  max-width: 280px;
+  max-width: 300px;
   padding:0 40px 100px 40px;
   overflow:hidden;
 
@@ -237,6 +237,7 @@ $clockColor: white;
       display:block;
       height:4px;
       &.fa-caret-up{
+        color:rgb(0,255,0);
         @include animation(flash-in linear 5s infinite);
       }
       &.fa-caret-down{
@@ -322,5 +323,85 @@ $clockColor: white;
   100% { @include browser(transform,translateX(-2000px))};
 }
 
+@media screen and (max-width: 700px){
+
+  .leftSide{
+    // display:none;
+    width:100%;
+    padding:0;
+    .clocks{
+      display:none;
+    }
+    margin-top:-100px;
+    padding-top: 10px;
+  }
+  .rightSide{
+    // display:none;
+    width: 100%;
+    // padding-top: 10px;
+    padding:0;
+
+  }
+  .tickers{
+    // display:none;
+    padding-left:0;
+    padding-right:0;
+    // overflow:hidden;
+    margin-top:0;
+    max-width:none;
+    .heading{
+      width:53%;
+      float:left;
+      padding: 20px 5px 0px 15px;
+      .chartsTitle{
+        font-size:24px;
+      }
+
+    }
+    .prices{
+      width:47%;
+      float:right;
+
+      font-size:14px;
+      line-height: 1.2em;
+      padding: 20px 20px 0 5px;
+
+    }
+    i{
+      font-size: 10px;
+    }
+    .globe{
+      clear:both;
+      margin-top:0px;
+      width:120px;
+      height:120px;
+    }
+    .arrows{
+      
+      padding-top:2px;
+      padding-left:2px;
+      display: inline-block;
+      vertical-align:top;
+      i{
+        padding:0px 1px 0 1px;
+        font-size:6px;
+        line-height:1em;
+      }
+    }
+  }
+
+  .x.axis path, .y.axis path {
+    display: none;
+    // stroke-width: .25;
+  }
+
+  .axis text{
+    font-size:10px;
+  }
+  #chart svg{
+    margin-left:-10px;
+  }
+
+}
 
 

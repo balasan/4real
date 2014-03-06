@@ -1,6 +1,13 @@
 app =  angular.module("4real.services", [])
 
 
+app.factory 'isMobile', ($window)->
+  return ()->
+    if ($window.innerWidth < 700)
+      return true
+    return false
+
+
 app.factory "socket", ($rootScope) ->
   socket = io.connect()
   on: (eventName, callback) ->

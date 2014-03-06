@@ -3,69 +3,71 @@ charts(ng-controller="chartsCtrl")
   .rightSide
 
     .tickers.screen
-      .chartsTitle
-        |4real Global Analytics
+      .heading
+        .chartsTitle
+          |4real Global Analytics
 
-      h2
-        //- i.fa.fa-btc ITCOIN 
-      .small
-        i.fa.fa-btc ITCOIN trading on 
-          a(href="https://www.bitstamp.net/" target="blank") BITSTAMP
+        h2
+          //- i.fa.fa-btc ITCOIN 
+        .small
+          i.fa.fa-btc ITCOIN trading on 
+            a(href="https://www.bitstamp.net/" target="blank") BITSTAMP
 
-      .cur()
-        span.curText USD
-          .arrows
-            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
-            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
-            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
-        .right
-          i.fa.fa-usd
-          span {{USD | ticker}}
-      .cur()
-        span.curText RUB
-          .arrows
-            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
-            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
-            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]") 
-        .right
-          i.fa.fa-rub
-          span {{RUB | ticker}}
-      .cur()
-        span.curText GBP
-          .arrows
-            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
-            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
-            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
-        .right
-          i.fa.fa-gbp
-          span {{GBP | ticker}}
-      .cur()
-        span.curText EUR
-          .arrows
-            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
-            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
-            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
-        .right 
-          i.fa.fa-eur
-          span {{EUR | ticker}}
-      .cur()
-        span.curText JPY
-          .arrows
-            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
-            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
-            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
-        .right
-          i.fa.fa-gbp
-          span {{JPY | ticker}}
-      .cur()
-        span.curText CNY
-           .arrows
-            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
-            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
-            i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
-        .right 
-          i.fa.fa-cny
-          span {{CNY | ticker}}
+      .prices
+        .cur()
+          span.curText USD
+            .arrows
+              i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+              i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+              i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+          .right
+            i.fa.fa-usd
+            span {{USD | ticker}}
+        .cur()
+          span.curText RUB
+            .arrows
+              i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+              i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+              i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]") 
+          .right
+            i.fa.fa-rub
+            span {{RUB | ticker}}
+        .cur()
+          span.curText GBP
+            .arrows
+              i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+              i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+              i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+          .right
+            i.fa.fa-gbp
+            span {{GBP | ticker}}
+        .cur()
+          span.curText EUR
+            .arrows
+              i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+              i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+              i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+          .right 
+            i.fa.fa-eur
+            span {{EUR | ticker}}
+        .cur()
+          span.curText JPY
+            .arrows
+              i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+              i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+              i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+          .right
+            i.fa.fa-gbp
+            span {{JPY | ticker}}
+        .cur()
+          span.curText CNY
+             .arrows
+              i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+              i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+              i.fa(ng-class="{true:'fa-caret-up', false:'fa-caret-down'}[up]")
+          .right 
+            i.fa.fa-cny
+            span {{CNY | ticker}}
 
       .globe.screen
         img(src="http://upload.wikimedia.org/wikipedia/commons/6/6b/Rotating_globe.gif")
@@ -105,13 +107,13 @@ charts(ng-controller="chartsCtrl")
       #chart.screen
         .btclogo
           i.fa.fa-btc
-          i.fa.fa-btc
-          i.fa.fa-btc
-          i.fa.fa-btc
+          //- i.fa.fa-btc
+          //- i.fa.fa-btc
+          //- i.fa.fa-btc
           
 
-          i.fa.fa-btc
-          i.fa.fa-btc
-          i.fa.fa-btc
-          i.fa.fa-btc
+          //- i.fa.fa-btc
+          //- i.fa.fa-btc
+          //- i.fa.fa-btc
+          //- i.fa.fa-btc
 

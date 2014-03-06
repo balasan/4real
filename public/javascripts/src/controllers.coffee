@@ -94,16 +94,16 @@ app.controller "chartsCtrl", [ '$scope','socket','$timeout','btcHistory','$filte
 
   getData = ()->
     socket.emit 'getData', $scope.trim, (data) ->
-      console.log(data)
+      # console.log(data)
       $scope.history = $filter('btcData')(data);
-      console.log($scope.history)
+      # console.log($scope.history)
       $scope.USD = $scope.history[$scope.history.length - 1].price
       convert()
 
         # body...
   socket.on 'btc-data', (data)->
     $scope.btcData = $filter('btcData')(data.data)
-    console.log($scope.btcData)
+    # console.log($scope.btcData)
     $scope.USD = parseFloat($scope.btcData.last)
     
     if $scope.btcData.date <= $scope.history[$scope.history.length - 1].date

@@ -24,16 +24,18 @@ block content
           specular
           .main.screen
             .vcenter
-              h1 
+              svg(viewBox='0 0 1024 256')
+                use(xlink:href="#logo-4real-thin-fill")
+              //- h1 
                 span 4real
                 //- |{{page}}
-              .mainNav
-                a(href="/charts")
-                  i.fa.fa-signal.fa-5x 
-                a(href="/about")
-                  i.fa.fa-comment-o.fa-5x 
-                a(href="/projects")
-                  i.fa.fa-laptop.fa-5x 
+          .mainNav.screen
+            a(href="/charts")
+              i.fa.fa-signal.fa-5x 
+            a(href="/about")
+              i.fa.fa-comment-o.fa-5x 
+            a(href="/projects")
+              i.fa.fa-laptop.fa-5x 
         //- floor
           //- shadow
       

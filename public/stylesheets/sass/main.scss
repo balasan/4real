@@ -96,6 +96,18 @@ body {
   @include browser(text-size-adjust, none);
 
 }
+
+#mainSVG{
+  display:none;
+}
+
+.main{
+  svg{
+    fill:white;
+    height:100px;
+  }
+}
+
 .tint{
   position:absolute;
   top:0;
@@ -149,9 +161,13 @@ h1{
 .mainNav{
   font-family: Raleway, sans-serif;  
   text-align:center;
+  bottom:20px;
+  position:absolute;
+  width:100%;
   i {
-    line-height:160px;
-    padding:0 20px;
+    line-height:40px;
+    font-size:2em;
+    padding:0 10px;
     @include transition(all cubic-bezier(0.175, 0.885, 0.32, 1.275) .3s);
     font-weight:200;
     cursor:pointer;
@@ -178,16 +194,20 @@ h2{
 .smallNav{
   font-family: Raleway, sans-serif;  
   position:absolute;
-  bottom:30px;
+  bottom:20px;
   margin:auto;
   width:100%;
   text-align:center;
-  font-size:22px;
+  font-size:2em;
   font-weight:500;
   line-height:34px;
+  svg{
+    height:40px;
+    width:80px;
+  }
   li{
     @include transition(all cubic-bezier(0.175, 0.885, 0.32, 1.275) .3s);
-    margin:0 5px;
+    margin:0 10px;
     display:inline-block;
     &:hover{
       // font-size:34px;
@@ -328,6 +348,7 @@ canvas {
   }
   .smallNav{
     bottom:10px;
+
   }
   h1{
     font-size:80px;

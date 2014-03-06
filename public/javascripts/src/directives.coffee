@@ -211,7 +211,7 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$location', ($docum
     
     $document.on('mousemove', rotateScene)
     
-    scale = 180
+    scale = 250
     w = angular.element($window)
 
     cleanup = ()->
@@ -325,7 +325,7 @@ app.directive "graph", [ '$window', '$filter','isMobile', ($window, $filter, isM
         else
           [i, d]
       )
-      d3.svg.line().interpolate("cardinal")
+      d3.svg.line().interpolate("monotone")
       .x((d) ->
         x d[1].date
       ).y((d) ->
@@ -339,7 +339,7 @@ app.directive "graph", [ '$window', '$filter','isMobile', ($window, $filter, isM
         else
           [i, d]
       )
-      d3.svg.area().interpolate("cardinal")
+      d3.svg.area().interpolate("monotone")
         .x((d) ->
           x d[1].date
         )
@@ -458,9 +458,9 @@ app.directive "graph", [ '$window', '$filter','isMobile', ($window, $filter, isM
       else
           path.datum(data)
             .attr("clip-path", "url(#clip)")
-            .attr("d", area(data,data.lenght))
+            .attr("d", area(data,data.lenght-1))
           path2.datum(data)
-            .attr("d", line(data,data.lenght)) 
+            .attr("d", line(data,data.lenght-1)) 
 
 
 

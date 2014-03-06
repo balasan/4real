@@ -933,6 +933,10 @@ circle:hover {
   #chart svg {
     margin-left: -10px;
   }
+
+  .area {
+    fill: none !important;
+  }
 }
 .aboutInner {
   width: 100%;
@@ -1486,6 +1490,15 @@ body {
   text-size-adjust: none;
 }
 
+#mainSVG {
+  display: none;
+}
+
+.main svg {
+  fill: white;
+  height: 100px;
+}
+
 .tint {
   position: absolute;
   top: 0;
@@ -1547,10 +1560,14 @@ h1 span:hover {
 .mainNav {
   font-family: Raleway, sans-serif;
   text-align: center;
+  bottom: 20px;
+  position: absolute;
+  width: 100%;
 }
 .mainNav i {
-  line-height: 160px;
-  padding: 0 20px;
+  line-height: 40px;
+  font-size: 2em;
+  padding: 0 10px;
   -webkit-transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275);
   -webkit-transition-delay: 0.3s;
   -moz-transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
@@ -1575,13 +1592,17 @@ h1 span:hover {
 .smallNav {
   font-family: Raleway, sans-serif;
   position: absolute;
-  bottom: 30px;
+  bottom: 20px;
   margin: auto;
   width: 100%;
   text-align: center;
-  font-size: 22px;
+  font-size: 2em;
   font-weight: 500;
   line-height: 34px;
+}
+.smallNav svg {
+  height: 40px;
+  width: 80px;
 }
 .smallNav li {
   -webkit-transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -1589,7 +1610,7 @@ h1 span:hover {
   -moz-transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
   -o-transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
   transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
-  margin: 0 5px;
+  margin: 0 10px;
   display: inline-block;
 }
 .smallNav li:hover {

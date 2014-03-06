@@ -226,7 +226,7 @@
           };
           resize();
           $document.on('mousemove', rotateScene);
-          scale = 180;
+          scale = 250;
           w = angular.element($window);
           cleanup = function() {
             var angle;
@@ -333,7 +333,7 @@
                 return [i, d];
               }
             });
-            return d3.svg.line().interpolate("cardinal").x(function(d) {
+            return d3.svg.line().interpolate("monotone").x(function(d) {
               return x(d[1].date);
             }).y(function(d) {
               return y(d[1].price);
@@ -347,7 +347,7 @@
                 return [i, d];
               }
             });
-            return d3.svg.area().interpolate("cardinal").x(function(d) {
+            return d3.svg.area().interpolate("monotone").x(function(d) {
               return x(d[1].date);
             }).y0(height).y1(function(d) {
               return y(d[1].price);
@@ -417,8 +417,8 @@
                 return path2.datum(data).transition().attr("d", line(data, data.lenght - 1));
               }
             } else {
-              path.datum(data).attr("clip-path", "url(#clip)").attr("d", area(data, data.lenght));
-              return path2.datum(data).attr("d", line(data, data.lenght));
+              path.datum(data).attr("clip-path", "url(#clip)").attr("d", area(data, data.lenght - 1));
+              return path2.datum(data).attr("d", line(data, data.lenght - 1));
             }
           };
           scope.$watch('history.length', function(newV, oldV) {

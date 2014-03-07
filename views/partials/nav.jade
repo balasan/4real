@@ -7,12 +7,12 @@
         i.fa.fa-home.fa-1x 
         //- |4real
     //- br
-    li
+    li(ng-hide="thispage=='charts'")
       a(href="/charts")
         i.fa.fa-signal.fa-1x 
-    li
-      a(href="/about")
+    li(ng-hide="thispage=='about'")
+      a(href="/about" )
         i.fa.fa-comment-o.fa-1x 
-    li
+    li(ng-hide="thispage=='projects'")
       a(href="/projects")
         i.fa.fa-laptop.fa-1x 

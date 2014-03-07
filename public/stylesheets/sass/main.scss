@@ -346,19 +346,30 @@ canvas {
     // -webkit-overflow-scrolling: touch;
 
   }
-  .smallNav{
-    bottom:10px;
-
+  .main{
+    margin-top:-40px;
+    svg{
+      fill:white;
+      height:60px;
+    }
   }
   h1{
     font-size:80px;
     line-height:1em;
   }
+
+  .smallNav{
+      font-size:1.7em;
+
+    i{
+    }
+  }
   .mainNav{
     i{
-      font-size: 65px;
-      line-height: 1.1em;
-      padding:20px 10px;
+        font-size:1.7em;
+      // font-size: 65px;
+      // line-height: 1.1em;
+      // padding:20px 10px;
       // display:block;
     }
   }

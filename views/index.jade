@@ -14,7 +14,7 @@ block content
           camera
           specular
           div(ng-include="'/partials/about'")            
-          div.screen(ng-include="'/partials/nav'")
+          div.screen(ng-repeat="thispage in ['about']" ng-include="'/partials/nav'")
         //- floor
           //- shadow 
       
@@ -43,7 +43,8 @@ block content
         //- ipad.ipad2        
         ipad
           specular
-          div(ng-include="'/partials/projects'")  
+          div( ng-include="'/partials/projects'")  
+          div(ng-repeat="thispage in ['projects']" ng-include="'/partials/nav'")
         //- floor
           //- shadow 
 
@@ -52,7 +53,7 @@ block content
         ipad
           specular
           div(ng-include="'/partials/charts'")
-          div.screen(ng-include="'/partials/nav'")
+          div.screen(ng-repeat="thispage in ['charts']" ng-include="'/partials/nav'")
         //- floor
           //- shadow
 

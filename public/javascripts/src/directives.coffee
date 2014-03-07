@@ -207,6 +207,7 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$location', "isMobi
         "transform": transform
 
       $timeout(updateRotation, 30)
+      # window.requestAnimationFrame(updateRotation,30);
 
     resize = ()->
       scope.windowWidth = $window.innerWidth

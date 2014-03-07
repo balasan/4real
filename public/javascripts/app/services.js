@@ -15,7 +15,17 @@
 
   app.factory("socket", function($rootScope) {
     var socket;
-    socket = io.connect();
+    socket = io.connect('/', {
+      'sync disconnect on unload': true
+    });
+    window.ononbeforeunload = function() {
+      socket.disconnect();
+      return console.log('disconnect');
+    };
+    window.onload = function() {
+      socket.socket.reconnect();
+      return console.log('reconnect');
+    };
     return {
       on: function(eventName, callback) {
         return socket.on(eventName, function() {

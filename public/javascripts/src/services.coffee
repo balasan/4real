@@ -8,22 +8,33 @@ app.factory 'isMobile', ($window)->
     return false
 
 
-app.factory "socket", ($rootScope) ->
-  socket = io.connect()
+app.factory "socket", "$timeout", ($rootScope,$timeout) ->
+  socket = io.connect( '/', {'sync disconnect on unload':true})
+
+  window.ononbeforeunload = ()->
+    socket.disconnect()
+    console.log( 'disconnect')
+
+  window.onload = ()->
+    socket.socket.reconnect()
+    console.log( 'reconnect')
+
   on: (eventName, callback) ->
-    socket.on eventName, ->
-      args = arguments
-      $rootScope.$apply ->
-        # callback args
-        callback.apply socket, args
-      # $rootScope.$apply()
+    $timeout
+      socket.on eventName, ->
+        args = arguments
+        $rootScope.$apply ->
+          # callback args
+          callback.apply socket, args
+        # $rootScope.$apply()
 
   emit: (eventName, data, callback) ->
-    socket.emit eventName, data, ->
-      args = arguments
-      $rootScope.$apply ->
-        # callback args  if callback
-        callback.apply socket, args  if callback
+    $timeout
+      socket.emit eventName, data, ->
+        args = arguments
+        $rootScope.$apply ->
+          # callback args  if callback
+          callback.apply socket, args  if callback
 
 app.factory "exchange", ['$rootScope', '$http', ($rootScope, $http) ->
   getRates: (callback)->

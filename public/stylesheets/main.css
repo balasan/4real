@@ -841,8 +841,8 @@ path {
   width: 100%;
   text-align: center;
   top: 50%;
-  margin-top: -60px;
-  font-size: 100px;
+  margin-top: -120px;
+  font-size: 200px;
   opacity: .1;
 }
 
@@ -1102,6 +1102,11 @@ circle:hover {
   }
 }
 
+@media screen and (max-height: 700px) {
+  .leftSide, .rightSide {
+    padding-top: 4%;
+  }
+}
 @media screen and (max-height: 600px) {
   .tickers .prices {
     font-size: 20px;

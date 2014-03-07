@@ -126,8 +126,8 @@ graph{
     width:100%;
     text-align:center;
     top:50%;
-    margin-top:-60px;
-    font-size:100px;
+    margin-top:-120px;
+    font-size:200px;
     opacity:.1;
   }
 
@@ -208,6 +208,7 @@ $clockColor: white;
     line-height: 1em;
     letter-spacing:0;
     i{
+      // color:rgb(200,0,0);
       color:white !important;
     }
   }
@@ -326,6 +327,14 @@ $clockColor: white;
 @include keyframes(runner){
   0% {@include browser(transform, translateX(130%))};
   100% { @include browser(transform,translateX(-2000px))};
+}
+
+@media screen and (max-height: 700px){
+
+  .leftSide, .rightSide{
+    padding-top:4%;
+  }
+
 }
 
 @media screen and (max-height: 600px){

@@ -55,7 +55,7 @@
 
 }
 .active .glowBar{
-    @include animation(glowBar .8s .2s);
+    @include animation(glowBar .9s .3s);
     opacity:0;
 }
 

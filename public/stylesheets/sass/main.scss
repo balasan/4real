@@ -1,9 +1,9 @@
 @import "base";
 @import "glass";
 @import "projects";
+@import "clock";
 @import "charts";
 @import "about";
-@import "clock";
 
 /* MAIN
 ------------------------------------------------------------*/
@@ -94,7 +94,7 @@ body {
   @include browser(transform,translateZ(0));
   @include browser(font-smoothing, antialiased);
   @include browser(text-size-adjust, none);
-
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #mainSVG{

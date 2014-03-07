@@ -95,6 +95,11 @@ path {
   stroke: white;
 }
 
+#chart svg{
+  width:90%;
+  // height:60%;
+}
+
 charts{
 
  }
@@ -206,8 +211,8 @@ $clockColor: white;
       color:white !important;
     }
   }
-  max-width: 300px;
-  padding:0 40px 100px 40px;
+  max-width: 250px;
+  padding:0 5% 100px 5%;
   overflow:hidden;
 
   i{
@@ -272,7 +277,7 @@ $clockColor: white;
   color:lightgrey;
   .time{
     position:relative;
-    padding: 0 2px 0 0px;
+    padding: 1px 0 ;
     margin-bottom:10px;
     span{
       padding:0 5px;
@@ -280,7 +285,7 @@ $clockColor: white;
 
   }
   .day{
-    font-size:11px;
+    font-size:12px;
     letter-spacing:1px;
 
     ul{
@@ -288,7 +293,7 @@ $clockColor: white;
         vertical-align:top;
         display:inline-block;
         // background:rgba(200,200,200,.8);
-        padding:1px 1px 0 1px;
+        padding:1px 1px 0px 1px;
         margin: 0 1px;
         line-height: 10px;
         &.select{
@@ -321,6 +326,56 @@ $clockColor: white;
 @include keyframes(runner){
   0% {@include browser(transform, translateX(130%))};
   100% { @include browser(transform,translateX(-2000px))};
+}
+
+@media screen and (max-height: 600px){
+
+    .tickers{
+      .prices{
+      font-size:20px;
+      line-height:1.3em;
+      }
+    }
+    .clock{
+      font-size:2.3px;
+    }
+
+    .leftSide{
+      padding-top:20px;
+    } 
+    .rightSide{
+      padding-top:5px;
+    }
+
+    .globe{
+      margin-top:-10px !important;
+    }
+
+}
+
+@media screen and (max-width: 1100px){
+
+  .clockContainer:nth-child(5){
+    display:none !important;
+  }
+  .clock{
+    font-size: 2.4px;
+  }
+  .tickers{
+    .prices{
+      font-size:20px;
+      line-height:1.3em;
+      }
+    }
+}
+@media screen and (max-width: 790px){
+
+  .rightSide{
+    padding-right:20px;
+  }
+  .clockContainer:nth-child(4){
+    display:none !important;
+  }
 }
 
 @media screen and (max-width: 700px){

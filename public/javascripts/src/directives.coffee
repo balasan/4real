@@ -159,7 +159,7 @@ app.directive "glass", ['$window', '$timeout','$filter', ($window, $timeout,$fil
       resize()
 ]
 
-app.directive "cube", [ '$document', '$window', '$timeout', '$location', ($document, $window,$timeout,$location)->
+app.directive "cube", [ '$document', '$window', '$timeout', '$location', "isMobile", ($document, $window,$timeout,$location,isMobile)->
   link: (scope, el, att) ->
     scope.oldH = 0;
     scope.oldV = 0;
@@ -190,10 +190,13 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$location', ($docum
         "-moz-transform": transform
         "-ms-transform": transform
         "-webkit-transform": transform
-
+      offset = 0
+      if isMobile()
+        offset = -400
       el.find("specular").css
         # "background-position": (-200 + (scope.oldH * -500)) + "px " + (-scope.oldV * 600) + "px"
-        "background-position": (-200 + (scope.oldH * -500)) + "px " + (-scope.oldV * 600 +1000) + "px"
+
+        "background-position": (-200 + (scope.oldH * -500)) + "px " + (-scope.oldV * 600 +1000 + offset) + "px"
         opacity: 1 - (scope.oldH * .45) - (scope.oldV * .45)
 
       transform = "rotateX(" + (65 + (scope.oldV * 20)) + "deg) rotateY(" + (10 - (scope.oldH * 20)) + "deg) skewX(-15deg)"

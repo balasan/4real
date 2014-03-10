@@ -375,9 +375,11 @@
             return $location.path('/' + scope.page);
           };
           auto = function() {
+            var t;
             scope.rotate.y += 90;
             cleanup();
-            return $timeout(auto, 20000);
+            t = Math.random();
+            return $timeout(auto, 40000 * t);
           };
           randomVertical = function() {
             var h, v;

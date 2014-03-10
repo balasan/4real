@@ -328,7 +328,8 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$location', "isMobi
     auto = ()->
       scope.rotate.y += 90;
       cleanup()
-      $timeout auto, 20000
+      t = Math.random()
+      $timeout auto, 40000 * t
 
     randomVertical = () ->
       v = Math.random()

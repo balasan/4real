@@ -332,9 +332,10 @@ shadow {
   font-size: 30px;
 }
 
-.projects {
+.projectImage {
   height: 100%;
 }
+
 .projects img {
   max-width: 100%;
   max-height: 80%;
@@ -1550,6 +1551,27 @@ body {
   width: 100%;
 }
 
+#videos {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#videos video {
+  position: absolute;
+  min-width: 100%;
+  min-height: 100%;
+  opacity: 0;
+  -webkit-transition: opacity 0.8s;
+  -moz-transition: opacity 0.8s;
+  -o-transition: opacity 0.8s;
+  transition: opacity 0.8s;
+}
+#videos video.activeVid {
+  opacity: 1;
+}
+
 .tint {
   position: absolute;
   top: 0;
@@ -1558,11 +1580,11 @@ body {
   height: 100%;
   background-size: cover;
   background-position: center;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(180, 180, 180, 0.8)), color-stop(21%, rgba(93, 120, 146, 0.8)), color-stop(68%, rgba(0, 0, 0, 0.8)), color-stop(100%, rgba(67, 103, 134, 0.8))), url(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg), url(https://s3-us-west-2.amazonaws.com/4real/various/wave11.jpg);
-  background-image: -webkit-linear-gradient(rgba(180, 180, 180, 0.8) 0%, rgba(93, 120, 146, 0.8) 21%, rgba(0, 0, 0, 0.8) 68%, rgba(67, 103, 134, 0.8) 100%), url(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg), url(https://s3-us-west-2.amazonaws.com/4real/various/wave11.jpg);
-  background-image: -moz-linear-gradient(rgba(180, 180, 180, 0.8) 0%, rgba(93, 120, 146, 0.8) 21%, rgba(0, 0, 0, 0.8) 68%, rgba(67, 103, 134, 0.8) 100%), url(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg), url(https://s3-us-west-2.amazonaws.com/4real/various/wave11.jpg);
-  background-image: -o-linear-gradient(rgba(180, 180, 180, 0.8) 0%, rgba(93, 120, 146, 0.8) 21%, rgba(0, 0, 0, 0.8) 68%, rgba(67, 103, 134, 0.8) 100%), url(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg), url(https://s3-us-west-2.amazonaws.com/4real/various/wave11.jpg);
-  background-image: linear-gradient(rgba(180, 180, 180, 0.8) 0%, rgba(93, 120, 146, 0.8) 21%, rgba(0, 0, 0, 0.8) 68%, rgba(67, 103, 134, 0.8) 100%), url(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg), url(https://s3-us-west-2.amazonaws.com/4real/various/wave11.jpg);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(201, 201, 201, 0.7)), color-stop(21%, rgba(57, 98, 137, 0.7)), color-stop(68%, rgba(20, 24, 34, 0.8)), color-stop(100%, rgba(53, 109, 158, 0.8)));
+  background-image: -webkit-linear-gradient(rgba(201, 201, 201, 0.7) 0%, rgba(57, 98, 137, 0.7) 21%, rgba(20, 24, 34, 0.8) 68%, rgba(53, 109, 158, 0.8) 100%);
+  background-image: -moz-linear-gradient(rgba(201, 201, 201, 0.7) 0%, rgba(57, 98, 137, 0.7) 21%, rgba(20, 24, 34, 0.8) 68%, rgba(53, 109, 158, 0.8) 100%);
+  background-image: -o-linear-gradient(rgba(201, 201, 201, 0.7) 0%, rgba(57, 98, 137, 0.7) 21%, rgba(20, 24, 34, 0.8) 68%, rgba(53, 109, 158, 0.8) 100%);
+  background-image: linear-gradient(rgba(201, 201, 201, 0.7) 0%, rgba(57, 98, 137, 0.7) 21%, rgba(20, 24, 34, 0.8) 68%, rgba(53, 109, 158, 0.8) 100%);
 }
 
 a, a:hover, a:visited {
@@ -1703,7 +1725,7 @@ canvas {
   transform: translateZ(10px);
 }
 
-.cube {
+#cube {
   width: 100%;
   height: 100%;
   -webkit-transform-style: preserve-3d;

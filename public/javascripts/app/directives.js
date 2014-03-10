@@ -4,6 +4,111 @@
 
   app = angular.module("4real.directives", []);
 
+  app.directive("video", [
+    "$timeout", "$window", function($timeout, $window) {
+      return {
+        link: function(scope, el, attr) {
+          return scope.$watch('page', function(newV, oldV) {
+            return $timeout(function() {
+              if (newV !== oldV) {
+                if (scope.page === 'liquid') {
+                  if (!scope.waterView) {
+                    scope.waterView = new waterView();
+                    scope.waterView.paused = false;
+                    scope.activeVideo = -1;
+                  }
+                  document.getElementById('cube').style.display = "none";
+                  document.getElementById('waterCanvas').style.display = "block";
+                  return window.paused = false;
+                } else {
+                  if (scope.waterView) {
+                    scope.waterView.paused = true;
+                  }
+                  document.getElementById('cube').style.display = "block";
+                  return document.getElementById('waterCanvas').style.display = "none";
+                }
+              }
+            });
+          });
+        }
+      };
+    }
+  ]);
+
+  app.directive("video", [
+    "$timeout", "$window", function($timeout, $window) {
+      return {
+        link: function(scope, el, attr) {
+          var resize, vidHeight, vidWidth;
+          vidHeight = 0;
+          vidWidth = 0;
+          resize = function() {
+            var adjust, viewportHeight, viewportWidth;
+            viewportWidth = $window.innerWidth;
+            viewportHeight = $window.innerHeight;
+            if (vidWidth / vidHeight > viewportWidth / viewportHeight) {
+              el.css({
+                height: viewportHeight
+              });
+              vidHeight = el.offsetHeight;
+              el.css({
+                'width': "auto"
+              });
+              vidWidth = el[0].offsetWidth;
+            } else {
+              el.css({
+                width: viewportWidth
+              });
+              vidWidth = el.offsetWidth;
+              el.css({
+                height: 'auto'
+              });
+              vidHeight = el[0].offsetHeight;
+            }
+            if (vidWidth > viewportWidth) {
+              adjust = -1 / 2 * (vidWidth - viewportWidth);
+              return el.css({
+                "margin-left": adjust,
+                "margin-top": 0
+              });
+            } else {
+              adjust = -1 / 2 * (vidHeight - viewportHeight);
+              return el.css({
+                "margin-top": adjust,
+                "margin-left": 0
+              });
+            }
+          };
+          el.on('loadedmetadata', function() {
+            vidHeight = el[0].offsetHeight;
+            vidWidth = el[0].offsetWidth;
+            return resize();
+          });
+          el.on('ended', function() {
+            return scope.playNextVideo();
+          });
+          scope.$watch('activeVideo', function(newV, oldV) {
+            if (scope.videos[scope.activeVideo] === el[0].id) {
+              el[0].play();
+              return el.addClass('activeVid');
+            } else {
+              el[0].pause();
+              if (el[0].currentTime) {
+                el[0].currentTime = 0;
+              }
+              return el.removeClass('activeVid');
+            }
+          });
+          return angular.element($window).bind('resize', function() {
+            vidHeight = el[0].offsetHeight;
+            vidWidth = el[0].offsetWidth;
+            return resize();
+          });
+        }
+      };
+    }
+  ]);
+
   app.directive("date", [
     "$filter", '$timeout', 'isMobile', function($filter, $timeout, isMobile) {
       return {
@@ -172,7 +277,7 @@
     '$document', '$window', '$timeout', '$location', "isMobile", function($document, $window, $timeout, $location, isMobile) {
       return {
         link: function(scope, el, att) {
-          var cleanup, resize, rotateScene, scale, updateRotation, w;
+          var auto, cleanup, randomVertical, resize, rotateScene, scale, updateRotation, w;
           scope.oldH = 0;
           scope.oldV = 0;
           scope.newH = 0;
@@ -185,19 +290,23 @@
             return scope.newV = -.5 + (e.pageY / $window.innerHeight);
           };
           updateRotation = function() {
-            var dr, dx, dy, offset, transform;
+            var dr, dx, dy, inc, offset, transform;
             dr = scope.rotate.y + scope.dragX - scope.oldR;
             if (Math.abs(dr) > .1) {
               dr *= .2;
             }
             scope.oldR += dr;
+            inc = 0.1;
+            if (scope.mode === "auto") {
+              inc = .04;
+            }
             dx = scope.newH - scope.oldH;
             dy = scope.newV - scope.oldV;
             if (Math.abs(dx) > .001) {
-              dx *= .1;
+              dx *= inc;
             }
             if (Math.abs(dy) > .001) {
-              dy *= .1;
+              dy *= inc;
             }
             scope.oldH += dx;
             scope.oldV += dy;
@@ -234,6 +343,9 @@
           w = angular.element($window);
           cleanup = function() {
             var angle;
+            if (scope.page === 'liquid') {
+              return;
+            }
             w.unbind('pointermove');
             scope.rotate.y += Math.round(scope.dragX / 90) * 90;
             scope.dragX = 0;
@@ -262,6 +374,28 @@
             }
             return $location.path('/' + scope.page);
           };
+          auto = function() {
+            scope.rotate.y += 90;
+            cleanup();
+            return $timeout(auto, 20000);
+          };
+          randomVertical = function() {
+            var h, v;
+            v = Math.random();
+            h = Math.random();
+            scope.newV = (v - .5) * 1.5;
+            scope.newH = (h - .5) * 2;
+            return $timeout(randomVertical, 6000 * v);
+          };
+          scope.$watch('page', function() {
+            if (scope.page === 'auto') {
+              scope.rotate.y = -90;
+              cleanup();
+              randomVertical();
+              auto();
+              return scope.mode = 'auto';
+            }
+          });
           el.bind('pointerdown', function(e) {
             var startX, startY;
             startX = e.x;
@@ -447,7 +581,7 @@
   ]);
 
   app.directive("water", [
-    function() {
+    '$timeout', function($timeout) {
       return {
         link: function(scope, el, att) {}
       };

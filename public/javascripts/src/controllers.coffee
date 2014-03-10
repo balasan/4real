@@ -1,5 +1,6 @@
 app =  angular.module("4real.controllers", [])
 
+
 app.controller 'aboutCtrl', ['$scope', ($scope) ->
 
   # $scope.text = [
@@ -23,22 +24,36 @@ app.controller 'aboutCtrl', ['$scope', ($scope) ->
 app.controller 'mainCtrl', [ '$scope', '$route', ($scope, $route) ->
   $scope.rotate = {}
   $scope.rotate.y=0;
+  $scope.waterView = null;
+
+  $scope.videos = ['v0', 'v1', 'v2', 'v3'];
+  $scope.activeVideo = 0;
+
+  $scope.playNextVideo = ()->
+    $scope.activeVideo = ($scope.activeVideo + 1) % $scope.videos.length
+
+
   $scope.$on '$routeChangeSuccess', (e, newL, oldL)->
     $scope.page = $route.current.params.page
     # $scope.$apply()
     rotations = ~~($scope.rotate.y / 360)
     angle = $scope.rotate.y % 360
     console.log $route.current.params.page
-    switch $route.current.params.page
-      when undefined then $scope.rotate.y = 0 + 360*rotations
+    switch $route.current.params.page                
+      when undefined
+        $scope.rotate.y = 0 + 360*rotations
+        $scope.activeVideo = 2
       when "charts" 
+        $scope.activeVideo = 0
         if (angle > -90) then $scope.rotate.y = 90 + 360*rotations
         else $scope.rotate.y = -270 + 360*rotations
-      when "projects"  
+      when "projects"
+        $scope.activeVideo = 1  
         if(angle < 90)
           $scope.rotate.y = -90 + 360*rotations
         else $scope.rotate.y = 270 + 360*rotations
       when "about" 
+        $scope.activeVideo = 3 
         if(angle >0)
           $scope.rotate.y = 180 + 360*rotations
         else $scope.rotate.y = -180 + 360*rotations

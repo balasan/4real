@@ -12,6 +12,90 @@ app =  angular.module("4real.directives", [])
 #       "background-color" : color
 # ]
 
+app.directive "video", ["$timeout", "$window", ($timeout, $window) ->
+
+  link: (scope, el, attr) ->
+    scope.$watch 'page', (newV, oldV) ->
+      $timeout( ()->
+        if newV != oldV
+          if scope.page == 'liquid'
+            if !scope.waterView
+              scope.waterView = new waterView()
+              scope.waterView.paused = false
+              scope.activeVideo = -1;
+            document.getElementById('cube').style.display="none";
+            document.getElementById('waterCanvas').style.display="block";
+            window.paused = false;
+          else
+            if scope.waterView
+              scope.waterView.paused = true;
+            document.getElementById('cube').style.display="block";
+            document.getElementById('waterCanvas').style.display="none";
+          )
+]
+
+app.directive "video", ["$timeout", "$window", ($timeout, $window) ->
+  link: (scope, el, attr) ->
+    vidHeight = 0;
+    vidWidth = 0;
+    resize = () ->
+      viewportWidth = $window.innerWidth
+      viewportHeight = $window.innerHeight
+      #assume all videos are the same width height
+      if vidWidth / vidHeight > viewportWidth / viewportHeight
+        el.css
+          height: viewportHeight
+        vidHeight = el.offsetHeight
+        el.css
+          'width':"auto"
+        vidWidth = el[0].offsetWidth
+      else
+        el.css
+          width: viewportWidth
+        vidWidth = el.offsetWidth
+        el.css
+          height : 'auto'
+        vidHeight = el[0].offsetHeight
+      if vidWidth > viewportWidth
+        adjust = -1 / 2 * (vidWidth - viewportWidth)
+        el.css
+          "margin-left": adjust
+          "margin-top": 0
+      else
+        adjust = -1 / 2 * (vidHeight - viewportHeight)
+        el.css
+          "margin-top": adjust
+          "margin-left": 0
+
+    el.on 'loadedmetadata', () ->
+      vidHeight = el[0].offsetHeight
+      vidWidth = el[0].offsetWidth
+      resize();
+
+    el.on 'ended', ()->
+      scope.playNextVideo()
+
+    scope.$watch 'activeVideo', (newV, oldV) ->
+      # if newV != oldV
+        if scope.videos[scope.activeVideo] == el[0].id
+          el[0].play()
+          el.addClass('activeVid')
+        else
+          el[0].pause()
+          if el[0].currentTime
+            el[0].currentTime = 0;
+          el.removeClass('activeVid')
+
+    angular.element($window).bind 'resize', ->
+      vidHeight = el[0].offsetHeight
+      vidWidth = el[0].offsetWidth
+      resize()
+    # $timeout ()->
+
+
+
+]
+
 app.directive "date", ["$filter",'$timeout','isMobile', ($filter,$timeout,isMobile)->
   scope: true
   link: (scope, el, attr)->
@@ -32,6 +116,7 @@ app.directive "date", ["$filter",'$timeout','isMobile', ($filter,$timeout,isMobi
     # if (!isMobile)
     timedUpdate()
 ]
+
 app.directive "clock", ["$filter",'$timeout','isMobile', ($filter,$timeout, isMobile)->
   scope: 
     location: "@"
@@ -178,10 +263,14 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$location', "isMobi
       if Math.abs(dr)>.1 then dr *=.2
       scope.oldR += dr
 
+      inc = 0.1
+      if scope.mode == "auto"
+        inc = .04
+
       dx = scope.newH - scope.oldH 
       dy = scope.newV - scope.oldV
-      if Math.abs(dx)>.001 then dx *=.1
-      if Math.abs(dy)>.001 then dy *=.1
+      if Math.abs(dx)>.001 then dx *=inc
+      if Math.abs(dy)>.001 then dy *=inc
       scope.oldH += dx
       scope.oldV += dy
       transform="translateZ("+-scope.windowWidth/2+"px) rotateX(" + ((scope.oldV * 5)) + "deg) rotateY(" + ((scope.oldH * 5) + scope.oldR) + "deg) translateZ("+scope.windowWidth/2+"px) "
@@ -219,6 +308,8 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$location', "isMobi
     w = angular.element($window)
 
     cleanup = ()->
+      if scope.page == 'liquid'
+        return;
       w.unbind 'pointermove'
       scope.rotate.y += Math.round(scope.dragX / 90) * 90;
       scope.dragX = 0
@@ -232,6 +323,27 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$location', "isMobi
         when -270 then scope.page = 'charts'
         when -180 then scope.page = 'about'
       $location.path('/'+scope.page)
+
+
+    auto = ()->
+      scope.rotate.y += 90;
+      cleanup()
+      $timeout auto, 20000
+
+    randomVertical = () ->
+      v = Math.random()
+      h = Math.random()
+      scope.newV = (v-.5)*1.5
+      scope.newH = (h-.5)*2
+      $timeout randomVertical, 6000*v
+    
+    scope.$watch 'page', ()->
+      if scope.page == 'auto'
+        scope.rotate.y = -90;
+        cleanup()
+        randomVertical()
+        auto()
+        scope.mode = 'auto';
 
     el.bind 'pointerdown', (e)->
       startX = e.x 
@@ -509,7 +621,7 @@ app.directive "graph", [ '$window', '$filter','isMobile', ($window, $filter, isM
 
 ]
 
-app.directive "water", [ ()->
+app.directive "water", [ '$timeout', ($timeout)->
   link: (scope, el, att) ->
-    # initWater();  
+    # $timeout initWater;  
 ]

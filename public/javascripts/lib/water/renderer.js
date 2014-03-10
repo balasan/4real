@@ -9,9 +9,9 @@
 var helperFunctions = '\
   const float IOR_AIR = 1.0;\
   const float IOR_WATER = 1.333;\
-  const vec3 abovewaterColor = vec3(0.9, 1.0, 1.25);\
+  const vec3 abovewaterColor = vec3(0.8, 1.0, 1.15);\
   const vec3 underwaterColor = vec3(0.7, 0.9, 1.0);\
-  const float poolHeight = 1.0;\
+  const float poolHeight = .7;\
   uniform vec3 light;\
   uniform vec3 sphereCenter;\
   uniform vec3 sphereNormals;\
@@ -21,6 +21,8 @@ var helperFunctions = '\
   uniform sampler2D water;\
   uniform sampler2D sref;\
   uniform sampler2D srefl;\
+  uniform samplerCube sky;\
+  uniform vec3 eye;\
   \
   vec2 intersectCube(vec3 origin, vec3 ray, vec3 cubeMin, vec3 cubeMax) {\
     vec3 tMin = (cubeMin - origin) / ray;\
@@ -92,6 +94,9 @@ var helperFunctions = '\
       wallColor = texture2D(tiles, point.xz * vec2(0.5, -0.5) + 0.5).rgb;\
       normal = vec3(0.0, 1.0, 0.0);\
     }\
+    vec3 incomingRay = normalize(point - eye);\
+    vec3 refractedRay = refract(incomingRay, normal, .75);\
+    wallColor = textureCube(sky, refractedRay*vec3(1.0,-1.0,1.0)).rgb;\
     \
     scale /= length(point); /* pool ambient occlusion */\
     scale *= 1.0 - 0.9 / pow(length(point - sphereCenter) / sphereRadius, 4.0); /* sphere ambient occlusion */\
@@ -122,7 +127,7 @@ function Renderer() {
     // wrap: gl.REPEAT,
     format: gl.RGB
   });
-  this.lightDir = new GL.Vector(2.0, 2.0, -1.0).unit();
+  this.lightDir = new GL.Vector(-0.3, 0.5, 0.8).unit();
   this.causticTex = new GL.Texture(1024, 1024);
 
   var filter = GL.Texture.canUseFloatingPointLinearFiltering() ? gl.LINEAR : gl.NEAREST;
@@ -142,16 +147,14 @@ function Renderer() {
         gl_Position = gl_ModelViewProjectionMatrix * vec4(position, 1.0);\
       }\
     ', helperFunctions + '\
-      uniform vec3 eye;\
       varying vec3 position;\
-      uniform samplerCube sky;\
       uniform vec2 scale;\
       \
       vec3 getSurfaceRayColor(vec3 origin, vec3 ray, vec3 waterColor, vec3 normal, float r) {\
         vec3 color= vec3(0.0,0.0,0.0);\
         /*float q = intersectSphere(origin, ray, sphereCenter, sphereRadius);*/\
-        vec3 boxBottom = sphereCenter+vec3(-0.22, -0.02, -0.21);\
-        vec3 boxTop = sphereCenter+vec3(0.19, 0.09, -0.18);\
+        vec3 boxBottom = sphereCenter+vec3(-0.20, -0.08, -0.007)*sphereRadius/0.1;\
+        vec3 boxTop = sphereCenter+vec3(0.20, 0.1, 0.006)*sphereRadius/0.1;\
         vec2 q = intersectCube(origin,ray,boxBottom,boxTop);\
         /*if( q.y>-1.0 && q.y>q.x) {*/\
         if(r == 1.0){\
@@ -174,10 +177,10 @@ function Renderer() {
         } else if(color.g < 0.1) {\
           vec2 t = intersectCube(origin, ray, vec3(-1.0, -poolHeight, -1.0), vec3(1.0, 2.0, 1.0));\
           vec3 hit = origin + ray * t.y;\
-          if (hit.y < 2.0 / 12.0) {\
+          if (hit.y < -2.0 / 12.0) {\
             color = getWallColor(hit);\
           } else {\
-            color = textureCube(sky, ray).rgb;\
+            color += textureCube(sky, -ray).rgb;\
             color += vec3(pow(max(0.0, dot(light, ray)), 5000.0)) * vec3(10.0, 8.0, 6.0);\
           }\
         }\
@@ -262,7 +265,6 @@ function Renderer() {
     varying vec3 normal;\
     varying vec3 neye;\
     varying float reflect;\
-    uniform vec3 eye;\
     uniform float reflection;\
     void main() {\
       normal = gl_Normal.xyz;\
@@ -300,13 +302,13 @@ function Renderer() {
     varying vec3 position;\
     void main() {\
       position = gl_Vertex.xyz;\
-      position.y = ((1.0 - position.y) * (6.0 / 12.0) - 1.0) * poolHeight;\
+      position.y = ((1.0 - position.y) * (6.1 / 12.0) - 1.0) * poolHeight;\
       gl_Position = gl_ModelViewProjectionMatrix * vec4(position, 1.0);\
     }\
   ', helperFunctions + '\
     varying vec3 position;\
     void main() {\
-      gl_FragColor = vec4(getWallColor(position), 1.0);\
+      gl_FragColor = vec4(getWallColor(position)*underwaterColor*1.1, 1.0);\
       vec4 info = texture2D(water, position.xz * 0.5 + 0.5);\
       if (position.y < info.r) {\
         gl_FragColor.rgb *= underwaterColor * 1.2;\
@@ -385,14 +387,12 @@ function Renderer() {
     varying vec3 position;\
     void main() {\
       position = gl_Vertex.xyz;\
-      /*position.y = ((1.0 - position.y) * (6.0 / 12.0) - 1.0) * poolHeight;*/\
       gl_Position = gl_ModelViewProjectionMatrix * vec4(position, 1.0);\
     }\
   ', helperFunctions + '\
     varying vec3 position;\
-    uniform samplerCube sky;\
     void main() {\
-      gl_FragColor = textureCube(sky, position);\
+      gl_FragColor = textureCube(sky, position*vec3(1.0,-1.0,1.0));\
     }\
   ');
 
@@ -438,7 +438,7 @@ Renderer.prototype.renderSky = function(sky) {
   sky.bind(0);
   // gl.enable(gl.CULL_FACE);
   gl.pushMatrix()
-  gl.scale(10,10,10)
+  gl.scale(15,15,15)
   this.skyShader.uniforms({
     sky: 0,
   }).draw(this.skyMesh);
@@ -465,11 +465,11 @@ Renderer.prototype.renderVideo = function(video) {
 
 }
 
-Renderer.prototype.renderWater = function(water, sky, video) {
-  var tracer = new GL.Raytracer();
+Renderer.prototype.renderWater = function(water, sky, video, tracer) {
 
   this.sref.bind(4);
   this.srefl.bind(5);
+  sky.bind(2);
 
   // video.bind(5);
 
@@ -504,7 +504,7 @@ Renderer.prototype.renderWater = function(water, sky, video) {
   this.sref.drawTo(function() {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     gl.pushMatrix()
-    gl.translate(0,0,0.085);
+    // gl.translate(0,0,0.085);
     this_.sphereShaderRef.uniforms({
       light: this_.lightDir,
       water: 0,
@@ -521,7 +521,7 @@ Renderer.prototype.renderWater = function(water, sky, video) {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     gl.pushMatrix()
     gl.scale(1.0,-1.0,1.0)
-    gl.translate(0,0,0.085);
+    // gl.translate(0,0,0.085);
     this_.sphereShaderRef.uniforms({
       light: this_.lightDir,
       water: 0,
@@ -542,7 +542,7 @@ Renderer.prototype.renderSphere = function(water) {
   gl.pushMatrix()
   // gl.rotate(Math.acos((center.y+.5))*2*Math.PI,1,0,0);
 
-  gl.translate(0,0,0.085);
+  // gl.translate(0,0,0.085);
   this.sphereShader.uniforms({
     light: this.lightDir,
     water: 0,
@@ -555,18 +555,21 @@ Renderer.prototype.renderSphere = function(water) {
 
 };
 
-Renderer.prototype.renderCube = function(water) {
-  gl.enable(gl.CULL_FACE);
+Renderer.prototype.renderCube = function(water,sky, tracer) {
+  // gl.enable(gl.CULL_FACE);
   water.textureA.bind(0);
   this.tileTexture.bind(1);
   this.causticTex.bind(2);
+  sky.bind(3);
   this.cubeShader.uniforms({
     light: this.lightDir,
     water: 0,
     tiles: 1,
     causticTex: 2,
+    sky:3,
+    eye: tracer.eye,
     sphereCenter: this.sphereCenter,
     sphereRadius: this.sphereRadius,
   }).draw(this.cubeMesh);
-  gl.disable(gl.CULL_FACE);
+  // gl.disable(gl.CULL_FACE);
 };

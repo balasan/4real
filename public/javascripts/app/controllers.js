@@ -10,6 +10,12 @@
     '$scope', '$route', function($scope, $route) {
       $scope.rotate = {};
       $scope.rotate.y = 0;
+      $scope.waterView = null;
+      $scope.videos = ['v0', 'v1', 'v2', 'v3'];
+      $scope.activeVideo = 0;
+      $scope.playNextVideo = function() {
+        return $scope.activeVideo = ($scope.activeVideo + 1) % $scope.videos.length;
+      };
       return $scope.$on('$routeChangeSuccess', function(e, newL, oldL) {
         var angle, rotations;
         $scope.page = $route.current.params.page;
@@ -18,8 +24,10 @@
         console.log($route.current.params.page);
         switch ($route.current.params.page) {
           case void 0:
-            return $scope.rotate.y = 0 + 360 * rotations;
+            $scope.rotate.y = 0 + 360 * rotations;
+            return $scope.activeVideo = 2;
           case "charts":
+            $scope.activeVideo = 0;
             if (angle > -90) {
               return $scope.rotate.y = 90 + 360 * rotations;
             } else {
@@ -27,6 +35,7 @@
             }
             break;
           case "projects":
+            $scope.activeVideo = 1;
             if (angle < 90) {
               return $scope.rotate.y = -90 + 360 * rotations;
             } else {
@@ -34,6 +43,7 @@
             }
             break;
           case "about":
+            $scope.activeVideo = 3;
             if (angle > 0) {
               return $scope.rotate.y = 180 + 360 * rotations;
             } else {

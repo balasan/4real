@@ -49,6 +49,8 @@ app.get "/partials/:name", routes.partials
 app.get "/charts", routes.index
 app.get "/projects", routes.index
 app.get "/about", routes.index
+app.get "/liquid", routes.index
+app.get "/auto", routes.index
 
 
 # btc = gox.createStream({trade:false,ticker:true}) 

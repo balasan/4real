@@ -394,5 +394,18 @@ canvas {
       // display:block;
     }
   }
+  video{
+    display:none !important;
+  }
+  #videos{
+      background-size:cover;
+      background-position:center;
+      @include background-image(
+
+        url(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg)
+        ,url(https://s3-us-west-2.amazonaws.com/4real/various/wave11.jpg)
+      
+      );
+  }
 
 }

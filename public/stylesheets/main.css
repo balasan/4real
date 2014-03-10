@@ -2284,4 +2284,14 @@ canvas {
   .mainNav i {
     font-size: 1.7em;
   }
+
+  video {
+    display: none !important;
+  }
+
+  #videos {
+    background-size: cover;
+    background-position: center;
+    background-image: url(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg), url(https://s3-us-west-2.amazonaws.com/4real/various/wave11.jpg);
+  }
 }

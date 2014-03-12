@@ -97,22 +97,23 @@ app.controller "chartsCtrl", [ '$scope','socket','$timeout','btcHistory','$filte
       # console.log($scope[rate.id.slice(0,3)])
 
 
-  getRates = ()->
-    exchange.getRates (rates)->
-      if !rates.results
-        $timeout(getRates, 5000)
-        # getRates
-        return
-      $scope.rates = rates.results.rate
-      convert()
-  getRates()
+  # getRates = ()->
+  #   exchange.getRates (rates)->
+  #     if !rates.results
+  #       $timeout(getRates, 5000)
+  #       # getRates
+  #       return
+  #     $scope.rates = rates.results.rate
+  #     convert()
+  # getRates()
 
   getData = ()->
-    socket.emit 'getData', $scope.trim, (data) ->
+    socket.emit 'getData', $scope.trim, (data, rates) ->
       # console.log(data)
       $scope.history = $filter('btcData')(data);
       # console.log($scope.history)
       $scope.USD = $scope.history[$scope.history.length - 1].price
+      $scope.rates = rates
       convert()
 
         # body...

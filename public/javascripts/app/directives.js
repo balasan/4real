@@ -89,10 +89,14 @@
           });
           scope.$watch('activeVideo', function(newV, oldV) {
             if (scope.videos[scope.activeVideo] === el[0].id) {
-              el[0].play();
+              if (el[0].play) {
+                el[0].play();
+              }
               return el.addClass('activeVid');
             } else {
-              el[0].pause();
+              if (el[0].pause) {
+                el[0].pause();
+              }
               if (el[0].currentTime) {
                 el[0].currentTime = 0;
               }
@@ -521,10 +525,8 @@
               }
             }
           };
-          path = svg.append("path").attr("d", area(data, 0)).attr("class", "area").attr("clip-path", "url(#clip)").style("fill", "url(#gradient)").style("stroke", 'none');
-          roll(area, 0);
-          path2 = svg.append("path").attr("d", line(data, 0)).style("fill", "none");
-          roll(line, 0, true);
+          path = svg.append("path").attr("class", "area").attr("clip-path", "url(#clip)").style("fill", "url(#gradient)").style("stroke", 'none');
+          path2 = svg.append("path").style("fill", "none");
           gx = svg.append("svg:g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
           gy = svg.append("svg:g").attr("class", "y axis").attr("transform", "translate(0,0)").call(yAxis);
           resize = function() {
@@ -561,6 +563,7 @@
               return path2.datum(data).attr("d", line(data, data.lenght - 1));
             }
           };
+          updateChart(true);
           scope.$watch('history.length', function(newV, oldV) {
             var redraw;
             if (newV !== oldV) {

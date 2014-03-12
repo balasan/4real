@@ -78,10 +78,12 @@ app.directive "video", ["$timeout", "$window", ($timeout, $window) ->
     scope.$watch 'activeVideo', (newV, oldV) ->
       # if newV != oldV
         if scope.videos[scope.activeVideo] == el[0].id
-          el[0].play()
+          if(el[0].play)
+            el[0].play()
           el.addClass('activeVid')
         else
-          el[0].pause()
+          if(el[0].pause)
+            el[0].pause()
           if el[0].currentTime
             el[0].currentTime = 0;
           el.removeClass('activeVid')
@@ -506,17 +508,13 @@ app.directive "graph", [ '$window', '$filter','isMobile', ($window, $filter, isM
             roll path, k + 1
 
     path=svg.append("path")
-      .attr("d",area(data,0))
       .attr("class", "area")
       .attr("clip-path", "url(#clip)")
       .style("fill", "url(#gradient)")
       .style("stroke",'none')
-    roll(area,0);  
 
     path2=svg.append("path")
-      .attr("d",line(data,0))
       .style("fill", "none")
-    roll(line,0,true);  
 
 
     gx = svg.append("svg:g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call xAxis
@@ -606,6 +604,7 @@ app.directive "graph", [ '$window', '$filter','isMobile', ($window, $filter, isM
       # )
       # circle.exit().remove();
 
+    updateChart(true)
 
     scope.$watch 'history.length', (newV, oldV) ->
       if newV != oldV

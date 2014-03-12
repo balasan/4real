@@ -65,10 +65,7 @@
 
   app.controller("chartsCtrl", [
     '$scope', 'socket', '$timeout', 'btcHistory', '$filter', 'exchange', function($scope, socket, $timeout, btcHistory, $filter, exchange) {
-      var convert, getData;
-      socket.on('init', function(data) {
-        return getData();
-      });
+      var convert;
       $scope.btcData = {};
       $scope.history = [];
       $scope.filtered = {};
@@ -80,7 +77,6 @@
       $scope.EUR = '0.00';
       $scope.GBP = '0.00';
       $scope.JPY = '0.00';
-      $scope.rates = {};
       convert = function() {
         if ($scope.USD === '0.00' || !$scope.rates[0]) {
           return;
@@ -89,14 +85,11 @@
           return $scope[rate.id.slice(0, 3)] = $scope.USD / parseFloat(rate.Rate);
         });
       };
-      getData = function() {
-        return socket.emit('getData', $scope.trim, function(data, rates) {
-          $scope.history = $filter('btcData')(data);
-          $scope.USD = $scope.history[$scope.history.length - 1].price;
-          $scope.rates = rates;
-          return convert();
-        });
-      };
+      $scope.data;
+      $scope.history = $filter('btcData')($scope.data);
+      $scope.USD = $scope.history[$scope.history.length - 1].price;
+      convert();
+      window.prerenderReady = true;
       return socket.on('btc-data', function(data) {
         $scope.btcData = $filter('btcData')(data.data);
         $scope.USD = parseFloat($scope.btcData.last);

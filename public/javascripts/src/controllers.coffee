@@ -70,8 +70,8 @@ app.controller "projectsCtrl", [ '$scope','projectsService','$timeout', ($scope,
 
 app.controller "chartsCtrl", [ '$scope','socket','$timeout','btcHistory','$filter', 'exchange', ($scope,socket,$timeout,btcHistory,$filter, exchange)->
 
-  socket.on 'init', (data)->
-    getData()
+  # socket.on 'init', (data)->
+    # getData()
 
   $scope.btcData = {};
   $scope.history = [];
@@ -87,7 +87,6 @@ app.controller "chartsCtrl", [ '$scope','socket','$timeout','btcHistory','$filte
   $scope.EUR = '0.00'
   $scope.GBP = '0.00'
   $scope.JPY = '0.00'
-  $scope.rates ={}
 
   convert = ()->
     if $scope.USD=='0.00' || !$scope.rates[0]
@@ -106,15 +105,18 @@ app.controller "chartsCtrl", [ '$scope','socket','$timeout','btcHistory','$filte
   #     $scope.rates = rates.results.rate
   #     convert()
   # getRates()
+  $scope.data
 
-  getData = ()->
-    socket.emit 'getData', $scope.trim, (data, rates) ->
-      # console.log(data)
-      $scope.history = $filter('btcData')(data);
-      # console.log($scope.history)
-      $scope.USD = $scope.history[$scope.history.length - 1].price
-      $scope.rates = rates
-      convert()
+  # getData = ()->
+    # socket.emit 'getData', $scope.trim, (data, rates) ->
+    # console.log(data)
+  $scope.history = $filter('btcData')($scope.data);
+  # console.log($scope.history)
+  $scope.USD = $scope.history[$scope.history.length - 1].price
+  # $scope.rates = rates
+  convert()
+
+  window.prerenderReady = true
 
         # body...
   socket.on 'btc-data', (data)->

@@ -54,6 +54,14 @@ app.get "/about", routes.index
 app.get "/liquid", routes.index
 app.get "/auto", routes.index
 
+app.post "/", routes.index
+app.post "/partials/:name", routes.partials
+app.post "/charts", routes.index
+app.post "/projects", routes.index
+app.post "/about", routes.index
+app.post "/liquid", routes.index
+app.post "/auto", routes.index
+
 
 setInterval
 

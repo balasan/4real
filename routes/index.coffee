@@ -27,6 +27,7 @@ module.exports = (db) ->
 
   rates: rateData
 
+
   index : (req, res) ->
     limit = 1000
 

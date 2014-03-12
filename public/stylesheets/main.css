@@ -885,8 +885,9 @@ circle:hover {
   margin: auto;
 }
 .globe img {
-  margin: -.5% 0 0 -.5%;
+  margin: -.5% 0 0 -.8%;
   width: 101%;
+  height: 101%;
 }
 
 .tickers {

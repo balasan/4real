@@ -13,6 +13,7 @@
 		"goxstream": "latest",
 		"socket.io": "latest",
 		"mongoose": "latest",
-		"newrelic": "latest"
+		"newrelic": "latest",
+		"prerender-node": "latest"
 	}
 }

@@ -7,7 +7,7 @@ express = require("express")
 routes = require("./routes")
 http = require("http")
 https = require("https")
-
+request = require('request');
 
 path = require("path")
 socket = require('./routes/socket');
@@ -68,6 +68,12 @@ setInterval
 lastTime = new Date(0)
 seconds = 5
 the_interval = seconds * 1000
+
+request.post 'http://localhost:5000/projects?_escaped_fragment_=',(error, response, body) ->
+         # response.
+         # if (!error && response.statusCode == 200)
+            # console.log(body)
+
 
 getData = ()->
   url = "https://www.bitstamp.net:443/api/ticker/"

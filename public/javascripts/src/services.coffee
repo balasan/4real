@@ -69,7 +69,7 @@ app.factory 'projectsService', [ ()->
     description: ''
     url: 'http://disimages.com'
     img: [
-      url: amazonUrl + 'disimages.png'
+      url: amazonUrl + 'disimages.jpg'
     ]
     iphone:[]
   ,
@@ -77,7 +77,7 @@ app.factory 'projectsService', [ ()->
     description: 'realtime 3d collage platform'
     url: 'http://gifpumper.com'
     img: [
-      url: amazonUrl + 'gifpumper.png'
+      url: amazonUrl + 'gifpumper.jpg'
     ]
     iphone:[]
   ,
@@ -85,7 +85,7 @@ app.factory 'projectsService', [ ()->
     description: 'website for artist Kehinde Wiley'
     url: 'http://kehindewiley.com'
     img: [
-      url: amazonUrl + 'kehindewiley.png'
+      url: amazonUrl + 'kehindewiley.jpg'
     ]
     iphone:[
       url: amazonUrl+ 'kwphone.png'
@@ -95,7 +95,7 @@ app.factory 'projectsService', [ ()->
     description: 'Website for Thea Westreich art advisory services'
     url: ''
     img: [
-      url: amazonUrl + 'twaas.png'
+      url: amazonUrl + 'twaas.jpg'
     ]
     tablet: [
       
@@ -109,7 +109,7 @@ app.factory 'projectsService', [ ()->
     description: 'platform for users to upload their walmart stories'
     url: 'http://walmartat50.org'
     img: [
-      url: amazonUrl + 'walmart.png'
+      url: amazonUrl + 'walmart.jpg'
     ]
     iphone:[]
   ,
@@ -118,7 +118,7 @@ app.factory 'projectsService', [ ()->
     description: ''
     url: 'http://davidlewisgallery.com'
     img: [
-      url: amazonUrl + 'davidlewis.png'
+      url: amazonUrl + 'davidlewis.jpg'
     ]
     iphone:[
       url: amazonUrl+ 'dlphone.png'
@@ -138,7 +138,7 @@ app.factory 'projectsService', [ ()->
     description: 'Augmented Reality App'
     url: 'http://balasan.net/thedigit/'
     img: [
-      url: amazonUrl + 'digit.png'
+      url: amazonUrl + 'digit.jpg'
     ]
     iphone:[
       url: amazonUrl + "digitphone2.png"

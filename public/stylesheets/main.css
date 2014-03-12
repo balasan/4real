@@ -337,9 +337,14 @@ shadow {
 }
 
 .projects img {
-  max-width: 100%;
+  max-width: 90%;
   max-height: 80%;
   float: right;
+}
+.projects .largeImage {
+  border-radius: 3px;
+  margin: 0 5% 0 5%;
+  box-shadow: 2px 2px 20px 0px rgba(0, 0, 55, 0.5);
 }
 
 .singleproject {

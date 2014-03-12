@@ -95,7 +95,7 @@
           url: 'http://disimages.com',
           img: [
             {
-              url: amazonUrl + 'disimages.png'
+              url: amazonUrl + 'disimages.jpg'
             }
           ],
           iphone: []
@@ -105,7 +105,7 @@
           url: 'http://gifpumper.com',
           img: [
             {
-              url: amazonUrl + 'gifpumper.png'
+              url: amazonUrl + 'gifpumper.jpg'
             }
           ],
           iphone: []
@@ -115,7 +115,7 @@
           url: 'http://kehindewiley.com',
           img: [
             {
-              url: amazonUrl + 'kehindewiley.png'
+              url: amazonUrl + 'kehindewiley.jpg'
             }
           ],
           iphone: [
@@ -129,7 +129,7 @@
           url: '',
           img: [
             {
-              url: amazonUrl + 'twaas.png'
+              url: amazonUrl + 'twaas.jpg'
             }
           ],
           tablet: [],
@@ -144,7 +144,7 @@
           url: 'http://walmartat50.org',
           img: [
             {
-              url: amazonUrl + 'walmart.png'
+              url: amazonUrl + 'walmart.jpg'
             }
           ],
           iphone: []
@@ -154,7 +154,7 @@
           url: 'http://davidlewisgallery.com',
           img: [
             {
-              url: amazonUrl + 'davidlewis.png'
+              url: amazonUrl + 'davidlewis.jpg'
             }
           ],
           iphone: [
@@ -168,7 +168,7 @@
           url: 'http://balasan.net/thedigit/',
           img: [
             {
-              url: amazonUrl + 'digit.png'
+              url: amazonUrl + 'digit.jpg'
             }
           ],
           iphone: [

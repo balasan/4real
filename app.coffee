@@ -69,10 +69,12 @@ lastTime = new Date(0)
 seconds = 5
 the_interval = seconds * 1000
 
-request.post 'http://localhost:5000/projects?_escaped_fragment_=',(error, response, body) ->
-         # response.
-         # if (!error && response.statusCode == 200)
-            # console.log(body)
+
+# REFRESH THE ROBOTS CACHE
+request.post 'http://robots4real.herokuapp.com/http://4real.io/projects',(error, response, body) ->
+request.post 'http://robots4real.herokuapp.com/http://4real.io/charts',(error, response, body) ->
+request.post 'http://robots4real.herokuapp.com/http://4real.io',(error, response, body) ->
+request.post 'http://robots4real.herokuapp.com/http://4real.io/about',(error, response, body) ->
 
 
 getData = ()->
@@ -110,7 +112,7 @@ io.sockets.on('connection', (socket)->
   socket.on('getData', (limit, callback)->
 
     if !limit
-      limit = 1000
+      limit = 100
 
     db.secondModel.find().limit(limit).sort(timestamp: -1).limit(limit).exec (err, data) ->
       if err
@@ -121,6 +123,11 @@ io.sockets.on('connection', (socket)->
 )
 
 
+minutes = 30
+minutes * 60 * 1000
+pingPrerender = ()->
+  request.get 'http://robots4real.herokuapp.com/http://4real.io',(error, response, body) ->
+    console.log("awake robots4real.herokuapp.com")
 
-
+setInterval pingPrerender, minutes * 60 * 1000
 

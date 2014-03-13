@@ -1462,24 +1462,6 @@ circle:hover {
 /* MAIN
 ------------------------------------------------------------*/
 @font-face {
-  font-family: 'Raleway';
-  src: url("../fonts/Raleway-Regular.ttf");
-  font-weight: normal;
-}
-
-@font-face {
-  font-family: 'Raleway';
-  src: url("../fonts/Raleway-ExtraLight.ttf");
-  font-weight: 200;
-}
-
-@font-face {
-  font-family: 'Raleway';
-  src: url("../fonts/Raleway-SemiBold.ttf");
-  font-weight: 600;
-}
-
-@font-face {
   font-family: 'Exo2';
   src: url("../fonts/Exo2-Light.ttf");
   font-weight: 400;

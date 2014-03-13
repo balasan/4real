@@ -29,7 +29,7 @@ module.exports = (db) ->
 
 
   index : (req, res) ->
-    limit = 1000
+    limit = 60
 
     db.secondModel.find().sort(timestamp: -1).limit(limit).exec (err, data) ->
       if err

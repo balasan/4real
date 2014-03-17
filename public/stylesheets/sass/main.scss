@@ -115,6 +115,7 @@ body {
   position:absolute;
   top:0;
   left:0;
+  background-color:black;
   @include transform(translateZ(-1000px));
   video{
     position:absolute;

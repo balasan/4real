@@ -21,7 +21,7 @@ app.controller 'aboutCtrl', ['$scope', ($scope) ->
 
 ]
 
-app.controller 'mainCtrl', [ '$scope', '$route', ($scope, $route) ->
+app.controller 'mainCtrl', [ '$scope', '$route', '$timeout', ($scope, $route, $timeout) ->
   $scope.rotate = {}
   $scope.rotate.y=0;
   $scope.waterView = null;
@@ -31,7 +31,6 @@ app.controller 'mainCtrl', [ '$scope', '$route', ($scope, $route) ->
 
   $scope.playNextVideo = ()->
     $scope.activeVideo = ($scope.activeVideo + 1) % $scope.videos.length
-
 
   $scope.$on '$routeChangeSuccess', (e, newL, oldL)->
     $scope.page = $route.current.params.page
@@ -57,14 +56,27 @@ app.controller 'mainCtrl', [ '$scope', '$route', ($scope, $route) ->
         if(angle >0)
           $scope.rotate.y = 180 + 360*rotations
         else $scope.rotate.y = -180 + 360*rotations
+     $scope.$broadcast('page', $scope.page)
 
 ]
 
 app.controller "projectsCtrl", [ '$scope','projectsService','$timeout', ($scope,projectsService,$timeout)->
+  
   $scope.projects=[]
-  $timeout(()->
-    $scope.projects = projectsService.projects
-  0)
+
+  $scope.$on 'page', (e,page)->
+    if page=="projects"
+      $scope.loadProjects()
+      # body...)
+
+  $scope.loadProjects = ()->
+    if($scope.projects[0]==undefined)
+      $scope.projects = projectsService.projects
+ 
+  if $scope.$parent.page=='projects'
+    $scope.loadProjects()
+
+  $timeout $scope.loadProjects, 10000
 
 ]
 

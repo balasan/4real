@@ -44,7 +44,7 @@ block content
           //- floor
             //- shadow 
         
-        .glass.front(glass ng-class="{'active' : !page}")
+        .glass.active.front(glass ng-class="{'active' : !page}")
           ipad.ipad2
           ipad
             specular
@@ -88,7 +88,7 @@ block content
       //-     div(ng-repeat="project in projects")
       //-       //- img(crossorigin="anonymous" src="{{project.img[0].url}}")
 
-      canvas#waterCanvas(water)
+      canvas#waterCanvas()
 
     div.hidden
       video#video(loop)

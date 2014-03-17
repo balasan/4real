@@ -585,12 +585,4 @@
     }
   ]);
 
-  app.directive("water", [
-    '$timeout', function($timeout) {
-      return {
-        link: function(scope, el, att) {}
-      };
-    }
-  ]);
-
 }).call(this);

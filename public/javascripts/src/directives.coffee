@@ -621,7 +621,4 @@ app.directive "graph", [ '$window', '$filter','isMobile', ($window, $filter, isM
 
 ]
 
-app.directive "water", [ '$timeout', ($timeout)->
-  link: (scope, el, att) ->
-    # $timeout initWater;  
-]
+

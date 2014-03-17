@@ -7,7 +7,7 @@
   app.controller('aboutCtrl', ['$scope', function($scope) {}]);
 
   app.controller('mainCtrl', [
-    '$scope', '$route', function($scope, $route) {
+    '$scope', '$route', '$timeout', function($scope, $route, $timeout) {
       $scope.rotate = {};
       $scope.rotate.y = 0;
       $scope.waterView = null;
@@ -25,31 +25,33 @@
         switch ($route.current.params.page) {
           case void 0:
             $scope.rotate.y = 0 + 360 * rotations;
-            return $scope.activeVideo = 2;
+            $scope.activeVideo = 2;
+            break;
           case "charts":
             $scope.activeVideo = 0;
             if (angle > -90) {
-              return $scope.rotate.y = 90 + 360 * rotations;
+              $scope.rotate.y = 90 + 360 * rotations;
             } else {
-              return $scope.rotate.y = -270 + 360 * rotations;
+              $scope.rotate.y = -270 + 360 * rotations;
             }
             break;
           case "projects":
             $scope.activeVideo = 1;
             if (angle < 90) {
-              return $scope.rotate.y = -90 + 360 * rotations;
+              $scope.rotate.y = -90 + 360 * rotations;
             } else {
-              return $scope.rotate.y = 270 + 360 * rotations;
+              $scope.rotate.y = 270 + 360 * rotations;
             }
             break;
           case "about":
             $scope.activeVideo = 3;
             if (angle > 0) {
-              return $scope.rotate.y = 180 + 360 * rotations;
+              $scope.rotate.y = 180 + 360 * rotations;
             } else {
-              return $scope.rotate.y = -180 + 360 * rotations;
+              $scope.rotate.y = -180 + 360 * rotations;
             }
         }
+        return $scope.$broadcast('page', $scope.page);
       });
     }
   ]);
@@ -57,9 +59,20 @@
   app.controller("projectsCtrl", [
     '$scope', 'projectsService', '$timeout', function($scope, projectsService, $timeout) {
       $scope.projects = [];
-      return $timeout(function() {
-        return $scope.projects = projectsService.projects;
-      }, 0);
+      $scope.$on('page', function(e, page) {
+        if (page === "projects") {
+          return $scope.loadProjects();
+        }
+      });
+      $scope.loadProjects = function() {
+        if ($scope.projects[0] === void 0) {
+          return $scope.projects = projectsService.projects;
+        }
+      };
+      if ($scope.$parent.page === 'projects') {
+        $scope.loadProjects();
+      }
+      return $timeout($scope.loadProjects, 10000);
     }
   ]);
 

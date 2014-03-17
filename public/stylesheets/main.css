@@ -1545,6 +1545,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
+  background-color: black;
   -webkit-transform: translateZ(-1000px);
   -moz-transform: translateZ(-1000px);
   -ms-transform: translateZ(-1000px);

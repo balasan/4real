@@ -59,7 +59,7 @@
       $scope.projects = [];
       return $timeout(function() {
         return $scope.projects = projectsService.projects;
-      }, 1000);
+      }, 0);
     }
   ]);
 

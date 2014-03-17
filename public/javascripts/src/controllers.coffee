@@ -64,7 +64,7 @@ app.controller "projectsCtrl", [ '$scope','projectsService','$timeout', ($scope,
   $scope.projects=[]
   $timeout(()->
     $scope.projects = projectsService.projects
-  1000)
+  0)
 
 ]
 

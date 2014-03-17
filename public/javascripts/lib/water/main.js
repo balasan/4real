@@ -5,6 +5,9 @@
  * Released under the MIT license
  */
 
+
+
+
 var waterView = function() {
 
   this.paused = true;
@@ -53,10 +56,10 @@ var waterView = function() {
 
 
 
+	startRender()
 
 
-
-	// window.onload = function() {
+	function startRender() {
 
 
 	var ratio = window.devicePixelRatio || 1;
@@ -126,33 +129,36 @@ var waterView = function() {
   } 
   this.drops()
 
-  this.reset = function(){
+  var auto = false;
+  if(auto){
 
-    gravity = new GL.Vector(0, 1, 0);
-    setTimeout(function(){
-      gravity = new GL.Vector(0, -4, 0);
-    },2000)
-    setTimeout(self.reset, 20000);
-  }
-  this.reset()
+	  this.reset = function(){
 
-  this.moreDrops = function(){
-    self.drops()
-    t = Math.random()
-    setTimeout(self.moreDrops,t*12000)
-  }
-  this.moreDrops()
+	    gravity = new GL.Vector(0, 1, 0);
+	    setTimeout(function(){
+	      gravity = new GL.Vector(0, -4, 0);
+	    },2000)
+	    setTimeout(self.reset, 20000);
+	  }
+	  this.reset()
 
-  this.move = function(){
-    var v = Math.random()
-    var h = Math.random()
-    angleX = -v*90 
-    angleY = (h-.5) * 360 * 10
-    setTimeout(self.move,10000)
-  }
-  this.move();
+	  this.moreDrops = function(){
+	    self.drops()
+	    t = Math.random()
+	    setTimeout(self.moreDrops,t*12000)
+	  }
+	  this.moreDrops()
 
+	  this.move = function(){
+	    var v = Math.random()
+	    var h = Math.random()
+	    angleX = -v*90 
+	    angleY = (h-.5) * 360 * 10
+	    setTimeout(self.move,10000)
+	  }
+	  this.move();
 
+	}
 
 	var video = gl.createTexture();
 
@@ -240,7 +246,7 @@ var waterView = function() {
 				var tracer = new GL.Raytracer();
 				var ray = tracer.getRayForPixel(e.pageX * ratio, e.pageY * ratio);
 				var pointOnPlane = tracer.eye.add(ray.multiply(-tracer.eye.y / ray.y));
-				water.addDrop(pointOnPlane.x, pointOnPlane.z, 0.1, 0.1);
+				water.addDrop(pointOnPlane.x, pointOnPlane.z, 0.03, 0.03);
 				// if (paused) {
 				// 	water.updateNormals();
 				// 	renderer.updateCaustics(water);
@@ -368,5 +374,5 @@ var waterView = function() {
 		renderer.renderSphere(water);
 		gl.disable(gl.DEPTH_TEST);
 	}
-	// };
+	};
 }

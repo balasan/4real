@@ -9,8 +9,8 @@
 var helperFunctions = '\
   const float IOR_AIR = 1.0;\
   const float IOR_WATER = 1.333;\
-  const vec3 abovewaterColor = vec3(0.8, 1.0, 1.15);\
-  const vec3 underwaterColor = vec3(0.7, 0.9, 1.0);\
+  const vec3 abovewaterColor = vec3(0.8, 0.9, 0.9);\
+  const vec3 underwaterColor = vec3(0.8, 0.9, 1.0);\
   const float poolHeight = .7;\
   uniform vec3 light;\
   uniform vec3 sphereCenter;\
@@ -287,10 +287,10 @@ function Renderer() {
       }\
       color += diffuse;\
       if(reflect > 0.0 && position.y<info.r){\
-        color = vec3(.0);\
+        color = vec3(0.0);\
       }\
       if(reflect == 0.0 && position.y>info.r){\
-        color = vec3(.0);\
+        color = vec3(0.0);\
       }\
       gl_FragColor = vec4(color, 1.0);\
     }\

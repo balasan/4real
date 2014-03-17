@@ -12,26 +12,26 @@ app =  angular.module("4real.directives", [])
 #       "background-color" : color
 # ]
 
-app.directive "video", ["$timeout", "$window", ($timeout, $window) ->
+app.directive "main", ["$timeout", "$window", ($timeout, $window) ->
 
   link: (scope, el, attr) ->
     scope.$watch 'page', (newV, oldV) ->
-      $timeout( ()->
-        if newV != oldV
-          if scope.page == 'liquid'
-            if !scope.waterView
-              scope.waterView = new waterView()
-              scope.waterView.paused = false
-              scope.activeVideo = -1;
-            document.getElementById('cube').style.display="none";
-            document.getElementById('waterCanvas').style.display="block";
-            window.paused = false;
-          else
-            if scope.waterView
-              scope.waterView.paused = true;
-            document.getElementById('cube').style.display="block";
-            document.getElementById('waterCanvas').style.display="none";
-          )
+      if(newV != oldV)
+            if scope.page == 'liquid'
+              if !scope.waterView
+                angular.element(window).bind 'load',()->
+                  scope.waterView = new waterView()
+                  scope.waterView.paused = false
+                  scope.activeVideo = -1;
+              document.getElementById('cube').style.display="none";
+              document.getElementById('waterCanvas').style.display="block";
+              window.paused = false;
+            else
+              if scope.waterView
+                scope.waterView.paused = true;
+              document.getElementById('cube').style.display="block";
+              document.getElementById('waterCanvas').style.display="none";
+            
 ]
 
 app.directive "video", ["$timeout", "$window", ($timeout, $window) ->

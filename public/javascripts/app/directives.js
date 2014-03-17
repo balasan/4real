@@ -4,31 +4,31 @@
 
   app = angular.module("4real.directives", []);
 
-  app.directive("video", [
+  app.directive("main", [
     "$timeout", "$window", function($timeout, $window) {
       return {
         link: function(scope, el, attr) {
           return scope.$watch('page', function(newV, oldV) {
-            return $timeout(function() {
-              if (newV !== oldV) {
-                if (scope.page === 'liquid') {
-                  if (!scope.waterView) {
+            if (newV !== oldV) {
+              if (scope.page === 'liquid') {
+                if (!scope.waterView) {
+                  angular.element(window).bind('load', function() {
                     scope.waterView = new waterView();
                     scope.waterView.paused = false;
-                    scope.activeVideo = -1;
-                  }
-                  document.getElementById('cube').style.display = "none";
-                  document.getElementById('waterCanvas').style.display = "block";
-                  return window.paused = false;
-                } else {
-                  if (scope.waterView) {
-                    scope.waterView.paused = true;
-                  }
-                  document.getElementById('cube').style.display = "block";
-                  return document.getElementById('waterCanvas').style.display = "none";
+                    return scope.activeVideo = -1;
+                  });
                 }
+                document.getElementById('cube').style.display = "none";
+                document.getElementById('waterCanvas').style.display = "block";
+                return window.paused = false;
+              } else {
+                if (scope.waterView) {
+                  scope.waterView.paused = true;
+                }
+                document.getElementById('cube').style.display = "block";
+                return document.getElementById('waterCanvas').style.display = "none";
               }
-            });
+            }
           });
         }
       };

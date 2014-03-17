@@ -90,7 +90,7 @@ block content
 
       canvas#waterCanvas(water)
 
-    //- div.hidden
+    div.hidden
       video#video(loop)
         Your browser doesn't appear to support the HTML5 <code>&lt;video&gt;</code> element.
       //- video#zpos(src="video/nyctimelapse")
@@ -102,10 +102,10 @@ block content
       //- img#yneg(src='images/beach/yneg.jpg')
       //- img#zneg(src='images/beach/zneg.jpg')
       //- img#zpos(src='images/beach/zpos.jpg')
-      img#xneg(src='images/trees/negx.jpg')
-      img#xpos(src='images/trees/posx.jpg')
-      img#ypos(src='images/trees/negy.jpg')
-      img#yneg(src='images/trees/posy.jpg')
-      img#zneg(src='images/trees/negz.jpg')
-      img#zpos(src='images/trees/posz.jpg')
+      img#xneg(crossOrigin="" src='https://s3-us-west-2.amazonaws.com/4real/skyboxes/trees/negxs.jpg')
+      img#xpos(crossOrigin="" src='https://s3-us-west-2.amazonaws.com/4real/skyboxes/trees/posxs.jpg')
+      img#ypos(crossOrigin="" src='https://s3-us-west-2.amazonaws.com/4real/skyboxes/trees/negys.jpg')
+      img#yneg(crossOrigin="" src='https://s3-us-west-2.amazonaws.com/4real/skyboxes/trees/posys.jpg')
+      img#zneg(crossOrigin="" src='https://s3-us-west-2.amazonaws.com/4real/skyboxes/trees/negzs.jpg')
+      img#zpos(crossOrigin="" src='https://s3-us-west-2.amazonaws.com/4real/skyboxes/trees/poszs.jpg')
       div#loading | Loading...

@@ -115,6 +115,7 @@ body {
   position:absolute;
   top:0;
   left:0;
+  @include transform(translateZ(-1000px));
   video{
     position:absolute;
     min-width:100%;
@@ -129,6 +130,7 @@ body {
 }
 
 .tint{
+  @include transform(translateZ(-1000px));
   position:absolute;
   top:0;
   left:0;

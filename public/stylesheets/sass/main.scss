@@ -52,7 +52,7 @@
 }
 
 #waterCanvas{
-  display:none;
+  // display:none;
 }
 
 $fontColor: rgb(150,150,150);
@@ -95,6 +95,14 @@ body {
   @include browser(font-smoothing, antialiased);
   @include browser(text-size-adjust, none);
   -moz-osx-font-smoothing: grayscale;
+}
+
+.wrapper{
+  opacity:0;
+  @include transition(all 1s);
+  &.live{
+    opacity:1;
+  }
 }
 
 #mainSVG{
@@ -362,7 +370,11 @@ canvas {
     height:100%;
     width:100%;
     overflow:hidden;
+    
   }
+
+
+
   glass{
     overflow:hidden;
     // overflow-x:hidden;

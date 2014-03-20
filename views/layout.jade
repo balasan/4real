@@ -1,6 +1,9 @@
 doctype html5
-html(ng-app="4real")
+html(ng-app="4real" ng-controller="mainCtrl")
   head
+
+    title 4REAL DIGITAL AGENCY
+
     meta(name="viewport" content="width=device-width, user-scalable=no, minimal-ui")
     
     meta(property='og:title', content='4real')
@@ -8,10 +11,9 @@ html(ng-app="4real")
     meta(property='og:site_name', content='4real')
     meta(property='og:description', content='4real is a global digital agency creating high-end, agile websites and apps', digital='digital', agency='agency', global='global', specialising='specialising' high='high', end='end', websites="websites", apps="apps")
 
-    meta( name='description' content="4Real is a global creative agency in NYC + Moscow; we design & build cool websites & apps")
+    meta( name='description' content="4Real is a global creative agency in NYC + Moscow. We design & build cool websites & apps.")
     meta(name="fragment" content="!")
 
-    title 4real digital agency
   
     link(rel='stylesheet', href='/stylesheets/main.css')
     link(rel='stylesheet', href='/javascripts/lib/font-awesome/css/font-awesome.min.css')
@@ -72,6 +74,7 @@ html(ng-app="4real")
     block content
   footer
     script(src="/socket.io/socket.io.js")
+    script(type='text/javascript', src="/javascripts/lib/pointer.js")
 
     script(type='text/javascript', src="/javascripts/lib/d3/d3.min.js")
 
@@ -83,7 +86,7 @@ html(ng-app="4real")
 
 
     script(type='text/javascript', src="/javascripts/lib/angular/angular.min.js")
-    script(type='text/javascript', src="/javascripts/lib/angular-route/angular-route.min.js")
+    script(type='text/javascript', src="/javascripts/lib/angular-ui-router/release/angular-ui-router.min.js")
     script(type='text/javascript', src="/javascripts/lib/angular-animate/angular-animate.min.js")
     // script(type='text/javascript', src="/javascripts/lib/angular-moment/angular-moment.min.js")
 

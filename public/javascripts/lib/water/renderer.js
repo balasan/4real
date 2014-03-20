@@ -16,7 +16,6 @@ var helperFunctions = '\
   uniform vec3 sphereCenter;\
   uniform vec3 sphereNormals;\
   uniform float sphereRadius;\
-  uniform sampler2D tiles;\
   uniform sampler2D causticTex;\
   uniform sampler2D water;\
   uniform sampler2D sref;\
@@ -85,13 +84,13 @@ var helperFunctions = '\
     vec3 wallColor;\
     vec3 normal;\
     if (abs(point.x) > 0.999) {\
-      wallColor = texture2D(tiles, point.zy * vec2(-0.5, 0.8) + vec2(0.5, 1.0)).rgb;\
+      /*wallColor = texture2D(tiles, point.zy * vec2(-0.5, 0.8) + vec2(0.5, 1.0)).rgb;*/\
       normal = vec3(-point.x, 0.0, 0.0);\
     } else if (abs(point.z) > 0.999) {\
-      wallColor = texture2D(tiles, point.xy * vec2(0.5, 0.8) + vec2(0.5, 1.0)).rgb;\
+      /*wallColor = texture2D(tiles, point.xy * vec2(0.5, 0.8) + vec2(0.5, 1.0)).rgb;*/\
       normal = vec3(0.0, 0.0, -point.z);\
     } else {\
-      wallColor = texture2D(tiles, point.xz * vec2(0.5, -0.5) + 0.5).rgb;\
+      /*wallColor = texture2D(tiles, point.xz * vec2(0.5, -0.5) + 0.5).rgb;*/\
       normal = vec3(0.0, 1.0, 0.0);\
     }\
     vec3 incomingRay = normalize(point - eye);\
@@ -121,12 +120,12 @@ var helperFunctions = '\
 ';
 
 function Renderer() {
-  this.tileTexture = GL.Texture.fromImage(document.getElementById('tiles'), {
-    // minFilter: gl.LINEAR_MIPMAP_LINEAR,
-    minFilter: gl.LINEAR,
-    // wrap: gl.REPEAT,
-    format: gl.RGB
-  });
+  // this.tileTexture = GL.Texture.fromImage(document.getElementById('tiles'), {
+  //   // minFilter: gl.LINEAR_MIPMAP_LINEAR,
+  //   minFilter: gl.LINEAR,
+  //   // wrap: gl.REPEAT,
+  //   format: gl.RGB
+  // });
   this.lightDir = new GL.Vector(-0.3, 0.5, 0.8).unit();
   this.causticTex = new GL.Texture(1024, 1024);
 
@@ -153,8 +152,8 @@ function Renderer() {
       vec3 getSurfaceRayColor(vec3 origin, vec3 ray, vec3 waterColor, vec3 normal, float r) {\
         vec3 color= vec3(0.0,0.0,0.0);\
         /*float q = intersectSphere(origin, ray, sphereCenter, sphereRadius);*/\
-        vec3 boxBottom = sphereCenter+vec3(-0.20, -0.08, -0.007)*sphereRadius/0.1;\
-        vec3 boxTop = sphereCenter+vec3(0.20, 0.1, 0.006)*sphereRadius/0.1;\
+        vec3 boxBottom = sphereCenter+vec3(-0.20, -0.08, -0.008)*sphereRadius/0.1;\
+        vec3 boxTop = sphereCenter+vec3(0.20, 0.1, 0.008)*sphereRadius/0.1;\
         vec2 q = intersectCube(origin,ray,boxBottom,boxTop);\
         /*if( q.y>-1.0 && q.y>q.x) {*/\
         if(r == 1.0){\
@@ -474,7 +473,7 @@ Renderer.prototype.renderWater = function(water, sky, video, tracer) {
   // video.bind(5);
 
   water.textureA.bind(0);
-  this.tileTexture.bind(1);
+  // this.tileTexture.bind(1);
   sky.bind(2);
   this.causticTex.bind(3);
   gl.enable(gl.CULL_FACE);
@@ -483,7 +482,7 @@ Renderer.prototype.renderWater = function(water, sky, video, tracer) {
     this.waterShaders[i].uniforms({
       light: this.lightDir,
       water: 0,
-      tiles: 1,
+      // tiles: 1,
       sky: 2,
       sref: 4,
       srefl: 5,
@@ -558,13 +557,12 @@ Renderer.prototype.renderSphere = function(water) {
 Renderer.prototype.renderCube = function(water,sky, tracer) {
   // gl.enable(gl.CULL_FACE);
   water.textureA.bind(0);
-  this.tileTexture.bind(1);
+  // this.tileTexture.bind(1);
   this.causticTex.bind(2);
   sky.bind(3);
   this.cubeShader.uniforms({
     light: this.lightDir,
     water: 0,
-    tiles: 1,
     causticTex: 2,
     sky:3,
     eye: tracer.eye,

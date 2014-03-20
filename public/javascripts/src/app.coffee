@@ -5,25 +5,53 @@ app = angular.module("4real", [
   "4real.services", 
   "4real.directives", 
   "4real.controllers", 
-  "ngRoute", 
+  "ui.router", 
   "ngAnimate",
   # "ngSanitize"
   # "angularMoment",
 ])
-app.config ["$routeProvider","$locationProvider", ($routeProvider, $locationProvider) ->
+app.config ["$locationProvider","$stateProvider","$urlRouterProvider", ($locationProvider,$stateProvider, $urlRouterProvider) ->
   
-  $locationProvider.html5Mode(true)
+  $locationProvider.html5Mode(true).hashPrefix('!');
 
-  # $routeProvider.when "/",
-    # templateUrl: "/partials/index"
+  $urlRouterProvider.otherwise("/");
+  # $stateProvider.when "/liquid",
+  #   templateUrl: "/partials/liquid"
+  #   controller: 'mainCtrl' 
+
+  # $urlRouterProvider.otherwise("/");
+
+  # $urlRouterProvider.when "/:page",
+    # templateUrl: "/partials/main"
     # controller: 'mainCtrl'  
 
-  $routeProvider.when "/:page",
-    # templateUrl: "/partials/index"
-    # controller: 'mainCtrl'  
+  $stateProvider.state "liquid",
+    url: "/liquid"
+    templateUrl: "/partials/liquid"
 
-  $routeProvider.otherwise
-    redirectTo: '/'
+  $stateProvider.state "index",
+    url: "/"
+    templateUrl: "/partials/main"
+    page: ''
+  
+  $stateProvider.state "index.about",
+    url: "about"
+    page: "about"
+
+  $stateProvider.state "index.charts",
+    url: "charts"
+    page: "charts"
+
+  $stateProvider.state "index.projects",
+    url: "projects"
+    page: "projects"
+
+  # $stateProvider.when "/:page",
+  #   templateUrl: "/partials/main"
+  #   # controller: 'mainCtrl'  
+
+  # $stateProvider.otherwise
+  #   redirectTo: '/'
 
   # $routeProvider.when "/projects",
   #   templateUrl: "/partials/index"

@@ -21,25 +21,27 @@ app.controller 'aboutCtrl', ['$scope', ($scope) ->
 
 ]
 
-app.controller 'mainCtrl', [ '$scope', '$route', '$timeout', ($scope, $route, $timeout) ->
+app.controller 'mainCtrl', [ '$scope', '$timeout','$rootScope', ($scope, $timeout,$rootScope) ->
   $scope.rotate = {}
   $scope.rotate.y=0;
   $scope.waterView = null;
 
   $scope.videos = ['v0', 'v1', 'v2', 'v3'];
   $scope.activeVideo = 0;
+  $scope.page='';
+  $scope.loadedImg =0;
 
   $scope.playNextVideo = ()->
     $scope.activeVideo = ($scope.activeVideo + 1) % $scope.videos.length
 
-  $scope.$on '$routeChangeSuccess', (e, newL, oldL)->
-    $scope.page = $route.current.params.page
+  $rootScope.$on '$stateChangeStart', (e, newState, oldState)->
+    $scope.page = newState.page
     # $scope.$apply()
     rotations = ~~($scope.rotate.y / 360)
     angle = $scope.rotate.y % 360
-    console.log $route.current.params.page
-    switch $route.current.params.page                
-      when undefined
+    # console.log $route.current.params.page
+    switch $scope.page               
+      when ''
         $scope.rotate.y = 0 + 360*rotations
         $scope.activeVideo = 2
       when "charts" 

@@ -262,7 +262,7 @@ var waterView = function() {
 				center.y = Math.max(radius - 1, Math.min(10, center.y));
 				center.z = Math.max(radius - 1, Math.min(1 - radius, center.z));
 				prevHit = nextHit;
-				if (paused) renderer.updateCaustics(water);
+				if (this.paused) renderer.updateCaustics(water);
 				break;
 			case MODE_ORBIT_CAMERA:
 				angleY -= e.pageX - oldX;

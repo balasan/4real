@@ -12,26 +12,21 @@ app =  angular.module("4real.directives", [])
 #       "background-color" : color
 # ]
 
+app.directive "loaded", ["$timeout", "$window", ($timeout, $window) ->
+  link: (scope, el, attr) ->
+    el.on 'load', ()->
+      scope.loadedImg +=1
+      scope.$apply()
+]
+
 app.directive "main", ["$timeout", "$window", ($timeout, $window) ->
 
   link: (scope, el, attr) ->
-    scope.$watch 'page', (newV, oldV) ->
-      if(newV != oldV)
-            if scope.page == 'liquid'
-              if !scope.waterView
-                angular.element(window).bind 'load',()->
-                  scope.waterView = new waterView()
-                  scope.waterView.paused = false
-                  scope.activeVideo = -1;
-              document.getElementById('cube').style.display="none";
-              document.getElementById('waterCanvas').style.display="block";
-              window.paused = false;
-            else
-              if scope.waterView
-                scope.waterView.paused = true;
-              document.getElementById('cube').style.display="block";
-              document.getElementById('waterCanvas').style.display="none";
-            
+
+    scope.$watch 'loadedImg', (newV,oldV)->
+      if newV == 6
+        scope.waterView = new waterView()
+        scope.waterView.paused = false           
 ]
 
 app.directive "video", ["$timeout", "$window", ($timeout, $window) ->
@@ -246,7 +241,7 @@ app.directive "glass", ['$window', '$timeout','$filter', ($window, $timeout,$fil
       resize()
 ]
 
-app.directive "cube", [ '$document', '$window', '$timeout', '$location', "isMobile", ($document, $window,$timeout,$location,isMobile)->
+app.directive "cube", [ '$document', '$window', '$timeout', '$state', "isMobile", ($document, $window,$timeout,$state,isMobile)->
   link: (scope, el, att) ->
     scope.oldH = 0;
     scope.oldV = 0;
@@ -317,14 +312,18 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$location', "isMobi
       scope.dragX = 0
       angle = scope.rotate.y % 360 
       switch angle
-        when 0 then scope.page = ''
-        when 90 then scope.page = 'charts'
-        when -90 then scope.page = 'projects'
-        when 180 then scope.page = 'about'
-        when 270 then scope.page = 'projects'
-        when -270 then scope.page = 'charts'
-        when -180 then scope.page = 'about'
-      $location.path('/'+scope.page)
+        when 0 then page = ''
+        when 90 then page= 'charts'
+        when -90 then page = 'projects'
+        when 180 then page = 'about'
+        when 270 then page = 'projects'
+        when -270 then page = 'charts'
+        when -180 then page = 'about'
+      if page==""
+        state = 'index'
+      else
+        state = 'index.'+page
+      $state.go(state)
 
 
     auto = ()->

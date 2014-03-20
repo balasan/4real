@@ -1,0 +1,82 @@
+#videos
+  video#v0( video preload='auto' )
+    source(src='https://s3-us-west-2.amazonaws.com/4real/various/v1.mp4', type='video/mp4', p-oster='https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg')
+    source(src='https://s3-us-west-2.amazonaws.com/4real/various/v1.ogv', type='video/ogg', p-oster='https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg')
+    | Your browser does not support the HTML5 video element.
+
+  video#v1(video preload='auto')
+    source(src='https://s3-us-west-2.amazonaws.com/4real/various/v2-1.mp4', type='video/mp4', p-oster='https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg')
+    source(src='https://s3-us-west-2.amazonaws.com/4real/various/v2-1.ogv', type='video/ogg', p-oster='https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg')
+    | Your browser does not support the HTML5 video element.
+
+  video#v2(video preload='auto')
+    source(src='https://s3-us-west-2.amazonaws.com/4real/various/v3.mp4', type='video/mp4', p-oster='https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg')
+    source(src='https://s3-us-west-2.amazonaws.com/4real/various/v3.ogv', type='video/ogg', p-oster='https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg')
+    | Your browser does not support the HTML5 video element.
+
+  video#v3(video preload='auto')
+    source(src='https://s3-us-west-2.amazonaws.com/4real/various/v4.mp4', type='video/mp4', p-oster='https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg')
+    source(src='https://s3-us-west-2.amazonaws.com/4real/various/v4.ogv', type='video/ogg', p-oster='https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg')
+    | Your browser does not support the HTML5 video element.
+
+.tint 
+
+
+.container
+
+ 
+  #cube(cube)
+  
+    .glass.back(glass ng-class="{'active': page=='about'}")
+      ipad.ipad2
+      ipad
+        camera
+        specular
+        div(ng-include="'/partials/about'")            
+        div.screen(ng-repeat="thispage in ['about']" ng-include="'/partials/nav'")
+      //- floor
+        //- shadow 
+    
+    .glass.front(glass ng-class="{'active' : page==''}")
+      ipad.ipad2
+      ipad
+        specular
+        .main.screen
+          .vcenter
+            svg(viewBox='0 0 1024 256')
+              use(xlink:href="#logo-4real-thin-fill")
+            //- h1 
+              span 4real
+              //- |{{page}}
+        .mainNav.screen
+          a(href="/charts")
+            i.fa.fa-signal.fa-5x 
+          a(href="/about")
+            i.fa.fa-comment-o.fa-5x 
+          a(href="/projects")
+            i.fa.fa-laptop.fa-5x 
+      //- floor
+        //- shadow
+    
+    .glass.left(glass ng-class="{'active': page=='projects'}")
+      //- ipad.ipad2        
+      ipad
+        specular
+        div( ng-include="'/partials/projects'")  
+        div.screen(ng-repeat="thispage in ['projects']" ng-include="'/partials/nav'")
+      //- floor
+        //- shadow 
+
+    .glass.right(glass ng-class="{'active': page=='charts'}")
+      //- ipad.ipad2
+      ipad
+        specular
+        div(ng-include="'/partials/charts'")
+        div.screen(ng-repeat="thispage in ['charts']" ng-include="'/partials/nav'")
+      //- floor
+        //- shadow
+
+  //- div.outerFolder( bgcolor )
+  //-   div.rolo( rolo ng-controller="projectsCtrl")
+  //-     div(ng-repeat="project in projects")
+  //-       //- img(crossorigin="anonymous" src="{{project.img[0].url}}")

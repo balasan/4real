@@ -59,6 +59,20 @@ app.factory "btcHistory", [ '$rootScope', '$http', ($rootScope, $http) ->
     )
 ]
 
+app.factory "siteMap", [()->
+
+  data={
+    main:{
+      title: "4real Digital Agency"
+      description: "4real is a digital agency specializing in designing and building scalable technology-driven websites & apps. The company 4REAL aims to re-envision digital spaces and reformulate communication-interaction channels. The fusion of technological and creative resources lends to the development of agile software and integrated design. Although based in New York, 4REAL remains a global enterprise, with offices in Moscow, along with designers and programmers team members in London and Berlin."
+    }
+    about:{
+      title: "4real - About"
+      description: "4real offers consultancy and expertise with a keen sense of global culture, 4REAL creates online experiences that span a variety of digital environments, including video, mobile, 3D, sound, and modular. The traditional gaps between user and brand, art and consumption, culture and commerce - these are spaces where technology can create wholly new cultural experiences for users. 4REAL creates integrated online systems, across an array of digital platforms, that facilitate a deeper two-way exchange between brands and consumers."
+    }
+  }
+
+]
 
 app.factory 'projectsService', [ ()->
 

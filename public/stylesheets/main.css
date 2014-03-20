@@ -1483,10 +1483,6 @@ circle:hover {
   @inlcude transition(none);
 }
 
-#waterCanvas {
-  display: none;
-}
-
 * {
   padding: 0px;
   margin: 0px;
@@ -1527,6 +1523,17 @@ body {
   -o-text-size-adjust: none;
   text-size-adjust: none;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.wrapper {
+  opacity: 0;
+  -webkit-transition: all 1s;
+  -moz-transition: all 1s;
+  -o-transition: all 1s;
+  transition: all 1s;
+}
+.wrapper.live {
+  opacity: 1;
 }
 
 #mainSVG {

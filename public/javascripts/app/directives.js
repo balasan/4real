@@ -4,30 +4,27 @@
 
   app = angular.module("4real.directives", []);
 
+  app.directive("loaded", [
+    "$timeout", "$window", function($timeout, $window) {
+      return {
+        link: function(scope, el, attr) {
+          return el.on('load', function() {
+            scope.loadedImg += 1;
+            return scope.$apply();
+          });
+        }
+      };
+    }
+  ]);
+
   app.directive("main", [
     "$timeout", "$window", function($timeout, $window) {
       return {
         link: function(scope, el, attr) {
-          return scope.$watch('page', function(newV, oldV) {
-            if (newV !== oldV) {
-              if (scope.page === 'liquid') {
-                if (!scope.waterView) {
-                  angular.element(window).bind('load', function() {
-                    scope.waterView = new waterView();
-                    scope.waterView.paused = false;
-                    return scope.activeVideo = -1;
-                  });
-                }
-                document.getElementById('cube').style.display = "none";
-                document.getElementById('waterCanvas').style.display = "block";
-                return window.paused = false;
-              } else {
-                if (scope.waterView) {
-                  scope.waterView.paused = true;
-                }
-                document.getElementById('cube').style.display = "block";
-                return document.getElementById('waterCanvas').style.display = "none";
-              }
+          return scope.$watch('loadedImg', function(newV, oldV) {
+            if (newV === 6) {
+              scope.waterView = new waterView();
+              return scope.waterView.paused = false;
             }
           });
         }
@@ -278,7 +275,7 @@
   ]);
 
   app.directive("cube", [
-    '$document', '$window', '$timeout', '$location', "isMobile", function($document, $window, $timeout, $location, isMobile) {
+    '$document', '$window', '$timeout', '$state', "isMobile", function($document, $window, $timeout, $state, isMobile) {
       return {
         link: function(scope, el, att) {
           var auto, cleanup, randomVertical, resize, rotateScene, scale, updateRotation, w;
@@ -346,7 +343,7 @@
           scale = 250;
           w = angular.element($window);
           cleanup = function() {
-            var angle;
+            var angle, page, state;
             if (scope.page === 'liquid') {
               return;
             }
@@ -356,27 +353,32 @@
             angle = scope.rotate.y % 360;
             switch (angle) {
               case 0:
-                scope.page = '';
+                page = '';
                 break;
               case 90:
-                scope.page = 'charts';
+                page = 'charts';
                 break;
               case -90:
-                scope.page = 'projects';
+                page = 'projects';
                 break;
               case 180:
-                scope.page = 'about';
+                page = 'about';
                 break;
               case 270:
-                scope.page = 'projects';
+                page = 'projects';
                 break;
               case -270:
-                scope.page = 'charts';
+                page = 'charts';
                 break;
               case -180:
-                scope.page = 'about';
+                page = 'about';
             }
-            return $location.path('/' + scope.page);
+            if (page === "") {
+              state = 'index';
+            } else {
+              state = 'index.' + page;
+            }
+            return $state.go(state);
           };
           auto = function() {
             var t;

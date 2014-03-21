@@ -8,7 +8,7 @@
 
   app.config([
     "$locationProvider", "$stateProvider", "$urlRouterProvider", function($locationProvider, $stateProvider, $urlRouterProvider) {
-      $locationProvider.html5Mode(true).hashPrefix('!');
+      $locationProvider.html5Mode(true);
       $urlRouterProvider.otherwise("/");
       $stateProvider.state("liquid", {
         url: "/liquid",

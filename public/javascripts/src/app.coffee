@@ -12,7 +12,7 @@ app = angular.module("4real", [
 ])
 app.config ["$locationProvider","$stateProvider","$urlRouterProvider", ($locationProvider,$stateProvider, $urlRouterProvider) ->
   
-  $locationProvider.html5Mode(true).hashPrefix('!');
+  $locationProvider.html5Mode(true);
 
   $urlRouterProvider.otherwise("/");
   # $stateProvider.when "/liquid",

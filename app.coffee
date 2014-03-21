@@ -72,6 +72,10 @@ request.post 'http://robots4real.herokuapp.com/http://4real.io/projects',(error,
 request.post 'http://robots4real.herokuapp.com/http://4real.io/charts',(error, response, body) ->
 request.post 'http://robots4real.herokuapp.com/http://4real.io',(error, response, body) ->
 request.post 'http://robots4real.herokuapp.com/http://4real.io/about',(error, response, body) ->
+request.post 'http://robots4real.herokuapp.com/http://www.4real.io/projects',(error, response, body) ->
+request.post 'http://robots4real.herokuapp.com/http://www.4real.io/charts',(error, response, body) ->
+request.post 'http://robots4real.herokuapp.com/http://www.4real.io',(error, response, body) ->
+request.post 'http://robots4real.herokuapp.com/http://www.4real.io/about',(error, response, body) ->
 
 
 getData = ()->

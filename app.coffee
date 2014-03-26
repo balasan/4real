@@ -17,13 +17,13 @@ db = require('./db')()
 app = express()
 server = require('http').createServer(app)
 io = require('socket.io').listen(server, {log: false});
-
+prerender = require('prerender-node')
 
 app.configure ->
   app.set "port", process.env.PORT or 3000
   app.set "views", __dirname + "/views"
   app.set "view engine", "jade"
-  app.use(require('prerender-node'))
+  app.use prerender
   app.use express.favicon()
   app.use express.logger("dev")
   app.use express.bodyParser()
@@ -51,14 +51,6 @@ app.get "/about", routes.index
 app.get "/liquid", routes.index
 app.get "/auto", routes.index
 
-app.post "/", routes.index
-app.post "/partials/:name", routes.partials
-app.post "/charts", routes.index
-app.post "/projects", routes.index
-app.post "/about", routes.index
-app.post "/liquid", routes.index
-app.post "/auto", routes.index
-
 
 setInterval
 
@@ -68,14 +60,23 @@ the_interval = seconds * 1000
 
 
 # REFRESH THE ROBOTS CACHE
-request.post 'http://robots4real.herokuapp.com/http://4real.io/projects',(error, response, body) ->
-request.post 'http://robots4real.herokuapp.com/http://4real.io/charts',(error, response, body) ->
-request.post 'http://robots4real.herokuapp.com/http://4real.io',(error, response, body) ->
-request.post 'http://robots4real.herokuapp.com/http://4real.io/about',(error, response, body) ->
-request.post 'http://robots4real.herokuapp.com/http://www.4real.io/projects',(error, response, body) ->
-request.post 'http://robots4real.herokuapp.com/http://www.4real.io/charts',(error, response, body) ->
-request.post 'http://robots4real.herokuapp.com/http://www.4real.io',(error, response, body) ->
-request.post 'http://robots4real.herokuapp.com/http://www.4real.io/about',(error, response, body) ->
+rProjects = ->
+  request.post 'http://robots4real.herokuapp.com/http://4real.io/projects',(error, response, body) ->
+rCharts = ->
+  request.post 'http://robots4real.herokuapp.com/http://4real.io/charts',(error, response, body) ->
+rHome = ->
+  request.post 'http://robots4real.herokuapp.com/http://4real.io/',(error, response, body) ->
+rAbout = ->
+  request.post 'http://robots4real.herokuapp.com/http://4real.io/about',(error, response, body) ->
+rAbout = ->
+  request.post 'http://robots4real.herokuapp.com/http://4real.io/liquid',(error, response, body) ->
+
+
+rHome()
+# setTimeout rAbout, 20 * 1000
+# setTimeout rProjects, 40 * 1000
+# setTimeout rCharts, 60 * 1000
+# setTimeout rCharts, 80 * 1000
 
 
 getData = ()->

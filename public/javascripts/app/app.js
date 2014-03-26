@@ -12,12 +12,18 @@
       $urlRouterProvider.otherwise("/");
       $stateProvider.state("liquid", {
         url: "/liquid",
-        templateUrl: "/partials/liquid"
+        templateUrl: "/partials/liquid",
+        page: 'liquid'
       });
       $stateProvider.state("index", {
         url: "/",
         templateUrl: "/partials/main",
         page: ''
+      });
+      $stateProvider.state("auto", {
+        url: "/auto",
+        templateUrl: "/partials/main",
+        page: 'auto'
       });
       $stateProvider.state("index.about", {
         url: "about",

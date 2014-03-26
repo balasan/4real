@@ -120,19 +120,19 @@ var waterView = function() {
 	gravity = new GL.Vector(0, -2, 0);
 	radius = .4;
 
-  this.drops = function(){
+  self.drops = function(){
   	for (var i = 0; i < 10; i++) {
       setTimeout(function(){
   		  water.addDrop(Math.random() * 2 - 1, Math.random() * 2 - 1, 0.01, (i & 1) ? 0.01 : -0.01);
       },300*i);
   	}
   } 
-  this.drops()
+  self.drops()
 
-  var auto = false;
+  var auto = true;
   if(auto){
 
-	  this.reset = function(){
+	  self.reset = function(){
 
 	    gravity = new GL.Vector(0, 1, 0);
 	    setTimeout(function(){
@@ -140,23 +140,23 @@ var waterView = function() {
 	    },2000)
 	    setTimeout(self.reset, 20000);
 	  }
-	  this.reset()
+	  self.reset()
 
-	  this.moreDrops = function(){
+	  self.moreDrops = function(){
 	    self.drops()
 	    t = Math.random()
 	    setTimeout(self.moreDrops,t*12000)
 	  }
-	  this.moreDrops()
+	  self.moreDrops()
 
-	  this.move = function(){
+	  self.move = function(){
 	    var v = Math.random()
 	    var h = Math.random()
 	    angleX = -v*90 
 	    angleY = (h-.5) * 360 * 10
 	    setTimeout(self.move,10000)
 	  }
-	  this.move();
+	  self.move();
 
 	}
 

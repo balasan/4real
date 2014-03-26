@@ -7,7 +7,7 @@
   app.controller('aboutCtrl', ['$scope', function($scope) {}]);
 
   app.controller('mainCtrl', [
-    '$scope', '$timeout', '$rootScope', function($scope, $timeout, $rootScope) {
+    '$scope', '$timeout', '$rootScope', 'siteMap', function($scope, $timeout, $rootScope, siteMap) {
       $scope.rotate = {};
       $scope.rotate.y = 0;
       $scope.waterView = null;
@@ -27,6 +27,9 @@
           case '':
             $scope.rotate.y = 0 + 360 * rotations;
             $scope.activeVideo = 2;
+            $scope.title = siteMap.main.title;
+            $scope.description = siteMap.main.description;
+            $scope.keywords = siteMap.main.keywords;
             break;
           case "charts":
             $scope.activeVideo = 0;
@@ -35,6 +38,9 @@
             } else {
               $scope.rotate.y = -270 + 360 * rotations;
             }
+            $scope.title = siteMap.charts.title;
+            $scope.description = siteMap.charts.description;
+            $scope.keywords = siteMap.charts.keywords;
             break;
           case "projects":
             $scope.activeVideo = 1;
@@ -43,6 +49,9 @@
             } else {
               $scope.rotate.y = 270 + 360 * rotations;
             }
+            $scope.title = siteMap.projects.title;
+            $scope.description = siteMap.projects.description;
+            $scope.keywords = siteMap.projects.keywords;
             break;
           case "about":
             $scope.activeVideo = 3;
@@ -51,6 +60,14 @@
             } else {
               $scope.rotate.y = -180 + 360 * rotations;
             }
+            $scope.title = siteMap.about.title;
+            $scope.description = siteMap.about.description;
+            $scope.keywords = siteMap.about.keywords;
+            break;
+          case "liquid":
+            $scope.title = siteMap.liquid.title;
+            $scope.description = siteMap.liquid.description;
+            $scope.keywords = siteMap.liquid.keywords;
         }
         return $scope.$broadcast('page', $scope.page);
       });

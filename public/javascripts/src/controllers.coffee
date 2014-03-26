@@ -1,6 +1,5 @@
 app =  angular.module("4real.controllers", [])
 
-
 app.controller 'aboutCtrl', ['$scope', ($scope) ->
 
   # $scope.text = [
@@ -21,7 +20,7 @@ app.controller 'aboutCtrl', ['$scope', ($scope) ->
 
 ]
 
-app.controller 'mainCtrl', [ '$scope', '$timeout','$rootScope', ($scope, $timeout,$rootScope) ->
+app.controller 'mainCtrl', [ '$scope', '$timeout','$rootScope','siteMap', ($scope, $timeout,$rootScope,siteMap) ->
   $scope.rotate = {}
   $scope.rotate.y=0;
   $scope.waterView = null;
@@ -44,20 +43,36 @@ app.controller 'mainCtrl', [ '$scope', '$timeout','$rootScope', ($scope, $timeou
       when ''
         $scope.rotate.y = 0 + 360*rotations
         $scope.activeVideo = 2
+        $scope.title = siteMap.main.title
+        $scope.description = siteMap.main.description
+        $scope.keywords = siteMap.main.keywords
       when "charts" 
         $scope.activeVideo = 0
         if (angle > -90) then $scope.rotate.y = 90 + 360*rotations
         else $scope.rotate.y = -270 + 360*rotations
+        $scope.title = siteMap.charts.title
+        $scope.description = siteMap.charts.description
+        $scope.keywords = siteMap.charts.keywords
       when "projects"
         $scope.activeVideo = 1  
         if(angle < 90)
           $scope.rotate.y = -90 + 360*rotations
         else $scope.rotate.y = 270 + 360*rotations
+        $scope.title = siteMap.projects.title
+        $scope.description = siteMap.projects.description
+        $scope.keywords = siteMap.projects.keywords
       when "about" 
         $scope.activeVideo = 3 
         if(angle >0)
           $scope.rotate.y = 180 + 360*rotations
         else $scope.rotate.y = -180 + 360*rotations
+        $scope.title = siteMap.about.title
+        $scope.description = siteMap.about.description
+        $scope.keywords = siteMap.about.keywords
+      when "liquid"
+        $scope.title = siteMap.liquid.title
+        $scope.description = siteMap.liquid.description
+        $scope.keywords = siteMap.liquid.keywords
      $scope.$broadcast('page', $scope.page)
 
 ]

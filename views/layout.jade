@@ -2,7 +2,7 @@ doctype html5
 html(ng-app="4real" ng-controller="mainCtrl")
   head
 
-    title 4REAL DIGITAL AGENCY
+    title {{title}}
 
     meta(name="viewport" content="width=device-width, user-scalable=no, minimal-ui")
     
@@ -11,9 +11,9 @@ html(ng-app="4real" ng-controller="mainCtrl")
     meta(property='og:site_name', content='4real')
     meta(property='og:description', content='4real is a global digital agency creating high-end, agile websites and apps', digital='digital', agency='agency', global='global', specialising='specialising' high='high', end='end', websites="websites", apps="apps")
 
-    meta( name='description' content="4Real is a global creative agency in NYC + Moscow. We design & build cool websites & apps.")
+    meta( name='description' content="{{description}}")
     meta(name="fragment" content="!")
-
+    meta(name="keywords" content="{{keywords}}")
   
     link(rel='stylesheet', href='/stylesheets/main.css')
     link(rel='stylesheet', href='/javascripts/lib/font-awesome/css/font-awesome.min.css')

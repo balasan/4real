@@ -28,12 +28,18 @@ app.config ["$locationProvider","$stateProvider","$urlRouterProvider", ($locatio
   $stateProvider.state "liquid",
     url: "/liquid"
     templateUrl: "/partials/liquid"
+    page: 'liquid'
 
   $stateProvider.state "index",
     url: "/"
     templateUrl: "/partials/main"
     page: ''
   
+  $stateProvider.state "auto",
+    url: "/auto"
+    templateUrl: "/partials/main"
+    page: 'auto'
+
   $stateProvider.state "index.about",
     url: "about"
     page: "about"

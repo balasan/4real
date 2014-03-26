@@ -73,10 +73,10 @@ rAbout = ->
 
 
 rHome()
-# setTimeout rAbout, 20 * 1000
-# setTimeout rProjects, 40 * 1000
-# setTimeout rCharts, 60 * 1000
-# setTimeout rCharts, 80 * 1000
+setTimeout rAbout, 20 * 1000
+setTimeout rProjects, 40 * 1000
+setTimeout rCharts, 60 * 1000
+setTimeout rCharts, 80 * 1000
 
 
 getData = ()->

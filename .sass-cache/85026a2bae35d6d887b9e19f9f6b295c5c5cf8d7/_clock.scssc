@@ -1,0 +1,482 @@
+3.2.13 (Media Mark)
+9a216d16541384ac6b4cc6dd1795e6fc6ac009f9
+o:Sass::Tree::RootNode
+:@template"b#$clockColor: white;
+
+.clocks{
+  // top:20px;
+  // right:0px;
+  // float: left;
+  position:relative;
+  // margin:0px 0 0 0px;
+  text-align:center;
+}
+.clockContainer{
+  // float:left;
+  // overflow:auto;
+  position:relative;
+  margin: 0px 2.5% 10px 2.5%;
+  // float:left;
+  display:inline-block;
+}
+
+
+.clock {
+  font-size:2.7px;
+  // width: 100px;
+  // height: 100px;
+  // margin:auto;
+  // float:left;
+  // right: 20px;
+  // top: 20px;
+  // float:right;
+  position: relative;
+  margin-bottom:5px;
+}
+
+
+/* line 27, ../../source/css/_header.scss */
+.clock .face {
+  width: 32em;
+  height: 32em;
+  margin:auto;
+  border: 2px solid rgba(255,255,255,.75);
+  @include box-shadow(inset 1px -1px 2px 0px rgba(200, 200, 255, 0.5), 1px 1px 1px 0px rgba(0, 0, 0, 0.1));
+  border-radius: 50%;
+  position: relative;
+  background:rgba(255,255,255,.1);
+}
+
+.clock #hour {
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -1px 0 -1px -25%;
+  padding: 1px 0 1px 25%;
+  background: $clockColor;
+  -webkit-transform-origin: 100% 50%;
+  -moz-transform-origin: 100% 50%;
+  -ms-transform-origin: 100% 50%;
+  transform-origin: 100% 50%;
+  border-radius: 5px 0 0 5px;
+}
+/* line 75, ../../source/css/_header.scss */
+
+// .clock #minute {
+//   width:.8em;
+//   height:12.5em;
+//   border-radius:.5em;
+//   background:white;
+//   position:absolute;
+//   bottom:50%; left:50%;
+//   margin:0 0 -1.5em -.4em;
+//   // box-shadow:#343536 0 0 2px;
+//   @include transform-origin(0.4em, 11em);
+// }
+
+.clock #minute {
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -35% -1px 0;
+  padding: 35% 1px 0;
+  background: $clockColor;
+  -webkit-transform-origin: 50% 100%;
+  -moz-transform-origin: 50% 100%;
+  -ms-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+  border-radius: 5px 5px 0 0;
+}
+
+
+.clock #second {
+
+  width:.4em;
+  height:14em;
+  border-radius:.1em .1em 0 0/10em 10em 0 0;
+  background:#c00;
+  position:absolute;
+  bottom:50%; left:50%;
+  margin:0 0 -2em -0.1em;
+  // box-shadow:rgba(255,255,255,.4) 0 0 .4em;
+  @include transform-origin(0.1em, 12em);
+  // @include transition(all ease-in-out .3s)
+}
+.clock #second:after {
+  content:'';
+  width:1.4em;
+  height:1.4em;
+  border-radius:.7em;
+  background:inherit;
+  position:absolute;
+  left:-.65em; 
+  bottom:1.35em;
+}
+.clock #second:before {
+  content:'';
+  width:.8em;
+  height:3em;
+  border-radius:.2em .2em .4em .4em/.2em .2em 2em 2em;
+  // box-shadow:rgba(0,0,0,.8) 0 0 .2em;
+  background:inherit;
+  position:absolute;
+  left:-.2em; bottom:-3em;
+}
+
+// .clock #second {
+//   font-size:4px;
+//   width: 0;
+//   height: 0;
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   margin: -40% -1px 0 0;
+//   padding: 40% 1px 0 0;
+//   // background: $clockColor;
+//   -webkit-transform-origin: 50% 100%;
+//   -moz-transform-origin: 50% 100%;
+//   -ms-transform-origin: 50% 100%;
+//   transform-origin: 50% 100%;
+// }
+
+
+.ampm{
+  margin-top: -3.4em;
+  margin-bottom: 2.4em;
+  font-size: 12px;
+  // color:rgb(0,255,0);
+}
+
+.clock .minute-marks li {
+  display:block;
+  width:.2em;
+  height:.6em;
+  background:white;
+  position:absolute;
+  top:50%; left:50%;
+
+  // margin:-.4em 0 0 -.1em;
+}
+
+
+.clock .digits li span{
+  font-size: 9px;
+}
+.clock .digits li {
+  font-size:1.6em;
+  display:block;
+  width:1.6em;
+  height:1.6em;
+  position:absolute;
+  top:50%; left:50%;
+  line-height:1.6em;
+  text-align:center;
+  margin:-.8em 0 0 -.7em;
+  font-weight:bold;
+}
+
+.clock .digits li:nth-child(1) { @include transform(translate(3.9em, -6.9em))}
+.clock .digits li:nth-child(2) { @include transform(translate(6.9em, -4em))}
+.clock .digits li:nth-child(3) { @include transform(translate(8em, 0em))}
+.clock .digits li:nth-child(4) { @include transform(translate(6.8em, 4em))}
+.clock .digits li:nth-child(5) { @include transform(translate(3.9em, 6.9em))}
+.clock .digits li:nth-child(6) { @include transform(translate(0em, 8em))}
+.clock .digits li:nth-child(7) { @include transform(translate(-3.9em, 6.9em))}
+.clock .digits li:nth-child(8) { @include transform(translate(-6.8em, 4em))}
+.clock .digits li:nth-child(9) { @include transform(translate(-8em, 0em))}
+.clock .digits li:nth-child(10) { @include transform(translate(-6.9em, -4em))}
+.clock .digits li:nth-child(11) { @include transform(translate(-3.9em, -6.9em))}
+.clock .digits li:nth-child(12) { @include transform(translate(0em, -8em))}
+
+
+// .clock .minute-marks li:first-child {@include transform(rotate(6deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(2) {@include transform(rotate(12deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(3) {@include transform(rotate(18deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(4) {@include transform(rotate(24deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(5) {@include transform(rotate(36deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(6) {@include transform(rotate(42deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(7) {@include transform(rotate(48deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(8) {@include transform(rotate(54deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(9) {@include transform(rotate(66deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(10) {@include transform(rotate(72deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(11) {@include transform(rotate(78deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(12) {@include transform(rotate(84deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(13) {@include transform(rotate(96deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(14) {@include transform(rotate(102deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(15) {@include transform(rotate(108deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(16) {@include transform(rotate(114deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(17) {@include transform(rotate(126deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(18) {@include transform(rotate(132deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(19) {@include transform(rotate(138deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(20) {@include transform(rotate(144deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(21) {@include transform(rotate(156deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(22) {@include transform(rotate(162deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(23) {@include transform(rotate(168deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(24) {@include transform(rotate(174deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(25) {@include transform(rotate(186deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(26) {@include transform(rotate(192deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(27) {@include transform(rotate(198deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(28) {@include transform(rotate(204deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(29) {@include transform(rotate(216deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(30) {@include transform(rotate(222deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(31) {@include transform(rotate(228deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(32) {@include transform(rotate(234deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(33) {@include transform(rotate(246deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(34) {@include transform(rotate(252deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(35) {@include transform(rotate(258deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(36) {@include transform(rotate(264deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(37) {@include transform(rotate(276deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(38) {@include transform(rotate(282deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(39) {@include transform(rotate(288deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(40) {@include transform(rotate(294deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(41) {@include transform(rotate(306deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(42) {@include transform(rotate(312deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(43) {@include transform(rotate(318deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(44) {@include transform(rotate(324deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(45) {@include transform(rotate(336deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(46) {@include transform(rotate(342deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(47) {@include transform(rotate(348deg) translateY(-12.7em))}
+// .clock .minute-marks li:nth-child(48) {@include transform(rotate(354deg) translateY(-12.7em))}
+:@has_childrenT:@options{ :@children[$o:Sass::Tree::VariableNode:@guarded0:
+@name"clockColor:
+@expro:Sass::Script::Color	:@attrs{	:rediˇ:
+alphai:
+greeniˇ:	blueiˇ:@value0;@:
+@linei;@;	[ ;io:Sass::Tree::RuleNode:@parsed_ruleso:"Sass::Selector::CommaSequence:@members[o:Sass::Selector::Sequence;[o:#Sass::Selector::SimpleSequence
+;[o:Sass::Selector::Class;["clocks:@filename" ;i:@sourceso:Set:
+@hash{ ;@;i:@subject0;@;i;T;@:
+@tabsi ;	[	o:Sass::Tree::CommentNode
+:
+@type:silent;["2/* top:20px;
+ * right:0px;
+ * float: left; */;@;	[ ;i	o:Sass::Tree::PropNode;["position;o:Sass::Script::String;$:identifier;"relative;@:@prop_syntax:new;@;"i ;	[ ;io;#
+;$;%;["/* margin:0px 0 0 0px; */;@;	[ ;io;&;["text-align;o;';$;(;"center;@;);*;@;"i ;	[ ;i;i:
+@rule[".clockso;;o;;[o;;[o;
+;[o;;["clockContainer;" ;i;o;; { ;@<;i;!0;@<;i;T;@;"i ;	[
+o;#
+;$;%;["(/* float:left;
+ * overflow:auto; */;@;	[ ;io;&;["position;o;';$;(;"relative;@;);*;@;"i ;	[ ;io;&;["margin;o;';$;(;"0px 2.5% 10px 2.5%;@;);*;@;"i ;	[ ;io;#
+;$;%;["/* float:left; */;@;	[ ;io;&;["display;o;';$;(;"inline-block;@;);*;@;"i ;	[ ;i;i;+[".clockContainero;;o;;[o;;[o;
+;[o;;["
+clock;" ;i;o;; { ;@f;i;!0;@f;i;T;@;"i ;	[	o;&;["font-size;o;';$;(;"
+2.7px;@;);*;@;"i ;	[ ;io;#
+;$;%;["w/* width: 100px;
+ * height: 100px;
+ * margin:auto;
+ * float:left;
+ * right: 20px;
+ * top: 20px;
+ * float:right; */;@;	[ ;io;&;["position;o;';$;(;"relative;@;);*;@;"i ;	[ ;i#o;&;["margin-bottom;o;';$;(;"5px;@;);*;@;"i ;	[ ;i$;i;+[".clocko;#
+;$:normal;["1/* line 27, ../../source/css/_header.scss */;@;	[ ;i(o;;o;;[o;;[o;
+;[o;;["
+clock;" ;i);o;; { ;@ã;i);!0o;
+;[o;;["	face;@ã;i);o;; { ;@ã;i);!0;@ã;i);T;@;"i ;	[o;&;["
+width;o;';$;(;"	32em;@;);*;@;"i ;	[ ;i*o;&;["height;o;';$;(;"	32em;@;);*;@;"i ;	[ ;i+o;&;["margin;o;';$;(;"	auto;@;);*;@;"i ;	[ ;i,o;&;["border;o:Sass::Script::List	;[o:Sass::Script::Number:@denominator_units[ :@numerator_units["px;i:@original"2px;@;i-o;'	;$;(;"
+solid;@;i-o:Sass::Script::Funcall;"	rgba:@keywords{ ;@:@splat0;i-:
+@args[	o;.;/[ ;0[ ;iˇ;1"255;@;i-o;.;/@π;0[ ;iˇ;1"255;@;i-o;.;/@π;0[ ;iˇ;1"255;@;i-o;.;/@π;0[ ;f	0.75;1"	0.75;@;i-;@:@separator:
+space;i-;);*;@;"i ;	[ ;i-o:Sass::Tree::MixinNode;"box-shadow;3{ ;@;	[ ;40;i.;5[o;-	;[o;'	;$;(;"
+inset;@;i.o;.;/[ ;0["px;i;1"1px;@;i.o;.;/[ ;0["px;i˙;1"	-1px;@;i.o;.;/[ ;0["px;i;1"2px;@;i.o;.;/[ ;0["px;i ;1"0px;@;i.o;2;"	rgba;3{ ;@;40;i.;5[	o;.;/@π;0[ ;i»;1"200;@;i.o;.;/@π;0[ ;i»;1"200;@;i.o;.;/@π;0[ ;iˇ;1"255;@;i.o;.;/@π;0[ ;f0.5;1"0.5;@;i.;@;6;7;i.o;-	;[
+o;.;/[ ;0["px;i;1"1px;@;i.o;.;/[ ;0["px;i;1"1px;@;i.o;.;/[ ;0["px;i;1"1px;@;i.o;.;/[ ;0["px;i ;1"0px;@;i.o;2;"	rgba;3{ ;@;40;i.;5[	o;.;/@π;0[ ;i ;1"0;@;i.o;.;/@π;0[ ;i ;1"0;@;i.o;.;/@π;0[ ;i ;1"0;@;i.o;.;/@π;0[ ;f0.10000000000000001 ôö;1"0.1;@;i.;@;6;7;i.o;&;["border-radius;o;';$;(;"50%;@;);*;@;"i ;	[ ;i/o;&;["position;o;';$;(;"relative;@;);*;@;"i ;	[ ;i0o;&;["background;o;2;"	rgba;3{ ;@;40;i1;5[	o;.;/@π;0[ ;iˇ;1"255;@;i1o;.;/@π;0[ ;iˇ;1"255;@;i1o;.;/@π;0[ ;iˇ;1"255;@;i1o;.;/@π;0[ ;f0.10000000000000001 ôö;1"0.1;@;i1;);*;@;"i ;	[ ;i1;i);+[".clock .faceo;;o;;[o;;[o;
+;[o;;["
+clock;" ;i4;o;; { ;@I;i4;!0o;
+;[o:Sass::Selector::Id;["	hour;@I;i4;o;; { ;@I;i4;!0;@I;i4;T;@;"i ;	[o;&;["
+width;o;';$;(;"0;@;);*;@;"i ;	[ ;i5o;&;["height;o;';$;(;"0;@;);*;@;"i ;	[ ;i6o;&;["position;o;';$;(;"absolute;@;);*;@;"i ;	[ ;i7o;&;["top;o;';$;(;"50%;@;);*;@;"i ;	[ ;i8o;&;["	left;o;';$;(;"50%;@;);*;@;"i ;	[ ;i9o;&;["margin;o;';$;(;"-1px 0 -1px -25%;@;);*;@;"i ;	[ ;i:o;&;["padding;o;';$;(;"1px 0 1px 25%;@;);*;@;"i ;	[ ;i;o;&;["background;o:Sass::Script::Variable	;"clockColor;@:@underscored_name"clockColor;i<;);*;@;"i ;	[ ;i<o;&;["-webkit-transform-origin;o;';$;(;"100% 50%;@;);*;@;"i ;	[ ;i=o;&;["-moz-transform-origin;o;';$;(;"100% 50%;@;);*;@;"i ;	[ ;i>o;&;["-ms-transform-origin;o;';$;(;"100% 50%;@;);*;@;"i ;	[ ;i?o;&;["transform-origin;o;';$;(;"100% 50%;@;);*;@;"i ;	[ ;i@o;&;["border-radius;o;';$;(;"5px 0 0 5px;@;);*;@;"i ;	[ ;iA;i4;+[".clock #houro;#
+;$;,;["1/* line 75, ../../source/css/_header.scss */;@;	[ ;iCo;#
+;$;%;["/* .clock #minute {
+ *   width:.8em;
+ *   height:12.5em;
+ *   border-radius:.5em;
+ *   background:white;
+ *   position:absolute;
+ *   bottom:50%; left:50%;
+ *   margin:0 0 -1.5em -.4em;
+ *   // box-shadow:#343536 0 0 2px;
+ *   @include transform-origin(0.4em, 11em);
+ * } */;@;	[ ;iEo;;o;;[o;;[o;
+;[o;;["
+clock;" ;iQ;o;; { ;@∑;iQ;!0o;
+;[o;9;["minute;@∑;iQ;o;; { ;@∑;iQ;!0;@∑;iQ;T;@;"i ;	[o;&;["
+width;o;';$;(;"0;@;);*;@;"i ;	[ ;iRo;&;["height;o;';$;(;"0;@;);*;@;"i ;	[ ;iSo;&;["position;o;';$;(;"absolute;@;);*;@;"i ;	[ ;iTo;&;["top;o;';$;(;"50%;@;);*;@;"i ;	[ ;iUo;&;["	left;o;';$;(;"50%;@;);*;@;"i ;	[ ;iVo;&;["margin;o;';$;(;"-35% -1px 0;@;);*;@;"i ;	[ ;iWo;&;["padding;o;';$;(;"35% 1px 0;@;);*;@;"i ;	[ ;iXo;&;["background;o;:	;"clockColor;@;;"clockColor;iY;);*;@;"i ;	[ ;iYo;&;["-webkit-transform-origin;o;';$;(;"50% 100%;@;);*;@;"i ;	[ ;iZo;&;["-moz-transform-origin;o;';$;(;"50% 100%;@;);*;@;"i ;	[ ;i[o;&;["-ms-transform-origin;o;';$;(;"50% 100%;@;);*;@;"i ;	[ ;i\o;&;["transform-origin;o;';$;(;"50% 100%;@;);*;@;"i ;	[ ;i]o;&;["border-radius;o;';$;(;"5px 5px 0 0;@;);*;@;"i ;	[ ;i^;iQ;+[".clock #minuteo;;o;;[o;;[o;
+;[o;;["
+clock;" ;ib;o;; { ;@;ib;!0o;
+;[o;9;["second;@;ib;o;; { ;@;ib;!0;@;ib;T;@;"i ;	[o;&;["
+width;o;';$;(;"	.4em;@;);*;@;"i ;	[ ;ido;&;["height;o;';$;(;"	14em;@;);*;@;"i ;	[ ;ieo;&;["border-radius;o;';$;(;" .1em .1em 0 0/10em 10em 0 0;@;);*;@;"i ;	[ ;ifo;&;["background;o;';$;(;"	#c00;@;);*;@;"i ;	[ ;igo;&;["position;o;';$;(;"absolute;@;);*;@;"i ;	[ ;iho;&;["bottom;o;';$;(;"50%;@;);*;@;"i ;	[ ;iio;&;["	left;o;';$;(;"50%;@;);*;@;"i ;	[ ;iio;&;["margin;o;';$;(;"0 0 -2em -0.1em;@;);*;@;"i ;	[ ;ijo;#
+;$;%;["4/* box-shadow:rgba(255,255,255,.4) 0 0 .4em; */;@;	[ ;iko;8;"transform-origin;3{ ;@;	[ ;40;il;5[o;.;/[ ;0["em;f0.10000000000000001 ôö;1"
+0.1em;@;ilo;.;/[ ;0["em;i;1"	12em;@;ilo;#
+;$;%;["3/* @include transition(all ease-in-out .3s) */;@;	[ ;im;ib;+[".clock #secondo;;o;;[o;;[o;
+;[o;;["
+clock;" ;io;o;; { ;@|;io;!0o;
+;[o;9;["second;@|;ioo:Sass::Selector::Pseudo
+;["
+after:	@arg0;@|;io:@syntactic_type:
+class;o;; { ;@|;io;!0;@|;io;T;@;"i ;	[o;&;["content;o;';$;(;"'';@;);*;@;"i ;	[ ;ipo;&;["
+width;o;';$;(;"
+1.4em;@;);*;@;"i ;	[ ;iqo;&;["height;o;';$;(;"
+1.4em;@;);*;@;"i ;	[ ;iro;&;["border-radius;o;';$;(;"	.7em;@;);*;@;"i ;	[ ;iso;&;["background;o;';$;(;"inherit;@;);*;@;"i ;	[ ;ito;&;["position;o;';$;(;"absolute;@;);*;@;"i ;	[ ;iuo;&;["	left;o;';$;(;"-.65em;@;);*;@;"i ;	[ ;ivo;&;["bottom;o;';$;(;"1.35em;@;);*;@;"i ;	[ ;iw;io;+[".clock #second:aftero;;o;;[o;;[o;
+;[o;;["
+clock;" ;iy;o;; { ;@∆;iy;!0o;
+;[o;9;["second;@∆;iyo;<
+;["before;=0;@∆;iy;>;?;o;; { ;@∆;iy;!0;@∆;iy;T;@;"i ;	[o;&;["content;o;';$;(;"'';@;);*;@;"i ;	[ ;izo;&;["
+width;o;';$;(;"	.8em;@;);*;@;"i ;	[ ;i{o;&;["height;o;';$;(;"3em;@;);*;@;"i ;	[ ;i|o;&;["border-radius;o;';$;(;"*.2em .2em .4em .4em/.2em .2em 2em 2em;@;);*;@;"i ;	[ ;i}o;#
+;$;%;["./* box-shadow:rgba(0,0,0,.8) 0 0 .2em; */;@;	[ ;i~o;&;["background;o;';$;(;"inherit;@;);*;@;"i ;	[ ;io;&;["position;o;';$;(;"absolute;@;);*;@;"i ;	[ ;i{o;&;["	left;o;';$;(;"
+-.2em;@;);*;@;"i ;	[ ;i|o;&;["bottom;o;';$;(;"	-3em;@;);*;@;"i ;	[ ;i|;iy;+[".clock #second:beforeo;#
+;$;%;["s/* .clock #second {
+ *   font-size:4px;
+ *   width: 0;
+ *   height: 0;
+ *   position: absolute;
+ *   top: 50%;
+ *   left: 50%;
+ *   margin: -40% -1px 0 0;
+ *   padding: 40% 1px 0 0;
+ *   // background: $clockColor;
+ *   -webkit-transform-origin: 50% 100%;
+ *   -moz-transform-origin: 50% 100%;
+ *   -ms-transform-origin: 50% 100%;
+ *   transform-origin: 50% 100%;
+ * } */;@;	[ ;io;;o;;[o;;[o;
+;[o;;["	ampm;" ;iê;o;; { ;@;iê;!0;@;iê;T;@;"i ;	[	o;&;["margin-top;o;';$;(;"-3.4em;@;);*;@;"i ;	[ ;iëo;&;["margin-bottom;o;';$;(;"
+2.4em;@;);*;@;"i ;	[ ;iío;&;["font-size;o;';$;(;"	12px;@;);*;@;"i ;	[ ;iìo;#
+;$;%;["/* color:rgb(0,255,0); */;@;	[ ;iî;iê;+["
+.ampmo;;o;;[o;;[o;
+;[o;;["
+clock;" ;ió;o;; { ;@>;ió;!0o;
+;[o;;["minute-marks;@>;ió;o;; { ;@>;ió;!0o;
+;[o:Sass::Selector::Element	:@namespace0;["li;@>;ió;o;; { ;@>;ió;!0;@>;ió;T;@;"i ;	[o;&;["display;o;';$;(;"
+block;@;);*;@;"i ;	[ ;iòo;&;["
+width;o;';$;(;"	.2em;@;);*;@;"i ;	[ ;iôo;&;["height;o;';$;(;"	.6em;@;);*;@;"i ;	[ ;iöo;&;["background;o;';$;(;"
+white;@;);*;@;"i ;	[ ;iõo;&;["position;o;';$;(;"absolute;@;);*;@;"i ;	[ ;iúo;&;["top;o;';$;(;"50%;@;);*;@;"i ;	[ ;iùo;&;["	left;o;';$;(;"50%;@;);*;@;"i ;	[ ;iùo;#
+;$;%;[""/* margin:-.4em 0 0 -.1em; */;@;	[ ;iü;ió;+[".clock .minute-marks lio;;o;;[o;;[	o;
+;[o;;["
+clock;" ;i£;o;; { ;@ä;i£;!0o;
+;[o;;["digits;@ä;i£;o;; { ;@ä;i£;!0o;
+;[o;@	;A0;["li;@ä;i£;o;; { ;@ä;i£;!0o;
+;[o;@	;A0;["	span;@ä;i£;o;; { ;@ä;i£;!0;@ä;i£;T;@;"i ;	[o;&;["font-size;o;';$;(;"9px;@;);*;@;"i ;	[ ;i§;i£;+[".clock .digits li spano;;o;;[o;;[o;
+;[o;;["
+clock;" ;i¶;o;; { ;@µ;i¶;!0o;
+;[o;;["digits;@µ;i¶;o;; { ;@µ;i¶;!0o;
+;[o;@	;A0;["li;@µ;i¶;o;; { ;@µ;i¶;!0;@µ;i¶;T;@;"i ;	[o;&;["font-size;o;';$;(;"
+1.6em;@;);*;@;"i ;	[ ;ißo;&;["display;o;';$;(;"
+block;@;);*;@;"i ;	[ ;i®o;&;["
+width;o;';$;(;"
+1.6em;@;);*;@;"i ;	[ ;i©o;&;["height;o;';$;(;"
+1.6em;@;);*;@;"i ;	[ ;i™o;&;["position;o;';$;(;"absolute;@;);*;@;"i ;	[ ;i´o;&;["top;o;';$;(;"50%;@;);*;@;"i ;	[ ;i¨o;&;["	left;o;';$;(;"50%;@;);*;@;"i ;	[ ;i¨o;&;["line-height;o;';$;(;"
+1.6em;@;);*;@;"i ;	[ ;i≠o;&;["text-align;o;';$;(;"center;@;);*;@;"i ;	[ ;iÆo;&;["margin;o;';$;(;"-.8em 0 0 -.7em;@;);*;@;"i ;	[ ;iØo;&;["font-weight;o;';$;(;"	bold;@;);*;@;"i ;	[ ;i∞;i¶;+[".clock .digits lio;;o;;[o;;[o;
+;[o;;["
+clock;" ;i≥;o;; { ;@;i≥;!0o;
+;[o;;["digits;@;i≥;o;; { ;@;i≥;!0o;
+;[o;@	;A0;["li;@;i≥o;<
+;["nth-child;=["1;@;i≥;>;?;o;; { ;@;i≥;!0;@;i≥;T;@;"i ;	[o;8;"transform;3{ ;@;	[ ;40;i≥;5[o;2;"translate;3{ ;@;40;i≥;5[o;.;/[ ;0["em;f3.8999999999999999 33;1"
+3.9em;@;i≥o;.;/[ ;0["em;f-6.9000000000000004 ôö;1"-6.9em;@;i≥;i≥;+["#.clock .digits li:nth-child(1)o;;o;;[o;;[o;
+;[o;;["
+clock;" ;i¥;o;; { ;@M;i¥;!0o;
+;[o;;["digits;@M;i¥;o;; { ;@M;i¥;!0o;
+;[o;@	;A0;["li;@M;i¥o;<
+;["nth-child;=["2;@M;i¥;>;?;o;; { ;@M;i¥;!0;@M;i¥;T;@;"i ;	[o;8;"transform;3{ ;@;	[ ;40;i¥;5[o;2;"translate;3{ ;@;40;i¥;5[o;.;/[ ;0["em;f6.9000000000000004 ôö;1"
+6.9em;@;i¥o;.;/[ ;0["em;i˜;1"	-4em;@;i¥;i¥;+["#.clock .digits li:nth-child(2)o;;o;;[o;;[o;
+;[o;;["
+clock;" ;iµ;o;; { ;@Ñ;iµ;!0o;
+;[o;;["digits;@Ñ;iµ;o;; { ;@Ñ;iµ;!0o;
+;[o;@	;A0;["li;@Ñ;iµo;<
+;["nth-child;=["3;@Ñ;iµ;>;?;o;; { ;@Ñ;iµ;!0;@Ñ;iµ;T;@;"i ;	[o;8;"transform;3{ ;@;	[ ;40;iµ;5[o;2;"translate;3{ ;@;40;iµ;5[o;.;/[ ;0["em;i;1"8em;@;iµo;.;/[ ;0["em;i ;1"0em;@;iµ;iµ;+["#.clock .digits li:nth-child(3)o;;o;;[o;;[o;
+;[o;;["
+clock;" ;i∂;o;; { ;@∫;i∂;!0o;
+;[o;;["digits;@∫;i∂;o;; { ;@∫;i∂;!0o;
+;[o;@	;A0;["li;@∫;i∂o;<
+;["nth-child;=["4;@∫;i∂;>;?;o;; { ;@∫;i∂;!0;@∫;i∂;T;@;"i ;	[o;8;"transform;3{ ;@;	[ ;40;i∂;5[o;2;"translate;3{ ;@;40;i∂;5[o;.;/[ ;0["em;f6.7999999999999998 33;1"
+6.8em;@;i∂o;.;/[ ;0["em;i	;1"4em;@;i∂;i∂;+["#.clock .digits li:nth-child(4)o;;o;;[o;;[o;
+;[o;;["
+clock;" ;i∑;o;; { ;@Ò;i∑;!0o;
+;[o;;["digits;@Ò;i∑;o;; { ;@Ò;i∑;!0o;
+;[o;@	;A0;["li;@Ò;i∑o;<
+;["nth-child;=["5;@Ò;i∑;>;?;o;; { ;@Ò;i∑;!0;@Ò;i∑;T;@;"i ;	[o;8;"transform;3{ ;@;	[ ;40;i∑;5[o;2;"translate;3{ ;@;40;i∑;5[o;.;/[ ;0["em;f3.8999999999999999 33;1"
+3.9em;@;i∑o;.;/[ ;0["em;f6.9000000000000004 ôö;1"
+6.9em;@;i∑;i∑;+["#.clock .digits li:nth-child(5)o;;o;;[o;;[o;
+;[o;;["
+clock;" ;i∏;o;; { ;@);i∏;!0o;
+;[o;;["digits;@);i∏;o;; { ;@);i∏;!0o;
+;[o;@	;A0;["li;@);i∏o;<
+;["nth-child;=["6;@);i∏;>;?;o;; { ;@);i∏;!0;@);i∏;T;@;"i ;	[o;8;"transform;3{ ;@;	[ ;40;i∏;5[o;2;"translate;3{ ;@;40;i∏;5[o;.;/[ ;0["em;i ;1"0em;@;i∏o;.;/[ ;0["em;i;1"8em;@;i∏;i∏;+["#.clock .digits li:nth-child(6)o;;o;;[o;;[o;
+;[o;;["
+clock;" ;iπ;o;; { ;@_;iπ;!0o;
+;[o;;["digits;@_;iπ;o;; { ;@_;iπ;!0o;
+;[o;@	;A0;["li;@_;iπo;<
+;["nth-child;=["7;@_;iπ;>;?;o;; { ;@_;iπ;!0;@_;iπ;T;@;"i ;	[o;8;"transform;3{ ;@;	[ ;40;iπ;5[o;2;"translate;3{ ;@;40;iπ;5[o;.;/[ ;0["em;f-3.8999999999999999 33;1"-3.9em;@;iπo;.;/[ ;0["em;f6.9000000000000004 ôö;1"
+6.9em;@;iπ;iπ;+["#.clock .digits li:nth-child(7)o;;o;;[o;;[o;
+;[o;;["
+clock;" ;i∫;o;; { ;@ó;i∫;!0o;
+;[o;;["digits;@ó;i∫;o;; { ;@ó;i∫;!0o;
+;[o;@	;A0;["li;@ó;i∫o;<
+;["nth-child;=["8;@ó;i∫;>;?;o;; { ;@ó;i∫;!0;@ó;i∫;T;@;"i ;	[o;8;"transform;3{ ;@;	[ ;40;i∫;5[o;2;"translate;3{ ;@;40;i∫;5[o;.;/[ ;0["em;f-6.7999999999999998 33;1"-6.8em;@;i∫o;.;/[ ;0["em;i	;1"4em;@;i∫;i∫;+["#.clock .digits li:nth-child(8)o;;o;;[o;;[o;
+;[o;;["
+clock;" ;iª;o;; { ;@Œ;iª;!0o;
+;[o;;["digits;@Œ;iª;o;; { ;@Œ;iª;!0o;
+;[o;@	;A0;["li;@Œ;iªo;<
+;["nth-child;=["9;@Œ;iª;>;?;o;; { ;@Œ;iª;!0;@Œ;iª;T;@;"i ;	[o;8;"transform;3{ ;@;	[ ;40;iª;5[o;2;"translate;3{ ;@;40;iª;5[o;.;/[ ;0["em;iÛ;1"	-8em;@;iªo;.;/[ ;0["em;i ;1"0em;@;iª;iª;+["#.clock .digits li:nth-child(9)o;;o;;[o;;[o;
+;[o;;["
+clock;" ;iº;o;; { ;@;iº;!0o;
+;[o;;["digits;@;iº;o;; { ;@;iº;!0o;
+;[o;@	;A0;["li;@;iºo;<
+;["nth-child;=["10;@;iº;>;?;o;; { ;@;iº;!0;@;iº;T;@;"i ;	[o;8;"transform;3{ ;@;	[ ;40;iº;5[o;2;"translate;3{ ;@;40;iº;5[o;.;/[ ;0["em;f-6.9000000000000004 ôö;1"-6.9em;@;iºo;.;/[ ;0["em;i˜;1"	-4em;@;iº;iº;+["$.clock .digits li:nth-child(10)o;;o;;[o;;[o;
+;[o;;["
+clock;" ;iΩ;o;; { ;@;;iΩ;!0o;
+;[o;;["digits;@;;iΩ;o;; { ;@;;iΩ;!0o;
+;[o;@	;A0;["li;@;;iΩo;<
+;["nth-child;=["11;@;;iΩ;>;?;o;; { ;@;;iΩ;!0;@;;iΩ;T;@;"i ;	[o;8;"transform;3{ ;@;	[ ;40;iΩ;5[o;2;"translate;3{ ;@;40;iΩ;5[o;.;/[ ;0["em;f-3.8999999999999999 33;1"-3.9em;@;iΩo;.;/[ ;0["em;f-6.9000000000000004 ôö;1"-6.9em;@;iΩ;iΩ;+["$.clock .digits li:nth-child(11)o;;o;;[o;;[o;
+;[o;;["
+clock;" ;iæ;o;; { ;@s;iæ;!0o;
+;[o;;["digits;@s;iæ;o;; { ;@s;iæ;!0o;
+;[o;@	;A0;["li;@s;iæo;<
+;["nth-child;=["12;@s;iæ;>;?;o;; { ;@s;iæ;!0;@s;iæ;T;@;"i ;	[o;8;"transform;3{ ;@;	[ ;40;iæ;5[o;2;"translate;3{ ;@;40;iæ;5[o;.;/[ ;0["em;i ;1"0em;@;iæo;.;/[ ;0["em;iÛ;1"	-8em;@;iæ;iæ;+["$.clock .digits li:nth-child(12)o;#
+;$;%;["J/* .clock .minute-marks li:first-child {@include transform(rotate(6deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(2) {@include transform(rotate(12deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(3) {@include transform(rotate(18deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(4) {@include transform(rotate(24deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(5) {@include transform(rotate(36deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(6) {@include transform(rotate(42deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(7) {@include transform(rotate(48deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(8) {@include transform(rotate(54deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(9) {@include transform(rotate(66deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(10) {@include transform(rotate(72deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(11) {@include transform(rotate(78deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(12) {@include transform(rotate(84deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(13) {@include transform(rotate(96deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(14) {@include transform(rotate(102deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(15) {@include transform(rotate(108deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(16) {@include transform(rotate(114deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(17) {@include transform(rotate(126deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(18) {@include transform(rotate(132deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(19) {@include transform(rotate(138deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(20) {@include transform(rotate(144deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(21) {@include transform(rotate(156deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(22) {@include transform(rotate(162deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(23) {@include transform(rotate(168deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(24) {@include transform(rotate(174deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(25) {@include transform(rotate(186deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(26) {@include transform(rotate(192deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(27) {@include transform(rotate(198deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(28) {@include transform(rotate(204deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(29) {@include transform(rotate(216deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(30) {@include transform(rotate(222deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(31) {@include transform(rotate(228deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(32) {@include transform(rotate(234deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(33) {@include transform(rotate(246deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(34) {@include transform(rotate(252deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(35) {@include transform(rotate(258deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(36) {@include transform(rotate(264deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(37) {@include transform(rotate(276deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(38) {@include transform(rotate(282deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(39) {@include transform(rotate(288deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(40) {@include transform(rotate(294deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(41) {@include transform(rotate(306deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(42) {@include transform(rotate(312deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(43) {@include transform(rotate(318deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(44) {@include transform(rotate(324deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(45) {@include transform(rotate(336deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(46) {@include transform(rotate(342deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(47) {@include transform(rotate(348deg) translateY(-12.7em))}
+ * .clock .minute-marks li:nth-child(48) {@include transform(rotate(354deg) translateY(-12.7em))} */;@;	[ ;i¡;i

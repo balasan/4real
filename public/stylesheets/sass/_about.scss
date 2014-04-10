@@ -10,7 +10,7 @@
 
 .aboutOuter.scroll{
   height:100%;
-  @include transition(height 0.8s ease-out .4s );
+  @include transition(height 0.8s ease-out .2s );
 }
 
 .aboutOuter{
@@ -49,14 +49,28 @@
   height:0px;
   @include browser(box-shadow, 0 0 30px 8px rgba(255,255,255,.2));
   width:100%;
-  opacity:1;
+  opacity:0;
+
   // @include animation(glowBar .6s);
-  // @include animation(glowBar .4s 0s);
+  // @include animation(none);
+  @include animation(glowBar2 .4s);
+  // @include browser(animation-fill-mode, both);
+    // -moz-animation-fill-mode: forwards;
+    // animation-fill-mode: forwards;
 
 }
-.active .glowBar{
-    @include animation(glowBar .9s .3s);
+.glowBar.hidden{
+  // @include animation(none);
+  // @include animation(glowBar .4s);
+  // @include browser(animation-fill-mode, both);
+
+}
+.glowBar.visible{
+    @include animation(none);
+    @include animation(glowBar .9s .2s);
     opacity:0;
+    // @include browser(animation-fill-mode, forward);
+
 }
 
 .cursor{
@@ -123,6 +137,14 @@
   100%  { opacity: 0; }
 }
 
+@include keyframes(glowBar2) {
+  0%    { opacity: 0; }
+  10%   { opacity: .5; }
+  // 45%   { opacity: 1; }  
+  // 55%   { opacity: 1; }
+  90%  { opacity: .5; }
+  100%  { opacity: 0; }
+}
 
 @media screen and (max-width: 700px){
 

@@ -3,3 +3,5 @@ node_modules/
 public/images/
 public/videos/
 public/stylesheets/.sass-cache/
+4real.sublime-project
+nodemon.json

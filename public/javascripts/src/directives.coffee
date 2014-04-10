@@ -255,12 +255,14 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$state', "isMobile"
       scope.newH  = .5 - (e.pageX / $window.innerWidth)
       scope.newV = -.5 + (e.pageY / $window.innerHeight)
 
+    specular = el.find("specular")
+
     updateRotation = () ->
       dr = scope.rotate.y + scope.dragX - scope.oldR
       if Math.abs(dr)>.1 then dr *=.2
       scope.oldR += dr
 
-      inc = 0.1
+      inc = 0.05
       if scope.mode == "auto"
         inc = .04
 
@@ -279,21 +281,30 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$state', "isMobile"
       offset = 0
       if isMobile()
         offset = -400
-      el.find("specular").css
-        # "background-position": (-200 + (scope.oldH * -500)) + "px " + (-scope.oldV * 600) + "px"
 
-        "background-position": (-200 + (scope.oldH * -500)) + "px " + (-scope.oldV * 600 +1000 + offset) + "px"
-        opacity: 1 - (scope.oldH * .45) - (scope.oldV * .45)
+      transform2="translateX("+((scope.oldH * -400)) + "px ) translateY("+(-scope.oldV * 400  + offset) + "px) translateZ(0)"
+            
+      Array.prototype.slice.apply(specular).forEach (spec)->
+        specEl = angular.element(spec)
+        if specEl.hasClass('active')
+          specEl.css
+            # "background-position": (-200 + (scope.oldH * -500)) + "px " + (-scope.oldV * 600) + "px"
+            "transform": transform2
+            "-moz-transform": transform2
+            "-ms-transform": transform2
+            "-webkit-transform": transform2
+            # "background-position": (-200 + (scope.oldH * -500)) + "px " + (-scope.oldV * 600 -200 + offset) + "px"
+            # opacity: 1 - (scope.oldH * .45) - (scope.oldV * .45)
 
       transform = "rotateX(" + (65 + (scope.oldV * 20)) + "deg) rotateY(" + (10 - (scope.oldH * 20)) + "deg) skewX(-15deg)"
-      el.find("shadow").css 
-        "-webkit-transform": transform
-        "-moz-transform": transform
-        "-ms-transform": transform
-        "transform": transform
+      # el.find("shadow").css 
+      #   "-webkit-transform": transform
+      #   "-moz-transform": transform
+      #   "-ms-transform": transform
+      #   "transform": transform
 
-      $timeout(updateRotation, 30)
-      # window.requestAnimationFrame(updateRotation,30);
+      # $timeout(updateRotation, 30)
+      window.requestAnimationFrame(updateRotation,30);
 
     resize = ()->
       scope.windowWidth = $window.innerWidth
@@ -392,7 +403,7 @@ app.directive "graph", [ '$window', '$filter','isMobile', ($window, $filter, isM
 
 
     svg = d3.select("#chart").append("svg")
-      .attr("viewBox","0 0 width height")
+      .attr("viewBox","0 0 " + (width + margin[3] + margin[1])+" "+(height + margin[0] + margin[2]))
       .attr("preserveAspectRatio","xMidYMid")
       .attr("width", width + margin[3] + margin[1])
       .attr("height", height + margin[0] + margin[2])
@@ -506,14 +517,15 @@ app.directive "graph", [ '$window', '$filter','isMobile', ($window, $filter, isM
           path.transition().duration(1).ease("linear").attr("d", area(data, k)).each "end", ->
             roll path, k + 1
 
+    path2=svg.append("path")
+      .style("fill", "none")
+
     path=svg.append("path")
       .attr("class", "area")
       .attr("clip-path", "url(#clip)")
       .style("fill", "url(#gradient)")
       .style("stroke",'none')
 
-    path2=svg.append("path")
-      .style("fill", "none")
 
 
     gx = svg.append("svg:g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call xAxis

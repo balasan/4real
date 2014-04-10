@@ -1,18 +1,22 @@
 .smallNav
   ui
-    li
+    li(ng-hide="thispage==''")
       //- svg(viewBox='0 0 1024 256')
         //- use(xlink:href="#logo-4real-thin-fill")
       a(href="/")
-        i.fa.fa-home.fa-1x 
+        i.fa.fa-home.fa-1x
+          h2 4real 
         //- |4real
     //- br
     li(ng-hide="thispage=='charts'")
       a(href="/charts")
         i.fa.fa-signal.fa-1x 
+          h2 4real analytics
     li(ng-hide="thispage=='about'")
       a(href="/about" )
-        i.fa.fa-comment-o.fa-1x 
+        i.fa.fa-comment-o.fa-1x
+          h2 4real about
     li(ng-hide="thispage=='projects'")
       a(href="/projects")
-        i.fa.fa-laptop.fa-1x 
+        i.fa.fa-laptop.fa-1x
+          h2 4real projects 

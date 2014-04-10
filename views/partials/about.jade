@@ -1,4 +1,4 @@
-.screen
+div
   .aboutOuter(ng-class="{'scroll': page=='about'}")
     .about
       .aboutInner(abouts ng-class="{'hide': page!='about'}")
@@ -18,12 +18,16 @@
         .social.desktop
           a(href="mailto:contact@4real.io" target="blank")
             i.fa.fa-envelope
+              h2 4real email 
           a(href="https://www.facebook.com/pages/4REAL/646277525437451" target="blank")
             i.fa.fa-facebook
+              h2 4real facebook 
           a(href="http://twitter.com/4realglobal" target="blank")
             i.fa.fa-twitter
+               h2 4real twitter 
           a(href="http://instagram.com/4realglobal" target="blank")
             i.fa.fa-instagram
+              h2 4real instagram 
 
 
           //- a.icon(href='https://twitter.com/kehindewileyart', target='_blank')
@@ -47,7 +51,7 @@
           //-   .back.insta
           //-     svg(viewbox='0 0 32 32')
           //-       use(xlink:href='#instagramF')
-  .glowBar
+  .glowBar(ng-class="{'visible': page=='about'}")
   
 
 

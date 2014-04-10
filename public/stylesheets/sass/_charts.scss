@@ -47,9 +47,20 @@
   vertical-align:top;
 }
 
-area{
-  fill: url(#gradient);      
+.area{
+  fill: none;
+  // visibility:hidden;
+fill-opacity:0;
 }
+
+.active .area{
+  // fill: url('#gradient') !important;
+  // visibility:visible;
+  fill: auto;
+  fill-opacity:1;      
+}
+
+
 
 path {
   stroke: white;
@@ -189,9 +200,9 @@ $clockColor: white;
   overflow: hidden;
   margin:auto;
   img{
-    margin: -.5% 0 0 -.8%;
-    width: 101%;
-    height: 101%;
+    margin: -.8% 0 0 -.8%;
+    width: 101.5%;
+    height: 101.5%;
   }
 }
 
@@ -320,14 +331,20 @@ $clockColor: white;
   clear:both;
   color:rgb(0,255,0);
   @include browser(transform, translateX(130%));
-  @include animation(runner linear 1s);
-  @include animation(runner linear 20s 1s infinite );
+
   line-height: 1.5em;
 }
 
+.active .runner{
+  @include animation(runner linear 0s);
+  @include animation(runner linear 20s 1s infinite );
+
+}
+
 @include keyframes(runner){
-  0% {@include browser(transform, translateX(130%))};
-  100% { @include browser(transform,translateX(-2000px))};
+  // 0% {@include browser(transform, translateX(10%))};
+  100% { @include browser(transform,translateX(-1600px))};
+  @include browser(animation-fill-mode, both);
 }
 
 @media screen and (max-height: 700px){

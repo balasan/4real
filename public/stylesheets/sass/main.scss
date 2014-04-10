@@ -5,6 +5,8 @@
 @import "charts";
 @import "about";
 
+
+
 /* MAIN
 ------------------------------------------------------------*/
 
@@ -62,6 +64,19 @@ $fontColor: rgb(150,150,150);
   margin:0px;
   // opacity:inherit;
 
+}
+
+
+
+i{
+ h2{
+  text-indent: -99999px;
+  display: inline-block;
+  width:0px;
+  overflow:hidden;
+  @include transform(scale(1,1));
+
+ }
 }
 
 html{
@@ -149,11 +164,11 @@ body {
   background-size:cover;
   background-position:center;
   @include background-image( 
-    // linear-gradient(rgba(180, 180, 180, 0.8) 0%, rgba(93, 120, 146, 0.8) 21%, rgba(0, 0, 0, 0.8) 68%, rgba(67, 103, 134, 0.8) 100%)
-    linear-gradient(rgba(201, 201, 201, 0.7) 0%, rgba(57, 98, 137, 0.7) 21%, rgba(20, 24, 34, 0.8) 68%, rgba(53, 109, 158, 0.8) 100%)
+    linear-gradient(rgba(180, 180, 180, 0.8) 0%, rgba(93, 120, 146, 0.8) 21%, rgba(0, 0, 0, 0.8) 68%, rgba(67, 103, 134, 0.8) 100%)
+    // linear-gradient(rgba(201, 201, 201, 0.7) 0%, rgba(57, 98, 137, 0.7) 21%, rgba(20, 24, 34, 0.8) 68%, rgba(53, 109, 158, 0.8) 100%)
 
-    // ,url(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg)
-    // ,url(https://s3-us-west-2.amazonaws.com/4real/various/wave11.jpg)
+    ,url(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg)
+    ,url(https://s3-us-west-2.amazonaws.com/4real/various/wave11.jpg)
     );
   // @include background-image(linear-gradient(rgba(255, 255, 255, 0.41) 0%, rgba(255, 255, 255, 0.55) 21%, rgba(255, 255, 255, 0.48) 68%, rgba(255, 255, 255, 0.45) 100%));
 }
@@ -166,7 +181,7 @@ a, a:hover, a:visited {
 h1{
   font-family: Raleway, sans-serif;  
   color:white;
-  text-shadow: 1px 1px 1px rgba(0,0,0,.15);
+  // text-shadow: 1px 1px 1px rgba(0,0,0,.15);
   font-size: 80px;
   text-align: center;
   font-weight:400;
@@ -198,18 +213,18 @@ h1{
   width:100%;
   i {
     line-height:40px;
-    font-size:2em;
+    font-size:28px;
     padding:0 10px;
     @include transition(all cubic-bezier(0.175, 0.885, 0.32, 1.275) .3s);
     font-weight:200;
     cursor:pointer;
-    @include transform(scale3d(1,1,1))
+    @include transform(scale(1,1))
 
   }
   i:hover{
     // font-size:130px;
 
-    @include transform(scale3d(1.5,1.5,1))
+    @include transform(scale(1.5,1.5));
   }
 
 
@@ -269,6 +284,7 @@ canvas {
 #cube{
   width:100%;
   height:100%;
+  // @include browser(backface-visibility, hidden);
   @include browser(transform-style, preserve-3d);
   position:absolute;
   // @include transition(all 1s linear)

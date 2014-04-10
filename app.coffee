@@ -78,7 +78,6 @@ setTimeout rProjects, 40 * 1000
 setTimeout rCharts, 60 * 1000
 setTimeout rCharts, 80 * 1000
 
-
 getData = ()->
   url = "https://www.bitstamp.net:443/api/ticker/"
   https.get(url, (res) ->
@@ -96,7 +95,7 @@ getData = ()->
       newTime = new Date(parseInt(data.timestamp)*100)
       if  newTime > lastTime
         lastTime = newTime
-        io.sockets.emit('btc-data', data:data)
+        io.sockets.emit('btcData', data:data)
 
     return
   ).on "error", (e) ->
@@ -110,12 +109,13 @@ setInterval getData, the_interval
 
 
 io.sockets.on('connection', (socket)->
-  socket.emit('init')
+  
+  # socket.emit('init')
+  
   socket.on('getData', (limit, callback)->
 
     if !limit
       limit = 100
-
     db.secondModel.find().limit(limit).sort(timestamp: -1).limit(limit).exec (err, data) ->
       if err
         console.log err

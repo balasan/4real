@@ -9,15 +9,15 @@ app.factory 'isMobile', ($window)->
 
 
 app.factory "socket", ($rootScope) ->
-  socket = io.connect( '/', {'sync disconnect on unload':true})
+  socket = io.connect( '/')
 
-  window.ononbeforeunload = ()->
-    socket.disconnect()
-    console.log( 'disconnect')
+  # window.ononbeforeunload = ()->
+  #   socket.disconnect()
+  #   console.log( 'disconnect')
 
-  window.onload = ()->
-    socket.socket.reconnect()
-    console.log( 'reconnect')
+  # window.onload = ()->
+  #   socket.socket.reconnect()
+  #   console.log( 'reconnect')
 
   on: (eventName, callback) ->
     socket.on eventName, ->
@@ -120,7 +120,7 @@ app.factory 'projectsService', [ ()->
   ,
     title: 'TWAAS'
     description: 'Website for Thea Westreich art advisory services'
-    url: ''
+    url: 'http://twaas.com ' 
     img: [
       url: amazonUrl + 'twaas.jpg'
     ]

@@ -1,0 +1,664 @@
+3.2.13 (Media Mark)
+ee0ea9d5084005b290559af7ed790a05d3a16c27
+o:Sass::Tree::RootNode
+:@template"£"@import "base";
+@import "glass";
+@import "projects";
+@import "clock";
+@import "charts";
+@import "about";
+
+
+
+/* MAIN
+------------------------------------------------------------*/
+
+
+// @import url(http://fonts.googleapis.com/css?family=Exo+2:400,300,500);
+// @import url(http://fonts.googleapis.com/css?family=Raleway:400,500,600);
+
+// @font-face {
+//   font-family: 'Raleway';
+//   src: url('../fonts/Raleway-Regular.ttf');
+//   font-weight:normal 
+// }
+// @font-face {
+//   font-family: 'Raleway';
+//   src: url('../fonts/Raleway-ExtraLight.ttf');
+//   font-weight:200 
+// }
+// @font-face {
+//   font-family: 'Raleway';
+//   src: url('../fonts/Raleway-SemiBold.ttf');
+//   font-weight:600 
+// }
+
+@font-face {
+  font-family: 'Exo2';
+  src: url('../fonts/Exo2-Light.ttf');
+  font-weight:400 
+}
+
+@font-face {
+  font-family: 'Ozone';
+  src: url('../fonts/Ozone.ttf');
+  font-weight:200 
+}
+
+
+@font-face {
+  font-family: 'Digital';
+  src: url('../fonts/digital-7.ttf');
+  font-weight:200 
+}
+
+.notransition{
+  @inlcude transition(none);
+}
+
+#waterCanvas{
+  // display:none;
+}
+
+$fontColor: rgb(150,150,150);
+
+*{
+  padding:0px;
+  margin:0px;
+  // opacity:inherit;
+
+}
+
+
+
+i{
+ h2{
+  text-indent: -99999px;
+  display: inline-block;
+  width:0px;
+  overflow:hidden;
+  @include transform(scale(1,1));
+
+ }
+}
+
+html{
+  height:100%;
+  overflow:hidden;
+}
+
+body {
+  font-family: 'Exo2', sans-serif;
+  font: 14px;
+  height:100%;
+  width:100%;
+  overflow:hidden;
+  // background-image:url(http://www.okiraa.com/wallpaperstock/crystal-blue-waves-beach-beautiful-blue-crystal-nature-ocean-pretty-sea-sky-stunning-summer-sun-water-waves.jpg);
+  background-size:cover;
+  font-weight:200;
+  color:white;
+  // @include background-image(
+
+      // url(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg)
+      // ,url(https://s3-us-west-2.amazonaws.com/4real/various/wave11.jpg)
+      // ,url(https://s3-us-west-2.amazonaws.com/4real/various/wave1small.jpg)
+      
+      // );
+      // linear-gradient(to top, rgba(0, 255, 255, 0.41) 0%, rgba(255, 255, 255, 0.55) 21%, rgba(255, 255, 255, 0.48) 68%, rgba(255, 255, 255, 0.45) 100%));
+  // @include background-image( linear-gradient(#ffffff 0%, #5D7892 21%, #000000 68%, #436786 100%));
+
+  // @include background-image(linear-gradient(#FFFFFF 0%, #66B6FF 21%, #000000 68%, #0B538B 100%));
+  @include browser(text-size-adjust, none);
+  @include browser(transform,translateZ(0));
+  @include browser(font-smoothing, antialiased);
+  @include browser(text-size-adjust, none);
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.wrapper{
+  opacity:0;
+  @include transition(all 1s);
+  &.live{
+    opacity:1;
+  }
+}
+
+#mainSVG{
+  display:none;
+}
+
+.main{
+  svg{
+    fill:white;
+    height:100px;
+    width:100%;
+  }
+}
+
+#videos{
+  width:100%;
+  height:100%;
+  position:absolute;
+  top:0;
+  left:0;
+  background-color:black;
+  @include transform(translateZ(-1000px));
+  video{
+    position:absolute;
+    min-width:100%;
+    min-height:100%;
+    opacity:0;
+    @include transition(opacity .8s);
+    &.activeVid{
+      opacity:1;
+
+    }
+  }
+}
+
+.tint{
+  @include transform(translateZ(-1000px));
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  // opacity:.8;
+  background-size:cover;
+  background-position:center;
+  @include background-image( 
+    linear-gradient(rgba(180, 180, 180, 0.8) 0%, rgba(93, 120, 146, 0.8) 21%, rgba(0, 0, 0, 0.8) 68%, rgba(67, 103, 134, 0.8) 100%)
+    // linear-gradient(rgba(201, 201, 201, 0.7) 0%, rgba(57, 98, 137, 0.7) 21%, rgba(20, 24, 34, 0.8) 68%, rgba(53, 109, 158, 0.8) 100%)
+
+    ,url(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg)
+    ,url(https://s3-us-west-2.amazonaws.com/4real/various/wave11.jpg)
+    );
+  // @include background-image(linear-gradient(rgba(255, 255, 255, 0.41) 0%, rgba(255, 255, 255, 0.55) 21%, rgba(255, 255, 255, 0.48) 68%, rgba(255, 255, 255, 0.45) 100%));
+}
+
+a, a:hover, a:visited {
+  color: inherit;
+  text-decoration:none;
+}
+
+h1{
+  font-family: Raleway, sans-serif;  
+  color:white;
+  // text-shadow: 1px 1px 1px rgba(0,0,0,.15);
+  font-size: 80px;
+  text-align: center;
+  font-weight:400;
+  // @include animation(rotateAlot .7s);
+
+  @include browser(transform-style, preserve-3d);
+  cursor:pointer;
+  span:hover{
+    @include animation(colorRainbow .7s infinite);
+    @include transition(font-size cubic-bezier(0.175, 0.885, 0.32, 1.275) .3s);
+  }
+}
+
+.main{
+  display:table;
+  width:100%;
+  height:100%;
+}
+.vcenter{
+  display:table-cell;
+  vertical-align:middle;
+}
+
+.mainNav{
+  font-family: Raleway, sans-serif;  
+  text-align:center;
+  bottom:20px;
+  position:absolute;
+  width:100%;
+  i {
+    line-height:40px;
+    font-size:28px;
+    padding:0 10px;
+    @include transition(all cubic-bezier(0.175, 0.885, 0.32, 1.275) .3s);
+    font-weight:200;
+    cursor:pointer;
+    @include transform(scale(1,1))
+
+  }
+  i:hover{
+    // font-size:130px;
+
+    @include transform(scale(1.5,1.5));
+  }
+
+
+}
+
+
+h2{ 
+  // text-align:center;
+  // color: $fontColor;
+  // font-size: 14px;
+
+}
+
+.smallNav{
+  font-family: Raleway, sans-serif;  
+  position:absolute;
+  bottom:20px;
+  margin:auto;
+  width:100%;
+  text-align:center;
+  font-size:2em;
+  font-weight:500;
+  line-height:34px;
+  svg{
+    height:40px;
+    width:80px;
+  }
+  li{
+    @include transition(all cubic-bezier(0.175, 0.885, 0.32, 1.275) .3s);
+    margin:0 10px;
+    display:inline-block;
+    &:hover{
+      // font-size:34px;
+      @include transform(scale(1.5,1.5));
+    }
+  }
+
+}
+
+canvas {
+  position:absolute;
+  top:0px;
+  left:0px;
+
+}
+
+.container{
+  width:100%;
+  height:100%;
+  @include browser(perspective, 600px); 
+  @include browser(transform-style, preserve-3d);
+  @include browser(perspective-origin, 50% 50%); 
+  // @include transform3d(translate3d(0,0,0));
+  @include browser(transform,translateZ(10px));
+
+}
+#cube{
+  width:100%;
+  height:100%;
+  // @include browser(backface-visibility, hidden);
+  @include browser(transform-style, preserve-3d);
+  position:absolute;
+  // @include transition(all 1s linear)
+  // @include browser(transform-origin-z, -650px);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+
+.outerFolder{
+  position:absolute;
+  bottom:0px;
+  height:60%;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  // background-image:url(/images/paper.jpg);
+  background-size: 100% auto;
+  // background-color:rgb(150,100,40);
+  width:100%;
+
+
+  
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  
+  position:absolute;
+
+}
+
+.hidden{
+  display:none;
+}
+
+
+
+.glow{
+  text-shadow: 0 0 16px rgba(255,255,255,.5);
+}
+
+
+@include keyframes(colorRainbow) {
+  0% {color:magenta}
+  25% {color:cyan}
+  50% {color:yellow}
+  75% {color:rgb(0,255,0)}
+}
+
+@include keyframes(rotateAlot) {
+  0%    { @include transform3d(translateZ(-1000px) rotateX(360*2deg));
+          @include animation-timing-function(easeinout);
+ }
+  // 20%   { @include transform3d( rotateX(360*2deg));
+          // @include animation-timing-function(easeout);  
+      // }
+  100%  { @include transform3d(translateZ(0px)  rotateY(0deg)); 
+          @include animation-timing-function(easeout);  
+  }
+}
+@include keyframes(fly-in) {
+  0%    { @include transform3d(translateZ(-10000px))   }
+  // 25%   { @include transform3d(rotateY(360*7.5deg)) }
+  // 75%   { @include transform3d(rotateY(360*2.5deg))}
+  100%  { @include transform3d(translateZ(0px)) }
+}
+
+@include keyframes(fade-in-out-0) {
+  0%    { opacity: 0; }
+  25%   { opacity: 1; }
+  75%   { opacity: 1; }
+  100%  { opacity: 0; }
+}
+@include keyframes(flash-in) {
+  0%   { opacity: 0; }
+  1%   { opacity: 0; }
+  2%   { opacity: 1; }
+  3%   { opacity: 1; }
+  4%   { opacity: 0; }
+  6%  { opacity: 0; }
+  7%  { opacity: 1; }
+  100%  { opacity: 1; }
+}
+
+@media screen and (max-width: 700px){
+
+  html{
+    height:100%;
+    min-height:550px;
+  }
+
+  body{
+    // min-height:600px;
+    // overflow-y:visible;
+    height:100%;
+    width:100%;
+    overflow:hidden;
+    
+  }
+
+
+
+  glass{
+    overflow:hidden;
+    // overflow-x:hidden;
+    // overflow-y: scroll; /* has to be scroll, not auto */
+    // -webkit-overflow-scrolling: touch;
+
+  }
+  .main{
+    margin-top:-40px;
+    svg{
+      fill:white;
+      height:60px;
+    }
+  }
+  h1{
+    font-size:80px;
+    line-height:1em;
+  }
+
+  .smallNav{
+      font-size:1.7em;
+
+    i{
+    }
+  }
+  .mainNav{
+    i{
+        font-size:1.7em;
+      // font-size: 65px;
+      // line-height: 1.1em;
+      // padding:20px 10px;
+      // display:block;
+    }
+  }
+  video{
+    display:none !important;
+  }
+  #videos{
+      background-size:cover;
+      background-position:center;
+      @include background-image(
+
+        url(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg)
+        ,url(https://s3-us-west-2.amazonaws.com/4real/various/wave11.jpg)
+      
+      );
+  }
+
+}
+:@has_childrenT:@options{ :@children[0o:Sass::Tree::ImportNode:@imported_file0:@imported_filename"	base;0;@;	[ :
+@lineio;
+;0;"
+glass;0;@;	[ ;io;
+;0;"projects;0;@;	[ ;io;
+;0;"
+clock;0;@;	[ ;i	o;
+;0;"charts;0;@;	[ ;i
+o;
+;0;"
+about;0;@;	[ ;io:Sass::Tree::CommentNode
+:
+@type:normal:@value["K/* MAIN
+------------------------------------------------------------*/;@;	[ ;io;
+;:silent;["ò/* @import url(http://fonts.googleapis.com/css?family=Exo+2:400,300,500);
+ * @import url(http://fonts.googleapis.com/css?family=Raleway:400,500,600); */;@;	[ ;io;
+;;;["n/* @font-face {
+ *   font-family: 'Raleway';
+ *   src: url('../fonts/Raleway-Regular.ttf');
+ *   font-weight:normal 
+ * }
+ * @font-face {
+ *   font-family: 'Raleway';
+ *   src: url('../fonts/Raleway-ExtraLight.ttf');
+ *   font-weight:200 
+ * }
+ * @font-face {
+ *   font-family: 'Raleway';
+ *   src: url('../fonts/Raleway-SemiBold.ttf');
+ *   font-weight:600 
+ * } */;@;	[ ;io:Sass::Tree::DirectiveNode
+;T;["@font-face;@;	[o:Sass::Tree::PropNode:
+@name["font-family;o:Sass::Script::String;:identifier;"'Exo2';@:@prop_syntax:new;@:
+@tabsi ;	[ ;i'o;;["src;o:Sass::Script::Funcall;"url:@keywords{ ;@:@splat0;i(:
+@args[o;	;:string;"../fonts/Exo2-Light.ttf;@;i(;;;@;i ;	[ ;i(o;;["font-weight;o:Sass::Script::Number:@denominator_units[ :@numerator_units[ ;iê:@original"400;@;i);;;@;i ;	[ ;i*;i&o;
+;T;["@font-face;@;	[o;;["font-family;o;;;;"'Ozone';@;;;@;i ;	[ ;i-o;;["src;o;;"url;{ ;@;0;i.;[o;	;;;"../fonts/Ozone.ttf;@;i.;;;@;i ;	[ ;i.o;;["font-weight;o; ;!@?;"[ ;i»;#"200;@;i/;;;@;i ;	[ ;i0;i,o;
+;T;["@font-face;@;	[o;;["font-family;o;;;;"'Digital';@;;;@;i ;	[ ;i4o;;["src;o;;"url;{ ;@;0;i5;[o;	;;;"../fonts/digital-7.ttf;@;i5;;;@;i ;	[ ;i5o;;["font-weight;o; ;!@?;"[ ;i»;#"200;@;i6;;;@;i ;	[ ;i7;i3o:Sass::Tree::RuleNode:@parsed_ruleso:"Sass::Selector::CommaSequence:@members[o:Sass::Selector::Sequence;'[o:#Sass::Selector::SimpleSequence
+;'[o:Sass::Selector::Class;["notransition:@filename" ;i9:@sourceso:Set:
+@hash{ ;+@~;i9:@subject0;+@~;i9;T;@;i ;	[o;	;["@inlcude "transition(" "	none" ")" ;@;	[ ;i:;i9:
+@rule[".notransitiono;$;%o;&;'[o;(;'[o;)
+;'[o:Sass::Selector::Id;["waterCanvas;+" ;i=;,o;-;.{ ;+@ò;i=;/0;+@ò;i=;T;@;i ;	[o;
+;;;["/* display:none; */;@;	[ ;i>;i=;0["#waterCanvaso:Sass::Tree::VariableNode:@guarded0;"fontColor:
+@expro;;"rgb;{ ;@;0;iA;[o; ;!@?;"[ ;iñ;#"150;@;iAo; ;!@?;"[ ;iñ;#"150;@;iAo; ;!@?;"[ ;iñ;#"150;@;iA;@;	[ ;iAo;$;%o;&;'[o;(;'[o;)
+;'[o:Sass::Selector::Universal:@namespace0;+" ;iC;,o;-;.{ ;+@∫;iC;/0;+@∫;iC;T;@;i ;	[o;;["padding;o;;;;"0px;@;;;@;i ;	[ ;iDo;;["margin;o;;;;"0px;@;;;@;i ;	[ ;iEo;
+;;;["/* opacity:inherit; */;@;	[ ;iF;iC;0["*o;$;%o;&;'[o;(;'[o;)
+;'[o:Sass::Selector::Element	;60;["i;+" ;iL;,o;-;.{ ;+@⁄;iL;/0;+@⁄;iL;T;@;i ;	[o;$;%o;&;'[o;(;'[o;)
+;'[o;7	;60;["h2;+" ;iM;,o;-;.{ ;+@Ë;iM;/0;+@Ë;iM;T;@;i ;	[
+o;;["text-indent;o;;;;"-99999px;@;;;@;i ;	[ ;iNo;;["display;o;;;;"inline-block;@;;;@;i ;	[ ;iOo;;["
+width;o;;;;"0px;@;;;@;i ;	[ ;iPo;;["overflow;o;;;;"hidden;@;;;@;i ;	[ ;iQo:Sass::Tree::MixinNode;"transform;{ ;@;	[ ;0;iR;[o;;"
+scale;{ ;@;0;iR;[o; ;!@?;"[ ;i;#"1;@;iRo; ;!@?;"[ ;i;#"1;@;iR;iM;0["h2;iL;0["io;$;%o;&;'[o;(;'[o;)
+;'[o;7	;60;["	html;+" ;iW;,o;-;.{ ;+@!;iW;/0;+@!;iW;T;@;i ;	[o;;["height;o;;;;"	100%;@;;;@;i ;	[ ;iXo;;["overflow;o;;;;"hidden;@;;;@;i ;	[ ;iY;iW;0["	htmlo;$;%o;&;'[o;(;'[o;)
+;'[o;7	;60;["	body;+" ;i\;,o;-;.{ ;+@=;i\;/0;+@=;i\;T;@;i ;	[o;;["font-family;o;;;;"'Exo2', sans-serif;@;;;@;i ;	[ ;i]o;;["	font;o;;;;"	14px;@;;;@;i ;	[ ;i^o;;["height;o;;;;"	100%;@;;;@;i ;	[ ;i_o;;["
+width;o;;;;"	100%;@;;;@;i ;	[ ;i`o;;["overflow;o;;;;"hidden;@;;;@;i ;	[ ;iao;
+;;;["±/* background-image:url(http://www.okiraa.com/wallpaperstock/crystal-blue-waves-beach-beautiful-blue-crystal-nature-ocean-pretty-sea-sky-stunning-summer-sun-water-waves.jpg); */;@;	[ ;ibo;;["background-size;o;;;;"
+cover;@;;;@;i ;	[ ;ico;;["font-weight;o;;;;"200;@;;;@;i ;	[ ;ido;;["
+color;o;;;;"
+white;@;;;@;i ;	[ ;ieo;
+;;;["%/* @include background-image( */;@;	[ ;ifo;
+;;;["”/* url(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg)
+ * ,url(https://s3-us-west-2.amazonaws.com/4real/various/wave11.jpg)
+ * ,url(https://s3-us-west-2.amazonaws.com/4real/various/wave1small.jpg) */;@;	[ ;iho;
+;;;["/* );
+ * linear-gradient(to top, rgba(0, 255, 255, 0.41) 0%, rgba(255, 255, 255, 0.55) 21%, rgba(255, 255, 255, 0.48) 68%, rgba(255, 255, 255, 0.45) 100%));
+ * @include background-image( linear-gradient(#ffffff 0%, #5D7892 21%, #000000 68%, #436786 100%)); */;@;	[ ;ilo;
+;;;["j/* @include background-image(linear-gradient(#FFFFFF 0%, #66B6FF 21%, #000000 68%, #0B538B 100%)); */;@;	[ ;ipo;8;"browser;{ ;@;	[ ;0;iq;[o;	;;;"text-size-adjust;@;iqo;	;;;"	none;@;iqo;8;"browser;{ ;@;	[ ;0;ir;[o;	;;;"transform;@;iro;;"translateZ;{ ;@;0;ir;[o; ;!@?;"[ ;i ;#"0;@;iro;8;"browser;{ ;@;	[ ;0;is;[o;	;;;"font-smoothing;@;iso;	;;;"antialiased;@;iso;8;"browser;{ ;@;	[ ;0;it;[o;	;;;"text-size-adjust;@;ito;	;;;"	none;@;ito;;["-moz-osx-font-smoothing;o;;;;"grayscale;@;;;@;i ;	[ ;iu;i\;0["	bodyo;$;%o;&;'[o;(;'[o;)
+;'[o;*;["wrapper;+" ;ix;,o;-;.{ ;+@¿;ix;/0;+@¿;ix;T;@;i ;	[o;;["opacity;o;;;;"0;@;;;@;i ;	[ ;iyo;8;"transition;{ ;@;	[ ;0;iz;[o:Sass::Script::List	;[o;	;;;"all;@;izo; ;![ ;"["s;i;#"1s;@;iz;@:@separator:
+space;izo;$;%o;&;'[o;(;'[o;)
+;'[o:Sass::Selector::Parent;+" ;i{o;*;["	live;+@‡;i{;,o;-;.{ ;+@‡;i{;/0;+@‡;i{;T;@;i ;	[o;;["opacity;o;;;;"1;@;;;@;i ;	[ ;i|;i{;0["&.live;ix;0[".wrappero;$;%o;&;'[o;(;'[o;)
+;'[o;1;["mainSVG;+" ;i{;,o;-;.{ ;+@˚;i{;/0;+@˚;i{;T;@;i ;	[o;;["display;o;;;;"	none;@;;;@;i ;	[ ;i|;i{;0["#mainSVGo;$;%o;&;'[o;(;'[o;)
+;'[o;*;["	main;+" ;i;,o;-;.{ ;+@;i;/0;+@;i;T;@;i ;	[o;$;%o;&;'[o;(;'[o;)
+;'[o;7	;60;["svg;+" ;iÄ;,o;-;.{ ;+@;iÄ;/0;+@;iÄ;T;@;i ;	[o;;["	fill;o;;;;"
+white;@;;;@;i ;	[ ;iÅo;;["height;o;;;;"
+100px;@;;;@;i ;	[ ;iÇo;;["
+width;o;;;;"	100%;@;;;@;i ;	[ ;iÉ;iÄ;0["svg;i;0["
+.maino;$;%o;&;'[o;(;'[o;)
+;'[o;1;["videos;+" ;iá;,o;-;.{ ;+@C;iá;/0;+@C;iá;T;@;i ;	[o;;["
+width;o;;;;"	100%;@;;;@;i ;	[ ;iào;;["height;o;;;;"	100%;@;;;@;i ;	[ ;iâo;;["position;o;;;;"absolute;@;;;@;i ;	[ ;iäo;;["top;o;;;;"0;@;;;@;i ;	[ ;ião;;["	left;o;;;;"0;@;;;@;i ;	[ ;iåo;;["background-color;o;;;;"
+black;@;;;@;i ;	[ ;iço;8;"transform;{ ;@;	[ ;0;ié;[o;;"translateZ;{ ;@;0;ié;[o; ;![ ;"["px;i˛¸;#"-1000px;@;iéo;$;%o;&;'[o;(;'[o;)
+;'[o;7	;60;["
+video;+" ;iè;,o;-;.{ ;+@É;iè;/0;+@É;iè;T;@;i ;	[o;;["position;o;;;;"absolute;@;;;@;i ;	[ ;iêo;;["min-width;o;;;;"	100%;@;;;@;i ;	[ ;iëo;;["min-height;o;;;;"	100%;@;;;@;i ;	[ ;iío;;["opacity;o;;;;"0;@;;;@;i ;	[ ;iìo;8;"transition;{ ;@;	[ ;0;iî;[o;9	;[o;	;;;"opacity;@;iîo; ;![ ;"["s;f0.80000000000000004 ôö;#"	0.8s;@;iî;@;:;;;iîo;$;%o;&;'[o;(;'[o;)
+;'[o;<;+" ;iïo;*;["activeVid;+@∂;iï;,o;-;.{ ;+@∂;iï;/0;+@∂;iï;T;@;i ;	[o;;["opacity;o;;;;"1;@;;;@;i ;	[ ;iñ;iï;0["&.activeVid;iè;0["
+video;iá;0["#videoso;$;%o;&;'[o;(;'[o;)
+;'[o;*;["	tint;+" ;iú;,o;-;.{ ;+@”;iú;/0;+@”;iú;T;@;i ;	[o;8;"transform;{ ;@;	[ ;0;iù;[o;;"translateZ;{ ;@;0;iù;[o; ;![ ;"["px;i˛¸;#"-1000px;@;iùo;;["position;o;;;;"absolute;@;;;@;i ;	[ ;iûo;;["top;o;;;;"0;@;;;@;i ;	[ ;iüo;;["	left;o;;;;"0;@;;;@;i ;	[ ;i†o;;["
+width;o;;;;"	100%;@;;;@;i ;	[ ;i°o;;["height;o;;;;"	100%;@;;;@;i ;	[ ;i¢o;
+;;;["/* opacity:.8; */;@;	[ ;i£o;;["background-size;o;;;;"
+cover;@;;;@;i ;	[ ;i§o;;["background-position;o;;;;"center;@;;;@;i ;	[ ;i•o;8;"background-image;{ ;@;	[ ;0;i¨;[o;;"linear-gradient;{ ;@;0;iß;[	o;9	;[o;;"	rgba;{ ;@;0;iß;[	o; ;!@?;"[ ;i¥;#"180;@;ißo; ;!@?;"[ ;i¥;#"180;@;ißo; ;!@?;"[ ;i¥;#"180;@;ißo; ;!@?;"[ ;f0.80000000000000004 ôö;#"0.8;@;ißo; ;![ ;"["%;i ;#"0%;@;iß;@;:;;;ißo;9	;[o;;"	rgba;{ ;@;0;iß;[	o; ;!@?;"[ ;ib;#"93;@;ißo; ;!@?;"[ ;i};#"120;@;ißo; ;!@?;"[ ;ií;#"146;@;ißo; ;!@?;"[ ;f0.80000000000000004 ôö;#"0.8;@;ißo; ;![ ;"["%;i;#"21%;@;iß;@;:;;;ißo;9	;[o;;"	rgba;{ ;@;0;iß;[	o; ;!@?;"[ ;i ;#"0;@;ißo; ;!@?;"[ ;i ;#"0;@;ißo; ;!@?;"[ ;i ;#"0;@;ißo; ;!@?;"[ ;f0.80000000000000004 ôö;#"0.8;@;ißo; ;![ ;"["%;iI;#"68%;@;iß;@;:;;;ißo;9	;[o;;"	rgba;{ ;@;0;iß;[	o; ;!@?;"[ ;iH;#"67;@;ißo; ;!@?;"[ ;il;#"103;@;ißo; ;!@?;"[ ;iÜ;#"134;@;ißo; ;!@?;"[ ;f0.80000000000000004 ôö;#"0.8;@;ißo; ;![ ;"["%;ii;#"	100%;@;iß;@;:;;;ißo;	;;;"Durl(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg);@;i™o;	;;;"Eurl(https://s3-us-west-2.amazonaws.com/4real/various/wave11.jpg);@;i´o;
+;;;["≠/* @include background-image(linear-gradient(rgba(255, 255, 255, 0.41) 0%, rgba(255, 255, 255, 0.55) 21%, rgba(255, 255, 255, 0.48) 68%, rgba(255, 255, 255, 0.45) 100%)); */;@;	[ ;i≠;iú;0["
+.tinto;$;%o;&;'[o;(;'[o;)
+;'[o;7	;60;["a;+" ;i∞;,o;-;.{ ;+@ê;i∞;/0o;(;'[o;)
+;'[o;7	;60;["a;+@ê;i∞o:Sass::Selector::Pseudo
+;["
+hover:	@arg0;+@ê;i∞:@syntactic_type:
+class;,o;-;.{ ;+@ê;i∞;/0o;(;'[o;)
+;'[o;7	;60;["a;+@ê;i∞o;=
+;["visited;>0;+@ê;i∞;?;@;,o;-;.{ ;+@ê;i∞;/0;+@ê;i∞;T;@;i ;	[o;;["
+color;o;;;;"inherit;@;;;@;i ;	[ ;i±o;;["text-decoration;o;;;;"	none;@;;;@;i ;	[ ;i≤;i∞;0["a, a:hover, a:visitedo;$;%o;&;'[o;(;'[o;)
+;'[o;7	;60;["h1;+" ;iµ;,o;-;.{ ;+@ƒ;iµ;/0;+@ƒ;iµ;T;@;i ;	[o;;["font-family;o;;;;"Raleway, sans-serif;@;;;@;i ;	[ ;i∂o;;["
+color;o;;;;"
+white;@;;;@;i ;	[ ;i∑o;
+;;;["4/* text-shadow: 1px 1px 1px rgba(0,0,0,.15); */;@;	[ ;i∏o;;["font-size;o;;;;"	80px;@;;;@;i ;	[ ;iπo;;["text-align;o;;;;"center;@;;;@;i ;	[ ;i∫o;;["font-weight;o;;;;"400;@;;;@;i ;	[ ;iªo;
+;;;["./* @include animation(rotateAlot .7s); */;@;	[ ;iºo;8;"browser;{ ;@;	[ ;0;iæ;[o;	;;;"transform-style;@;iæo;	;;;"preserve-3d;@;iæo;;["cursor;o;;;;"pointer;@;;;@;i ;	[ ;iøo;$;%o;&;'[o;(;'[o;)
+;'[o;7	;60;["	span;+" ;i¿o;=
+;["
+hover;>0;+@;i¿;?;@;,o;-;.{ ;+@;i¿;/0;+@;i¿;T;@;i ;	[o;8;"animation;{ ;@;	[ ;0;i¡;[o;9	;[o;	;;;"colorRainbow;@;i¡o; ;![ ;"["s;f0.69999999999999996 ff;#"	0.7s;@;i¡o;	;;;"infinite;@;i¡;@;:;;;i¡o;8;"transition;{ ;@;	[ ;0;i¬;[o;9	;[o;	;;;"font-size;@;i¬o;;"cubic-bezier;{ ;@;0;i¬;[	o; ;!@?;"[ ;f0.17499999999999999 ff;#"
+0.175;@;i¬o; ;!@?;"[ ;f0.88500000000000001 ∏R;#"
+0.885;@;i¬o; ;!@?;"[ ;f0.32000000000000001 {;#"	0.32;@;i¬o; ;!@?;"[ ;f1.2749999999999999 ff;#"
+1.275;@;i¬o; ;![ ;"["s;f0.29999999999999999 33;#"	0.3s;@;i¬;@;:;;;i¬;i¿;0["span:hover;iµ;0["h1o;$;%o;&;'[o;(;'[o;)
+;'[o;*;["	main;+" ;i∆;,o;-;.{ ;+@P;i∆;/0;+@P;i∆;T;@;i ;	[o;;["display;o;;;;"
+table;@;;;@;i ;	[ ;i«o;;["
+width;o;;;;"	100%;@;;;@;i ;	[ ;i»o;;["height;o;;;;"	100%;@;;;@;i ;	[ ;i…;i∆;0["
+.maino;$;%o;&;'[o;(;'[o;)
+;'[o;*;["vcenter;+" ;iÀ;,o;-;.{ ;+@r;iÀ;/0;+@r;iÀ;T;@;i ;	[o;;["display;o;;;;"table-cell;@;;;@;i ;	[ ;iÃo;;["vertical-align;o;;;;"middle;@;;;@;i ;	[ ;iÕ;iÀ;0[".vcentero;$;%o;&;'[o;(;'[o;)
+;'[o;*;["mainNav;+" ;i–;,o;-;.{ ;+@é;i–;/0;+@é;i–;T;@;i ;	[o;;["font-family;o;;;;"Raleway, sans-serif;@;;;@;i ;	[ ;i—o;;["text-align;o;;;;"center;@;;;@;i ;	[ ;i“o;;["bottom;o;;;;"	20px;@;;;@;i ;	[ ;i”o;;["position;o;;;;"absolute;@;;;@;i ;	[ ;i‘o;;["
+width;o;;;;"	100%;@;;;@;i ;	[ ;i’o;$;%o;&;'[o;(;'[o;)
+;'[o;7	;60;["i;+" ;i÷;,o;-;.{ ;+@∫;i÷;/0;+@∫;i÷;T;@;i ;	[o;;["line-height;o;;;;"	40px;@;;;@;i ;	[ ;i◊o;;["font-size;o;;;;"	28px;@;;;@;i ;	[ ;iÿo;;["padding;o;;;;"0 10px;@;;;@;i ;	[ ;iŸo;8;"transition;{ ;@;	[ ;0;i⁄;[o;9	;[o;	;;;"all;@;i⁄o;;"cubic-bezier;{ ;@;0;i⁄;[	o; ;!@?;"[ ;f0.17499999999999999 ff;#"
+0.175;@;i⁄o; ;!@?;"[ ;f0.88500000000000001 ∏R;#"
+0.885;@;i⁄o; ;!@?;"[ ;f0.32000000000000001 {;#"	0.32;@;i⁄o; ;!@?;"[ ;f1.2749999999999999 ff;#"
+1.275;@;i⁄o; ;![ ;"["s;f0.29999999999999999 33;#"	0.3s;@;i⁄;@;:;;;i⁄o;;["font-weight;o;;;;"200;@;;;@;i ;	[ ;i€o;;["cursor;o;;;;"pointer;@;;;@;i ;	[ ;i‹o;8;"transform;{ ;@;	[ ;0;iﬂ;[o;;"
+scale;{ ;@;0;i›;[o; ;!@?;"[ ;i;#"1;@;i›o; ;!@?;"[ ;i;#"1;@;i›;i÷;0["io;$;%o;&;'[o;(;'[o;)
+;'[o;7	;60;["i;+" ;i‡o;=
+;["
+hover;>0;+@;i‡;?;@;,o;-;.{ ;+@;i‡;/0;+@;i‡;T;@;i ;	[o;
+;;;["/* font-size:130px; */;@;	[ ;i·o;8;"transform;{ ;@;	[ ;0;i„;[o;;"
+scale;{ ;@;0;i„;[o; ;!@?;"[ ;f1.5;#"1.5;@;i„o; ;!@?;"[ ;f1.5;#"1.5;@;i„;i‡;0["i:hover;i–;0[".mainNavo;$;%o;&;'[o;(;'[o;)
+;'[o;7	;60;["h2;+" ;iÍ;,o;-;.{ ;+@D;iÍ;/0;+@D;iÍ;T;@;i ;	[o;
+;;;["G/* text-align:center;
+ * color: $fontColor;
+ * font-size: 14px; */;@;	[ ;iÎ;iÍ;0["h2o;$;%o;&;'[o;(;'[o;)
+;'[o;*;["smallNav;+" ;iÒ;,o;-;.{ ;+@X;iÒ;/0;+@X;iÒ;T;@;i ;	[o;;["font-family;o;;;;"Raleway, sans-serif;@;;;@;i ;	[ ;iÚo;;["position;o;;;;"absolute;@;;;@;i ;	[ ;iÛo;;["bottom;o;;;;"	20px;@;;;@;i ;	[ ;iÙo;;["margin;o;;;;"	auto;@;;;@;i ;	[ ;iıo;;["
+width;o;;;;"	100%;@;;;@;i ;	[ ;iˆo;;["text-align;o;;;;"center;@;;;@;i ;	[ ;i˜o;;["font-size;o;;;;"2em;@;;;@;i ;	[ ;i¯o;;["font-weight;o;;;;"500;@;;;@;i ;	[ ;i˘o;;["line-height;o;;;;"	34px;@;;;@;i ;	[ ;i˙o;$;%o;&;'[o;(;'[o;)
+;'[o;7	;60;["svg;+" ;i˚;,o;-;.{ ;+@ú;i˚;/0;+@ú;i˚;T;@;i ;	[o;;["height;o;;;;"	40px;@;;;@;i ;	[ ;i¸o;;["
+width;o;;;;"	80px;@;;;@;i ;	[ ;i˝;i˚;0["svgo;$;%o;&;'[o;(;'[o;)
+;'[o;7	;60;["li;+" ;iˇ;,o;-;.{ ;+@∏;iˇ;/0;+@∏;iˇ;T;@;i ;	[	o;8;"transition;{ ;@;	[ ;0;i ;[o;9	;[o;	;;;"all;@;i o;;"cubic-bezier;{ ;@;0;i ;[	o; ;!@?;"[ ;f0.17499999999999999 ff;#"
+0.175;@;i o; ;!@?;"[ ;f0.88500000000000001 ∏R;#"
+0.885;@;i o; ;!@?;"[ ;f0.32000000000000001 {;#"	0.32;@;i o; ;!@?;"[ ;f1.2749999999999999 ff;#"
+1.275;@;i o; ;![ ;"["s;f0.29999999999999999 33;#"	0.3s;@;i ;@;:;;;i o;;["margin;o;;;;"0 10px;@;;;@;i ;	[ ;io;;["display;o;;;;"inline-block;@;;;@;i ;	[ ;io;$;%o;&;'[o;(;'[o;)
+;'[o;<;+" ;io;=
+;["
+hover;>0;+@Û;i;?;@;,o;-;.{ ;+@Û;i;/0;+@Û;i;T;@;i ;	[o;
+;;;["/* font-size:34px; */;@;	[ ;io;8;"transform;{ ;@;	[ ;0;i;[o;;"
+scale;{ ;@;0;i;[o; ;!@?;"[ ;f1.5;#"1.5;@;io; ;!@?;"[ ;f1.5;#"1.5;@;i;i;0["&:hover;iˇ;0["li;iÒ;0[".smallNavo;$;%o;&;'[o;(;'[o;)
+;'[o;7	;60;["canvas;+" ;i;,o;-;.{ ;+@;i;/0;+@;i;T;@;i ;	[o;;["position;o;;;;"absolute;@;;;@;i ;	[ ;io;;["top;o;;;;"0px;@;;;@;i ;	[ ;io;;["	left;o;;;;"0px;@;;;@;i ;	[ ;i;i;0["canvaso;$;%o;&;'[o;(;'[o;)
+;'[o;*;["container;+" ;i;,o;-;.{ ;+@A;i;/0;+@A;i;T;@;i ;	[o;;["
+width;o;;;;"	100%;@;;;@;i ;	[ ;io;;["height;o;;;;"	100%;@;;;@;i ;	[ ;io;8;"browser;{ ;@;	[ ;0;i;[o;	;;;"perspective;@;io; ;![ ;"["px;iX;#"
+600px;@;io;8;"browser;{ ;@;	[ ;0;i;[o;	;;;"transform-style;@;io;	;;;"preserve-3d;@;io;8;"browser;{ ;@;	[ ;0;i;[o;	;;;"perspective-origin;@;io;9	;[o; ;![ ;"["%;i7;#"50%;@;io; ;![ ;"["%;i7;#"50%;@;i;@;:;;;io;
+;;;["4/* @include transform3d(translate3d(0,0,0)); */;@;	[ ;io;8;"browser;{ ;@;	[ ;0;i;[o;	;;;"transform;@;io;;"translateZ;{ ;@;0;i;[o; ;![ ;"["px;i;#"	10px;@;i;i;0[".containero;$;%o;&;'[o;(;'[o;)
+;'[o;1;["	cube;+" ;i;,o;-;.{ ;+@ô;i;/0;+@ô;i;T;@;i ;	[o;;["
+width;o;;;;"	100%;@;;;@;i ;	[ ;io;;["height;o;;;;"	100%;@;;;@;i ;	[ ;io;
+;;;["9/* @include browser(backface-visibility, hidden); */;@;	[ ;io;8;"browser;{ ;@;	[ ;0;i ;[o;	;;;"transform-style;@;i o;	;;;"preserve-3d;@;i o;;["position;o;;;;"absolute;@;;;@;i ;	[ ;i!o;
+;;;["^/* @include transition(all 1s linear)
+ * @include browser(transform-origin-z, -650px); */;@;	[ ;i"o;;["-webkit-touch-callout;o;;;;"	none;@;;;@;i ;	[ ;i$o;;["-webkit-user-select;o;;;;"	none;@;;;@;i ;	[ ;i%o;;["-khtml-user-select;o;;;;"	none;@;;;@;i ;	[ ;i&o;;["-moz-user-select;o;;;;"	none;@;;;@;i ;	[ ;i'o;;["-ms-user-select;o;;;;"	none;@;;;@;i ;	[ ;i(o;;["user-select;o;;;;"	none;@;;;@;i ;	[ ;i);i;0["
+#cubeo;$;%o;&;'[o;(;'[o;)
+;'[o;*;["outerFolder;+" ;i.;,o;-;.{ ;+@;i.;/0;+@;i.;T;@;i ;	[o;;["position;o;;;;"absolute;@;;;@;i ;	[ ;i/o;;["bottom;o;;;;"0px;@;;;@;i ;	[ ;i0o;;["height;o;;;;"60%;@;;;@;i ;	[ ;i1o;;["border-top-left-radius;o;;;;"	30px;@;;;@;i ;	[ ;i2o;;["border-top-right-radius;o;;;;"	30px;@;;;@;i ;	[ ;i3o;
+;;;["3/* background-image:url(/images/paper.jpg); */;@;	[ ;i4o;;["background-size;o;;;;"100% auto;@;;;@;i ;	[ ;i5o;
+;;;[",/* background-color:rgb(150,100,40); */;@;	[ ;i6o;;["
+width;o;;;;"	100%;@;;;@;i ;	[ ;i7o;;["-webkit-transform-style;o;;;;"preserve-3d;@;;;@;i ;	[ ;i;o;;["-moz-transform-style;o;;;;"preserve-3d;@;;;@;i ;	[ ;i<o;;["transform-style;o;;;;"preserve-3d;@;;;@;i ;	[ ;i=o;;["position;o;;;;"absolute;@;;;@;i ;	[ ;i?;i.;0[".outerFoldero;$;%o;&;'[o;(;'[o;)
+;'[o;*;["hidden;+" ;iC;,o;-;.{ ;+@J;iC;/0;+@J;iC;T;@;i ;	[o;;["display;o;;;;"	none;@;;;@;i ;	[ ;iD;iC;0[".hiddeno;$;%o;&;'[o;(;'[o;)
+;'[o;*;["	glow;+" ;iI;,o;-;.{ ;+@`;iI;/0;+@`;iI;T;@;i ;	[o;;["text-shadow;o;9	;[	o; ;!@?;"[ ;i ;#"0;@;iJo; ;!@?;"[ ;i ;#"0;@;iJo; ;![ ;"["px;i;#"	16px;@;iJo;;"	rgba;{ ;@;0;iJ;[	o; ;!@?;"[ ;iˇ;#"255;@;iJo; ;!@?;"[ ;iˇ;#"255;@;iJo; ;!@?;"[ ;iˇ;#"255;@;iJo; ;!@?;"[ ;f0.5;#"0.5;@;iJ;@;:;;;iJ;;;@;i ;	[ ;iJ;iI;0["
+.glowo;8;"keyframes;{ ;T;@;	[	o;$;%o;&;'[o;(;'[["0%" ;+" ;iO;T;@;i ;	[o;;["
+color;o;;;;"magenta;@;;;@;i ;	[ ;iO;iO;0["0%o;$;%o;&;'[o;(;'[["25%" ;+" ;iP;T;@;i ;	[o;;["
+color;o;;;;"	cyan;@;;;@;i ;	[ ;iP;iP;0["25%o;$;%o;&;'[o;(;'[["50%" ;+" ;iQ;T;@;i ;	[o;;["
+color;o;;;;"yellow;@;;;@;i ;	[ ;iQ;iQ;0["50%o;$;%o;&;'[o;(;'[["75%" ;+" ;iR;T;@;i ;	[o;;["
+color;o;;"rgb;{ ;@;0;iR;[o; ;!@?;"[ ;i ;#"0;@;iRo; ;!@?;"[ ;iˇ;#"255;@;iRo; ;!@?;"[ ;i ;#"0;@;iR;;;@;i ;	[ ;iR;iR;0["75%;0;iN;[o;	;;;"colorRainbow;@;iNo;8;"keyframes;{ ;T;@;	[o;$;%o;&;'[o;(;'[["0%" ;+" ;iV;T;@;i ;	[o;8;"transform3d;{ ;@;	[ ;0;iV;[o;9	;[o;;"translateZ;{ ;@;0;iV;[o; ;![ ;"["px;i˛¸;#"-1000px;@;iVo;;"rotateX;{ ;@;0;iV;[o:Sass::Script::Operation
+:@operator:
+times;@:@operand2o; ;![ ;"["deg;i;#"	2deg;@;iV;iV:@operand1o; ;!@?;"[ ;ih;#"360;@;iV;@;:;;;iVo;8;"animation-timing-function;{ ;@;	[ ;0;iW;[o;	;;;"easeinout;@;iW;iV;0["0%o;
+;;;["s/* 20%   { @include transform3d( rotateX(360*2deg));
+ * @include animation-timing-function(easeout);  
+ * } */;@;	[ ;iYo;$;%o;&;'[o;(;'[["	100%" ;+" ;i\;T;@;i ;	[o;8;"transform3d;{ ;@;	[ ;0;i\;[o;9	;[o;;"translateZ;{ ;@;0;i\;[o; ;![ ;"["px;i ;#"0px;@;i\o;;"rotateY;{ ;@;0;i\;[o; ;![ ;"["deg;i ;#"	0deg;@;i\;@;:;;;i\o;8;"animation-timing-function;{ ;@;	[ ;0;i];[o;	;;;"easeout;@;i];i\;0["	100%;0;iU;[o;	;;;"rotateAlot;@;iUo;8;"keyframes;{ ;T;@;	[o;$;%o;&;'[o;(;'[["0%" ;+" ;ia;T;@;i ;	[o;8;"transform3d;{ ;@;	[ ;0;ia;[o;;"translateZ;{ ;@;0;ia;[o; ;![ ;"["px;i˛ÿ;#"-10000px;@;ia;ia;0["0%o;
+;;;["t/* 25%   { @include transform3d(rotateY(360*7.5deg)) }
+ * 75%   { @include transform3d(rotateY(360*2.5deg))} */;@;	[ ;ibo;$;%o;&;'[o;(;'[["	100%" ;+" ;id;T;@;i ;	[o;8;"transform3d;{ ;@;	[ ;0;id;[o;;"translateZ;{ ;@;0;id;[o; ;![ ;"["px;i ;#"0px;@;id;id;0["	100%;0;i`;[o;	;;;"fly-in;@;i`o;8;"keyframes;{ ;T;@;	[	o;$;%o;&;'[o;(;'[["0%" ;+" ;ih;T;@;i ;	[o;;["opacity;o;;;;"0;@;;;@;i ;	[ ;ih;ih;0["0%o;$;%o;&;'[o;(;'[["25%" ;+" ;ii;T;@;i ;	[o;;["opacity;o;;;;"1;@;;;@;i ;	[ ;ii;ii;0["25%o;$;%o;&;'[o;(;'[["75%" ;+" ;ij;T;@;i ;	[o;;["opacity;o;;;;"1;@;;;@;i ;	[ ;ij;ij;0["75%o;$;%o;&;'[o;(;'[["	100%" ;+" ;ik;T;@;i ;	[o;;["opacity;o;;;;"0;@;;;@;i ;	[ ;ik;ik;0["	100%;0;ig;[o;	;;;"fade-in-out-0;@;igo;8;"keyframes;{ ;T;@;	[o;$;%o;&;'[o;(;'[["0%" ;+" ;in;T;@;i ;	[o;;["opacity;o;;;;"0;@;;;@;i ;	[ ;in;in;0["0%o;$;%o;&;'[o;(;'[["1%" ;+" ;io;T;@;i ;	[o;;["opacity;o;;;;"0;@;;;@;i ;	[ ;io;io;0["1%o;$;%o;&;'[o;(;'[["2%" ;+" ;ip;T;@;i ;	[o;;["opacity;o;;;;"1;@;;;@;i ;	[ ;ip;ip;0["2%o;$;%o;&;'[o;(;'[["3%" ;+" ;iq;T;@;i ;	[o;;["opacity;o;;;;"1;@;;;@;i ;	[ ;iq;iq;0["3%o;$;%o;&;'[o;(;'[["4%" ;+" ;ir;T;@;i ;	[o;;["opacity;o;;;;"0;@;;;@;i ;	[ ;ir;ir;0["4%o;$;%o;&;'[o;(;'[["6%" ;+" ;is;T;@;i ;	[o;;["opacity;o;;;;"0;@;;;@;i ;	[ ;is;is;0["6%o;$;%o;&;'[o;(;'[["7%" ;+" ;it;T;@;i ;	[o;;["opacity;o;;;;"1;@;;;@;i ;	[ ;it;it;0["7%o;$;%o;&;'[o;(;'[["	100%" ;+" ;iu;T;@;i ;	[o;;["opacity;o;;;;"1;@;;;@;i ;	[ ;iu;iu;0["	100%;0;im;[o;	;;;"flash-in;@;imo:Sass::Tree::MediaNode;T;" ;@;i ;	[o;$;%o;&;'[o;(;'[o;)
+;'[o;7	;60;["	html;+" ;iz;,o;-;.{ ;+@{	;iz;/0;+@{	;iz;T;@;i ;	[o;;["height;o;;;;"	100%;@;;;@;i ;	[ ;i{o;;["min-height;o;;;;"
+550px;@;;;@;i ;	[ ;i|;iz;0["	htmlo;$;%o;&;'[o;(;'[o;)
+;'[o;7	;60;["	body;+" ;i;,o;-;.{ ;+@ó	;i;/0;+@ó	;i;T;@;i ;	[	o;
+;;;["3/* min-height:600px;
+ * overflow-y:visible; */;@;	[ ;iÄo;;["height;o;;;;"	100%;@;;;@;i ;	[ ;iÇo;;["
+width;o;;;;"	100%;@;;;@;i ;	[ ;iÉo;;["overflow;o;;;;"hidden;@;;;@;i ;	[ ;iÑ;i;0["	bodyo;$;%o;&;'[o;(;'[o;)
+;'[o;7	;60;["
+glass;+" ;iä;,o;-;.{ ;+@Ω	;iä;/0;+@Ω	;iä;T;@;i ;	[o;;["overflow;o;;;;"hidden;@;;;@;i ;	[ ;ião;
+;;;["{/* overflow-x:hidden;
+ * overflow-y: scroll; /* has to be scroll, not auto */
+ * -webkit-overflow-scrolling: touch; */;@;	[ ;iå;iä;0["
+glasso;$;%o;&;'[o;(;'[o;)
+;'[o;*;["	main;+" ;ië;,o;-;.{ ;+@◊	;ië;/0;+@◊	;ië;T;@;i ;	[o;;["margin-top;o;;;;"
+-40px;@;;;@;i ;	[ ;iío;$;%o;&;'[o;(;'[o;)
+;'[o;7	;60;["svg;+" ;iì;,o;-;.{ ;+@Î	;iì;/0;+@Î	;iì;T;@;i ;	[o;;["	fill;o;;;;"
+white;@;;;@;i ;	[ ;iîo;;["height;o;;;;"	60px;@;;;@;i ;	[ ;iï;iì;0["svg;ië;0["
+.maino;$;%o;&;'[o;(;'[o;)
+;'[o;7	;60;["h1;+" ;iò;,o;-;.{ ;+@	
+;iò;/0;+@	
+;iò;T;@;i ;	[o;;["font-size;o;;;;"	80px;@;;;@;i ;	[ ;iôo;;["line-height;o;;;;"1em;@;;;@;i ;	[ ;iö;iò;0["h1o;$;%o;&;'[o;(;'[o;)
+;'[o;*;["smallNav;+" ;iù;,o;-;.{ ;+@%
+;iù;/0;+@%
+;iù;T;@;i ;	[o;;["font-size;o;;;;"
+1.7em;@;;;@;i ;	[ ;iûo;$;%o;&;'[o;(;'[o;)
+;'[o;7	;60;["i;+" ;i†;,o;-;.{ ;+@9
+;i†;/0;+@9
+;i†;T;@;i ;	[ ;i†;0["i;iù;0[".smallNavo;$;%o;&;'[o;(;'[o;)
+;'[o;*;["mainNav;+" ;i£;,o;-;.{ ;+@K
+;i£;/0;+@K
+;i£;T;@;i ;	[o;$;%o;&;'[o;(;'[o;)
+;'[o;7	;60;["i;+" ;i§;,o;-;.{ ;+@Y
+;i§;/0;+@Y
+;i§;T;@;i ;	[o;;["font-size;o;;;;"
+1.7em;@;;;@;i ;	[ ;i•o;
+;;;["Z/* font-size: 65px;
+ * line-height: 1.1em;
+ * padding:20px 10px;
+ * display:block; */;@;	[ ;i¶;i§;0["i;i£;0[".mainNavo;$;%o;&;'[o;(;'[o;)
+;'[o;7	;60;["
+video;+" ;i¨;,o;-;.{ ;+@u
+;i¨;/0;+@u
+;i¨;T;@;i ;	[o;;["display;o;;;;"none !important;@;;;@;i ;	[ ;i≠;i¨;0["
+videoo;$;%o;&;'[o;(;'[o;)
+;'[o;1;["videos;+" ;iØ;,o;-;.{ ;+@ã
+;iØ;/0;+@ã
+;iØ;T;@;i ;	[o;;["background-size;o;;;;"
+cover;@;;;@;i ;	[ ;i∞o;;["background-position;o;;;;"center;@;;;@;i ;	[ ;i±o;8;"background-image;{ ;@;	[ ;0;i∑;[o;	;;;"Durl(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg);@;i¥o;	;;;"Eurl(https://s3-us-west-2.amazonaws.com/4real/various/wave11.jpg);@;iµ;iØ;0["#videos:@query["screen"
+ and "(o;	;;;"max-width;@;ix": o; ;![ ;"["px;iº;#"
+700px;@;ix");ix;i

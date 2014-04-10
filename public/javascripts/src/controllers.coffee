@@ -30,6 +30,8 @@ app.controller 'mainCtrl', [ '$scope', '$timeout','$rootScope','siteMap', ($scop
   $scope.page='';
   $scope.loadedImg =0;
 
+  $scope.title = "4real Digital Agency"
+
   $scope.playNextVideo = ()->
     $scope.activeVideo = ($scope.activeVideo + 1) % $scope.videos.length
 
@@ -148,7 +150,7 @@ app.controller "chartsCtrl", [ '$scope','socket','$timeout','btcHistory','$filte
   window.prerenderReady = true
 
         # body...
-  socket.on 'btc-data', (data)->
+  socket.on 'btcData', (data)->
     $scope.btcData = $filter('btcData')(data.data)
     # console.log($scope.btcData)
     $scope.USD = parseFloat($scope.btcData.last)

@@ -1,0 +1,620 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"video",
+				"activeVideo"
+			],
+			[
+				"max",
+				"max-width"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"font-",
+				"font-size"
+			],
+			[
+				"padding",
+				"padding-bottom"
+			],
+			[
+				"stroke",
+				"stroke-width"
+			],
+			[
+				"line",
+				"line-height"
+			],
+			[
+				"lin",
+				"line-height"
+			],
+			[
+				"trans",
+				"transform3d"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"Con",
+				"Content-Type"
+			],
+			[
+				"z",
+				"z-index"
+			],
+			[
+				"si",
+				"singleFrame"
+			],
+			[
+				"TO",
+				"toJSON"
+			],
+			[
+				"bn",
+				"btn-primary"
+			],
+			[
+				"File",
+				"FileList"
+			],
+			[
+				"img",
+				"img"
+			],
+			[
+				"p",
+				"p"
+			],
+			[
+				"br",
+				"bar"
+			],
+			[
+				"T",
+				"TriplBold"
+			],
+			[
+				"a",
+				"a"
+			],
+			[
+				"input",
+				"input-large"
+			],
+			[
+				"add",
+				"addClass"
+			],
+			[
+				"btn",
+				"btn-primary"
+			],
+			[
+				"to",
+				"toJSON"
+			],
+			[
+				"java",
+				"javascript"
+			],
+			[
+				"background",
+				"background	background-color: rgb"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 47.0,
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"packages",
+				"Package Control: List Packages"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"",
+				"Package Control: Install Package"
+			],
+			[
+				"br",
+				"Preferences: Browse Packages"
+			],
+			[
+				"INstall",
+				"Package Control: Install Package"
+			],
+			[
+				"Install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 125.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/slavab/local/teamslava/lib/routes.js",
+		"/Users/slavab/local/teamslava/app/styles/_mixins.scss",
+		"/Users/slavab/local/teamslava/app/views/index.jade",
+		"/Users/slavab/local/teamslava/app/scripts/controllers/main.coffee",
+		"/Users/slavab/local/teamslava/.gitignore",
+		"/Users/slavab/local/teamslava/app/scripts/controllers/signup.js",
+		"/Users/slavab/local/generator/lib/config/env/production.js",
+		"/Users/slavab/local/generator/.tmp/styles/main.css",
+		"/Users/slavab/local/generator/app/styles/main.scss",
+		"/Users/slavab/local/generator/Gruntfile.js",
+		"/Users/slavab/local/generator/lib/config/env/development.js",
+		"/Users/slavab/local/testejs/public/javascripts/app/filters.js",
+		"/Users/slavab/local/tasks/app.js",
+		"/Users/slavab/local/testejs/public/javascripts/app/controllers.js",
+		"/Users/slavab/local/testejs/views/partials/main.ejs",
+		"/Users/slavab/local/generator/app/scripts/app.js",
+		"/Users/slavab/local/generator/bower.json",
+		"/Users/slavab/local/testejs/public/javascripts/app/directives.js",
+		"/Users/slavab/local/testejs/public/javascripts/app/services.js",
+		"/Users/slavab/local/testejs/public/stylesheets/style.css",
+		"/Users/slavab/local/testejs/app.js",
+		"/Users/slavab/local/testejs/routes/api.js",
+		"/Users/slavab/local/testejs/public/javascripts/app/app.js",
+		"/Users/slavab/local/testejs/views/index.ejs",
+		"/Users/slavab/local/testejs/views/partials/task.ejs",
+		"/Users/slavab/local/tasks/routes/main.js",
+		"/Users/slavab/local/tasks/public/javascripts/app/services.js",
+		"/Users/slavab/local/tasks/public/javascripts/app/controllers.js",
+		"/Users/slavab/local/tasks/public/javascripts/app/app.js",
+		"/Users/slavab/local/tasks/views/partials/main.ejs",
+		"/Users/slavab/local/tasks/views/index.ejs",
+		"/Users/slavab/local/tasks/.bowerrc",
+		"/Users/slavab/local/tasks/db.js",
+		"/Users/slavab/local/tasks/.gitignore",
+		"/Users/slavab/local/testejs/routes/index.js",
+		"/Users/slavab/local/testejs/views/odl_index.ejs",
+		"/Users/slavab/local/tasks/views/task.ejs",
+		"/Users/slavab/local/tasks/Procfile",
+		"/Users/slavab/local/testejs/.bowerrc",
+		"/Users/slavab/local/testejs/public/javascripts/app.js",
+		"/Users/slavab/local/4real/db.coffee",
+		"/Users/slavab/local/tasks/.env",
+		"/Users/slavab/local/tasks/package.json",
+		"/Users/slavab/local/testejs/bin/www",
+		"/Users/slavab/local/testejs/views/new.ejs",
+		"/Users/slavab/local/testejs/views/home.ejs",
+		"/Users/slavab/local/testejs/views/post.ejs",
+		"/Users/slavab/local/testexample/bin/www",
+		"/Users/slavab/local/testexample/routes/user.js",
+		"/Users/slavab/local/testexample/app.js",
+		"/Users/slavab/local/chatboard/public/javascripts/app/directives.js",
+		"/Users/slavab/local/chatboard/views/index.jade",
+		"/Users/slavab/local/chatboard/app.js",
+		"/Users/slavab/local/chatboard/public/javascripts/app/controllers.js",
+		"/Users/slavab/local/chatboard/public/javascripts/app/services.js",
+		"/Users/slavab/local/chatboard/views/layout.jade",
+		"/Users/slavab/local/chatboard/routes/index.js",
+		"/Users/slavab/local/chatboard/package.json",
+		"/Users/slavab/local/chatboard/.gitignore",
+		"/Users/slavab/local/chatboard/public/javascripts/controllers.js",
+		"/Users/slavab/local/chatboard/public/javascripts/app/filters.js",
+		"/Users/slavab/local/chatboard/public/javascripts/app.js",
+		"/Users/slavab/local/chatboard/public/javascripts/services.js",
+		"/Users/slavab/local/chatboard/public/javascripts/directives.js",
+		"/Users/slavab/local/chatboard/.bowerrc",
+		"/Users/slavab/local/chatboard/Procfile",
+		"/Users/slavab/local/chatboard/public/javascripts/filters.js",
+		"/Users/slavab/local/chatboard/.Gruntfile",
+		"/Users/slavab/local/chatboard/.env",
+		"/Users/slavab/local/testMean/app/styles/main.scss",
+		"/Users/slavab/local/testMean/lib/config/express.js",
+		"/Users/slavab/local/services/prerender/.gitignore",
+		"/Users/slavab/local/services/prerender/.env",
+		"/Users/slavab/local/services/prerender/lib/plugins/s3HtmlCache.js",
+		"/Users/slavab/local/services/prerender/server.js",
+		"/Users/slavab/local/services/prerender/lib/plugins/inMemoryHtmlCache.js",
+		"/Users/slavab/local/services/prerender/lib/client.js",
+		"/Users/slavab/local/4real/public/javascripts/src/filters.coffee",
+		"/Users/slavab/local/4real/public/stylesheets/sass/_about.scss",
+		"/Users/slavab/local/4real/package.json",
+		"/Users/slavab/local/4real/app.coffee",
+		"/Users/slavab/local/4real/public/stylesheets/sass/_clock.scss",
+		"/Users/slavab/local/4real/public/stylesheets/sass/_charts.scss",
+		"/Users/slavab/local/4real/public/stylesheets/sass/_projects.scss",
+		"/Users/slavab/local/4real/views/partials/charts.jade",
+		"/Users/slavab/local/4real/public/javascripts/lib/water/main.js",
+		"/Users/slavab/local/4real/public/javascripts/lib/water/renderer.js",
+		"/Users/slavab/local/4real/views/layout.jade",
+		"/Users/slavab/local/services/prerender/package.json",
+		"/Users/slavab/local/4real/.env",
+		"/Users/slavab/local/4real/views/partials/projects.jade",
+		"/Users/slavab/Library/Application Support/Sublime Text 3/Packages/User/JavascriptBeautify.sublime-settings",
+		"/Users/slavab/local/4real/public/javascripts/lib/4real.js",
+		"/Users/slavab/local/4real/public/javascripts/lib/water/lightgl.js",
+		"/Users/slavab/local/4real/public/javascripts/lib/water/cubemap.js",
+		"/Users/slavab/local/4real/public/javascripts/src/app.coffee",
+		"/Users/slavab/local/4real/views/partials/about.jade",
+		"/Users/slavab/Library/Application Support/Sublime Text 3/Packages/Javascript Beautify/JavascriptBeautify.sublime-settings",
+		"/Users/slavab/Library/Application Support/Sublime Text 3/Packages/Javascript Beautify/Default (OSX).sublime-keymap",
+		"/Users/slavab/local/4real/views/partials/nav.jade",
+		"/Users/slavab/local/4real/public/javascripts/lib/4REAL.js",
+		"/Users/slavab/local/4real/newrelic.js",
+		"/Users/slavab/local/4real/views/partials/charts2.jade",
+		"/Users/slavab/local/4real/public/javascripts/lib/icons.js",
+		"/Users/slavab/local/bitcoin/app.js",
+		"/Users/slavab/local/4real/views/partials/clock.jade",
+		"/Users/slavab/local/4real/public/stylesheets/sass/_glass.scss",
+		"/Users/slavab/local/4real/public/stylesheets/sass/clock.scss",
+		"/Users/slavab/local/4real/public/stylesheets/style.css",
+		"/Users/slavab/local/4real/public/stylesheets/sass/main.scss",
+		"/Users/slavab/local/4real/.gitignore",
+		"/Users/slavab/local/bitcoin/.gitignore",
+		"/Users/slavab/local/code-bits/node-bits",
+		"/Users/slavab/local/bitcoin/views/layout.jade",
+		"/Users/slavab/local/bitcoin/routes/index.js",
+		"/Users/slavab/local/bitcoin/views/index.jade",
+		"/Users/slavab/local/bitcoin/package.json",
+		"/Users/slavab/local/4real/routes/socket.coffee",
+		"/Users/slavab/local/bitcoin/.env",
+		"/Users/slavab/local/bitcoin/Procfile",
+		"/Users/slavab/local/4real/public/javascripts/lib/moment-timezone/min/moment-timezone.min.js",
+		"/Users/slavab/local/4real/public/javascripts/lib/moment-timezone/moment-timezone.json",
+		"/Users/slavab/local/4real/routes/index.coffee",
+		"/Users/slavab/local/4real/views/index.jade",
+		"/Users/slavab/local/4real/public/javascripts/d3line.js",
+		"/Users/slavab/local/4real/public/stylesheets/sass/_base.scss",
+		"/Users/slavab/local/4real/routes/btc.coffee",
+		"/Users/slavab/local/4real/public/stylesheets/config.rb"
+	],
+	"find":
+	{
+		"height": 31.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"",
+			"/Users/slavab/local/4real/public/images",
+			"layout.js",
+			"app.js",
+			"clock.scss",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"bottom",
+			"about",
+			"content",
+			";\n",
+			"content",
+			"    .bottom\n    .bottom\n    .bottom\n    .bottom\n    .bottom\n    .bottom\n    .bottom\n    .bottom\n    .bottom\n    .bottom\n    .bottom\n    .bottom\n    .bottom\n    .bottom\n    .bottom",
+			"box-sizing",
+			"compass",
+			"mongo",
+			"_img",
+			"img",
+			"mc:edit",
+			"ndedit",
+			"blogPosts",
+			"tasks",
+			"blogBost",
+			"dev",
+			"debug",
+			"io",
+			"server",
+			"\"\n",
+			".gitignore",
+			"http.get",
+			"https",
+			"img",
+			"projects",
+			"s3",
+			"el[0]",
+			"el.[0]",
+			"getData",
+			"db",
+			"setInterval",
+			"auto",
+			"strength",
+			"gravity",
+			"this.drops",
+			"drops",
+			"move",
+			"drops",
+			"auto=",
+			"auto =",
+			"auto",
+			"page",
+			"window",
+			"projectImage",
+			"cubeT",
+			"reflect",
+			"cubemap",
+			"angleY",
+			"cubeShader",
+			"height",
+			"lightDir",
+			"textureCube",
+			"sky",
+			"sampler3D",
+			"3D",
+			"texture3D",
+			"unform3D",
+			"cubeShader",
+			"vec3 eye",
+			"eye",
+			"samplerCube",
+			"sky",
+			"sky ",
+			"sky",
+			"tiles",
+			"sky",
+			"getWallCo",
+			"sky",
+			"getWallColor",
+			"sky",
+			"ray",
+			"sky",
+			"physics",
+			"lightDir",
+			"light",
+			"lightDir",
+			"light",
+			"gravity",
+			"useSpherePhysics",
+			"gravity",
+			"paused",
+			"water",
+			"paused",
+			"animate",
+			"request",
+			"cubeShader",
+			"cubeMap",
+			"cubemap",
+			"skytexture",
+			"triangles",
+			"sky",
+			"cubeShade",
+			"cubemap",
+			"gravit",
+			"hiden",
+			"skyShader",
+			"renderSky",
+			"cubemap",
+			"sky",
+			"renderSky",
+			"cubeShader",
+			"cuberShader",
+			"renderCube",
+			"intersectLog",
+			"radius",
+			"logo",
+			"page",
+			"setTimeout",
+			"timeout",
+			"ws.",
+			"setTimout",
+			"colors",
+			"project",
+			"bitcoin",
+			"svg",
+			"globe",
+			"max-width",
+			"globe",
+			"svg",
+			"smallNav",
+			"reg(\\n)",
+			"<\\n>",
+			"\\n",
+			"g>",
+			"<g>",
+			"area",
+			"gradient"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"this.physics",
+			" ",
+			"Date",
+			"))}",
+			"@include transform(",
+			"))}",
+			"@include transform(translate",
+			"em))",
+			"@include transform(",
+			".clock",
+			"4e",
+			"00"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 31.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.coffeecompile_output":
+	{
+		"height": 100.0
+	},
+	"output.exec":
+	{
+		"height": 100.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "4real.sublime-project",
+	"replace":
+	{
+		"height": 58.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"/Users/slavab/local/walmart/walmart.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+		],
+		"width": 836.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 244.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

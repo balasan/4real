@@ -5,3 +5,5 @@ public/videos/
 public/stylesheets/.sass-cache/
 4real.sublime-project
 nodemon.json
+.sass-cache
+.git.bfg-report

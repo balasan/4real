@@ -78,7 +78,7 @@ specular {
 
 .screen{
   opacity:.1;
-  @include transition(opacity .2s);
+  @include transition(opacity .4s);
 
 }
 

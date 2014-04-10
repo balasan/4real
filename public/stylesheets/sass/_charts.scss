@@ -338,13 +338,13 @@ $clockColor: white;
 .active .runner{
   @include animation(runner linear 0s);
   @include animation(runner linear 20s 1s infinite );
+  @include browser(animation-fill-mode, both);
 
 }
 
 @include keyframes(runner){
-  // 0% {@include browser(transform, translateX(10%))};
+  0% {@include browser(transform, translateX(150%))};
   100% { @include browser(transform,translateX(-1600px))};
-  @include browser(animation-fill-mode, both);
 }
 
 @media screen and (max-height: 700px){

@@ -131,10 +131,10 @@ specular {
 
 .screen {
   opacity: .1;
-  -webkit-transition: opacity 0.2s;
-  -moz-transition: opacity 0.2s;
-  -o-transition: opacity 0.2s;
-  transition: opacity 0.2s;
+  -webkit-transition: opacity 0.4s;
+  -moz-transition: opacity 0.4s;
+  -o-transition: opacity 0.4s;
+  transition: opacity 0.4s;
 }
 
 ipad {
@@ -1016,9 +1016,22 @@ circle:hover {
   -ms-animation: runner linear 20s 1s infinite;
   -o-animation: runner linear 20s 1s infinite;
   animation: runner linear 20s 1s infinite;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -ms-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
 }
 
 @-moz-keyframes runner {
+  0% {
+    -webkit-transform: translateX(150%);
+    -moz-transform: translateX(150%);
+    -ms-transform: translateX(150%);
+    -o-transform: translateX(150%);
+    transform: translateX(150%);
+  }
+
   100% {
     -webkit-transform: translateX(-1600px);
     -moz-transform: translateX(-1600px);
@@ -1026,15 +1039,17 @@ circle:hover {
     -o-transform: translateX(-1600px);
     transform: translateX(-1600px);
   }
-
-  -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
-  -ms-animation-fill-mode: both;
-  -o-animation-fill-mode: both;
-  animation-fill-mode: both;
 }
 
 @-webkit-keyframes runner {
+  0% {
+    -webkit-transform: translateX(150%);
+    -moz-transform: translateX(150%);
+    -ms-transform: translateX(150%);
+    -o-transform: translateX(150%);
+    transform: translateX(150%);
+  }
+
   100% {
     -webkit-transform: translateX(-1600px);
     -moz-transform: translateX(-1600px);
@@ -1042,15 +1057,17 @@ circle:hover {
     -o-transform: translateX(-1600px);
     transform: translateX(-1600px);
   }
-
-  -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
-  -ms-animation-fill-mode: both;
-  -o-animation-fill-mode: both;
-  animation-fill-mode: both;
 }
 
 @-o-keyframes runner {
+  0% {
+    -webkit-transform: translateX(150%);
+    -moz-transform: translateX(150%);
+    -ms-transform: translateX(150%);
+    -o-transform: translateX(150%);
+    transform: translateX(150%);
+  }
+
   100% {
     -webkit-transform: translateX(-1600px);
     -moz-transform: translateX(-1600px);
@@ -1058,15 +1075,17 @@ circle:hover {
     -o-transform: translateX(-1600px);
     transform: translateX(-1600px);
   }
-
-  -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
-  -ms-animation-fill-mode: both;
-  -o-animation-fill-mode: both;
-  animation-fill-mode: both;
 }
 
 @-ms-keyframes runner {
+  0% {
+    -webkit-transform: translateX(150%);
+    -moz-transform: translateX(150%);
+    -ms-transform: translateX(150%);
+    -o-transform: translateX(150%);
+    transform: translateX(150%);
+  }
+
   100% {
     -webkit-transform: translateX(-1600px);
     -moz-transform: translateX(-1600px);
@@ -1074,15 +1093,17 @@ circle:hover {
     -o-transform: translateX(-1600px);
     transform: translateX(-1600px);
   }
-
-  -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
-  -ms-animation-fill-mode: both;
-  -o-animation-fill-mode: both;
-  animation-fill-mode: both;
 }
 
 @keyframes runner {
+  0% {
+    -webkit-transform: translateX(150%);
+    -moz-transform: translateX(150%);
+    -ms-transform: translateX(150%);
+    -o-transform: translateX(150%);
+    transform: translateX(150%);
+  }
+
   100% {
     -webkit-transform: translateX(-1600px);
     -moz-transform: translateX(-1600px);
@@ -1090,12 +1111,6 @@ circle:hover {
     -o-transform: translateX(-1600px);
     transform: translateX(-1600px);
   }
-
-  -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
-  -ms-animation-fill-mode: both;
-  -o-animation-fill-mode: both;
-  animation-fill-mode: both;
 }
 
 @media screen and (max-height: 700px) {
@@ -1730,6 +1745,12 @@ h1 span:hover {
   transition: font-size cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
 }
 
+.siteInfo {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
 .main {
   display: table;
   width: 100%;
@@ -1851,6 +1872,14 @@ canvas {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab !important;
+}
+#cube.grab {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing !important;
 }
 
 .outerFolder {

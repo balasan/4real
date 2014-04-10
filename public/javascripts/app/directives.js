@@ -3,6 +3,18 @@
 
   app = angular.module("4real.directives", []);
 
+  app.directive("title", [
+    "$timeout", "$window", function($timeout, $window) {
+      return {
+        link: function(scope, el, attr) {
+          return $timeout(function() {
+            return el.html(scope.title);
+          });
+        }
+      };
+    }
+  ]);
+
   app.directive("loaded", [
     "$timeout", "$window", function($timeout, $window) {
       return {
@@ -277,7 +289,7 @@
     '$document', '$window', '$timeout', '$state', "isMobile", function($document, $window, $timeout, $state, isMobile) {
       return {
         link: function(scope, el, att) {
-          var auto, cleanup, randomVertical, resize, rotateScene, scale, specular, updateRotation, w;
+          var auto, cleanup, last, randomVertical, resize, rotateScene, scale, specular, updateRotation, w;
           scope.oldH = 0;
           scope.oldV = 0;
           scope.newH = 0;
@@ -290,11 +302,15 @@
             return scope.newV = -.5 + (e.pageY / $window.innerHeight);
           };
           specular = el.find("specular");
+          last = new Date();
           updateRotation = function() {
-            var dr, dx, dy, inc, offset, transform, transform2;
+            var dr, dx, dy, elapsed, inc, now, offset, transform, transform2;
+            now = new Date();
+            elapsed = now - last;
+            last = now;
             dr = scope.rotate.y + scope.dragX - scope.oldR;
             if (Math.abs(dr) > .1) {
-              dr *= .2;
+              dr *= .1;
             }
             scope.oldR += dr;
             inc = 0.05;
@@ -381,7 +397,8 @@
             } else {
               state = 'index.' + page;
             }
-            return $state.go(state);
+            $state.go(state);
+            return el.removeClass('grab');
           };
           auto = function() {
             var t;
@@ -409,6 +426,7 @@
           });
           el.bind('pointerdown', function(e) {
             var startX, startY;
+            el.addClass('grab');
             startX = e.x;
             startY = e.y;
             return w.bind('pointermove', function(e) {

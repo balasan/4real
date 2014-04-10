@@ -63,12 +63,12 @@ app.factory "siteMap", [->
   data =
     main:
       title: "4real Digital Agency"
-      description: "4real is a digital agency specializing in designing and building scalable technology-driven websites & apps.            It was started by Slava Balasanov and Analisa Teachworth in 2014.            4real aims to re-envision digital spaces and reformulate communication-interaction channels.            The fusion of technological and creative resources lends to the development of agile software and integrated design.            Although based in New York, 4REAL remains a global enterprise, with offices in Moscow, along with designers and programmers team members in London and Berlin."
+      description: "4real is a digital agency specializing in designing and building scalable technology-driven websites & apps. It was started by Slava Balasanov and Analisa Teachworth in 2014. 4real aims to re-envision digital spaces and reformulate communication-interaction channels. The fusion of technological and creative resources lends to the development of agile software and integrated design. Although based in New York, 4REAL remains a global enterprise, with offices in Moscow, along with designers and programmers team members in London and Berlin."
       keywords: "4real, digital, agency, New York, NYC, Moscow, studio, web, interactive, realtime, website, Slava, Analisa Teachworth"
 
     about:
       title: "4real - About"
-      description: "4real Digital Agency offers consultancy and expertise with a keen sense of global culture.           4REAL creates online experiences that span a variety of digital environments, including video, mobile, 3D, sound, and modular.           The traditional gaps between user and brand, art and consumption, culture and commerce - these are spaces where technology can create wholly new cultural experiences for users.           4REAL creates integrated online systems, across an array of digital platforms, that facilitate a deeper two-way exchange between brands and consumers."
+      description: "4real agency offers consultancy and expertise with a keen sense of global culture. 4REAL creates online experiences that span a variety of digital environments, including video, mobile, 3D, sound, and modular. The traditional gaps between user and brand, art and consumption, culture and commerce - these are spaces where technology can create wholly new cultural experiences for users. 4REAL creates integrated online systems, across an array of digital platforms, that facilitate a deeper two-way exchange between brands and consumers."
       keywords: "4real, digital, agency, about, information, NYC, Moscow, studio, web, interactive, realtime, website, Slava, Analisa Teachworth"
 
     charts:
@@ -79,7 +79,7 @@ app.factory "siteMap", [->
     projects:
       title: "4real - Projects"
       description: "These are some of the projects we have worked on. We like to fucus on projects that are culturally relevant and provide an opportunity to create a new and exciting interaction."
-      keywords: "4real, digital, agency, projects, galleries, DISImages, Dismagazine, NYC, Moscow, studio, web, interactive, realtime, website, Slava, Analisa Teachworth"
+      keywords: "4real, projects, digital, agency, projects, galleries, DISImages, Dismagazine, NYC, Moscow, studio, web, interactive, realtime, website, Slava, Analisa Teachworth"
 
     liquid:
       title: "4real - Liquid Demo"

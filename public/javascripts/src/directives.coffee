@@ -12,6 +12,13 @@ app =  angular.module("4real.directives", [])
 #       "background-color" : color
 # ]
 
+app.directive "title", ["$timeout", "$window", ($timeout, $window) ->
+  link: (scope, el, attr) ->
+    $timeout ()->
+      el.html scope.title
+] 
+
+
 app.directive "loaded", ["$timeout", "$window", ($timeout, $window) ->
   link: (scope, el, attr) ->
     el.on 'load', ()->
@@ -256,10 +263,18 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$state', "isMobile"
       scope.newV = -.5 + (e.pageY / $window.innerHeight)
 
     specular = el.find("specular")
+    last = new Date()
 
     updateRotation = () ->
+
+      now = new Date()
+      elapsed = now - last
+      last = now
+      # assune 60fps
+
       dr = scope.rotate.y + scope.dragX - scope.oldR
-      if Math.abs(dr)>.1 then dr *=.2
+      if Math.abs(dr)>.1 then dr *=.1 
+      # * elapsed/25
       scope.oldR += dr
 
       inc = 0.05
@@ -303,7 +318,7 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$state', "isMobile"
       #   "-ms-transform": transform
       #   "transform": transform
 
-      # $timeout(updateRotation, 30)
+      # $timeout(updateRotation, 20)
       window.requestAnimationFrame(updateRotation,30);
 
     resize = ()->
@@ -335,6 +350,7 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$state', "isMobile"
       else
         state = 'index.'+page
       $state.go(state)
+      el.removeClass('grab')
 
 
     auto = ()->
@@ -359,6 +375,7 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$state', "isMobile"
         scope.mode = 'auto';
 
     el.bind 'pointerdown', (e)->
+      el.addClass('grab')
       startX = e.x 
       startY = e.y
       w.bind 'pointermove', (e)->

@@ -195,6 +195,12 @@ h1{
   }
 }
 
+.siteInfo{
+  position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+
 .main{
   display:table;
   width:100%;
@@ -295,6 +301,15 @@ canvas {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  cursor:grab;
+  cursor:-moz-grab;
+  cursor:-webkit-grab !important;
+  &.grab{
+    cursor:grabbing;
+    cursor:-moz-grabbing;
+    cursor:-webkit-grabbing !important;  
+  }
+
 }
 
 

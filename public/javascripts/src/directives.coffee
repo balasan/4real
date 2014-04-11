@@ -297,19 +297,21 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$state', "isMobile"
       # if isMobile()
         # offset = -400
 
-      transform2="translateX("+((scope.oldH * -400)) + "px ) translateY("+(-scope.oldV * 400  + offset) + "px) translateZ(0)"
-            
-      Array.prototype.slice.apply(specular).forEach (spec)->
-        specEl = angular.element(spec)
-        if specEl.hasClass('active')
-          specEl.css
-            # "background-position": (-200 + (scope.oldH * -500)) + "px " + (-scope.oldV * 600) + "px"
-            "transform": transform2
-            "-moz-transform": transform2
-            "-ms-transform": transform2
-            "-webkit-transform": transform2
-            # "background-position": (-200 + (scope.oldH * -500)) + "px " + (-scope.oldV * 600 -200 + offset) + "px"
-            # opacity: 1 - (scope.oldH * .45) - (scope.oldV * .45)
+      if !isMobile() 
+        transform2="translateX("+((scope.oldH * -400)) + "px ) translateY("+(-scope.oldV * 400  + offset) + "px) translateZ(0)"
+        
+
+        Array.prototype.slice.apply(specular).forEach (spec)->
+          specEl = angular.element(spec)
+          if specEl.hasClass('active')
+            specEl.css
+              # "background-position": (-200 + (scope.oldH * -500)) + "px " + (-scope.oldV * 600) + "px"
+              "transform": transform2
+              "-moz-transform": transform2
+              "-ms-transform": transform2
+              "-webkit-transform": transform2
+              # "background-position": (-200 + (scope.oldH * -500)) + "px " + (-scope.oldV * 600 -200 + offset) + "px"
+              # opacity: 1 - (scope.oldH * .45) - (scope.oldV * .45)
 
       transform = "rotateX(" + (65 + (scope.oldV * 20)) + "deg) rotateY(" + (10 - (scope.oldH * 20)) + "deg) skewX(-15deg)"
       # el.find("shadow").css 
@@ -318,8 +320,10 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$state', "isMobile"
       #   "-ms-transform": transform
       #   "transform": transform
 
-      $timeout(updateRotation, 30)
-      # window.requestAnimationFrame(updateRotation,30);
+      if isMobile() 
+        $timeout(updateRotation, 20)
+      else
+        window.requestAnimationFrame(updateRotation,30);
 
     resize = ()->
       scope.windowWidth = $window.innerWidth

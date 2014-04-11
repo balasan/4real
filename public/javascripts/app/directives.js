@@ -335,21 +335,27 @@
               "-webkit-transform": transform
             });
             offset = 0;
-            transform2 = "translateX(" + (scope.oldH * -400) + "px ) translateY(" + (-scope.oldV * 400 + offset) + "px) translateZ(0)";
-            Array.prototype.slice.apply(specular).forEach(function(spec) {
-              var specEl;
-              specEl = angular.element(spec);
-              if (specEl.hasClass('active')) {
-                return specEl.css({
-                  "transform": transform2,
-                  "-moz-transform": transform2,
-                  "-ms-transform": transform2,
-                  "-webkit-transform": transform2
-                });
-              }
-            });
+            if (!isMobile()) {
+              transform2 = "translateX(" + (scope.oldH * -400) + "px ) translateY(" + (-scope.oldV * 400 + offset) + "px) translateZ(0)";
+              Array.prototype.slice.apply(specular).forEach(function(spec) {
+                var specEl;
+                specEl = angular.element(spec);
+                if (specEl.hasClass('active')) {
+                  return specEl.css({
+                    "transform": transform2,
+                    "-moz-transform": transform2,
+                    "-ms-transform": transform2,
+                    "-webkit-transform": transform2
+                  });
+                }
+              });
+            }
             transform = "rotateX(" + (65 + (scope.oldV * 20)) + "deg) rotateY(" + (10 - (scope.oldH * 20)) + "deg) skewX(-15deg)";
-            return $timeout(updateRotation, 30);
+            if (isMobile()) {
+              return $timeout(updateRotation, 20);
+            } else {
+              return window.requestAnimationFrame(updateRotation, 30);
+            }
           };
           resize = function() {
             return scope.windowWidth = $window.innerWidth;

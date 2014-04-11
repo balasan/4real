@@ -335,9 +335,6 @@
               "-webkit-transform": transform
             });
             offset = 0;
-            if (isMobile()) {
-              offset = -400;
-            }
             transform2 = "translateX(" + (scope.oldH * -400) + "px ) translateY(" + (-scope.oldV * 400 + offset) + "px) translateZ(0)";
             Array.prototype.slice.apply(specular).forEach(function(spec) {
               var specEl;
@@ -352,7 +349,7 @@
               }
             });
             transform = "rotateX(" + (65 + (scope.oldV * 20)) + "deg) rotateY(" + (10 - (scope.oldH * 20)) + "deg) skewX(-15deg)";
-            return window.requestAnimationFrame(updateRotation, 30);
+            return $timeout(updateRotation, 30);
           };
           resize = function() {
             return scope.windowWidth = $window.innerWidth;

@@ -176,5 +176,18 @@ shadow {
 
 
 
+@media screen and (max-width: 700px){
+.screen{
+  opacity:.1;
+  @include transition(opacity .2s);
 
+}
+
+.active{
+  specular{
+    // display:none;
+  }
+}
+
+}
 

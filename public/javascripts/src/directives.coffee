@@ -294,8 +294,8 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$state', "isMobile"
         "-ms-transform": transform
         "-webkit-transform": transform
       offset = 0
-      if isMobile()
-        offset = -400
+      # if isMobile()
+        # offset = -400
 
       transform2="translateX("+((scope.oldH * -400)) + "px ) translateY("+(-scope.oldV * 400  + offset) + "px) translateZ(0)"
             
@@ -318,8 +318,8 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$state', "isMobile"
       #   "-ms-transform": transform
       #   "transform": transform
 
-      # $timeout(updateRotation, 20)
-      window.requestAnimationFrame(updateRotation,30);
+      $timeout(updateRotation, 30)
+      # window.requestAnimationFrame(updateRotation,30);
 
     resize = ()->
       scope.windowWidth = $window.innerWidth

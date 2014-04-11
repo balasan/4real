@@ -225,6 +225,15 @@ shadow {
   transform: rotateX(75deg) skewX(-15deg) skewY(80deg) translateZ(0px);
 }
 
+@media screen and (max-width: 700px) {
+  .screen {
+    opacity: .1;
+    -webkit-transition: opacity 0.2s;
+    -moz-transition: opacity 0.2s;
+    -o-transition: opacity 0.2s;
+    transition: opacity 0.2s;
+  }
+}
 .animate-projects {
   -webkit-transition: all 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955);
   -moz-transition: all 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955);
@@ -1566,6 +1575,10 @@ circle:hover {
   .aboutOuter .about {
     font-size: 17px;
     line-height: 1.2em;
+  }
+  .aboutOuter .about p.indent {
+    padding-left: 0px;
+    text-align: right;
   }
 }
 /* MAIN

@@ -40,8 +40,6 @@
         specular(ng-class="{'active': page=='about'}")
         div(ng-include="'/partials/about'")            
         div.screen(ng-repeat="thispage in ['about']" ng-include="'/partials/nav'")
-      //- floor
-        //- shadow 
     
     .glass.front(glass ng-class="{'active' : page==''}")
       ipad.ipad2
@@ -53,33 +51,20 @@
               title 4real
               description 4real digital agency specializing in interactive art
               use(xlink:href="#logo-4real-thin-fill")
-            //- h1 
-              span 4real
-              //- |{{page}}
+              //- span 4real
         div.screen(ng-repeat="thispage in ['']" ng-include="'/partials/nav'")
 
-      //- floor
-        //- shadow
     
     .glass.left(glass ng-class="{'active': page=='projects'}")
-      //- ipad.ipad2        
       ipad
         specular(ng-class="{'active': page=='projects'}")
         div( ng-include="'/partials/projects'")  
         div.screen(ng-repeat="thispage in ['projects']" ng-include="'/partials/nav'")
-      //- floor
-        //- shadow 
+
 
     .glass.right(glass ng-class="{'active': page=='charts'}")
-      //- ipad.ipad2
       ipad
         specular(ng-class="{'active': page=='charts'}")
         div(ng-include="'/partials/charts'")
         div.screen(ng-repeat="thispage in ['charts']" ng-include="'/partials/nav'")
-      //- floor
-        //- shadow
-
-  //- div.outerFolder( bgcolor )
-  //-   div.rolo( rolo ng-controller="projectsCtrl")
-  //-     div(ng-repeat="project in projects")
-  //-       //- img(crossorigin="anonymous" src="{{project.img[0].url}}")
+ 

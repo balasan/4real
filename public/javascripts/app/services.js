@@ -79,7 +79,7 @@
       return data = {
         main: {
           title: "4real Digital Agency",
-          description: "4real is a digital agency specializing in designing and building scalable technology-driven websites & apps. It was started by Slava Balasanov and Analisa Teachworth in 2014. 4real aims to re-envision digital spaces and reformulate communication-interaction channels. The fusion of technological and creative resources lends to the development of agile software and integrated design. Although based in New York, 4REAL remains a global enterprise, with offices in Moscow, along with designers and programmers team members in London and Berlin.",
+          description: "4real is a digital agency specializing in designing and building scalable technology-driven websites & apps for the real world. It was started by Slava Balasanov and Analisa Teachworth in 2014. 4real aims to re-envision the web and reformulate communication-interaction channels. The fusion of technological and creative resources lends to the development of agile software and integrated design. Although based in New York, our studio remains a global enterprise, with offices in Moscow, along with designers and programmers team members in London and Berlin.",
           keywords: "4real, digital, agency, New York, NYC, Moscow, studio, web, interactive, realtime, website, Slava, Analisa Teachworth"
         },
         about: {
@@ -89,7 +89,7 @@
         },
         charts: {
           title: "4real - Analytics",
-          description: "At 4real Studio we think realtime technology is becoming ever-more important.           The 'Analytics Section' illustrates a realtime bitcoin feed from the Bitstam exchange.           The chart is using Bitstamp API and D3",
+          description: "At 4real studio we think realtime technology is becoming ever-more important.           The 'Analytics Section' illustrates a realtime bitcoin feed from the Bitstam exchange.           The chart is using Bitstamp API and D3",
           keywords: "4real, digital, agency, analytics, charts, bitcoin, bitstamp, realtime, prices, currency, NYC, Moscow, studio, web, interactive, realtime, website, Slava, Analisa Teachworth"
         },
         projects: {

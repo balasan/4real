@@ -73,7 +73,7 @@ app.factory "siteMap", [->
 
     charts:
       title: "4real - Analytics"
-      description: "At 4real Studio we think realtime technology is becoming ever-more important.           The 'Analytics Section' illustrates a realtime bitcoin feed from the Bitstam exchange.           The chart is using Bitstamp API and D3"
+      description: "At 4real studio we think realtime technology is becoming ever-more important.           The 'Analytics Section' illustrates a realtime bitcoin feed from the Bitstam exchange.           The chart is using Bitstamp API and D3"
       keywords: "4real, digital, agency, analytics, charts, bitcoin, bitstamp, realtime, prices, currency, NYC, Moscow, studio, web, interactive, realtime, website, Slava, Analisa Teachworth"
 
     projects:

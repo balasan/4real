@@ -115,7 +115,8 @@ var helperFunctions = '\
       scale += diffuse * 0.5;\
     }\
     \
-    return wallColor * scale;\
+    /*substitute scale to get shadow*/\
+    return wallColor * 0.7;\
   }\
 ';
 

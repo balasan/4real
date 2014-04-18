@@ -26,14 +26,32 @@ app.directive "loaded", ["$timeout", "$window", ($timeout, $window) ->
       scope.$apply()
 ]
 
-app.directive "main", ["$timeout", "$window", ($timeout, $window) ->
+app.directive "liquid", ["$timeout", "$window","isMobile","webGL", ($timeout, $window,isMobile,webGL) ->
 
   link: (scope, el, attr) ->
+    canvas = angular.element(document.getElementById('waterCanvas'))
+    canvas.addClass('visible')
+    scope.water = webGL.initWater()
+    if scope.water.error 
+      html = scope.water.error 
+      if html == 'WebGL not supported'
+        if(isMobile())    
+          error = document.getElementById('errorMobile');
+        else 
+          error = document.getElementById('error');
+        angular.element(error).css
+          display: 'block'
+    else
+      scope.water.paused=false;
+      scope.$watch 'loadedImg', (newV,oldV)->
+        if newV == 6
+          scope.water.skyReady = true;
+          scope.water.renderCubemap()      
+    scope.$on '$destroy', ()->
+       scope.water.paused = true
+       # canvas.remove();
+       canvas.removeClass('visible')
 
-    scope.$watch 'loadedImg', (newV,oldV)->
-      if newV == 6
-        scope.waterView = new waterView()
-        scope.waterView.paused = false           
 ]
 
 app.directive "video", ["$timeout", "$window", ($timeout, $window) ->

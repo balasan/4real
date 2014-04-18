@@ -91,5 +91,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-newer');
 
   // Default task.
-  grunt.registerTask('default', ['concurrent']);
+  grunt.registerTask('default', ['coffee','concurrent']);
 };

@@ -6,7 +6,7 @@
   app.controller('aboutCtrl', ['$scope', function($scope) {}]);
 
   app.controller('mainCtrl', [
-    '$scope', '$timeout', '$rootScope', 'siteMap', function($scope, $timeout, $rootScope, siteMap) {
+    '$scope', '$timeout', '$rootScope', 'siteMap', "$location", function($scope, $timeout, $rootScope, siteMap, $location) {
       $scope.rotate = {};
       $scope.rotate.y = 0;
       $scope.waterView = null;
@@ -15,6 +15,11 @@
       $scope.page = '';
       $scope.loadedImg = 0;
       $scope.title = "4real Digital Agency";
+      $scope.$watch('page', function(newP, oldP) {
+        if (oldP === 'liquid' && newP !== 'liquid') {
+          return null;
+        }
+      });
       $scope.playNextVideo = function() {
         return $scope.activeVideo = ($scope.activeVideo + 1) % $scope.videos.length;
       };
@@ -30,6 +35,7 @@
             $scope.title = siteMap.main.title;
             $scope.description = siteMap.main.description;
             $scope.keywords = siteMap.main.keywords;
+            $scope.fbimg = siteMap.main.fbimg;
             break;
           case "charts":
             $scope.activeVideo = 0;
@@ -41,6 +47,7 @@
             $scope.title = siteMap.charts.title;
             $scope.description = siteMap.charts.description;
             $scope.keywords = siteMap.charts.keywords;
+            $scope.fbimg = siteMap.charts.fbimg;
             break;
           case "projects":
             $scope.activeVideo = 1;
@@ -52,6 +59,7 @@
             $scope.title = siteMap.projects.title;
             $scope.description = siteMap.projects.description;
             $scope.keywords = siteMap.projects.keywords;
+            $scope.fbimg = siteMap.projects.fbimg;
             break;
           case "about":
             $scope.activeVideo = 3;
@@ -63,11 +71,13 @@
             $scope.title = siteMap.about.title;
             $scope.description = siteMap.about.description;
             $scope.keywords = siteMap.about.keywords;
+            $scope.fbimg = siteMap.about.fbimg;
             break;
           case "liquid":
             $scope.title = siteMap.liquid.title;
             $scope.description = siteMap.liquid.description;
             $scope.keywords = siteMap.liquid.keywords;
+            $scope.fbimg = siteMap.liquid.fbimg;
         }
         return $scope.$broadcast('page', $scope.page);
       });

@@ -27,6 +27,8 @@ module.exports = (db) ->
 
   rates: rateData
 
+  liquid : (req,res) ->
+    res.render('liquid')
 
   index : (req, res) ->
     limit = 60

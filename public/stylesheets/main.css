@@ -1602,7 +1602,49 @@ circle:hover {
 }
 
 .notransition {
-  @inlcude transition(none);
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+#waterCanvas {
+  display: none;
+}
+#waterCanvas.visible {
+  display: block;
+}
+
+.tag {
+  width: 300px;
+  text-align: center;
+  margin: auto;
+  z-index: 100000;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: white;
+  font-size: 16px;
+}
+.tag a, .tag a:hover, .tag a:visited {
+  color: lightgreen;
+}
+
+.error {
+  display: none;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.error .errorText {
+  width: 70%;
+  top: 50%;
+  margin: 30% auto 0 auto;
+  font-size: 30px;
+  line-height: 1.2em;
+}
+.error a, .error a:hover, .error a:visited {
+  color: lime;
 }
 
 * {
@@ -1678,6 +1720,26 @@ body {
   fill: white;
   height: 100px;
   width: 100%;
+}
+
+.subnav {
+  text-align: center;
+}
+.subnav .link {
+  padding: 10px 20px;
+  display: inline-block;
+  -webkit-transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -webkit-transition-delay: 0.3s;
+  -moz-transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
+  -o-transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
+  transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
+}
+.subnav .link:hover {
+  -webkit-transform: scale(1.5, 1.5);
+  -moz-transform: scale(1.5, 1.5);
+  -ms-transform: scale(1.5, 1.5);
+  -o-transform: scale(1.5, 1.5);
+  transform: scale(1.5, 1.5);
 }
 
 #videos {
@@ -2411,6 +2473,12 @@ canvas {
     height: 100%;
     width: 100%;
     overflow: hidden;
+  }
+
+  .error .errorText {
+    width: 90%;
+    margin-top: 40%;
+    font-size: 20px;
   }
 
   glass {

@@ -20,7 +20,7 @@ app.controller 'aboutCtrl', ['$scope', ($scope) ->
 
 ]
 
-app.controller 'mainCtrl', [ '$scope', '$timeout','$rootScope','siteMap', ($scope, $timeout,$rootScope,siteMap) ->
+app.controller 'mainCtrl', [ '$scope', '$timeout','$rootScope','siteMap',"$location", ($scope, $timeout,$rootScope,siteMap,$location) ->
   $scope.rotate = {}
   $scope.rotate.y=0;
   $scope.waterView = null;
@@ -31,6 +31,11 @@ app.controller 'mainCtrl', [ '$scope', '$timeout','$rootScope','siteMap', ($scop
   $scope.loadedImg =0;
 
   $scope.title = "4real Digital Agency"
+
+  $scope.$watch 'page', (newP, oldP) ->
+    if oldP == 'liquid' and newP !='liquid'
+      null
+      # window.location.reload();
 
   $scope.playNextVideo = ()->
     $scope.activeVideo = ($scope.activeVideo + 1) % $scope.videos.length
@@ -48,6 +53,7 @@ app.controller 'mainCtrl', [ '$scope', '$timeout','$rootScope','siteMap', ($scop
         $scope.title = siteMap.main.title
         $scope.description = siteMap.main.description
         $scope.keywords = siteMap.main.keywords
+        $scope.fbimg = siteMap.main.fbimg
       when "charts" 
         $scope.activeVideo = 0
         if (angle > -90) then $scope.rotate.y = 90 + 360*rotations
@@ -55,6 +61,7 @@ app.controller 'mainCtrl', [ '$scope', '$timeout','$rootScope','siteMap', ($scop
         $scope.title = siteMap.charts.title
         $scope.description = siteMap.charts.description
         $scope.keywords = siteMap.charts.keywords
+        $scope.fbimg = siteMap.charts.fbimg
       when "projects"
         $scope.activeVideo = 1  
         if(angle < 90)
@@ -63,6 +70,7 @@ app.controller 'mainCtrl', [ '$scope', '$timeout','$rootScope','siteMap', ($scop
         $scope.title = siteMap.projects.title
         $scope.description = siteMap.projects.description
         $scope.keywords = siteMap.projects.keywords
+        $scope.fbimg = siteMap.projects.fbimg
       when "about" 
         $scope.activeVideo = 3 
         if(angle >0)
@@ -71,10 +79,12 @@ app.controller 'mainCtrl', [ '$scope', '$timeout','$rootScope','siteMap', ($scop
         $scope.title = siteMap.about.title
         $scope.description = siteMap.about.description
         $scope.keywords = siteMap.about.keywords
+        $scope.fbimg = siteMap.about.fbimg
       when "liquid"
         $scope.title = siteMap.liquid.title
         $scope.description = siteMap.liquid.description
         $scope.keywords = siteMap.liquid.keywords
+        $scope.fbimg = siteMap.liquid.fbimg
      $scope.$broadcast('page', $scope.page)
 
 ]

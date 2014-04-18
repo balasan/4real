@@ -21,6 +21,7 @@
 
 .tint 
 
+canvas#waterCanvas
 
 .container
 
@@ -51,6 +52,14 @@
               title 4real
               description 4real digital agency specializing in interactive art
               use(xlink:href="#logo-4real-thin-fill")
+            .subnav
+              div.link
+                a(href="http://blog.4real.io")
+                  |blog
+              div.link
+                a(href="liquid" target="_self")
+                  |liquid demo
+
               //- span 4real
         div.screen(ng-repeat="thispage in ['']" ng-include="'/partials/nav'")
 

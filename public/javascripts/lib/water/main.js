@@ -12,6 +12,8 @@ var waterView = function() {
 
   this.paused = true;
   this.physics = true;
+  this.animated = false;
+  this.skyReady = false;
 
   var self = this;
 
@@ -19,28 +21,31 @@ var waterView = function() {
 		return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
 	}
 
-	function handleError(text) {
+	window.handleError = function(text) {
 		var html = text2html(text);
 		if (html == 'WebGL not supported') {
-			//TODO fallback
-			// html = 'Your browser does not support WebGL.<br>Please see\
-			// <a href="http://www.khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">\
-			// Getting a WebGL Implementation</a>.';
+			// TODO fallback
+			html = 'Your browser does not support WebGL.<br>Please see\
+			<a href="http://www.khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">\
+			Getting a WebGL Implementation</a>.';
 		}
 		var loading = document.getElementById('loading');
 		loading.innerHTML = html;
 		// loading.style.zIndex = 1;
 	}
 
+
+
 	window.gl = GL.create({
 		id: 'waterCanvas',
 		alpha: true
 	});
 
-
-
-
-	window.onerror = handleError;
+	// window.onerror = window.handleError;
+	var canvas = document.getElementById("waterCanvas");
+	canvas.addEventListener("webglcontextlost", function(event) {
+	    event.preventDefault();
+	}, false);
 
 	var water;
 	var cubemap;
@@ -53,8 +58,6 @@ var waterView = function() {
 	var oldCenter;
 	var velocity;
 	var radius;
-
-
 
 	startRender()
 
@@ -103,13 +106,23 @@ var waterView = function() {
 	}
 
 	cubemap = new Cubemap({
-		xneg: document.getElementById('xneg'),
-		xpos: document.getElementById('xpos'),
-		yneg: document.getElementById('yneg'),
-		ypos: document.getElementById('ypos'),
-		zneg: document.getElementById('zneg'),
-		zpos: document.getElementById('zpos')
+		xneg: new Image(),
+		xpos:  new Image(),
+		yneg:  new Image(),
+		ypos:  new Image(),
+		zneg:  new Image(),
+		zpos:  new Image()
 	});
+	self.renderCubemap = function(){
+		cubemap = new Cubemap({
+			xneg: document.getElementById('xneg'),
+			xpos: document.getElementById('xpos'),
+			yneg: document.getElementById('yneg'),
+			ypos: document.getElementById('ypos'),
+			zneg: document.getElementById('zneg'),
+			zpos: document.getElementById('zpos')
+		});
+	}
 
 	if (!water.textureA.canDrawTo() || !water.textureB.canDrawTo()) {
 		throw new Error('Rendering to floating-point textures is required but not supported');
@@ -129,8 +142,7 @@ var waterView = function() {
   } 
   self.drops()
 
-  var auto = true;
-  if(auto){
+  if(this.animated){
 
 	  self.reset = function(){
 
@@ -193,7 +205,7 @@ var waterView = function() {
 
 	function animate() {
 		var nextTime = new Date().getTime();
-		if (!this.paused) {
+		if (!self.paused) {
 			update((nextTime - prevTime) / 1000);
 			draw();
 		}
@@ -214,7 +226,7 @@ var waterView = function() {
 	var oldX, oldY;
 
 	document.onmousedown = function(e) {
-    if(this.paused)
+    if(self.paused)
       return;
 		oldX = e.pageX;
 		oldY = e.pageY;
@@ -239,7 +251,7 @@ var waterView = function() {
 	};
 
 	document.onmousemove = function(e) {
-    if(this.paused)
+    if(self.paused)
       return;
 		switch (mode) {
 			case MODE_ADD_DROPS:
@@ -258,11 +270,11 @@ var waterView = function() {
 				var t = -planeNormal.dot(tracer.eye.subtract(prevHit)) / planeNormal.dot(ray);
 				var nextHit = tracer.eye.add(ray.multiply(t));
 				center = center.add(nextHit.subtract(prevHit));
-				center.x = Math.max(radius - 1, Math.min(1 - radius, center.x));
+				center.x = Math.max(radius*1.5 - 1, Math.min(1 - radius*1.5 , center.x));
 				center.y = Math.max(radius - 1, Math.min(10, center.y));
-				center.z = Math.max(radius - 1, Math.min(1 - radius, center.z));
+				center.z = Math.max(radius*.2 - 1, Math.min(1 - radius*.2, center.z));
 				prevHit = nextHit;
-				if (this.paused) renderer.updateCaustics(water);
+				if (self.paused) renderer.updateCaustics(water);
 				break;
 			case MODE_ORBIT_CAMERA:
 				angleY -= e.pageX - oldX;
@@ -278,7 +290,7 @@ var waterView = function() {
 	document.onkeydown = function(e) {
 		// if (e.which == ' '.charCodeAt(0)) paused = !paused;
 		if (e.which == 'G'.charCodeAt(0)) self.physics = !self.physics;
-		else if (e.which == 'L'.charCodeAt(0) && this.paused) draw();
+		else if (e.which == 'L'.charCodeAt(0) && self.paused) draw();
 	};
 
 	var frame = 0;
@@ -336,7 +348,7 @@ var waterView = function() {
 		// Change the light direction to the camera look vector when the L key is pressed
 		if (GL.keys.L) {
 			renderer.lightDir = GL.Vector.fromAngles((90 - angleY) * Math.PI / 180, -angleX * Math.PI / 180);
-			if (this.paused) renderer.updateCaustics(water);
+			if (self.paused) renderer.updateCaustics(water);
 		}
 
 		gl.enable(gl.BLEND);
@@ -359,8 +371,9 @@ var waterView = function() {
 		gl.enable(gl.DEPTH_TEST);
 		renderer.sphereCenter = center;
 		renderer.sphereRadius = radius;
+		
 		renderer.renderSky(cubemap);
-
+		
 		// gl.pushMatrix()
 		// gl.loadIdentity();
 		// gl.translate(-angleY / 100, angleX / 100, 1, 0);

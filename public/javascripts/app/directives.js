@@ -28,15 +28,38 @@
     }
   ]);
 
-  app.directive("main", [
-    "$timeout", "$window", function($timeout, $window) {
+  app.directive("liquid", [
+    "$timeout", "$window", "isMobile", "webGL", function($timeout, $window, isMobile, webGL) {
       return {
         link: function(scope, el, attr) {
-          return scope.$watch('loadedImg', function(newV, oldV) {
-            if (newV === 6) {
-              scope.waterView = new waterView();
-              return scope.waterView.paused = false;
+          var canvas, error, html;
+          canvas = angular.element(document.getElementById('waterCanvas'));
+          canvas.addClass('visible');
+          scope.water = webGL.initWater();
+          if (scope.water.error) {
+            html = scope.water.error;
+            if (html === 'WebGL not supported') {
+              if (isMobile()) {
+                error = document.getElementById('errorMobile');
+              } else {
+                error = document.getElementById('error');
+              }
+              angular.element(error).css({
+                display: 'block'
+              });
             }
+          } else {
+            scope.water.paused = false;
+            scope.$watch('loadedImg', function(newV, oldV) {
+              if (newV === 6) {
+                scope.water.skyReady = true;
+                return scope.water.renderCubemap();
+              }
+            });
+          }
+          return scope.$on('$destroy', function() {
+            scope.water.paused = true;
+            return canvas.removeClass('visible');
           });
         }
       };

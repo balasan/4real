@@ -24,7 +24,7 @@ app.configure ->
   app.set "views", __dirname + "/views"
   app.set "view engine", "jade"
   app.use prerender
-  app.use express.favicon()
+  app.use express.favicon(path.join(__dirname, "/public/img/favicon.png"))
   app.use express.logger("dev")
   app.use express.bodyParser()
   app.use express.methodOverride()

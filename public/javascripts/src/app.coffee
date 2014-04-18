@@ -14,7 +14,7 @@ app.config ["$locationProvider","$stateProvider","$urlRouterProvider", ($locatio
   
   $locationProvider.html5Mode(true).hashPrefix('!');
 
-  $urlRouterProvider.otherwise("/");
+  # $urlRouterProvider.otherwise("/");
   # $stateProvider.when "/liquid",
   #   templateUrl: "/partials/liquid"
   #   controller: 'mainCtrl' 
@@ -29,11 +29,16 @@ app.config ["$locationProvider","$stateProvider","$urlRouterProvider", ($locatio
     url: "/liquid"
     templateUrl: "/partials/liquid"
     page: 'liquid'
+    reload:true
+
 
   $stateProvider.state "index",
     url: "/"
     templateUrl: "/partials/main"
     page: ''
+    reload:true
+
+
   
   $stateProvider.state "auto",
     url: "/auto"

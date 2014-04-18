@@ -3,6 +3,23 @@
 
   app = angular.module("4real.services", []);
 
+  app.factory('webGL', function($window) {
+    return {
+      initWater: function() {
+        var error;
+        try {
+          if (!this.waterView) {
+            this.waterView = new window.waterView();
+          }
+          return this.waterView;
+        } catch (_error) {
+          error = _error;
+          return error.message;
+        }
+      }
+    };
+  });
+
   app.factory('isMobile', function($window) {
     return function() {
       if ($window.innerWidth < 700) {
@@ -79,28 +96,33 @@
       return data = {
         main: {
           title: "4real Digital Agency",
-          description: "4real is a digital agency specializing in designing and building scalable technology-driven websites & apps for the real world. It was started by Slava Balasanov and Analisa Teachworth in 2014. 4real aims to re-envision the web and reformulate communication-interaction channels. The fusion of technological and creative resources lends to the development of agile software and integrated design. Although based in New York, our studio remains a global enterprise, with offices in Moscow, along with designers and programmers team members in London and Berlin.",
-          keywords: "4real, digital, agency, New York, NYC, Moscow, studio, web, interactive, realtime, website, Slava, Analisa Teachworth"
+          description: "4real is a digital agency specializing in designing and building scalable technology-driven websites & apps for the real world. It was started by Slava Balasanov and Analisa Teachworth in 2014. 4real aims to re-envision the web and reformulate communication-interaction channels. The fusion of technological and creative resources lends to the development of agile software and integrated design. Although based in New York, 4real remains a global enterprise, with offices in Moscow, along with designers and programmers team members in London and Berlin.",
+          keywords: "4real, digital, agency, New York, NYC, Moscow, studio, web, interactive, realtime, website, Slava, Analisa Teachworth",
+          fbimg: 'https://s3-us-west-2.amazonaws.com/4real/various/harddrive.jpg'
         },
         about: {
           title: "4real - About",
           description: "4real agency offers consultancy and expertise with a keen sense of global culture. 4REAL creates online experiences that span a variety of digital environments, including video, mobile, 3D, sound, and modular. The traditional gaps between user and brand, art and consumption, culture and commerce - these are spaces where technology can create wholly new cultural experiences for users. 4REAL creates integrated online systems, across an array of digital platforms, that facilitate a deeper two-way exchange between brands and consumers.",
-          keywords: "4real, digital, agency, about, information, NYC, Moscow, studio, web, interactive, realtime, website, Slava, Analisa Teachworth"
+          keywords: "4real, digital, agency, about, information, NYC, Moscow, studio, web, interactive, realtime, website, Slava, Analisa Teachworth",
+          fbimg: 'https://s3-us-west-2.amazonaws.com/4real/various/harddrive.jpg'
         },
         charts: {
           title: "4real - Analytics",
           description: "At 4real studio we think realtime technology is becoming ever-more important.           The 'Analytics Section' illustrates a realtime bitcoin feed from the Bitstam exchange.           The chart is using Bitstamp API and D3",
-          keywords: "4real, digital, agency, analytics, charts, bitcoin, bitstamp, realtime, prices, currency, NYC, Moscow, studio, web, interactive, realtime, website, Slava, Analisa Teachworth"
+          keywords: "4real, digital, agency, analytics, charts, bitcoin, bitstamp, realtime, prices, currency, NYC, Moscow, studio, web, interactive, realtime, website, Slava, Analisa Teachworth",
+          fbimg: 'https://s3-us-west-2.amazonaws.com/4real/various/harddrive.jpg'
         },
         projects: {
           title: "4real - Projects",
           description: "These are some of the projects we have worked on. We like to fucus on projects that are culturally relevant and provide an opportunity to create a new and exciting interaction.",
-          keywords: "4real, projects, digital, agency, projects, galleries, DISImages, Dismagazine, NYC, Moscow, studio, web, interactive, realtime, website, Slava, Analisa Teachworth"
+          keywords: "4real, projects, digital, agency, projects, galleries, DISImages, Dismagazine, NYC, Moscow, studio, web, interactive, realtime, website, Slava, Analisa Teachworth",
+          fbimg: 'https://s3-us-west-2.amazonaws.com/4real/various/harddrive.jpg'
         },
         liquid: {
           title: "4real - Liquid Demo",
           description: "4real demo of liquid dynamics. This demo is done in WebGL using GLSL shader language to crete an interactive, realtime visualisation of liquid.",
-          keywords: "4real, digital, agency, interactive, demo, water, Webgl, liquid, information, NYC, Moscow, studio, web, interactive, realtime, website, Slava, Analisa Teachworth"
+          keywords: "4real, digital, agency, interactive, demo, water, Webgl, liquid, information, NYC, Moscow, studio, web, interactive, realtime, website, Slava, Analisa Teachworth",
+          fbimg: "https://s3-us-west-2.amazonaws.com/4real/various/liquid.png"
         }
       };
     }

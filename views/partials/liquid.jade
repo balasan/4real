@@ -1,6 +1,20 @@
-div(main)
+div#liquid(liquid)
+  
 
-  canvas#waterCanvas
+  #error.error.tint
+    .errorText
+      |Eh, your browser does not support WebGL.
+      |Try using a recent version of Chrome or Firefox, 
+      a(href="https://discussions.apple.com/thread/3300585?start=0") enable WebGL in Safari
+      |  or 
+      a(href="http://get.webgl.org/") click here for more info.
+  #errorMobile.error.tint
+    .errorText
+      | Unfortunately mobile browsers dont support WebGL yet, try it on desktop!
+
+  .tag
+    |3D WebGL experience by 
+    a(href="http://4real.io" target="_self") 4rea.io
 
   div.hidden
     video#video(loop)

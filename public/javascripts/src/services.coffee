@@ -9,7 +9,7 @@ app.factory 'webGL', ($window)->
         this.waterView = new window.waterView()
       return this.waterView
     catch error
-      return error.message
+      return {error:error.message}
 
 app.factory 'isMobile', ($window)->
   return ()->

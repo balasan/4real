@@ -14,7 +14,9 @@
           return this.waterView;
         } catch (_error) {
           error = _error;
-          return error.message;
+          return {
+            error: error.message
+          };
         }
       }
     };

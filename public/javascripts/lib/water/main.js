@@ -233,7 +233,11 @@ var waterView = function() {
 		var tracer = new GL.Raytracer();
 		var ray = tracer.getRayForPixel(e.pageX * ratio, e.pageY * ratio);
 		var pointOnPlane = tracer.eye.add(ray.multiply(-tracer.eye.y / ray.y));
-		var sphereHitTest = GL.Raytracer.hitTestSphere(tracer.eye, ray, center, radius);
+		var min = center.add(new GL.Vector(-0.15, -0.02, -0.008).multiply(radius/0.1))
+		var max = center.add(new GL.Vector(0.15, 0.03, 0.008).multiply(radius/0.1));
+
+		var sphereHitTest = GL.Raytracer.hitTestBox(tracer.eye, ray, min, max);
+		// var sphereHitTest = GL.Raytracer.hitTestSphere(tracer.eye, ray, center, radius);
 		if (sphereHitTest) {
 			mode = MODE_MOVE_SPHERE;
 			prevHit = sphereHitTest.hit;

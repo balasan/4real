@@ -154,8 +154,8 @@ function Renderer() {
       vec3 getSurfaceRayColor(vec3 origin, vec3 ray, vec3 waterColor, vec3 normal, float r) {\
         vec3 color= vec3(0.0,0.0,0.0);\
         /*float q = intersectSphere(origin, ray, sphereCenter, sphereRadius);*/\
-        vec3 boxBottom = sphereCenter+vec3(-0.20, -0.08, -0.008)*sphereRadius/0.1;\
-        vec3 boxTop = sphereCenter+vec3(0.20, 0.1, 0.008)*sphereRadius/0.1;\
+        vec3 boxBottom = sphereCenter+vec3(-0.15, -0.025, -0.008)*sphereRadius/0.1;\
+        vec3 boxTop = sphereCenter+vec3(0.15, 0.035, 0.008)*sphereRadius/0.1;\
         vec2 q = intersectCube(origin,ray,boxBottom,boxTop);\
         /*if( q.y>-1.0 && q.y>q.x) {*/\
         if(r == 1.0){\

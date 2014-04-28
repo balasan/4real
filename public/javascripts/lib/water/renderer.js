@@ -99,7 +99,7 @@ var helperFunctions = '\
     wallColor = textureCube(sky, refractedRay*vec3(1.0,-1.0,1.0)).rgb*op*1.2;\
     \
     scale /= length(point); /* pool ambient occlusion */\
-    scale *= 1.0 - 0.9 / pow(length(point - sphereCenter) / sphereRadius, 4.0); /* sphere ambient occlusion */\
+    /*scale *= 1.0 - 0.9 / pow(length(point - sphereCenter) / sphereRadius, 4.0); sphere ambient occlusion */\
     \
     /* caustics */\
     vec3 refractedLight = -refract(-light, vec3(0.0, 1.0, 0.0), IOR_AIR / IOR_WATER);\
@@ -117,7 +117,7 @@ var helperFunctions = '\
     }\
     \
     /*substitute scale to get shadow*/\
-    return wallColor * 0.7;\
+    return wallColor * scale;\
   }\
 ';
 

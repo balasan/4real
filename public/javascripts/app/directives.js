@@ -50,6 +50,7 @@
             }
           } else {
             scope.water.paused = false;
+            scope.water.animate();
             scope.$watch('loadedImg', function(newV, oldV) {
               if (newV === 6) {
                 scope.water.skyReady = true;

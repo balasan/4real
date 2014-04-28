@@ -6,12 +6,12 @@ html(ng-app="4real" ng-controller="mainCtrl")
 
     meta(name="viewport" content="width=device-width, user-scalable=no, minimal-ui")
     
-    meta(property='og:title', content='title')
+    meta(property='og:title', content='{{title}}')
     meta(property='og:image', content='{{fbimg}}')
     meta(property='og:site_name', content='4real')
     meta(property='og:description', content='4real is a global digital agency creating high-end, agile websites and apps', digital='digital', agency='agency', global='global', specialising='specialising' high='high', end='end', websites="websites", apps="apps")
     meta(name="google-site-verification" content="QVILwlGsYWg8miEOCCqeh0fKKgHAXymB7487LKxetdE")
-    meta( name='description' content="{{description}}")
+    meta( name='description' content="4real demo of liquid dynamics. This demo is done in WebGL using GLSL shader language to crete an interactive, realtime visualisation of liquid.")
     meta(name="fragment" content="!")
     //- meta(name="keywords" content="{{keywords}}")
   
@@ -41,13 +41,13 @@ html(ng-app="4real" ng-controller="mainCtrl")
 
     // script(type='text/javascript', src="/javascripts/lib/angular-route/angular-route.min.js")
     
-    script(type='text/javascript', src="/javascripts/lib/4REAL.js")
-    script(type='text/javascript', src="/javascripts/lib/water/OES_texture_float_linear-polyfill.js")
-    script(type='text/javascript', src="/javascripts/lib/water/lightgl.js")
-    script(type='text/javascript', src="/javascripts/lib/water/cubemap.js")
-    script(type='text/javascript', src="/javascripts/lib/water/renderer.js")
-    script(type='text/javascript', src="/javascripts/lib/water/water.js")
-    script(type='text/javascript', src="/javascripts/lib/water/main.js")
+    // script(type='text/javascript', src="/javascripts/lib/4REAL.js")
+    // script(type='text/javascript', src="/javascripts/lib/water/OES_texture_float_linear-polyfill.js")
+    // script(type='text/javascript', src="/javascripts/lib/water/lightgl.js")
+    // script(type='text/javascript', src="/javascripts/lib/water/cubemap.js")
+    // script(type='text/javascript', src="/javascripts/lib/water/renderer.js")
+    // script(type='text/javascript', src="/javascripts/lib/water/water.js")
+    // script(type='text/javascript', src="/javascripts/lib/water/main.js")
 
 
     script(type='text/javascript', src="/javascripts/app/controllers.js")

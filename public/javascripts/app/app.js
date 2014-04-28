@@ -7,12 +7,6 @@
   app.config([
     "$locationProvider", "$stateProvider", "$urlRouterProvider", function($locationProvider, $stateProvider, $urlRouterProvider) {
       $locationProvider.html5Mode(true).hashPrefix('!');
-      $stateProvider.state("liquid", {
-        url: "/liquid",
-        templateUrl: "/partials/liquid",
-        page: 'liquid',
-        reload: true
-      });
       $stateProvider.state("index", {
         url: "/",
         templateUrl: "/partials/main",

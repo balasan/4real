@@ -1,4 +1,76 @@
-extends layout
-block content
-  <div ui-view></div>
-  canvas#waterCanvas
+doctype html5
+html()
+  head
+    title 4real - Liquid Demo
+    meta(name="viewport" content="width=device-width, user-scalable=no, minimal-ui")
+    
+    meta(property='og:title', content='4real Liquid Demo')
+    meta(property='og:image', content='https://s3-us-west-2.amazonaws.com/4real/various/liquid.png')
+    meta(property='og:site_name', content='4real')
+    meta(property='og:description', content='4real is a global digital agency creating high-end, agile websites and apps', digital='digital', agency='agency', global='global', specialising='specialising' high='high', end='end', websites="websites", apps="apps")
+    meta(name="google-site-verification" content="QVILwlGsYWg8miEOCCqeh0fKKgHAXymB7487LKxetdE")
+    meta( name='description' content="{{description}}")
+    meta(name="fragment" content="!")
+    link(rel='stylesheet', href='/stylesheets/main.css')
+
+
+  body
+    canvas#waterCanvas
+
+    div#liquid(liquid)
+      
+
+      #error.error.tint
+        .errorText
+          |Oh, your browser does not support WebGL.
+          |Try using a recent version of Chrome or Firefox, 
+          a(href="https://discussions.apple.com/thread/3300585?start=0") enable WebGL in Safari
+          |  or 
+          a(href="http://get.webgl.org/") click here for more info.
+          br
+          br
+          | Or watch the video recording here:
+          br
+          br
+          .youtubeVid
+      #errorMobile.error.tint
+        .errorText
+          | Unfortunately mobile browsers dont support WebGL yet, try it on desktop!
+          br
+          br
+          | Or watch the video recording here:
+          br
+          br
+          .youtubeVid
+
+      .tag
+        |3D WebGL experience by 
+        a(href="http://4real.io" target="_self") 4rea.io
+
+      div.hidden
+        video#video(loop)
+          Your browser doesn't appear to support the HTML5 <code>&lt;video&gt;</code> element.
+        //- video#zpos(src="video/nyctimelapse")
+        //- img#tiles(loaded crossOrigin="" ng-src="../images/tiles.jpg")
+        //- img#tiles(crossorigin="anonymous" src='https://s3-us-west-2.amazonaws.com/4real/projects/disimages.png')
+        //- img#xneg(src='images/beach/xneg.jpg')
+        //- img#xpos(src='images/beach/xpos.jpg')
+        //- img#ypos(src='images/beach/ypos.jpg')
+        //- img#yneg(src='images/beach/yneg.jpg')
+        //- img#zneg(src='images/beach/zneg.jpg')
+        //- img#zpos(src='images/beach/zpos.jpg')
+        img#xneg(loaded crossOrigin="" src='https://s3-us-west-2.amazonaws.com/4real/skyboxes/trees/negxs.jpg')
+        img#xpos(loaded crossOrigin="" src='https://s3-us-west-2.amazonaws.com/4real/skyboxes/trees/posxs.jpg')
+        img#ypos(loaded crossOrigin="" src='https://s3-us-west-2.amazonaws.com/4real/skyboxes/trees/negys.jpg')
+        img#yneg(loaded crossOrigin="" src='https://s3-us-west-2.amazonaws.com/4real/skyboxes/trees/posys.jpg')
+        img#zneg(loaded crossOrigin="" src='https://s3-us-west-2.amazonaws.com/4real/skyboxes/trees/negzs.jpg')
+        img#zpos(loaded crossOrigin="" src='https://s3-us-west-2.amazonaws.com/4real/skyboxes/trees/poszs.jpg')
+        div#loading | Loading...
+
+  script(type='text/javascript', src="/javascripts/lib/4REAL.js")
+  script(type='text/javascript', src="/javascripts/lib/water/OES_texture_float_linear-polyfill.js")
+  script(type='text/javascript', src="/javascripts/lib/water/lightgl.js")
+  script(type='text/javascript', src="/javascripts/lib/water/cubemap.js")
+  script(type='text/javascript', src="/javascripts/lib/water/renderer.js")
+  script(type='text/javascript', src="/javascripts/lib/water/water.js")
+  script(type='text/javascript', src="/javascripts/lib/water/main.js")

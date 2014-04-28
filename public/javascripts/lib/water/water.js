@@ -95,12 +95,12 @@ function Water() {
     varying vec2 coord;\
     \
     float volumeInSphere(vec3 center) {\
-      vec3 toCenter = vec3(coord.x * 2.0 - 1.0, 0.0, coord.y * 2.0 - 1.0) - center;\
-      float t = length(toCenter) / radius;\
+      vec3 toCenter = vec3(coord.x * 2.0 - 1.0, 0.0, coord.y * 2.0 - 1.0) - center*vec3(1.0,1.0,1.0);\
+      float t = length(toCenter*vec3(0.8,3.0,2.0)) / radius;\
       float dy = exp(-pow(t * 1.5, 6.0));\
       float ymin = min(0.0, center.y - dy);\
       float ymax = min(max(0.0, center.y + dy), ymin + 2.0 * dy);\
-      return (ymax - ymin) * 0.1;\
+      return (ymax - ymin) * 0.05;\
     }\
     \
     void main() {\
@@ -138,7 +138,7 @@ Water.prototype.moveSphere = function(oldCenter, newCenter, radius) {
     this_.sphereShader.uniforms({
       oldCenter: oldCenter,
       newCenter: newCenter,
-      radius: radius
+      radius: radius*1.0
     }).draw(this_.plane);
   });
   this.textureB.swapWith(this.textureA);

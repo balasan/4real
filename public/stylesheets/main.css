@@ -1609,10 +1609,17 @@ circle:hover {
 }
 
 #waterCanvas {
-  display: none;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab !important;
 }
 #waterCanvas.visible {
   display: block;
+}
+#waterCanvas.grab {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing !important;
 }
 
 .tag {
@@ -1635,11 +1642,14 @@ circle:hover {
   width: 100%;
   height: 100%;
   text-align: center;
+  padding: 0 15%;
+  min-height: 700px;
 }
 .error .errorText {
+  display: table-cell;
+  vertical-align: middle;
   width: 70%;
-  top: 50%;
-  margin: 30% auto 0 auto;
+  margin: 0 auto 0 auto;
   font-size: 30px;
   line-height: 1.2em;
 }
@@ -1666,7 +1676,8 @@ i h2 {
 
 html {
   height: 100%;
-  overflow: hidden;
+  overflow: auto;
+  min-height: 650px;
 }
 
 body {
@@ -2466,7 +2477,7 @@ canvas {
 @media screen and (max-width: 700px) {
   html {
     height: 100%;
-    min-height: 550px;
+    min-height: 520px;
   }
 
   body {
@@ -2475,10 +2486,18 @@ canvas {
     overflow: hidden;
   }
 
+  .error {
+    padding: 0 2.5%;
+  }
   .error .errorText {
-    width: 90%;
-    margin-top: 40%;
+    display: block;
+    width: 100%;
+    margin-top: 60px;
     font-size: 20px;
+  }
+  .error .errorText iframe {
+    width: 100%;
+    height: 200px;
   }
 
   glass {

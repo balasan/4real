@@ -25,11 +25,11 @@ app.config ["$locationProvider","$stateProvider","$urlRouterProvider", ($locatio
     # templateUrl: "/partials/main"
     # controller: 'mainCtrl'  
 
-  $stateProvider.state "liquid",
-    url: "/liquid"
-    templateUrl: "/partials/liquid"
-    page: 'liquid'
-    reload:true
+  # $stateProvider.state "liquid",
+  #   url: "/liquid"
+  #   templateUrl: "/partials/liquid"
+  #   page: 'liquid'
+  #   reload:true
 
 
   $stateProvider.state "index",

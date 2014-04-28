@@ -10,7 +10,7 @@
 
 var waterView = function() {
 
-  this.paused = true;
+  this.paused = false;
   this.physics = true;
   this.animated = false;
   this.skyReady = false;
@@ -41,11 +41,8 @@ var waterView = function() {
 		alpha: true
 	});
 
-	// window.onerror = window.handleError;
+
 	var canvas = document.getElementById("waterCanvas");
-	canvas.addEventListener("webglcontextlost", function(event) {
-	    event.preventDefault();
-	}, false);
 
 	var water;
 	var cubemap;
@@ -90,11 +87,11 @@ var waterView = function() {
 	water = new Water();
 	renderer = new Renderer();
 
-	var videoElement = document.getElementById("video");
-	videoElement.addEventListener("canplaythrough", startVideo, true);
-	videoElement.addEventListener("ended", videoDone, true);
-	videoElement.preload = "auto";
-	videoElement.src = "videos/people.mp4";
+	// var videoElement = document.getElementById("video");
+	// videoElement.addEventListener("canplaythrough", startVideo, true);
+	// videoElement.addEventListener("ended", videoDone, true);
+	// videoElement.preload = "auto";
+	// videoElement.src = "videos/people.mp4";
 
 	function startVideo() {
 		videoElement.play();
@@ -142,7 +139,6 @@ var waterView = function() {
   } 
   self.drops()
 
-  if(this.animated){
 
 	  self.reset = function(){
 
@@ -152,14 +148,12 @@ var waterView = function() {
 	    },2000)
 	    setTimeout(self.reset, 20000);
 	  }
-	  self.reset()
 
 	  self.moreDrops = function(){
 	    self.drops()
 	    t = Math.random()
 	    setTimeout(self.moreDrops,t*12000)
 	  }
-	  self.moreDrops()
 
 	  self.move = function(){
 	    var v = Math.random()
@@ -168,8 +162,11 @@ var waterView = function() {
 	    angleY = (h-.5) * 360 * 10
 	    setTimeout(self.move,10000)
 	  }
-	  self.move();
+  self.animate = function(){
 
+  	self.reset()
+	  self.moreDrops()
+	  self.move();
 	}
 
 	var video = gl.createTexture();
@@ -191,7 +188,7 @@ var waterView = function() {
 			gl.UNSIGNED_BYTE, videoElement);
 	}
 
-	document.getElementById('loading').innerHTML = '';
+	// document.getElementById('loading').innerHTML = '';
 	onresize();
 
 	var requestAnimationFrame =
@@ -388,4 +385,41 @@ var waterView = function() {
 		gl.disable(gl.DEPTH_TEST);
 	}
 	};
+}
+
+try{
+	var water = new waterView();
+	// water.animate();
+}
+catch (error){
+  var html = error.message
+  if(html == 'WebGL not supported')
+    if(window.innerWidth < 700)    
+      error = document.getElementById('errorMobile');
+    else 
+      error = document.getElementById('error');
+    error.style.display = 'table'
+    var video = error.getElementsByClassName('youtubeVid');
+    video[0].innerHTML = '<iframe width="640" height="360" src="//www.youtube.com/embed/7eUWHAZCSXs?rel=0" frameborder="0" allowfullscreen></iframe>';
+    document.getElementById('waterCanvas').style.display='none';
+}
+
+var canvas = document.getElementById("waterCanvas");
+
+canvas.addEventListener('mousedown', function(){
+	canvas.classList.add('grab')
+})
+canvas.addEventListener('mouseup', function(){
+	canvas.classList.remove('grab')
+})
+
+var handleError = function(errro){
+	console.log(error)
+}
+
+window.onerror = window.handleError;
+
+window.onload = function(){
+	if(water)
+		water.renderCubemap()
 }

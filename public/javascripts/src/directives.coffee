@@ -43,6 +43,7 @@ app.directive "liquid", ["$timeout", "$window","isMobile","webGL", ($timeout, $w
           display: 'block'
     else
       scope.water.paused=false;
+      scope.water.animate();
       scope.$watch 'loadedImg', (newV,oldV)->
         if newV == 6
           scope.water.skyReady = true;

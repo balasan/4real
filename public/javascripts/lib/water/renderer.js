@@ -12,6 +12,7 @@ var helperFunctions = '\
   const vec3 abovewaterColor = vec3(0.8, 0.9, 0.9);\
   const vec3 underwaterColor = vec3(0.8, 0.9, 1.0);\
   const float poolHeight = .7;\
+  uniform float op;\
   uniform vec3 light;\
   uniform vec3 sphereCenter;\
   uniform vec3 sphereNormals;\
@@ -95,7 +96,7 @@ var helperFunctions = '\
     }\
     vec3 incomingRay = normalize(point - eye);\
     vec3 refractedRay = refract(incomingRay, normal, .75);\
-    wallColor = textureCube(sky, refractedRay*vec3(1.0,-1.0,1.0)).rgb;\
+    wallColor = textureCube(sky, refractedRay*vec3(1.0,-1.0,1.0)).rgb*op*1.2;\
     \
     scale /= length(point); /* pool ambient occlusion */\
     scale *= 1.0 - 0.9 / pow(length(point - sphereCenter) / sphereRadius, 4.0); /* sphere ambient occlusion */\
@@ -180,7 +181,7 @@ function Renderer() {
           if (hit.y < -2.0 / 12.0) {\
             color = getWallColor(hit);\
           } else {\
-            color += textureCube(sky, -ray).rgb;\
+            color += textureCube(sky, -ray).rgb*op*1.2;\
             color += vec3(pow(max(0.0, dot(light, ray)), 5000.0)) * vec3(10.0, 8.0, 6.0);\
           }\
         }\
@@ -392,7 +393,8 @@ function Renderer() {
   ', helperFunctions + '\
     varying vec3 position;\
     void main() {\
-      gl_FragColor = textureCube(sky, position*vec3(1.0,-1.0,1.0));\
+      gl_FragColor = textureCube(sky, position*vec3(1.0,-1.0,1.0))*op*1.4;\
+      gl_FragColor.a = 1.0;\
     }\
   ');
 
@@ -433,7 +435,7 @@ Renderer.prototype.updateCaustics = function(water) {
   });
 };
 
-Renderer.prototype.renderSky = function(sky) {
+Renderer.prototype.renderSky = function(sky,op) {
 
   sky.bind(0);
   // gl.enable(gl.CULL_FACE);
@@ -441,6 +443,7 @@ Renderer.prototype.renderSky = function(sky) {
   gl.scale(15,15,15)
   this.skyShader.uniforms({
     sky: 0,
+    op: op
   }).draw(this.skyMesh);
   gl.popMatrix()
   // gl.disable(gl.CULL_FACE);
@@ -465,7 +468,7 @@ Renderer.prototype.renderVideo = function(video) {
 
 }
 
-Renderer.prototype.renderWater = function(water, sky, video, tracer) {
+Renderer.prototype.renderWater = function(water, sky, video, tracer,op) {
 
   this.sref.bind(4);
   this.srefl.bind(5);
@@ -489,6 +492,7 @@ Renderer.prototype.renderWater = function(water, sky, video, tracer) {
       srefl: 5,
       causticTex: 3,
       eye: tracer.eye,
+      op:op,
       scale: [gl.canvas.width,gl.canvas.height],
       sphereCenter: this.sphereCenter,
       sphereRadius: this.sphereRadius,
@@ -555,7 +559,7 @@ Renderer.prototype.renderSphere = function(water) {
 
 };
 
-Renderer.prototype.renderCube = function(water,sky, tracer) {
+Renderer.prototype.renderCube = function(water,sky, tracer,op) {
   // gl.enable(gl.CULL_FACE);
   water.textureA.bind(0);
   // this.tileTexture.bind(1);
@@ -566,6 +570,7 @@ Renderer.prototype.renderCube = function(water,sky, tracer) {
     water: 0,
     causticTex: 2,
     sky:3,
+    op:op,
     eye: tracer.eye,
     sphereCenter: this.sphereCenter,
     sphereRadius: this.sphereRadius,

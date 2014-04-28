@@ -15,6 +15,8 @@ var waterView = function() {
   this.animated = false;
   this.skyReady = false;
 
+  var skyOpacity = 0.0;
+
   var self = this;
 
 	function text2html(text) {
@@ -119,6 +121,7 @@ var waterView = function() {
 			zneg: document.getElementById('zneg'),
 			zpos: document.getElementById('zpos')
 		});
+		skyOpacity = 1;
 	}
 
 	if (!water.textureA.canDrawTo() || !water.textureB.canDrawTo()) {
@@ -327,12 +330,14 @@ var waterView = function() {
 
   var currentY =0;
   var currentX =0;
+  var currentOpacity=0.0;
 
 	function draw() {
     var tracer = new GL.Raytracer();
 
     dy = angleY - currentY;
     dx = angleX - currentX;
+    dop = skyOpacity - currentOpacity;
 
     if(Math.abs(dy) > .02)
       currentY += dy*.02
@@ -340,7 +345,9 @@ var waterView = function() {
     if(Math.abs(dx) > .02)
       currentX += dx*.02
     else currentX += dx;
-
+    if(Math.abs(dop) > .02)
+      currentOpacity += dop*.02
+    else currentOpacity += dop;    
 
 		// Change the light direction to the camera look vector when the L key is pressed
 		if (GL.keys.L) {
@@ -369,7 +376,7 @@ var waterView = function() {
 		renderer.sphereCenter = center;
 		renderer.sphereRadius = radius;
 		
-		renderer.renderSky(cubemap);
+		renderer.renderSky(cubemap,currentOpacity);
 		
 		// gl.pushMatrix()
 		// gl.loadIdentity();
@@ -378,9 +385,9 @@ var waterView = function() {
 		// renderer.renderVideo(video)
 		// gl.popMatrix()
 
-		renderer.renderCube(water,cubemap, tracer);
+		renderer.renderCube(water,cubemap, tracer,currentOpacity);
 		// updateTexture(5)
-		renderer.renderWater(water, cubemap, video, tracer);
+		renderer.renderWater(water, cubemap, video, tracer,currentOpacity);
 		renderer.renderSphere(water);
 		gl.disable(gl.DEPTH_TEST);
 	}

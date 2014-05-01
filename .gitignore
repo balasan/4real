@@ -7,3 +7,4 @@ public/stylesheets/.sass-cache/
 nodemon.json
 .sass-cache
 .git.bfg-report
+newrelic_agent.log

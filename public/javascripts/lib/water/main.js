@@ -1,4 +1,5 @@
 /*
+ * 4real Liquid Demo
  * Modified version of WebGL Water by Evan Wallace
  * http://madebyevan.com/webgl-water/
  *

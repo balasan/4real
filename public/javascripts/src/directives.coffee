@@ -282,6 +282,20 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$state', "isMobile"
       scope.newV = -.5 + (e.pageY / $window.innerHeight)
 
     specular = el.find("specular")
+
+    # specular.on 'pointerdown', (e)->
+    #   $this = angular.element(this)
+    #   $this.css 
+    #     'display':'none'
+
+    #   underneathElem = document.elementFromPoint(e.x, e.y);
+
+    #   $this.css 
+    #     'display':'block'
+
+    #   e.target = underneathElem;
+    #   underneathElem.dispatchEvent(e);
+
     last = new Date()
 
     updateRotation = () ->

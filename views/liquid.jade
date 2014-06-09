@@ -43,9 +43,9 @@ html()
           br
           .youtubeVid
 
-      .tag
-        |3D WebGL experience by 
-        a(href="http://4real.io" target="_self") 4rea.io
+      //- .tag
+      //-   |3D WebGL experience by 
+      //-   a(href="http://4real.io" target="_self") 4rea.io
 
       div.hidden
         video#video(loop)
@@ -53,20 +53,24 @@ html()
         //- video#zpos(src="video/nyctimelapse")
         //- img#tiles(loaded crossOrigin="" ng-src="../images/tiles.jpg")
         //- img#tiles(crossorigin="anonymous" src='https://s3-us-west-2.amazonaws.com/4real/projects/disimages.png')
-        //- img#xneg(src='images/beach/xneg.jpg')
-        //- img#xpos(src='images/beach/xpos.jpg')
-        //- img#ypos(src='images/beach/ypos.jpg')
-        //- img#yneg(src='images/beach/yneg.jpg')
-        //- img#zneg(src='images/beach/zneg.jpg')
-        //- img#zpos(src='images/beach/zpos.jpg')
+        //- img#xneg(src='images/beach/negx.jpg')
+        //- img#xpos(src='images/beach/posx.jpg')
+        //- img#ypos(src='images/beach/negy.jpg')
+        //- img#yneg(src='images/beach/posy.jpg')
+        //- img#zneg(src='images/beach/negz.jpg')
+        //- img#zpos(src='images/beach/posz.jpg')
+        
         img#xneg(loaded crossOrigin="" src='https://s3-us-west-2.amazonaws.com/4real/skyboxes/trees/negxs.jpg')
         img#xpos(loaded crossOrigin="" src='https://s3-us-west-2.amazonaws.com/4real/skyboxes/trees/posxs.jpg')
         img#ypos(loaded crossOrigin="" src='https://s3-us-west-2.amazonaws.com/4real/skyboxes/trees/negys.jpg')
         img#yneg(loaded crossOrigin="" src='https://s3-us-west-2.amazonaws.com/4real/skyboxes/trees/posys.jpg')
         img#zneg(loaded crossOrigin="" src='https://s3-us-west-2.amazonaws.com/4real/skyboxes/trees/negzs.jpg')
         img#zpos(loaded crossOrigin="" src='https://s3-us-west-2.amazonaws.com/4real/skyboxes/trees/poszs.jpg')
+        
         div#loading | Loading...
 
+  script(src="/javascripts/lib/GSVPano.js")
+  script(src="http://maps.google.com/maps/api/js?sensor=false")
   script(type='text/javascript', src="/javascripts/lib/4REAL.js")
   script(type='text/javascript', src="/javascripts/lib/water/OES_texture_float_linear-polyfill.js")
   script(type='text/javascript', src="/javascripts/lib/water/lightgl.js")

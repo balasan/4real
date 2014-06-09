@@ -181,7 +181,7 @@ function Renderer() {
           if (hit.y < -2.0 / 12.0) {\
             color = getWallColor(hit);\
           } else {\
-            color += textureCube(sky, -ray).rgb*op*1.2;\
+            color += textureCube(sky, -ray).rgb*op;\
             color += vec3(pow(max(0.0, dot(light, ray)), 5000.0)) * vec3(10.0, 8.0, 6.0);\
           }\
         }\
@@ -393,7 +393,7 @@ function Renderer() {
   ', helperFunctions + '\
     varying vec3 position;\
     void main() {\
-      gl_FragColor = textureCube(sky, position*vec3(1.0,-1.0,1.0))*op*1.4;\
+  gl_FragColor = textureCube(sky, position * vec3(1.0, -1.0, 1.0)) * op;\
       gl_FragColor.a = 1.0;\
     }\
   ');

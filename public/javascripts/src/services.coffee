@@ -13,7 +13,7 @@ app.factory 'webGL', ($window)->
 
 app.factory 'isMobile', ($window)->
   return ()->
-    if ($window.innerWidth < 800)
+    if ($window.innerWidth < 740)
       return true
     return false
 

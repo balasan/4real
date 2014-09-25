@@ -24,7 +24,7 @@
 
   app.factory('isMobile', function($window) {
     return function() {
-      if ($window.innerWidth < 700) {
+      if ($window.innerWidth < 800) {
         return true;
       }
       return false;

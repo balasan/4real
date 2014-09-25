@@ -324,9 +324,9 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$state', "isMobile"
       scope.oldH += dx
       scope.oldV += dy
 
-      
 
-      transform="translateZ("+-scope.windowWidth/2+"px) rotateX(" + ((scope.oldV * 5)) + "deg) rotateY(" + ((scope.oldH * 5) + scope.oldR) + "deg) translateZ("+scope.windowWidth/2+"px) "
+
+      transform= "rotateX(" + ((scope.oldV * 5)) + "deg) rotateY(" + ((scope.oldH * 5) + scope.oldR) + "deg) "
       el.css 
         "transform": transform
         "-moz-transform": transform
@@ -366,6 +366,12 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$state', "isMobile"
 
     resize = ()->
       scope.windowWidth = $window.innerWidth
+
+      el.css
+        'transform-origin': '50% 50% '+ -scope.windowWidth/2+'px'
+        '-webkit-transform-origin': '50% 50% '+ -scope.windowWidth/2+'px'
+
+
     resize()
     
     $document.on('mousemove', rotateScene)

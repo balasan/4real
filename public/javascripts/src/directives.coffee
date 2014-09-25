@@ -246,21 +246,24 @@ app.directive "glass", ['$window', '$timeout','$filter', ($window, $timeout,$fil
       width = $window.innerWidth
       if el.hasClass('left')
         obj = {}
-        obj[prefix.css+ "transform"] = "translateX("+width+"px) rotateY(90deg)"
-        el.css(
-          obj
-          )
+        transform = "translateX("+width+"px) rotateY(90deg)"
+        el.css
+          transform : transform
+          '-webkit-transform' : transform
+          
       else if el.hasClass('right')
         obj = {}
-        obj[prefix.css+ "transform"] = "translateX("+-width+"px) rotateY(-90deg)"
+        transform = "translateX("+-width+"px) rotateY(-90deg)"
         el.css(
-          obj
+          transform : transform
+          '-webkit-transform' : transform
           )
       else if el.hasClass('back')
         obj = {}
-        obj[prefix.css+ "transform"] = " translateZ("+ (-width)+"px) rotateY(-180deg)"
+        transform = " translateZ("+ (-width)+"px) rotateY(-180deg)"
         el.css(
-          obj
+          transform : transform
+          '-webkit-transform' : transform
           )
     resize()
     angular.element($window).bind 'resize', ->
@@ -320,6 +323,9 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$state', "isMobile"
       if Math.abs(dy)>.001 then dy *=inc
       scope.oldH += dx
       scope.oldV += dy
+
+      
+
       transform="translateZ("+-scope.windowWidth/2+"px) rotateX(" + ((scope.oldV * 5)) + "deg) rotateY(" + ((scope.oldH * 5) + scope.oldR) + "deg) translateZ("+scope.windowWidth/2+"px) "
       el.css 
         "transform": transform

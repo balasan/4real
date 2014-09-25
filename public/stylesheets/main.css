@@ -123,6 +123,9 @@ specular {
 .active .screen {
   opacity: 1;
 }
+.active .prices .cur {
+  display: block;
+}
 
 .screen {
   opacity: .1;
@@ -143,6 +146,9 @@ ipad {
   /*background: #000;*/
   border-radius: 10px;
   box-shadow: 0 0 1px 1px rgba(150, 150, 150, 0.6);
+}
+ipad .prices .cur {
+  display: none;
 }
 
 .ipad2 {
@@ -1921,11 +1927,6 @@ canvas {
   -ms-transform-style: preserve-3d;
   -o-transform-style: preserve-3d;
   transform-style: preserve-3d;
-  -webkit-perspective-origin: 50% 50%;
-  -moz-perspective-origin: 50% 50%;
-  -ms-perspective-origin: 50% 50%;
-  -o-perspective-origin: 50% 50%;
-  perspective-origin: 50% 50%;
   -webkit-transform: translateZ(10px);
   -moz-transform: translateZ(10px);
   -ms-transform: translateZ(10px);
@@ -1941,6 +1942,11 @@ canvas {
   -ms-transform-style: preserve-3d;
   -o-transform-style: preserve-3d;
   transform-style: preserve-3d;
+  -webkit-perspective: none;
+  -moz-perspective: none;
+  -ms-perspective: none;
+  -o-perspective: none;
+  perspective: none;
   position: absolute;
   -webkit-touch-callout: none;
   -webkit-user-select: none;

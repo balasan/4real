@@ -284,20 +284,29 @@
           var prefix, resize;
           prefix = $filter('prefix');
           resize = function() {
-            var obj, width;
+            var obj, transform, width;
             width = $window.innerWidth;
             if (el.hasClass('left')) {
               obj = {};
-              obj[prefix.css + "transform"] = "translateX(" + width + "px) rotateY(90deg)";
-              return el.css(obj);
+              transform = "translateX(" + width + "px) rotateY(90deg)";
+              return el.css({
+                transform: transform,
+                '-webkit-transform': transform
+              });
             } else if (el.hasClass('right')) {
               obj = {};
-              obj[prefix.css + "transform"] = "translateX(" + -width + "px) rotateY(-90deg)";
-              return el.css(obj);
+              transform = "translateX(" + -width + "px) rotateY(-90deg)";
+              return el.css({
+                transform: transform,
+                '-webkit-transform': transform
+              });
             } else if (el.hasClass('back')) {
               obj = {};
-              obj[prefix.css + "transform"] = " translateZ(" + (-width) + "px) rotateY(-180deg)";
-              return el.css(obj);
+              transform = " translateZ(" + (-width) + "px) rotateY(-180deg)";
+              return el.css({
+                transform: transform,
+                '-webkit-transform': transform
+              });
             }
           };
           resize();

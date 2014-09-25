@@ -348,7 +348,7 @@ canvas {
   height:100%;
   @include browser(perspective, 600px); 
   @include browser(transform-style, preserve-3d);
-  @include browser(perspective-origin, 50% 50%); 
+  // @include browser(perspective-origin, 50% 50%); 
   // @include transform3d(translate3d(0,0,0));
   @include browser(transform,translateZ(10px));
 
@@ -358,6 +358,8 @@ canvas {
   height:100%;
   // @include browser(backface-visibility, hidden);
   @include browser(transform-style, preserve-3d);
+  @include browser(perspective, none); 
+
   position:absolute;
   // @include transition(all 1s linear)
   // @include browser(transform-origin-z, -650px);

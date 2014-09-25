@@ -35,7 +35,7 @@ canvas#waterCanvas
   #cube(cube)
   
     .glass.back(glass ng-class="{'active': page=='about'}")
-      ipad.ipad2
+      //- ipad.ipad2
       ipad
         camera
         specular(ng-class="{'active': page=='about'}")
@@ -43,7 +43,7 @@ canvas#waterCanvas
         div.screen(ng-repeat="thispage in ['about']" ng-include="'/partials/nav'")
     
     .glass.front(glass ng-class="{'active' : page==''}")
-      ipad.ipad2
+      //- ipad.ipad2
       ipad
         specular(ng-class="{'active' : page==''}")
         .main.screen

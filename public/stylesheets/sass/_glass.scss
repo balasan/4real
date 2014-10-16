@@ -6,7 +6,7 @@
   width:100%;
   height:100%;
   overflow:visible;
-  @include browser(perspective, 600); 
+  // @include browser(perspective, 600); 
     // @include animation(rotateAlot .7s);
 
   // @include browser(transform-style, preserve-3d);
@@ -103,7 +103,7 @@ ipad {
   border-radius: 10px;
   // overflow: hidden;
   border: 1px solid rgba(150,150,150,.6);
-  @include browser(perspective, 600); 
+  // @include browser(perspective, 600); 
 
   // box-shadow: 0 0 1px 1px  rgba(150,150,150,.6);
 

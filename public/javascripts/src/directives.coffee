@@ -325,8 +325,9 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$state', "isMobile"
       scope.oldV += dy
 
 
-
       transform= "rotateX(" + ((scope.oldV * 5)) + "deg) rotateY(" + ((scope.oldH * 5) + scope.oldR) + "deg) "
+
+      # transform= "rotateX(" + ((scope.oldV * 5)) + "deg) rotateY(" + ((scope.oldH * 5) + scope.oldR) + "deg) "
       el.css 
         "transform": transform
         "-moz-transform": transform

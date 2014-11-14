@@ -24,7 +24,7 @@
 
   app.factory('isMobile', function($window) {
     return function() {
-      if ($window.innerWidth < 740) {
+      if ($window.innerWidth < 700) {
         return true;
       }
       return false;
@@ -136,6 +136,16 @@
       amazonUrl = "https://s3-us-west-2.amazonaws.com/4real/projects/";
       data = [
         {
+          title: 'Clinton Global Initiative',
+          description: '',
+          url: 'http://cgi-interactive.clintonfoundation.org/',
+          img: [
+            {
+              url: amazonUrl + 'cgi-web.jpg'
+            }
+          ],
+          iphone: []
+        }, {
           title: 'DIS Images',
           description: '',
           url: 'http://disimages.com',
@@ -193,22 +203,7 @@
               url: amazonUrl + 'walmart.jpg'
             }
           ],
-          iphone: []
-        }, {
-          title: 'David Lewis Gallery',
-          description: '',
-          url: 'http://davidlewisgallery.com',
-          img: [
-            {
-              url: amazonUrl + 'davidlewis.jpg'
-            }
-          ],
-          iphone: [
-            {
-              url: amazonUrl + 'dlphone.png'
-            }
-          ]
-        }, {
+          iphone: [],
           title: 'The Digit',
           description: 'Augmented Reality App',
           url: 'http://balasan.net/thedigit/',

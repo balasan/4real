@@ -146,6 +146,20 @@
           ],
           iphone: []
         }, {
+          title: 'DIS Magazine Mobile',
+          description: '',
+          url: 'http://dismagazine.com',
+          img: [
+            {
+              url: amazonUrl + 'dis-web.jpg'
+            }
+          ],
+          iphone: [
+            {
+              url: amazonUrl + 'dis-phone.png'
+            }
+          ]
+        }, {
           title: 'DIS Images',
           description: '',
           url: 'http://disimages.com',

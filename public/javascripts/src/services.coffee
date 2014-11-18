@@ -108,6 +108,15 @@ app.factory 'projectsService', [ ()->
 
   data = [
 
+    title: 'Thermal Online Experience'
+    description: ''
+    url: 'http://thermal.global'
+    img: [
+      url: amazonUrl + 'thermal.jpg'
+    ]
+    iphone:[]
+  ,
+
     title: 'Clinton Global Initiative'
     description: ''
     url: 'http://cgi-interactive.clintonfoundation.org/'

@@ -189,7 +189,7 @@ $clockColor: white;
 
 .active .globe{
   margin-top:40px;
-  @include browser(filter, hue-rotate(-25deg) brightness(1.5) saturate(150%));
+  // @include browser(filter, hue-rotate(-25deg) brightness(1.5) saturate(150%));
   opacity:.4;
 }
 .globe{

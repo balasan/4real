@@ -360,7 +360,7 @@
             }
             scope.oldH += dx;
             scope.oldV += dy;
-            transform = "rotateX(" + (scope.oldV * 5) + "deg) rotateY(" + ((scope.oldH * 5) + scope.oldR) + "deg) ";
+            transform = "translateZ(" + -$window.innerWidth / 2 + "px) rotateX(" + (scope.oldV * 5) + "deg) rotateY(" + ((scope.oldH * 5) + scope.oldR) + "deg) translateZ(" + $window.innerWidth / 2 + "px)";
             el.css({
               "transform": transform,
               "-moz-transform": transform,
@@ -392,10 +392,7 @@
           };
           resize = function() {
             scope.windowWidth = $window.innerWidth;
-            return el.css({
-              'transform-origin': '50% 50% ' + -scope.windowWidth / 2 + 'px',
-              '-webkit-transform-origin': '50% 50% ' + -scope.windowWidth / 2 + 'px'
-            });
+            return el.css;
           };
           resize();
           $document.on('mousemove', rotateScene);

@@ -325,7 +325,7 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$state', "isMobile"
       scope.oldV += dy
 
 
-      transform= "rotateX(" + ((scope.oldV * 5)) + "deg) rotateY(" + ((scope.oldH * 5) + scope.oldR) + "deg) "
+      transform= "translateZ("+ -$window.innerWidth/2+"px) rotateX(" + ((scope.oldV * 5)) + "deg) rotateY(" + ((scope.oldH * 5) + scope.oldR) + "deg) translateZ("+ $window.innerWidth/2+"px)"
 
       # transform= "rotateX(" + ((scope.oldV * 5)) + "deg) rotateY(" + ((scope.oldH * 5) + scope.oldR) + "deg) "
       el.css 
@@ -369,8 +369,8 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$state', "isMobile"
       scope.windowWidth = $window.innerWidth
 
       el.css
-        'transform-origin': '50% 50% '+ -scope.windowWidth/2+'px'
-        '-webkit-transform-origin': '50% 50% '+ -scope.windowWidth/2+'px'
+        # 'transform-origin': '50% 50% '+ -scope.windowWidth/2+'px'
+        # '-webkit-transform-origin': '50% 50% '+ -scope.windowWidth/2+'px'
 
 
     resize()

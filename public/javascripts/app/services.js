@@ -148,7 +148,7 @@
         }, {
           title: 'Clinton Global Initiative',
           description: '',
-          url: 'http://cgi-interactive.clintonfoundation.org/',
+          url: 'http://cgi-globe.herokuapp.com/',
           img: [
             {
               url: amazonUrl + 'cgi-web.jpg'

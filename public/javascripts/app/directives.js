@@ -68,7 +68,7 @@
   ]);
 
   app.directive("video", [
-    "$timeout", "$window", function($timeout, $window) {
+    "$timeout", "$window", "isMobile", function($timeout, $window, isMobile) {
       return {
         link: function(scope, el, attr) {
           var resize, vidHeight, vidWidth;
@@ -122,20 +122,20 @@
           scope.$watch('activeVideo', function(newV, oldV) {
             if (isMobile()) {
               return;
-              if (scope.videos[scope.activeVideo] === el[0].id) {
-                if (el[0].play) {
-                  el[0].play();
-                }
-                return el.addClass('activeVid');
-              } else {
-                if (el[0].pause) {
-                  el[0].pause();
-                }
-                if (el[0].currentTime) {
-                  el[0].currentTime = 0;
-                }
-                return el.removeClass('activeVid');
+            }
+            if (scope.videos[scope.activeVideo] === el[0].id) {
+              if (el[0].play) {
+                el[0].play();
               }
+              return el.addClass('activeVid');
+            } else {
+              if (el[0].pause) {
+                el[0].pause();
+              }
+              if (el[0].currentTime) {
+                el[0].currentTime = 0;
+              }
+              return el.removeClass('activeVid');
             }
           });
           return angular.element($window).bind('resize', function() {

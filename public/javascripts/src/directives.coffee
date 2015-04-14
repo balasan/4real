@@ -55,7 +55,7 @@ app.directive "liquid", ["$timeout", "$window","isMobile","webGL", ($timeout, $w
 
 ]
 
-app.directive "video", ["$timeout", "$window", ($timeout, $window) ->
+app.directive "video", ["$timeout", "$window","isMobile", ($timeout, $window, isMobile) ->
   link: (scope, el, attr) ->
     vidHeight = 0;
     vidWidth = 0;
@@ -99,8 +99,8 @@ app.directive "video", ["$timeout", "$window", ($timeout, $window) ->
 
 
     scope.$watch 'activeVideo', (newV, oldV) ->
-      if(isMobile())
-        return;
+        if isMobile() 
+          return;
 
       # if newV != oldV
         if scope.videos[scope.activeVideo] == el[0].id

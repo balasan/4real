@@ -91,8 +91,17 @@
 
     font-size:24px;
     padding:10px;
+    @include backface-visibility(hidden);
+
     &:hover{
       @include transform(scale(1.5,1.5));
+
+    }
+    h2{
+      text-indent: -99999px;
+      display: inline-block;
+      width:0px;
+      overflow:hidden;
     }
   }
   .icon {
@@ -106,6 +115,7 @@
     pointer-events: all; 
     cursor: pointer;
     color:rgb(120,120,120);
+
     // use { width: 24px; height: 24px; }
     svg { 
       fill: #fff; 

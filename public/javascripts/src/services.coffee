@@ -4,6 +4,7 @@ app =  angular.module("4real.services", [])
 app.factory 'webGL', ($window)->
    
   initWater : ()->
+
     try
       if !this.waterView
         this.waterView = new window.waterView()

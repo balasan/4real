@@ -1,5 +1,7 @@
-//- #videos
-  video#v0( video preload='auto' )
+#videos
+  video#v0( video preload='auto' loop)
+
+    //- source(src='/images/4realbg.mp4'  type='video/mp4', p-oster='https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg')
     source(src='https://s3-us-west-2.amazonaws.com/4real/various/v1.mp4', type='video/mp4', p-oster='https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg')
     source(src='https://s3-us-west-2.amazonaws.com/4real/various/v1.ogv', type='video/ogg', p-oster='https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg')
     | Your browser does not support the HTML5 video element.
@@ -37,14 +39,28 @@ canvas#waterCanvas
     .glass.back(glass ng-class="{'active': page=='about'}")
       //- ipad.ipad2
       ipad
-        camera
+
+        a.arrowLink(href="/projects")
+          .leftArrow.arrow
+            img(src="images/left-arrow.svg")
+        a.arrowLink(href="/charts") 
+          .rightArrow.arrow
+            img(src="images/right-arrow.svg")
+
+        //- camera
         specular(ng-class="{'active': page=='about'}")
         div(ng-include="'/partials/about'")            
-        div.screen(ng-repeat="thispage in ['about']" ng-include="'/partials/nav'")
+        div.nav.screen(ng-repeat="thispage in ['about']" ng-include="'/partials/nav'")
     
     .glass.front(glass ng-class="{'active' : page==''}")
       //- ipad.ipad2
       ipad
+        a.arrowLink(href="/charts")
+          .leftArrow.arrow
+            img(src="images/left-arrow.svg")
+        a.arrowLink(href="/projects") 
+          .rightArrow.arrow
+            img(src="images/right-arrow.svg") 
         specular(ng-class="{'active' : page==''}")
         .main.screen
           .vcenter
@@ -61,19 +77,33 @@ canvas#waterCanvas
                   |liquid demo
 
               //- span 4real
-        div.screen(ng-repeat="thispage in ['']" ng-include="'/partials/nav'")
+        div.nav.screen(ng-repeat="thispage in ['']" ng-include="'/partials/nav'")
 
     
     .glass.left(glass ng-class="{'active': page=='projects'}")
+      
       ipad
+        a.arrowLink(href="/")
+          .leftArrow.arrow
+            img(src="images/left-arrow.svg")
+        a.arrowLink(href="/about") 
+          .rightArrow.arrow
+            img(src="images/right-arrow.svg")
+
         specular(ng-class="{'active': page=='projects'}")
         div( ng-include="'/partials/projects'")  
-        div.screen(ng-repeat="thispage in ['projects']" ng-include="'/partials/nav'")
+        div.nav.screen(ng-repeat="thispage in ['projects']" ng-include="'/partials/nav'")
 
 
     .glass.right(glass ng-class="{'active': page=='charts'}")
       ipad
+        a.arrowLink(href="/about")
+          .leftArrow.arrow
+            img(src="images/left-arrow.svg")
+        a.arrowLink(href="/") 
+          .rightArrow.arrow
+            img(src="images/right-arrow.svg")
         specular(ng-class="{'active': page=='charts'}")
         div(ng-include="'/partials/charts'")
-        div.screen(ng-repeat="thispage in ['charts']" ng-include="'/partials/nav'")
+        div.nav.screen(ng-repeat="thispage in ['charts']" ng-include="'/partials/nav'")
  

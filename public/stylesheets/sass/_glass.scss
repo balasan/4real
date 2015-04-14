@@ -73,7 +73,7 @@ specular {
     display:block;
   }
   .screen{
-    opacity:1;
+    opacity:1 !important;
   }
   .prices{
     // width:auto;
@@ -81,12 +81,24 @@ specular {
       display:block;
     }
   }
+  .arrow{
+    opacity:1;
+  }
+}
+
+
+.arrowLink{
+  z-index:10;
+  // position:relative;
 }
 
 .screen{
-  opacity:.1;
+  opacity:.15;
   @include transition(opacity .4s);
+}
 
+.glass.left .screen{
+  opacity:.1;
 }
 
 ipad {
@@ -114,6 +126,32 @@ ipad {
       // overflow:none;
       display:none;
     }  
+  }
+  .arrow{
+    opacity:.2;
+    @include transition(opacity .4s);
+    height:100px;
+    padding:0 20px;
+    position:absolute;
+    z-index:10;
+    img{
+      height:80%;
+      width:auto;
+    }
+    cursor:pointer;
+    z-index:2;
+  }
+
+  .leftArrow{
+    top:50%;
+    left:0px;
+    margin-top:-50px;
+  }
+  .rightArrow{
+    position:absolute;
+    top:50%;
+    right:0px;
+    margin-top:-50px;
   }
 }
 

@@ -1,10 +1,14 @@
 .projects.screen(projects ng-controller="projectsCtrl")
   .projectList
     p.heading Some projects we worked on...
-    div.animate-list(ng-repeat="project in projects")
+    div.projectOuter.animate-list(ng-repeat="project in projects")
       .project(ng-mouseover="$parent.viewproject=$index") 
         a(ng-href="{{project.url}}" target="blank")
+          .projectTile(style="background-image:url({{project.img[0].url}})")
           |{{project.title}}
+
+  
+
   .singleproject.animate-projects(ng-repeat="project in projects" ng-show="$index==viewproject" )
     .projectImage
       a(ng-href="{{project.url}}" target="blank")

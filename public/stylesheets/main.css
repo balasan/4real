@@ -121,18 +121,29 @@ specular {
   display: block;
 }
 .active .screen {
-  opacity: 1;
+  opacity: 1 !important;
 }
 .active .prices .cur {
   display: block;
 }
+.active .arrow {
+  opacity: 1;
+}
+
+.arrowLink {
+  z-index: 10;
+}
 
 .screen {
-  opacity: .1;
+  opacity: .15;
   -webkit-transition: opacity 0.4s;
   -moz-transition: opacity 0.4s;
   -o-transition: opacity 0.4s;
   transition: opacity 0.4s;
+}
+
+.glass.left .screen {
+  opacity: .1;
 }
 
 ipad {
@@ -150,6 +161,34 @@ ipad {
 }
 ipad .prices .cur {
   display: none;
+}
+ipad .arrow {
+  opacity: .2;
+  -webkit-transition: opacity 0.4s;
+  -moz-transition: opacity 0.4s;
+  -o-transition: opacity 0.4s;
+  transition: opacity 0.4s;
+  height: 100px;
+  padding: 0 20px;
+  position: absolute;
+  z-index: 10;
+  cursor: pointer;
+  z-index: 2;
+}
+ipad .arrow img {
+  height: 80%;
+  width: auto;
+}
+ipad .leftArrow {
+  top: 50%;
+  left: 0px;
+  margin-top: -50px;
+}
+ipad .rightArrow {
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  margin-top: -50px;
 }
 
 .ipad2 {
@@ -302,6 +341,9 @@ shadow {
   top: 10%;
   left: 5%;
   width: 100%;
+  max-width: 30%;
+  margin: auto;
+  padding: 40px 40px;
   vertical-align: middle;
   font-size: 16px;
   line-height: 24px;
@@ -313,7 +355,7 @@ shadow {
   color: inherit;
 }
 .projectList p {
-  padding-bottom: 10px;
+  padding-bottom: 40px;
   font-size: 22px;
   -webkit-animation: opacity-animation cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.7s 0.3s;
   -moz-animation: opacity-animation cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.7s 0.3s;
@@ -322,15 +364,25 @@ shadow {
   animation: opacity-animation cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.7s 0.3s;
 }
 .projectList .project {
+  position: relative;
+  display: inline-block;
   cursor: pointer;
-  -webkit-transition: font-size cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  -webkit-transition-delay: 0.3s;
-  -moz-transition: font-size cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
-  -o-transition: font-size cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
-  transition: font-size cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
+  -webkit-transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
+  -moz-transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
+  -o-transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
+  transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
+  -webkit-transform-origin: left center 50%;
+  -moz-transform-origin: left center 50%;
+  -ms-transform-origin: left center 50%;
+  -o-transform-origin: left center 50%;
+  transform-origin: left center 50%;
 }
 .projectList .project:hover {
-  font-size: 30px;
+  -webkit-transform: scale(1.5, 1.5);
+  -moz-transform: scale(1.5, 1.5);
+  -ms-transform: scale(1.5, 1.5);
+  -o-transform: scale(1.5, 1.5);
+  transform: scale(1.5, 1.5);
 }
 
 .projectImage {
@@ -438,68 +490,50 @@ img.phone img.phone {
 
 @-moz-keyframes list-animation {
   0% {
-    -moz-transform: scale3d(1, 1, 1) translateX(1000px) translateZ(1000px) translateY(-500px);
-    transform: scale3d(1, 1, 1) translateX(1000px) translateZ(1000px) translateY(-500px);
     opacity: 0;
   }
 
   100% {
-    -moz-transform: scale3d(1, 1, 1) translateX(0);
-    transform: scale3d(1, 1, 1) translateX(0);
     opacity: 1;
   }
 }
 
 @-webkit-keyframes list-animation {
   0% {
-    -webkit-transform: scale3d(1, 1, 1) translateX(1000px) translateZ(1000px) translateY(-500px);
-    transform: scale3d(1, 1, 1) translateX(1000px) translateZ(1000px) translateY(-500px);
     opacity: 0;
   }
 
   100% {
-    -webkit-transform: scale3d(1, 1, 1) translateX(0);
-    transform: scale3d(1, 1, 1) translateX(0);
     opacity: 1;
   }
 }
 
 @-o-keyframes list-animation {
   0% {
-    -o-transform: scale3d(1, 1, 1) translateX(1000px) translateZ(1000px) translateY(-500px);
-    transform: scale3d(1, 1, 1) translateX(1000px) translateZ(1000px) translateY(-500px);
     opacity: 0;
   }
 
   100% {
-    -o-transform: scale3d(1, 1, 1) translateX(0);
-    transform: scale3d(1, 1, 1) translateX(0);
     opacity: 1;
   }
 }
 
 @-ms-keyframes list-animation {
   0% {
-    -ms-transform: scale3d(1, 1, 1) translateX(1000px) translateZ(1000px) translateY(-500px);
-    transform: scale3d(1, 1, 1) translateX(1000px) translateZ(1000px) translateY(-500px);
     opacity: 0;
   }
 
   100% {
-    -ms-transform: scale3d(1, 1, 1) translateX(0);
-    transform: scale3d(1, 1, 1) translateX(0);
     opacity: 1;
   }
 }
 
 @keyframes list-animation {
   0% {
-    transform: scale3d(1, 1, 1) translateX(1000px) translateZ(1000px) translateY(-500px);
     opacity: 0;
   }
 
   100% {
-    transform: scale3d(1, 1, 1) translateX(0);
     opacity: 1;
   }
 }
@@ -1337,6 +1371,11 @@ circle:hover {
   transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
   font-size: 24px;
   padding: 10px;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 .social i:hover {
   -webkit-transform: scale(1.5, 1.5);
@@ -1344,6 +1383,12 @@ circle:hover {
   -ms-transform: scale(1.5, 1.5);
   -o-transform: scale(1.5, 1.5);
   transform: scale(1.5, 1.5);
+}
+.social i h2 {
+  text-indent: -99999px;
+  display: inline-block;
+  width: 0px;
+  overflow: hidden;
 }
 .social .icon {
   -webkit-backface-visibility: hidden;
@@ -1655,15 +1700,8 @@ circle:hover {
 }
 
 i h2 {
-  text-indent: -99999px;
-  display: inline-block;
-  width: 0px;
-  overflow: hidden;
-  -webkit-transform: scale(1, 1);
-  -moz-transform: scale(1, 1);
-  -ms-transform: scale(1, 1);
-  -o-transform: scale(1, 1);
-  transform: scale(1, 1);
+  font-size: 12px;
+  padding-top: 3px;
 }
 
 html {
@@ -1736,6 +1774,11 @@ body {
   -moz-transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
   -o-transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
   transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 .subnav .link:hover {
   -webkit-transform: scale(1.5, 1.5);
@@ -1785,11 +1828,11 @@ body {
   height: 100%;
   background-size: cover;
   background-position: center;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(180, 180, 180, 0.8)), color-stop(21%, rgba(93, 120, 146, 0.8)), color-stop(68%, rgba(0, 0, 0, 0.8)), color-stop(100%, rgba(67, 103, 134, 0.8))), url(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg), url(https://s3-us-west-2.amazonaws.com/4real/various/wave11.jpg);
-  background-image: -webkit-linear-gradient(rgba(180, 180, 180, 0.8) 0%, rgba(93, 120, 146, 0.8) 21%, rgba(0, 0, 0, 0.8) 68%, rgba(67, 103, 134, 0.8) 100%), url(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg), url(https://s3-us-west-2.amazonaws.com/4real/various/wave11.jpg);
-  background-image: -moz-linear-gradient(rgba(180, 180, 180, 0.8) 0%, rgba(93, 120, 146, 0.8) 21%, rgba(0, 0, 0, 0.8) 68%, rgba(67, 103, 134, 0.8) 100%), url(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg), url(https://s3-us-west-2.amazonaws.com/4real/various/wave11.jpg);
-  background-image: -o-linear-gradient(rgba(180, 180, 180, 0.8) 0%, rgba(93, 120, 146, 0.8) 21%, rgba(0, 0, 0, 0.8) 68%, rgba(67, 103, 134, 0.8) 100%), url(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg), url(https://s3-us-west-2.amazonaws.com/4real/various/wave11.jpg);
-  background-image: linear-gradient(rgba(180, 180, 180, 0.8) 0%, rgba(93, 120, 146, 0.8) 21%, rgba(0, 0, 0, 0.8) 68%, rgba(67, 103, 134, 0.8) 100%), url(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg), url(https://s3-us-west-2.amazonaws.com/4real/various/wave11.jpg);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(201, 201, 201, 0.7)), color-stop(21%, rgba(57, 98, 137, 0.7)), color-stop(68%, rgba(20, 24, 34, 0.8)), color-stop(100%, rgba(53, 109, 158, 0.8)));
+  background-image: -webkit-linear-gradient(rgba(201, 201, 201, 0.7) 0%, rgba(57, 98, 137, 0.7) 21%, rgba(20, 24, 34, 0.8) 68%, rgba(53, 109, 158, 0.8) 100%);
+  background-image: -moz-linear-gradient(rgba(201, 201, 201, 0.7) 0%, rgba(57, 98, 137, 0.7) 21%, rgba(20, 24, 34, 0.8) 68%, rgba(53, 109, 158, 0.8) 100%);
+  background-image: -o-linear-gradient(rgba(201, 201, 201, 0.7) 0%, rgba(57, 98, 137, 0.7) 21%, rgba(20, 24, 34, 0.8) 68%, rgba(53, 109, 158, 0.8) 100%);
+  background-image: linear-gradient(rgba(201, 201, 201, 0.7) 0%, rgba(57, 98, 137, 0.7) 21%, rgba(20, 24, 34, 0.8) 68%, rgba(53, 109, 158, 0.8) 100%);
 }
 
 a, a:hover, a:visited {
@@ -1840,6 +1883,10 @@ h1 span:hover {
   vertical-align: middle;
 }
 
+i {
+  padding: 0 2px;
+}
+
 .mainNav {
   font-family: Raleway, sans-serif;
   text-align: center;
@@ -1863,6 +1910,13 @@ h1 span:hover {
   -ms-transform: scale(1, 1);
   -o-transform: scale(1, 1);
   transform: scale(1, 1);
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+  z-index: 10;
+  position: relative;
 }
 .mainNav i:hover {
   -webkit-transform: scale(1.5, 1.5);
@@ -1882,6 +1936,7 @@ h1 span:hover {
   font-size: 2em;
   font-weight: 500;
   line-height: 34px;
+  z-index: 10;
 }
 .smallNav svg {
   height: 40px;
@@ -1895,6 +1950,13 @@ h1 span:hover {
   transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
   margin: 0 10px;
   display: inline-block;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+  z-index: 10;
+  position: relative;
 }
 .smallNav li:hover {
   -webkit-transform: scale(1.5, 1.5);
@@ -1913,11 +1975,16 @@ canvas {
 .container {
   width: 100%;
   height: 100%;
-  -webkit-perspective: 600;
-  -moz-perspective: 600;
-  -ms-perspective: 600;
-  -o-perspective: 600;
-  perspective: 600;
+  -webkit-perspective: 600px;
+  -moz-perspective: 600px;
+  -ms-perspective: 600px;
+  -o-perspective: 600px;
+  perspective: 600px;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
   -webkit-perspective-origin: 50% 50%;
   -moz-perspective-origin: 50% 50%;
   -ms-perspective-origin: 50% 50%;

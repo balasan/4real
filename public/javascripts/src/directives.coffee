@@ -324,8 +324,12 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$state', "isMobile"
       scope.oldH += dx
       scope.oldV += dy
 
+      if (scope.oldV ==0)
+        scope.odV = .0001;
+      if (scope.oldH ==0)
+        scope.odH = .0001;
 
-      transform= "translateZ("+ -$window.innerWidth/2+"px) rotateX(" + ((scope.oldV * 5)) + "deg) rotateY(" + ((scope.oldH * 5) + scope.oldR) + "deg) translateZ("+ $window.innerWidth/2+"px)"
+      transform= " translateZ("+ -$window.innerWidth/2+"px) rotateX(" + ((scope.oldV * 5)) + "deg) rotateY(" + ((scope.oldH * 5) + scope.oldR) + "deg) translateZ("+ $window.innerWidth/2+"px)"
 
       # transform= "rotateX(" + ((scope.oldV * 5)) + "deg) rotateY(" + ((scope.oldH * 5) + scope.oldR) + "deg) "
       el.css 
@@ -379,6 +383,20 @@ app.directive "cube", [ '$document', '$window', '$timeout', '$state', "isMobile"
     
     scale = 250
     w = angular.element($window)
+
+
+ 
+
+    $arrowLeft = angular.element(el[0].getElementsByClassName('leftArrow'))
+    $arrowRight = angular.element(el[0].getElementsByClassName('rightArrow'))
+    
+    $arrowLeft.on('click',  ()->
+      scope.rotate.y+=90
+    )
+  
+    $arrowRight.on('click', ()->
+      scope.rotate.y-=90
+    )
 
     cleanup = ()->
       if scope.page == 'liquid'

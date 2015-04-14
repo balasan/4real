@@ -25,7 +25,9 @@ app.controller 'mainCtrl', [ '$scope', '$timeout','$rootScope','siteMap',"$locat
   $scope.rotate.y=0;
   $scope.waterView = null;
 
-  $scope.videos = ['v0', 'v1', 'v2', 'v3'];
+  # $scope.videos = ['v0', 'v1', 'v2', 'v3'];
+  $scope.videos = ['v0','v0','v0','v0'];
+
   $scope.activeVideo = 0;
   $scope.page='';
   $scope.loadedImg =0;
@@ -39,13 +41,13 @@ app.controller 'mainCtrl', [ '$scope', '$timeout','$rootScope','siteMap',"$locat
 
   $scope.playNextVideo = ()->
     $scope.activeVideo = ($scope.activeVideo + 1) % $scope.videos.length
+ 
+  # $scope.playNextVideo()
 
   $rootScope.$on '$stateChangeStart', (e, newState, oldState)->
     $scope.page = newState.page
-    # $scope.$apply()
     rotations = ~~($scope.rotate.y / 360)
     angle = $scope.rotate.y % 360
-    # console.log $route.current.params.page
     switch $scope.page               
       when ''
         $scope.rotate.y = 0 + 360*rotations
@@ -93,6 +95,8 @@ app.controller "projectsCtrl", [ '$scope','projectsService','$timeout', ($scope,
   
   $scope.projects=[]
 
+  $scope.viewproject = 0
+
   $scope.$on 'page', (e,page)->
     if page=="projects"
       $scope.loadProjects()
@@ -105,7 +109,7 @@ app.controller "projectsCtrl", [ '$scope','projectsService','$timeout', ($scope,
   if $scope.$parent.page=='projects'
     $scope.loadProjects()
 
-  $timeout $scope.loadProjects, 10000
+  $timeout $scope.loadProjects, 1000
 
 ]
 

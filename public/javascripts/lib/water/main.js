@@ -9,7 +9,7 @@
 
 
 
-var waterView = function() {
+var waterView = function(pixel) {
 
 	this.paused = false;
 	this.physics = true;
@@ -92,7 +92,7 @@ var waterView = function() {
 			gl.loadIdentity();
 			gl.perspective(45, gl.canvas.width / gl.canvas.height, 0.01, 100);
 			gl.matrixMode(gl.MODELVIEW);
-			draw();
+			// draw();
 		}
 
 		document.body.appendChild(gl.canvas);
@@ -116,14 +116,16 @@ var waterView = function() {
 			// clearInterval(intervalID);
 		}
 
+
 		cubemap = new Cubemap({
-			xneg: new Image(),
-			xpos: new Image(),
-			yneg: new Image(),
-			ypos: new Image(),
-			zneg: new Image(),
-			zpos: new Image()
+			xneg: pixel,
+			xpos: pixel,
+			yneg: pixel,
+			ypos: pixel,
+			zneg: pixel,
+			zpos: pixel
 		});
+
 		self.renderCubemap = function() {
 			cubemap = new Cubemap({
 				xneg: document.getElementById('xneg'),
@@ -426,26 +428,41 @@ var waterView = function() {
 	};
 }
 
-try {
-	var water = new waterView();
-	if (getParameterByName('auto'))
-		water.animate();
+var pixel = new Image()
+pixel.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs="
 
-	if (getParameterByName('record'))
-		water.record = true;
+pixel.onload = function(){
 
-} catch (error) {
-	var html = error.message
-	if (html == 'WebGL not supported')
-		if (window.innerWidth < 700)
-			error = document.getElementById('errorMobile');
-		else
-			error = document.getElementById('error');
-	error.style.display = 'table'
-	var video = error.getElementsByClassName('youtubeVid');
-	video[0].innerHTML = '<iframe width="640" height="360" src="//www.youtube.com/embed/7eUWHAZCSXs?rel=0" frameborder="0" allowfullscreen></iframe>';
-	document.getElementById('waterCanvas').style.display = 'none';
+	try {
+		var water = new waterView(pixel);
+		if (getParameterByName('auto'))
+			water.animate();
+
+		if (getParameterByName('record'))
+			water.record = true;
+
+	} catch (error) {
+		var html = error.message
+		if (html == 'WebGL not supported')
+			if (window.innerWidth < 700)
+				error = document.getElementById('errorMobile');
+			else
+				error = document.getElementById('error');
+		error.style.display = 'table'
+		var video = error.getElementsByClassName('youtubeVid');
+		video[0].innerHTML = '<iframe width="640" height="360" src="//www.youtube.com/embed/7eUWHAZCSXs?rel=0" frameborder="0" allowfullscreen></iframe>';
+		document.getElementById('waterCanvas').style.display = 'none';
+	}
+
+	window.onload = function() {
+	if (water)
+		water.renderCubemap()
+	}
+
 }
+
+
+
 
 var canvas = document.getElementById("waterCanvas");
 
@@ -462,31 +479,7 @@ var handleError = function(errro) {
 
 window.onerror = window.handleError;
 
-window.onload = function() {
-	// var loader = new GSVPANO.PanoLoader({
-	// 	zoom: 1,
-	// 	// useWebGL: true
-	// });
 
-	// Implement the onPanoramaLoad handler
-	// loader.onPanoramaLoad = function() {
-
-	// 	console.log(this)
-	// 	document.body.appendChild(this.canvas);
-	// 	// this.composePanorama()
-
-
-	//         Do your thing with the panorama:
-	//         this.canvas: an HTML5 canvas with the texture
-	//         this.copyright: the copyright of the images
-
-	// };
-
-	// loader.load(new google.maps.LatLng(51.50700703827454, -0.12791916931155356));
-
-	if (water)
-		water.renderCubemap()
-}
 
 
 function dataURItoBlob(dataURI) {

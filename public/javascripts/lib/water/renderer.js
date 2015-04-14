@@ -512,7 +512,7 @@ Renderer.prototype.renderWater = function(water, sky, video, tracer,op) {
     this_.sphereShaderRef.uniforms({
       light: this_.lightDir,
       water: 0,
-      causticTex: 1,
+      causticTex: 2,
       eye: tracer.eye,
       reflection: 0.0,
       sphereCenter: this_.sphereCenter,
@@ -529,7 +529,7 @@ Renderer.prototype.renderWater = function(water, sky, video, tracer,op) {
     this_.sphereShaderRef.uniforms({
       light: this_.lightDir,
       water: 0,
-      causticTex: 1,
+      causticTex: 2,
       eye: tracer.eye,
       reflection: 1.0,
       sphereCenter: this_.sphereCenter,
@@ -550,7 +550,7 @@ Renderer.prototype.renderSphere = function(water) {
   this.sphereShader.uniforms({
     light: this.lightDir,
     water: 0,
-    causticTex: 1,
+    causticTex: 2,
     sphereCenter: this.sphereCenter,
     sphereRadius: this.sphereRadius,
   }).draw(this.sphereMesh);

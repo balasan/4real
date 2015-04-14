@@ -322,7 +322,7 @@
     '$document', '$window', '$timeout', '$state', "isMobile", function($document, $window, $timeout, $state, isMobile) {
       return {
         link: function(scope, el, att) {
-          var auto, cleanup, last, randomVertical, resize, rotateScene, scale, specular, updateRotation, w;
+          var $arrowLeft, $arrowRight, auto, cleanup, last, randomVertical, resize, rotateScene, scale, specular, updateRotation, w;
           scope.oldH = 0;
           scope.oldV = 0;
           scope.newH = 0;
@@ -360,7 +360,13 @@
             }
             scope.oldH += dx;
             scope.oldV += dy;
-            transform = "translateZ(" + -$window.innerWidth / 2 + "px) rotateX(" + (scope.oldV * 5) + "deg) rotateY(" + ((scope.oldH * 5) + scope.oldR) + "deg) translateZ(" + $window.innerWidth / 2 + "px)";
+            if (scope.oldV === 0) {
+              scope.odV = .0001;
+            }
+            if (scope.oldH === 0) {
+              scope.odH = .0001;
+            }
+            transform = " translateZ(" + -$window.innerWidth / 2 + "px) rotateX(" + (scope.oldV * 5) + "deg) rotateY(" + ((scope.oldH * 5) + scope.oldR) + "deg) translateZ(" + $window.innerWidth / 2 + "px)";
             el.css({
               "transform": transform,
               "-moz-transform": transform,
@@ -398,6 +404,14 @@
           $document.on('mousemove', rotateScene);
           scale = 250;
           w = angular.element($window);
+          $arrowLeft = angular.element(el[0].getElementsByClassName('leftArrow'));
+          $arrowRight = angular.element(el[0].getElementsByClassName('rightArrow'));
+          $arrowLeft.on('click', function() {
+            return scope.rotate.y += 90;
+          });
+          $arrowRight.on('click', function() {
+            return scope.rotate.y -= 90;
+          });
           cleanup = function() {
             var angle, page, state;
             if (scope.page === 'liquid') {

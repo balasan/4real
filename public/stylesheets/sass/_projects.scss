@@ -53,9 +53,14 @@
   top:10%;
   left:5%;
   width:100%;
+  max-width:30%;
+  margin:auto;
+  padding:40px 40px;
   vertical-align:middle;
   font-size:16px;
   line-height: 24px;
+
+
   z-index:1;
   max-width:30%;
   a{
@@ -63,7 +68,7 @@
     color:inherit;
   }
   p{
-    padding-bottom:10px;
+    padding-bottom:40px;
     // @include animation(colorRainbow .7s infinite);
     // color:rgb(255,0,0);
     font-size:22px;
@@ -71,13 +76,37 @@
     @include animation(opacity-animation cubic-bezier(0.175, 0.885, 0.32, 1.275) .7s .3s);
   }
   .project{
+    position:relative;
+    display:inline-block;
     cursor:pointer;
     // font-style:italic;
-    @include transition(font-size cubic-bezier(0.175, 0.885, 0.32, 1.275) .3s);
+    @include transition(cubic-bezier(0.175, 0.885, 0.32, 1.275) .3s);
+    @include transform-origin(left center);
   }
   .project:hover{
-    font-size:30px;
+    // font-size:30px;
+    @include transform(scale(1.5,1.5));
+
+
   }
+
+  // font-size:0;
+  // text-align:center;
+  // height:80%;
+  // overflow:auto;
+  // .projectOuter{
+  //   display:inline-block;
+  //   width:100%;
+  //   position:relative;
+  //   padding:10px;
+
+  // }
+  // .projectTile{
+  //   width:100%;
+  //   padding-bottom:60%;
+  //   background-size:100% auto;
+  //   background-position:center top;
+  // }
 }
 
 .projectImage{
@@ -139,10 +168,10 @@ img.phone{
 }
 
 @include keyframes(list-animation) {
-  0%    { @include transform3d(scale3d(1,1,1) translateX(1000px) translateZ(1000px) translateY(-500px)); opacity:0}
+  0%    { opacity:0}
   // 25%   { opacity: 1; }
   // 75%   { opacity: 1; }
-  100%  {@include transform3d(scale3d(1,1,1) translateX(0)); opacity:1}
+  100%  {opacity:1}
 }
 
 @media screen and (max-width: 1000px){

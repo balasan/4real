@@ -10,7 +10,7 @@
       $scope.rotate = {};
       $scope.rotate.y = 0;
       $scope.waterView = null;
-      $scope.videos = ['v0', 'v1', 'v2', 'v3'];
+      $scope.videos = ['v0', 'v0', 'v0', 'v0'];
       $scope.activeVideo = 0;
       $scope.page = '';
       $scope.loadedImg = 0;
@@ -87,6 +87,7 @@
   app.controller("projectsCtrl", [
     '$scope', 'projectsService', '$timeout', function($scope, projectsService, $timeout) {
       $scope.projects = [];
+      $scope.viewproject = 0;
       $scope.$on('page', function(e, page) {
         if (page === "projects") {
           return $scope.loadProjects();
@@ -100,7 +101,7 @@
       if ($scope.$parent.page === 'projects') {
         $scope.loadProjects();
       }
-      return $timeout($scope.loadProjects, 10000);
+      return $timeout($scope.loadProjects, 1000);
     }
   ]);
 

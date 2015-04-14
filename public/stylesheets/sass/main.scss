@@ -243,6 +243,21 @@ body {
   // @include background-image(linear-gradient(rgba(255, 255, 255, 0.41) 0%, rgba(255, 255, 255, 0.55) 21%, rgba(255, 255, 255, 0.48) 68%, rgba(255, 255, 255, 0.45) 100%));
 }
 
+@media (max-width: 700px){
+  .tint{
+    @include background-image( 
+      linear-gradient(rgba(180, 180, 180, 0.8) 0%, rgba(93, 120, 146, 0.8) 21%, rgba(0, 0, 0, 0.8) 68%, rgba(67, 103, 134, 0.8) 100%)
+      // linear-gradient(rgba(201, 201, 201, 0.7) 0%, rgba(57, 98, 137, 0.7) 21%, rgba(20, 24, 34, 0.8) 68%, rgba(53, 109, 158, 0.8) 100%)
+
+      ,url(https://s3-us-west-2.amazonaws.com/4real/various/wave1.jpg)
+      ,url(https://s3-us-west-2.amazonaws.com/4real/various/wave11.jpg)
+      );
+    }
+  #videos{
+    display:none;
+  }
+}
+
 a, a:hover, a:visited {
   color: inherit;
   text-decoration:none;

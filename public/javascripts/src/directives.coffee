@@ -96,7 +96,12 @@ app.directive "video", ["$timeout", "$window", ($timeout, $window) ->
     el.on 'ended', ()->
       scope.playNextVideo()
 
+
+
     scope.$watch 'activeVideo', (newV, oldV) ->
+      if(isMobile())
+        return;
+
       # if newV != oldV
         if scope.videos[scope.activeVideo] == el[0].id
           if(el[0].play)

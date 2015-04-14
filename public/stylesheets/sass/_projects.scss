@@ -86,7 +86,9 @@
   .project:hover{
     // font-size:30px;
     @include transform(scale(1.5,1.5));
-
+    @media (max-width:700px){
+      @include transform(scale(1.1,1.1));
+    }
 
   }
 

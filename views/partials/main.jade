@@ -42,10 +42,10 @@ canvas#waterCanvas
 
         a.arrowLink(href="/projects")
           .leftArrow.arrow
-            img(src="images/left-arrow.svg")
+            img(src="img/left-arrow.svg")
         a.arrowLink(href="/charts") 
           .rightArrow.arrow
-            img(src="images/right-arrow.svg")
+            img(src="img/right-arrow.svg")
 
         //- camera
         specular(ng-class="{'active': page=='about'}")
@@ -57,10 +57,10 @@ canvas#waterCanvas
       ipad
         a.arrowLink(href="/charts")
           .leftArrow.arrow
-            img(src="images/left-arrow.svg")
+            img(src="img/left-arrow.svg")
         a.arrowLink(href="/projects") 
           .rightArrow.arrow
-            img(src="images/right-arrow.svg") 
+            img(src="img/right-arrow.svg") 
         specular(ng-class="{'active' : page==''}")
         .main.screen
           .vcenter
@@ -85,10 +85,10 @@ canvas#waterCanvas
       ipad
         a.arrowLink(href="/")
           .leftArrow.arrow
-            img(src="images/left-arrow.svg")
+            img(src="img/left-arrow.svg")
         a.arrowLink(href="/about") 
           .rightArrow.arrow
-            img(src="images/right-arrow.svg")
+            img(src="img/right-arrow.svg")
 
         specular(ng-class="{'active': page=='projects'}")
         div( ng-include="'/partials/projects'")  
@@ -99,10 +99,10 @@ canvas#waterCanvas
       ipad
         a.arrowLink(href="/about")
           .leftArrow.arrow
-            img(src="images/left-arrow.svg")
+            img(src="img/left-arrow.svg")
         a.arrowLink(href="/") 
           .rightArrow.arrow
-            img(src="images/right-arrow.svg")
+            img(src="img/right-arrow.svg")
         specular(ng-class="{'active': page=='charts'}")
         div(ng-include="'/partials/charts'")
         div.nav.screen(ng-repeat="thispage in ['charts']" ng-include="'/partials/nav'")

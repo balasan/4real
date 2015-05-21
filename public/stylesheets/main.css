@@ -273,10 +273,10 @@ shadow {
   }
 }
 .animate-projects {
-  -webkit-transition: all 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955);
-  -moz-transition: all 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955);
-  -o-transition: all 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955);
-  transition: all 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  -webkit-transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  -moz-transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  -o-transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
   opacity: 1;
   -webkit-transform: translateX(0px) scale3d(1, 1, 1);
   -moz-transform: translateX(0px) scale3d(1, 1, 1);
@@ -291,21 +291,25 @@ shadow {
 }
 
 .animate-projects.ng-hide.ng-hide-add {
-  -webkit-transform: translateX(1000px) scale3d(0, 0, 0);
-  -moz-transform: translateX(1000px) scale3d(0, 0, 0);
-  -ms-transform: translateX(1000px) scale3d(0, 0, 0);
-  -o-transform: translateX(1000px) scale3d(0, 0, 0);
-  transform: translateX(1000px) scale3d(0, 0, 0);
+  -webkit-transform: translateX(300px) scale3d(0.5, 0.5, 0.5);
+  -moz-transform: translateX(300px) scale3d(0.5, 0.5, 0.5);
+  -ms-transform: translateX(300px) scale3d(0.5, 0.5, 0.5);
+  -o-transform: translateX(300px) scale3d(0.5, 0.5, 0.5);
+  transform: translateX(300px) scale3d(0.5, 0.5, 0.5);
   opacity: 0;
 }
 
 .animate-projects.ng-hide.ng-hide-remove {
-  -webkit-transform: translateX(-1000px) scale3d(0, 0, 0);
-  -moz-transform: translateX(-1000px) scale3d(0, 0, 0);
-  -ms-transform: translateX(-1000px) scale3d(0, 0, 0);
-  -o-transform: translateX(-1000px) scale3d(0, 0, 0);
-  transform: translateX(-1000px) scale3d(0, 0, 0);
+  -webkit-transform: translateX(-500px) scale3d(0.5, 0.5, 0.5) translateZ(1px);
+  -moz-transform: translateX(-500px) scale3d(0.5, 0.5, 0.5) translateZ(1px);
+  -ms-transform: translateX(-500px) scale3d(0.5, 0.5, 0.5) translateZ(1px);
+  -o-transform: translateX(-500px) scale3d(0.5, 0.5, 0.5) translateZ(1px);
+  transform: translateX(-500px) scale3d(0.5, 0.5, 0.5) translateZ(1px);
   opacity: 0;
+  -webkit-transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  -moz-transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  -o-transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .animate-list.ng-enter {
@@ -427,18 +431,19 @@ img.phone {
   right: 80px;
   max-width: 200px;
   max-height: 80%;
-  -webkit-transition: all 0.3s 0.5s;
+  -webkit-transition: all 0.6s 0.3s;
   -webkit-transition-delay: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  -moz-transition: all 0.3s 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  -o-transition: all 0.3s 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  transition: all 0.3s 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -moz-transition: all 0.6s 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -o-transition: all 0.6s 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.6s 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 img.phone.ng-hide {
-  -webkit-transform: scale3d(0, 0, 0);
-  -moz-transform: scale3d(0, 0, 0);
-  -ms-transform: scale3d(0, 0, 0);
-  -o-transform: scale3d(0, 0, 0);
-  transform: scale3d(0, 0, 0);
+  opacity: 0;
+  -webkit-transform: scale3d(0.5, 0.5, 0.5);
+  -moz-transform: scale3d(0.5, 0.5, 0.5);
+  -ms-transform: scale3d(0.5, 0.5, 0.5);
+  -o-transform: scale3d(0.5, 0.5, 0.5);
+  transform: scale3d(0.5, 0.5, 0.5);
 }
 img.phone.ng-hide-add, img.phone.ng-hide-remove {
   display: block !important;

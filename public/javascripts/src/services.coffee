@@ -109,6 +109,31 @@ app.factory 'projectsService', [ ()->
 
   data = [
 
+
+
+    title: 'H0les'
+    description: ''
+    url: 'http://h0les.com'
+    img: [
+      url: amazonUrl + 'holes-sm.jpg'
+    ]
+    iphone:[
+     url: amazonUrl + 'holes-phone1.png'
+    ]
+  ,
+
+    title: 'Clone Zone'
+    description: ''
+    url: 'http://clonezone.link'
+    img: [
+      url: amazonUrl + 'clonezone.jpg'
+    ]
+    iphone:[
+     url: amazonUrl + 'clonezone-phone.png'
+    ]
+  ,
+
+
     title: 'Thermal Online Experience'
     description: ''
     url: 'http://thermal.global'
@@ -165,28 +190,28 @@ app.factory 'projectsService', [ ()->
       url: amazonUrl+ 'kwphone.png'
     ]
   ,
-    title: 'TWAAS'
-    description: 'Website for Thea Westreich art advisory services'
-    url: 'http://twaas.com ' 
-    img: [
-      url: amazonUrl + 'twaas.jpg'
-    ]
-    tablet: [
+  #   title: 'TWAAS'
+  #   description: 'Website for Thea Westreich art advisory services'
+  #   url: 'http://twaas.com ' 
+  #   img: [
+  #     url: amazonUrl + 'twaas.jpg'
+  #   ]
+  #   tablet: [
       
-    ]
-    iphone:[
-      url: amazonUrl + 'twaasphone.png'
-    ]
-  ,
+  #   ]
+  #   iphone:[
+  #     url: amazonUrl + 'twaasphone.png'
+  #   ]
+  # ,
 
-    title: 'Walmart at 50'
-    description: 'platform for users to upload their walmart stories'
-    url: 'http://walmartat50.org'
-    img: [
-      url: amazonUrl + 'walmart.jpg'
-    ]
-    iphone:[]
-    ,
+  #   title: 'Walmart at 50'
+  #   description: 'platform for users to upload their walmart stories'
+  #   url: 'http://walmartat50.org'
+  #   img: [
+  #     url: amazonUrl + 'walmart.jpg'
+  #   ]
+  #   iphone:[]
+  #   ,
 
 
     title: 'The Digit'

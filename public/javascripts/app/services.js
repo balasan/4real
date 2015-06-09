@@ -136,19 +136,15 @@
       amazonUrl = "https://s3-us-west-2.amazonaws.com/4real/projects/";
       data = [
         {
-          title: 'H0les',
+          title: 'Clinton Global Initiative',
           description: '',
-          url: 'http://h0les.com',
+          url: 'http://cgi-globe.herokuapp.com/',
           img: [
             {
-              url: amazonUrl + 'holes-sm.jpg'
+              url: amazonUrl + 'cgi-web.jpg'
             }
           ],
-          iphone: [
-            {
-              url: amazonUrl + 'holes-phone1.png'
-            }
-          ]
+          iphone: []
         }, {
           title: 'Clone Zone',
           description: '',
@@ -174,15 +170,19 @@
           ],
           iphone: []
         }, {
-          title: 'Clinton Global Initiative',
+          title: 'H0les',
           description: '',
-          url: 'http://cgi-globe.herokuapp.com/',
+          url: 'http://h0les.com',
           img: [
             {
-              url: amazonUrl + 'cgi-web.jpg'
+              url: amazonUrl + 'holes-sm.jpg'
             }
           ],
-          iphone: []
+          iphone: [
+            {
+              url: amazonUrl + 'holes-phone1.png'
+            }
+          ]
         }, {
           title: 'DIS Magazine Mobile',
           description: '',

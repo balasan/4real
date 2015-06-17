@@ -2,9 +2,9 @@
 ###
 Module dependencies.
 ###
-# require('newrelic');
 if process.env.HEROKU == true
-  express = require("express")
+  require('newrelic');
+express = require("express")
 routes = require("./routes")
 http = require("http")
 https = require("https")

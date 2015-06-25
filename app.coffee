@@ -130,7 +130,7 @@ io.sockets.on('connection', (socket)->
 
 minutes = 30
 minutes * 60 * 1000
-if process.env.HEROKU == true
+if process.env.HEROKU == 'true'
   pingPrerender = ()->
     request.get 'http://robots4real.herokuapp.com/http://4real.io',(error, response, body) ->
       console.log("awake robots4real.herokuapp.com")

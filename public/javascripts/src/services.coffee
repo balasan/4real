@@ -134,7 +134,7 @@ app.factory 'projectsService', [ ()->
 
     title: 'Thermal Online Experience'
     description: ''
-    url: 'http://tgf-thermal.herokuapp.com/'
+    url: 'http://tgf-thermal.herokuapp.com'
     img: [
       url: amazonUrl + 'thermal.jpg'
     ]

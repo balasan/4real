@@ -124,9 +124,9 @@ setInterval getData, the_interval
 
 
 io.sockets.on('connection', (socket)->
-  
+
   # socket.emit('init')
-  
+
   socket.on('getData', (limit, callback)->
 
     if !limit

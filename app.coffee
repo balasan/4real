@@ -55,6 +55,12 @@ app.get "/liquid", routes.liquid
 app.get "/auto", routes.index
 
 
+
+process.on 'uncaughtException', (err) ->
+  console.log('Caught exception: ' + err);
+  console.log(err.stack);
+
+
 setInterval
 
 lastTime = new Date(0)
@@ -93,12 +99,18 @@ getData = ()->
         data = JSON.parse(body)
       catch error
         console.log(body)
+        data = null
+        res = null
+        body = null
         return
       # console.log(data)
       newTime = new Date(parseInt(data.timestamp)*100)
       if  newTime > lastTime
         lastTime = newTime
         io.sockets.emit('btcData', data:data)
+      data = null
+      body = null
+      res = null
 
     return
   ).on "error", (e) ->

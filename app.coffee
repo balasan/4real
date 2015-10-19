@@ -104,7 +104,8 @@ getData = ()->
         body = null
         return
       # console.log(data)
-      newTime = new Date(parseInt(data.timestamp)*100)
+      newTime = new Date(parseInt(data.timestamp)*1000)
+      # console.log(newTime)
       if  newTime > lastTime
         lastTime = newTime
         io.sockets.emit('btcData', data:data)
@@ -129,13 +130,17 @@ io.sockets.on('connection', (socket)->
 
   socket.on('getData', (limit, callback)->
 
+    console.log("GETTING DATA")
+
     if !limit
       limit = 100
     db.secondModel.find().limit(limit).sort(timestamp: -1).limit(limit).exec (err, data) ->
       if err
         console.log err
       else
+        console.log(data)
         callback(data, rateData)
+
   )
 )
 

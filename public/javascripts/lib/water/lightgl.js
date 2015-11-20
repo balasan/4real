@@ -19,7 +19,7 @@ var GL = {
   // unintended transparencies in the canvas.
   create: function(options) {
     options = options || {};
-    if(!options.id)
+    if (!options.id)
       var canvas = document.createElement('canvas');
     else
       var canvas = document.getElementById(options.id);
@@ -29,6 +29,7 @@ var GL = {
     try { gl = canvas.getContext('webgl', options); } catch (e) {}
     try { gl = gl || canvas.getContext('experimental-webgl', options); } catch (e) {}
     if (!gl) throw new Error('WebGL not supported');
+    gl.HALF_FLOAT_OES = 0x8D61;
     addMatrixStack();
     addImmediateMode();
     addEventListeners();
@@ -1739,6 +1740,14 @@ function Texture(width, height, options) {
         !Texture.canUseFloatingPointLinearFiltering()) {
       throw new Error('OES_texture_float_linear is required but not supported');
     }
+  } else if (this.type === gl.HALF_FLOAT_OES) {
+    if (!Texture.canUseHalfFloatingPointTextures()) {
+      throw new Error('OES_texture_half_float is required but not supported');
+    }
+    if ((minFilter !== gl.NEAREST || magFilter !== gl.NEAREST) &&
+        !Texture.canUseHalfFloatingPointLinearFiltering()) {
+      throw new Error('OES_texture_half_float_linear is required but not supported');
+    }
   }
   gl.bindTexture(gl.TEXTURE_2D, this.id);
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
@@ -1838,7 +1847,6 @@ Texture.prototype = {
 // Return a new image created from `image`, an `<img>` tag.
 Texture.fromImage = function(image, options) {
   options = options || {};
-  // image.Cross-Origin = "anonymous"
   var texture = new Texture(image.width, image.height, options);
   try {
     gl.texImage2D(gl.TEXTURE_2D, 0, texture.format, texture.format, texture.type, image);
@@ -1885,18 +1893,36 @@ Texture.fromURL = function(url, options) {
 
 // ### GL.Texture.canUseFloatingPointTextures()
 //
-// Returns false if gl.FLOAT is not supported as a texture type. This is the
-// OES_texture_float extension.
+// Returns false if `gl.FLOAT` is not supported as a texture type. This is the
+// `OES_texture_float` extension.
 Texture.canUseFloatingPointTextures = function() {
   return !!gl.getExtension('OES_texture_float');
 };
 
 // ### GL.Texture.canUseFloatingPointLinearFiltering()
 //
-// Returns false if gl.LINEAR is not supported as a texture filter mode for
-// textures of type gl.FLOAT. This is the OES_texture_float_linear extension.
+// Returns false if `gl.LINEAR` is not supported as a texture filter mode for
+// textures of type `gl.FLOAT`. This is the `OES_texture_float_linear`
+// extension.
 Texture.canUseFloatingPointLinearFiltering = function() {
   return !!gl.getExtension('OES_texture_float_linear');
+};
+
+// ### GL.Texture.canUseFloatingPointTextures()
+//
+// Returns false if `gl.HALF_FLOAT_OES` is not supported as a texture type.
+// This is the `OES_texture_half_float` extension.
+Texture.canUseHalfFloatingPointTextures = function() {
+  return !!gl.getExtension('OES_texture_half_float');
+};
+
+// ### GL.Texture.canUseFloatingPointLinearFiltering()
+//
+// Returns false if `gl.LINEAR` is not supported as a texture filter mode for
+// textures of type `gl.HALF_FLOAT_OES`. This is the
+// `OES_texture_half_float_linear` extension.
+Texture.canUseHalfFloatingPointLinearFiltering = function() {
+  return !!gl.getExtension('OES_texture_half_float_linear');
 };
 
 // src/vector.js
@@ -1962,6 +1988,9 @@ Vector.prototype = {
       theta: Math.atan2(this.z, this.x),
       phi: Math.asin(this.y / this.length())
     };
+  },
+  angleTo: function(a) {
+    return Math.acos(this.dot(a) / (this.length() * a.length()));
   },
   toArray: function(n) {
     return [this.x, this.y, this.z].slice(0, n || 3);
@@ -2033,6 +2062,9 @@ Vector.lerp = function(a, b, fraction) {
 };
 Vector.fromArray = function(a) {
   return new Vector(a[0], a[1], a[2]);
+};
+Vector.angleBetween = function(a, b) {
+  return a.angleTo(b);
 };
 
 return GL;

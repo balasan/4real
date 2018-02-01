@@ -50,14 +50,14 @@
 .area{
   fill: none;
   // visibility:hidden;
-fill-opacity:0;
+  fill-opacity:0;
 }
 
 .active .area{
   // fill: url('#gradient') !important;
   // visibility:visible;
   fill: auto;
-  fill-opacity:1;      
+  fill-opacity:1;
 }
 
 
@@ -75,7 +75,7 @@ path {
   font-size:14px;
   // font-weight:light;
   fill: white;
-  width:1;
+  width:1em;
   font-weight:100;
 
   // stroke-opacity: .5;

@@ -10,15 +10,15 @@
     "npm": "2.1.x"
   },
   "dependencies": {
+    "coffee-script": "^1.12.7",
     "express": "3.0.0rc5",
     "jade": "*",
-    "less-middleware": "*",
-    "coffee-script": "latest",
-    "socket.io": "latest",
-    "mongoose": "latest",
-    "newrelic": "latest",
-    "prerender-node": "latest",
-    "request": "latest"
+    "less-middleware": "^2.2.1",
+    "mongoose": "^5.0.3",
+    "newrelic": "^2.6.1",
+    "prerender-node": "^2.7.4",
+    "request": "^2.83.0",
+    "socket.io": "^2.0.4"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

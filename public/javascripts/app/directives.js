@@ -519,7 +519,7 @@
           }
           data = $filter('btcTrim')(scope.history, scope.trim);
           parseDate = d3.time.format("%b %Y").parse;
-          margin = [30, 30, 50, 50];
+          margin = [30, 30, 50, 70];
           width = Math.max($window.innerWidth * .5, 300) - margin[1] - margin[3];
           height = Math.max($window.innerHeight * .5, 300) - margin[0] - margin[2];
           if (isMobile()) {

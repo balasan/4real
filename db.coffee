@@ -2,6 +2,9 @@ module.exports = ->
 
   mongoose = require('mongoose')
 
+  console.log(process.env.MONGODB_USERNAME)
+  console.log(process.env.MONGODB_PASSWORD)
+
   db = mongoose.connection
   db.on "connecting", ->
     console.log "connecting to MongoDB..."

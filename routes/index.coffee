@@ -1,17 +1,19 @@
 module.exports = (db) ->
   
   http = require('http')
+  https = require('https')
   rateData = {}
   getRates = ()->
-    url="http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%3D%22%20EURUSD%2CRUBUSD%2CGBPUSD%2CJPYUSD%2CCNYUSD%22&format=json&diagnostics=false&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback="
-    http.get(url, (res) ->
+    url="https://api.fixer.io/latest?base=USD&symbols=CEUR,CGBP,CRUB,CJPY,CCNY"
+    https.get(url, (res) ->
       body = ""
       res.on "data", (chunk) ->
         body += chunk
         return
       res.on "end", ->
         try
-          rateData = JSON.parse(body).query.results.rate
+          console.log(JSON.parse(body))
+          rateData = JSON.parse(body).rates
           # console.log(rateData)
         catch error
           setTimeout getRates, 5 * 60 * 1000

@@ -119,12 +119,17 @@
       $scope.EUR = '0.00';
       $scope.GBP = '0.00';
       $scope.JPY = '0.00';
+      console.log($scope.rates)
       convert = function() {
-        if ($scope.USD === '0.00' || !$scope.rates[0]) {
+        if ($scope.USD === '0.00' || $scope.rates === {}) {
           return;
         }
-        return $scope.rates.forEach(function(rate) {
-          return $scope[rate.id.slice(0, 3)] = $scope.USD / parseFloat(rate.Rate);
+        console.log($scope.rates)
+        return Object.keys($scope.rates).forEach(function(curr) {
+           console.log(curr)
+          return $scope[curr] = $scope.USD * parseFloat($scope.rates[curr]);
+
+          // return $scope[rate.id.slice(0, 3)] = $scope.USD / parseFloat(rate.Rate);
         });
       };
       $scope.data;

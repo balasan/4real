@@ -64,7 +64,7 @@
         getRates: function(callback) {
           return $http({
             method: "GET",
-            url: "https://api.fixer.io/latest?base=USD&symbols=CGBP,CRUB,CJPY,CCNY"
+            url: "https://api.fixer.io/latest?base=USD&symbols=CEUR,CGBP,CRUB,CJPY,CCNY"
           }).success(function(data) {
             return callback(data.query);
           }).error(function() {

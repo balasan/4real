@@ -12,7 +12,6 @@ module.exports = (db) ->
         return
       res.on "end", ->
         try
-          console.log(JSON.parse(body))
           rateData = JSON.parse(body).rates
           # console.log(rateData)
         catch error

@@ -120,12 +120,11 @@
       $scope.GBP = '0.00';
       $scope.JPY = '0.00';
       convert = function() {
-        if ($scope.USD === '0.00' || $scope.rates === {}) {
+        if ($scope.USD === '0.00' || $scope.rates === {} || !$scope.rates) {
           return;
         }
         return Object.keys($scope.rates).forEach(function(curr) {
-          return $scope[curr] = $scope.USD * parseFloat($scope.rates[curr]);
-          // return $scope[rate.id.slice(0, 3)] = $scope.USD / parseFloat(rate.Rate);
+          return $scope[curr] = $scope.USD * parseFloat($scope.rates[curr]) / $scope.rates['USD'];
         });
       };
       $scope.data;

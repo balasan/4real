@@ -1,14 +1,15 @@
 module.exports = (db) ->
-  
+  console.log(process.env.FIXER_API)
   http = require('http')
   https = require('https')
   rateData = {}
   getRates = ()->
-    url="https://api.fixer.io/latest?base=USD&symbols=CEUR,CGBP,CRUB,CJPY,CCNY"
-    https.get(url, (res) ->
+    url="http://data.fixer.io/latest&symbols=USD,GBP,RUB,JPY,CNY,EUR&access_key=" + process.env.FIXER_API
+    http.get(url, (res) ->
       body = ""
       res.on "data", (chunk) ->
         body += chunk
+        console.log(body)
         return
       res.on "end", ->
         try

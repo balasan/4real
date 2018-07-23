@@ -49,7 +49,7 @@ app.factory "exchange", ['$rootScope', '$http', ($rootScope, $http) ->
   getRates: (callback)->
     $http(
       method: "GET"
-      url: "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%3D%22%20EURUSD%2CRUBUSD%2CGBPUSD%2CJPYUSD%2CCNYUSD%22&format=json&diagnostics=false&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback="
+      url: "https://data.fixer.io/api/latest?base=USD&symbols=CEUR,CGBP,CRUB,CJPY,CCNY"
     ).success( (data)->
       callback(data.query)
     ).error(()->

@@ -70,15 +70,15 @@ the_interval = seconds * 1000
 
 # REFRESH THE ROBOTS CACHE
 rProjects = ->
-  request.post 'http://robots4real.herokuapp.com/http://4real.io/projects',(error, response, body) ->
+  request.post 'http://prerender.4real.io//http://4real.io/projects',(error, response, body) ->
 rCharts = ->
-  request.post 'http://robots4real.herokuapp.com/http://4real.io/charts',(error, response, body) ->
+  request.post 'http://prerender.4real.io//http://4real.io/charts',(error, response, body) ->
 rHome = ->
-  request.post 'http://robots4real.herokuapp.com/http://4real.io/',(error, response, body) ->
+  request.post 'http://prerender.4real.io//http://4real.io/',(error, response, body) ->
 rAbout = ->
-  request.post 'http://robots4real.herokuapp.com/http://4real.io/about',(error, response, body) ->
+  request.post 'http://prerender.4real.io/http://4real.io/about',(error, response, body) ->
 rAbout = ->
-  request.post 'http://robots4real.herokuapp.com/http://4real.io/liquid',(error, response, body) ->
+  request.post 'http://prerender.4real.io//http://4real.io/liquid',(error, response, body) ->
 
 
 rHome()
@@ -145,12 +145,12 @@ io.sockets.on('connection', (socket)->
 )
 
 
-minutes = 30
-minutes * 60 * 1000
-if process.env.HEROKU == 'true'
-  pingPrerender = ()->
-    request.get 'http://robots4real.herokuapp.com/http://4real.io',(error, response, body) ->
-      console.log("awake robots4real.herokuapp.com")
+# minutes = 30
+# minutes * 60 * 1000
+# if process.env.HEROKU == 'true'
+#   pingPrerender = ()->
+#     request.get 'http://robots4real.herokuapp.com/http://4real.io',(error, response, body) ->
+#       console.log("awake robots4real.herokuapp.com")
 
-  setInterval pingPrerender, minutes * 60 * 1000
+#   setInterval pingPrerender, minutes * 60 * 1000
 

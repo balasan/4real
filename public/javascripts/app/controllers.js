@@ -124,7 +124,7 @@
           return;
         }
         return Object.keys($scope.rates).forEach(function(curr) {
-          return $scope[curr] = $scope.USD * parseFloat($scope.rates[curr]) / $scope.rates['USD'];
+          return $scope[curr.replace('USD', '')] = $scope.USD * parseFloat($scope.rates[curr]);
         });
       };
       $scope.data;

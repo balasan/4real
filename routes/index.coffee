@@ -4,7 +4,7 @@ module.exports = (db) ->
   https = require('https')
   rateData = {}
   getRates = ()->
-    url="http://data.fixer.io/latest&symbols=USD,GBP,RUB,JPY,CNY,EUR&access_key=" + process.env.FIXER_API
+    url="http://apilayer.net/api/live?currencies=USD,GBP,RUB,JPY,CNY,EUR&access_key=" + process.env.FIXER_API
     http.get(url, (res) ->
       body = ""
       res.on "data", (chunk) ->
@@ -13,7 +13,7 @@ module.exports = (db) ->
         return
       res.on "end", ->
         try
-          rateData = JSON.parse(body).rates
+          rateData = JSON.parse(body).quotes
           # console.log(rateData)
         catch error
           setTimeout getRates, 5 * 60 * 1000

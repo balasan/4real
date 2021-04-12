@@ -133,38 +133,16 @@ app.controller "chartsCtrl", [ '$scope','socket','$timeout','btcHistory','$filte
   $scope.GBP = '0.00'
   $scope.JPY = '0.00'
 
-  # $scope.rates = exchange.getRates()
-
   convert = ()->
-  #   if $scope.USD=='0.00' || !$scope.rates || !$scope.rates[0]
-  #     return
-  #   $scope.rates.forEach (rate)->
-  #     $scope[rate.id.slice(0,3)] = $scope.USD / parseFloat(rate.Rate)
-      # console.log($scope[rate.id.slice(0,3)])
     if $scope.USD == '0.00' || $scope.rates == {} || !$scope.rates
       return
     return Object.keys($scope.rates).forEach (curr)->
-      return $scope[curr] = $scope.USD * parseFloat($scope.rates[curr]) / $scope.rates['USD']
+      return $scope[curr.replace('USD', '')] = $scope.USD * parseFloat($scope.rates[curr])
 
-
-  # getRates = ()->
-  #   exchange.getRates (rates)->
-  #     if !rates.results
-  #       $timeout(getRates, 5000)
-  #       # getRates
-  #       return
-  #     $scope.rates = rates.results.rate
-  #     convert()
-  # getRates()
   $scope.data
 
-  # getData = ()->
-    # socket.emit 'getData', $scope.trim, (data, rates) ->
-    # console.log(data)
   $scope.history = $filter('btcData')($scope.data);
-  # console.log($scope.history)
   $scope.USD = $scope.history[$scope.history.length - 1].price
-  # $scope.rates = rates
   convert()
 
   window.prerenderReady = true

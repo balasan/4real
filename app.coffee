@@ -2,8 +2,12 @@
 ###
 Module dependencies.
 ###
+env = require('dotenv');
+env.config()
+
 if process.env.HEROKU == true
   require('newrelic');
+
 express = require("express")
 routes = require("./routes")
 http = require("http")

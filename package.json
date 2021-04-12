@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "coffee-script": "^1.12.7",
+    "dotenv": "^8.2.0",
     "express": "3.0.0rc5",
     "jade": "*",
     "less-middleware": "^2.2.1",
@@ -18,12 +19,12 @@
   },
   "devDependencies": {
     "grunt": "~0.4.1",
+    "grunt-concurrent": "~0.5.0",
     "grunt-contrib-coffee": "~0.7.0",
     "grunt-contrib-compass": "~0.6.0",
     "grunt-contrib-watch": "~0.5.2",
     "grunt-foreman": "0.0.4",
-    "grunt-nodemon": "~0.2.1",
-    "grunt-concurrent": "~0.5.0",
-    "grunt-newer": "~0.7.0"
+    "grunt-newer": "~0.7.0",
+    "grunt-nodemon": "~0.2.1"
   }
 }

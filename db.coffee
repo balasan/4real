@@ -1,9 +1,5 @@
 module.exports = ->
-
   mongoose = require('mongoose')
-
-  console.log(process.env.MONGODB_USERNAME)
-  console.log(process.env.MONGODB_PASSWORD)
 
   db = mongoose.connection
   db.on "connecting", ->
@@ -19,8 +15,12 @@ module.exports = ->
     console.log "MongoDB reconnected!"
   db.on "disconnected", ->
     console.log "MongoDB disconnected!"
-    mongoose.connect('mongodb://' + process.env.MONGODB_USERNAME + ':' + process.env.MONGODB_PASSWORD + '@ds027729.mongolab.com:27729/bitcoin');
-  mongoose.connect('mongodb://' + process.env.MONGODB_USERNAME + ':' + process.env.MONGODB_PASSWORD + '@ds027729.mongolab.com:27729/bitcoin');
+    mongoose.connect('mongodb+srv://' + process.env.MONGODB_USERNAME + ':' + process.env.MONGODB_PASSWORD + '@cluster0.5skkg.mongodb.net/bitcoin?retryWrites=true&w=majority');
+  mongoose.connect('mongodb+srv://' + process.env.MONGODB_USERNAME + ':' + process.env.MONGODB_PASSWORD + '@cluster0.5skkg.mongodb.net/bitcoin?retryWrites=true&w=majority');
+
+
+
+
 
   Schema = mongoose.Schema
   secondSchema = new Schema(

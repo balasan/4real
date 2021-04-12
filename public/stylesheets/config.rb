@@ -1,5 +1,5 @@
 # Eric Meyer is the man https://github.com/ericam/compass-animation
-require 'animation'
+# require 'animation'
 
 # Set this to the root of your project when deployed:
 http_path = "/"
